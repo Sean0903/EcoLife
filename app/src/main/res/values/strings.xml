@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Green</string>
+    <string name="navigation_home_name">挑戰</string>
+    <string name="navigation_chart_name">成果</string>
+    <string name="navigation_calendar_name">日曆</string>
+    <string name="navigation_community_name">社群</string>
 </resources>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.sean.green.home.HomeFragment"
+        android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/communityFragment"
+        android:name="com.sean.green.community.CommunityFragment"
+        android:label="CommunityFragment" />
+    <fragment
+        android:id="@+id/chartFragment"
+        android:name="com.sean.green.chart.ChartFragment"
+        android:label="ChartFragment" />
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.sean.green.calendar.CalendarFragment"
+        android:label="CalendarFragment" />
+
+    <action android:id="@+id/navigate_to_home_fragment" app:destination="@id/homeFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+    <action android:id="@+id/navigate_to_chart_fragment" app:destination="@id/chartFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+    <action android:id="@+id/navigate_to_calendar_fragment" app:destination="@id/calendarFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+    <action android:id="@+id/navigate_to_community_fragment" app:destination="@id/communityFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+</navigation>
