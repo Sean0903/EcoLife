@@ -1,4 +1,4 @@
-package com.sean.green.data
+package com.sean.green.data.source
 
 /**
  *

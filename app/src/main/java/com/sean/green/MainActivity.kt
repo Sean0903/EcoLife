@@ -4,20 +4,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
-import app.appworks.school.stylish.util.CurrentFragmentType
-import com.google.android.material.bottomnavigation.BottomNavigationItemView
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sean.green.databinding.ActivityMainBinding
+import com.sean.green.ext.getVmFactory
 
 
 class MainActivity : AppCompatActivity() {
-//
-//    val viewModel by viewModels<MainViewModel> { getVmFactory() }
+
+    val viewModel by viewModels<MainViewModel> { getVmFactory() }
 
     private lateinit var binding: ActivityMainBinding
     //toolbar
