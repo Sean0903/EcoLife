@@ -17,8 +17,8 @@ class ViewModelFactory constructor(
     override fun <T : ViewModel> create(modelClass: Class<T>) =
         with(modelClass) {
             when {
-//                isAssignableFrom(MainViewModel::class.java) ->
-//                    MainViewModel(greenRepository)
+                isAssignableFrom(MainViewModel::class.java) ->
+                    MainViewModel(greenRepository)
 
 //                isAssignableFrom(HomeViewModel::class.java) ->
 //                    HomeViewModel(stylishRepository)

@@ -1,11 +1,11 @@
 package com.sean.green
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import app.appworks.school.stylish.util.CurrentFragmentType
+import com.sean.green.data.source.GreenRepository
 
-class MainViewModel: ViewModel() {
+class MainViewModel(private val greenRepository: GreenRepository) : ViewModel() {
 
-    // Record current fragment to support data binding
-    val currentFragmentType = MutableLiveData<CurrentFragmentType>()
+//    // Record current fragment to support data binding
+//    val currentFragmentType = MutableLiveData<CurrentFragmentType>()
+
 }

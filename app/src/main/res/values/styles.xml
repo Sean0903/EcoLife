@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="MyFloatingActionButton" parent="@style/Widget.MaterialComponents.FloatingActionButton">
+        <item name="colorPrimary">@color/colorBlue2</item>
+        <item name="materialThemeOverlay">@style/MyFabOverlay</item>
+    </style>
+
+    <style name="MyFabOverlay">
+        <item name="colorSecondary">@color/colorBlue2</item>
+    </style>
+
+
+</resources>

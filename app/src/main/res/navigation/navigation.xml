@@ -7,18 +7,36 @@
         android:id="@+id/homeFragment"
         android:name="com.sean.green.home.HomeFragment"
         android:label="HomeFragment" />
+
     <fragment
         android:id="@+id/communityFragment"
         android:name="com.sean.green.community.CommunityFragment"
         android:label="CommunityFragment" />
+
     <fragment
         android:id="@+id/chartFragment"
         android:name="com.sean.green.chart.ChartFragment"
         android:label="ChartFragment" />
+
     <fragment
         android:id="@+id/calendarFragment"
         android:name="com.sean.green.calendar.CalendarFragment"
         android:label="CalendarFragment" />
+
+    <fragment
+        android:id="@+id/challengeFragment"
+        android:name="com.sean.green.challenge.ChallengeFragment"
+        android:label="ChallengeFragment" />
+
+    <fragment
+        android:id="@+id/saveFragment"
+        android:name="com.sean.green.save.SaveFragment"
+        android:label="SaveFragment" />
+
+    <fragment
+        android:id="@+id/useFragment"
+        android:name="com.sean.green.use.UseFragment"
+        android:label="UseFragment" />
 
     <action android:id="@+id/navigate_to_home_fragment" app:destination="@id/homeFragment"
         app:popUpTo="@id/navigation"
@@ -30,6 +48,15 @@
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
     <action android:id="@+id/navigate_to_community_fragment" app:destination="@id/communityFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+    <action android:id="@+id/navigate_to_save_fragment" app:destination="@id/saveFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+    <action android:id="@+id/navigate_to_use_fragment" app:destination="@id/useFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+    <action android:id="@+id/navigate_to_challenge_fragment" app:destination="@id/challengeFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
 </navigation>

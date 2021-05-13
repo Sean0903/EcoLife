@@ -47,9 +47,9 @@
     <color name="blue_voyage">#33a4cc</color>
 
     <!-- Original -->
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="color_blue1">#3F51B5</color>
+    <color name="color_blue2">#303F9F</color>
+    <color name="color_pink_red">#FF4081</color>
     <color name="white_two">#f5f5f5</color>
 
     <!-- lanuch -->
@@ -57,5 +57,40 @@
 
     <!--    favorite-->
     <color name="favorite_id">#8C8B8B</color>
+
+    <color name="colorPrimary">#7EBD97</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorSecondary">#209387</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorAllTransparent">#00FFFFFF</color>
+    <color name="colorTransparent">#30FFFFFF</color>
+    <color name="colorOrangeSave">#C8FF8C00</color>
+    <color name="colorBananna">#E6FFD500</color>
+    <color name="colorMyType">#7EBD97</color>
+    <color name="colorButton">#D5D5D5</color>
+    <color name="calendar_highlight">#209387</color>
+    <color name="calendar_date_disable">#646464</color>
+    <color name="calendar_date_enable_normal">#000000</color>
+    <color name="calendar_background_item_enable">#FFFFFF</color>
+    <color name="calendar_background_item_disable">#C9BFBF</color>
+    <color name="colorWater">#05A5DB</color>
+    <color name="colorOil">#A0B880</color>
+    <color name="colorVegetable">#368047</color>
+    <color name="colorProtein">#F9D936</color>
+    <color name="colorFruit">#DC4C32</color>
+    <color name="colorCarbon">#F59C4D</color>
+    <color name="colorNight">#A2A2A2</color>
+    <color name="colorMuscle">#A06FE0</color>
+    <color name="colorPinky">#E4B6C7</color>
+    <color name="colorSelectedBottomNav">#FFE873</color>
+    <color name="colorShadow">#B4000000</color>
+    <color name="colorGrass">#7EBD97</color>
+    <color name="colorSkin">#FFEBBC</color>
+    <color name="colorBlue1">#D2E9FF</color>
+    <color name="colorBlue2">#C4E1FF</color>
+    <color name="colorBlue3">#ACD6FF</color>
+    <color name="colorBlue4">#97CBFF</color>
+    <color name="colorBlue5">#84C1FF</color>
 
 </resources>
