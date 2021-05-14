@@ -94,6 +94,11 @@
     <color name="colorBlue5">#84C1FF</color>
     <color name="colorRareWind1">#a8edea</color>
     <color name="colorRareWind2">#fed6e3</color>
+    <color name="brightYellow">#FFEF9F</color>
+    <color name="brightBlue1">#a1c4fd</color>
+    <color name="brightBlue2">#c2e9fb</color>
+    <color name="brightGreen1">#d4fc79</color>
+    <color name="brightGreen2">#96e8a1</color>
 
 
 </resources>

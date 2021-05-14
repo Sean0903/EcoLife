@@ -11,13 +11,14 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_button">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="300dp"
-            android:layout_height="130dp"
-            android:layout_marginTop="32dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -29,84 +30,57 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/image_challenge_plastic"
-                android:layout_width="89dp"
-                android:layout_height="77dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/image_challenge_power"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_my_challenge_title"
-                app:srcCompat="@drawable/leaves" />
-
             <TextView
                 android:id="@+id/text_challenge_plastic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:background="@drawable/text_round"
                 android:fontFamily="@font/noto_sans_bold"
                 android:text="30"
-                app:layout_constraintBottom_toBottomOf="@+id/image_challenge_plastic"
-                app:layout_constraintEnd_toEndOf="@+id/image_challenge_plastic"
-                app:layout_constraintStart_toStartOf="@+id/image_challenge_plastic"
-                app:layout_constraintTop_toTopOf="@+id/image_challenge_plastic" />
-
-            <ImageView
-                android:id="@+id/image_challenge_power"
-                android:layout_width="89dp"
-                android:layout_height="77dp"
-                app:layout_constraintEnd_toStartOf="@+id/image_challenge_corban"
-                app:layout_constraintStart_toEndOf="@+id/image_challenge_plastic"
-                app:layout_constraintTop_toTopOf="@+id/image_challenge_plastic"
-                app:srcCompat="@drawable/leaves" />
+                app:layout_constraintEnd_toStartOf="@+id/text_challenge_power"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_my_challenge_title" />
 
             <TextView
                 android:id="@+id/text_challenge_power"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/text_round"
                 android:fontFamily="@font/noto_sans_bold"
                 android:text="22"
-                app:layout_constraintBottom_toBottomOf="@+id/image_challenge_power"
-                app:layout_constraintEnd_toEndOf="@+id/image_challenge_power"
-                app:layout_constraintStart_toStartOf="@+id/image_challenge_power"
-                app:layout_constraintTop_toTopOf="@+id/image_challenge_power" />
-
-            <ImageView
-                android:id="@+id/image_challenge_corban"
-                android:layout_width="89dp"
-                android:layout_height="77dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/image_challenge_power"
-                app:layout_constraintTop_toTopOf="@+id/image_challenge_power"
-                app:srcCompat="@drawable/leaves" />
+                app:layout_constraintEnd_toStartOf="@+id/text_challenge_corban"
+                app:layout_constraintStart_toEndOf="@+id/text_challenge_plastic"
+                app:layout_constraintTop_toTopOf="@+id/text_challenge_plastic" />
 
             <TextView
                 android:id="@+id/text_challenge_corban"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/text_round"
                 android:fontFamily="@font/noto_sans_bold"
                 android:text="24"
-                app:layout_constraintBottom_toBottomOf="@+id/image_challenge_corban"
-                app:layout_constraintEnd_toEndOf="@+id/image_challenge_corban"
-                app:layout_constraintStart_toStartOf="@+id/image_challenge_corban"
-                app:layout_constraintTop_toTopOf="@+id/image_challenge_corban" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/text_challenge_power"
+                app:layout_constraintTop_toTopOf="@+id/text_challenge_power" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout2"
             android:layout_width="300dp"
-            android:layout_height="130dp"
+            android:layout_height="100dp"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
             <TextView
-                android:id="@+id/text_my_save_titile"
+                android:id="@+id/text_my_save_title"
                 style="@style/home_page_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_my_save_titile"
+                android:text="@string/text_my_save_title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -115,9 +89,9 @@
                 android:layout_width="45dp"
                 android:layout_height="30dp"
                 android:scaleType="fitStart"
-                app:layout_constraintBottom_toBottomOf="@+id/text_my_save_titile"
-                app:layout_constraintStart_toEndOf="@+id/text_my_save_titile"
-                app:layout_constraintTop_toTopOf="@+id/text_my_save_titile"
+                app:layout_constraintBottom_toBottomOf="@+id/text_my_save_title"
+                app:layout_constraintStart_toEndOf="@+id/text_my_save_title"
+                app:layout_constraintTop_toTopOf="@+id/text_my_save_title"
                 app:srcCompat="@drawable/ic_baseline_info_24" />
 
             <ImageView
@@ -149,7 +123,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/image_home_save_power"
                 app:layout_constraintStart_toEndOf="@+id/image_home_save_plastic"
-                app:layout_constraintTop_toBottomOf="@+id/text_my_save_titile" />
+                app:layout_constraintTop_toBottomOf="@+id/text_my_save_title" />
 
             <ImageView
                 android:id="@+id/image_home_save_power"
@@ -217,28 +191,29 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout3"
             android:layout_width="300dp"
-            android:layout_height="130dp"
+            android:layout_height="100dp"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
             <TextView
-                android:id="@+id/text_my_use_titile"
+                android:id="@+id/text_my_use_title"
                 style="@style/home_page_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_my_use_titile"
+                android:text="@string/text_my_use_title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
             <ImageView
                 android:id="@+id/image_home_use_info"
                 android:layout_width="45dp"
                 android:layout_height="30dp"
                 android:scaleType="fitStart"
-                app:layout_constraintBottom_toBottomOf="@+id/text_my_use_titile"
-                app:layout_constraintStart_toEndOf="@+id/text_my_use_titile"
-                app:layout_constraintTop_toTopOf="@+id/text_my_use_titile"
+                app:layout_constraintBottom_toBottomOf="@+id/text_my_use_title"
+                app:layout_constraintStart_toEndOf="@+id/text_my_use_title"
+                app:layout_constraintTop_toTopOf="@+id/text_my_use_title"
                 app:srcCompat="@drawable/ic_baseline_info_24" />
 
             <ImageView
@@ -270,7 +245,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/image_home_use_power"
                 app:layout_constraintStart_toEndOf="@+id/image_home_use_plastic"
-                app:layout_constraintTop_toBottomOf="@+id/text_my_use_titile" />
+                app:layout_constraintTop_toBottomOf="@+id/text_my_use_title" />
 
             <ImageView
                 android:id="@+id/image_home_use_power"
@@ -331,6 +306,24 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/image_home_use_carbon"
                 app:layout_constraintTop_toTopOf="@+id/text_home_use_power" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout3"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_home"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_home_picture"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

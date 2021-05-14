@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.sean.green.community.CommunityViewModel
+import com.sean.green.data.Save
 import com.sean.green.databinding.FragmentCommunityBinding
 import com.sean.green.databinding.FragmentHomeBinding
 
@@ -22,8 +23,20 @@ class HomeFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater)
+
         binding.lifecycleOwner = this
+
         binding.viewModel = viewModel
+
+        val adapter = HomeAdapter()
+        binding.recyclerViewHome.adapter = adapter
+
+        val mock = Save()
+        val mock2 = Save()
+        val mockList = listOf( mock, mock2,mock, mock2)
+
+        adapter.submitList(mockList)
+
         return binding.root
     }
 }
