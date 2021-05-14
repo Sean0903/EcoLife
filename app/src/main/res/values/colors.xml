@@ -92,5 +92,8 @@
     <color name="colorBlue3">#ACD6FF</color>
     <color name="colorBlue4">#97CBFF</color>
     <color name="colorBlue5">#84C1FF</color>
+    <color name="colorRareWind1">#a8edea</color>
+    <color name="colorRareWind2">#fed6e3</color>
+
 
 </resources>
