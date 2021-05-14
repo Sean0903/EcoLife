@@ -29,7 +29,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navGraph="@navigation/navigation"
-            tools:visibility="visible" />
+            tools:visibility="visible"
+            tools:layout="@layout/activity_main"
+            />
 
         <ImageView
             android:id="@+id/fabShadow"

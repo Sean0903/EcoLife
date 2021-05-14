@@ -2,12 +2,12 @@
 <resources>
 
     <style name="MyFloatingActionButton" parent="@style/Widget.MaterialComponents.FloatingActionButton">
-        <item name="colorPrimary">@color/colorBlue2</item>
+        <item name="colorPrimary">@color/colorRareWind1</item>
         <item name="materialThemeOverlay">@style/MyFabOverlay</item>
     </style>
 
     <style name="MyFabOverlay">
-        <item name="colorSecondary">@color/colorBlue2</item>
+        <item name="colorSecondary">@color/colorRareWind1</item>
     </style>
 
     <style name="home_page_title">

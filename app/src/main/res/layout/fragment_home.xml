@@ -109,6 +109,109 @@
                 android:text="@string/text_my_save_titile"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/image_home_save_info"
+                android:layout_width="45dp"
+                android:layout_height="30dp"
+                android:scaleType="fitStart"
+                app:layout_constraintBottom_toBottomOf="@+id/text_my_save_titile"
+                app:layout_constraintStart_toEndOf="@+id/text_my_save_titile"
+                app:layout_constraintTop_toTopOf="@+id/text_my_save_titile"
+                app:srcCompat="@drawable/ic_baseline_info_24" />
+
+            <ImageView
+                android:id="@+id/image_home_save_plastic"
+                android:layout_width="40dp"
+                android:layout_height="35dp"
+                android:background="@drawable/tag_left_corners"
+                android:padding="@dimen/elevation_all"
+                android:paddingTop="@dimen/elevation_all"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="@+id/text_home_save_plastic"
+                app:layout_constraintEnd_toStartOf="@+id/text_home_save_plastic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/text_home_save_plastic"
+                app:srcCompat="@drawable/bag" />
+
+            <TextView
+                android:id="@+id/text_home_save_plastic"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/tag_right_corners_plastic"
+                android:hint="0"
+                android:padding="@dimen/elevation_all"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorWhite"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/image_home_save_power"
+                app:layout_constraintStart_toEndOf="@+id/image_home_save_plastic"
+                app:layout_constraintTop_toBottomOf="@+id/text_my_save_titile" />
+
+            <ImageView
+                android:id="@+id/image_home_save_power"
+                android:layout_width="40dp"
+                android:layout_height="35dp"
+                android:background="@drawable/tag_left_corners"
+                android:padding="@dimen/elevation_all"
+                android:paddingTop="@dimen/elevation_all"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="@+id/text_home_save_power"
+                app:layout_constraintEnd_toStartOf="@+id/text_home_save_power"
+                app:layout_constraintStart_toEndOf="@+id/text_home_save_plastic"
+                app:layout_constraintTop_toTopOf="@+id/text_home_save_power"
+                app:srcCompat="@drawable/lighting" />
+
+            <TextView
+                android:id="@+id/text_home_save_power"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/tag_right_corners_power"
+                android:hint="0"
+                android:padding="@dimen/elevation_all"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorWhite"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toStartOf="@+id/image_home_save_carbon"
+                app:layout_constraintStart_toEndOf="@+id/image_home_save_power"
+                app:layout_constraintTop_toTopOf="@+id/text_home_save_plastic" />
+
+            <ImageView
+                android:id="@+id/image_home_save_carbon"
+                android:layout_width="40dp"
+                android:layout_height="35dp"
+                android:background="@drawable/tag_left_corners"
+                android:padding="@dimen/elevation_all"
+                android:paddingTop="@dimen/elevation_all"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="@+id/text_home_save_carbon"
+                app:layout_constraintEnd_toStartOf="@+id/text_home_save_carbon"
+                app:layout_constraintStart_toEndOf="@+id/text_home_save_power"
+                app:layout_constraintTop_toTopOf="@+id/text_home_save_carbon"
+                app:layout_constraintVertical_bias="0.0"
+                app:srcCompat="@drawable/carbon_dioxide" />
+
+            <TextView
+                android:id="@+id/text_home_save_carbon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/tag_right_corners_carbon"
+                android:hint="0"
+                android:padding="@dimen/elevation_all"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorWhite"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_home_save_carbon"
+                app:layout_constraintTop_toTopOf="@+id/text_home_save_power" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -128,6 +231,106 @@
                 android:text="@string/text_my_use_titile"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/image_home_use_info"
+                android:layout_width="45dp"
+                android:layout_height="30dp"
+                android:scaleType="fitStart"
+                app:layout_constraintBottom_toBottomOf="@+id/text_my_use_titile"
+                app:layout_constraintStart_toEndOf="@+id/text_my_use_titile"
+                app:layout_constraintTop_toTopOf="@+id/text_my_use_titile"
+                app:srcCompat="@drawable/ic_baseline_info_24" />
+
+            <ImageView
+                android:id="@+id/image_home_use_plastic"
+                android:layout_width="40dp"
+                android:layout_height="35dp"
+                android:background="@drawable/tag_left_corners"
+                android:padding="@dimen/elevation_all"
+                android:paddingTop="@dimen/elevation_all"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="@+id/text_home_use_plastic"
+                app:layout_constraintEnd_toStartOf="@+id/text_home_use_plastic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/text_home_use_plastic"
+                app:srcCompat="@drawable/bag" />
+
+            <TextView
+                android:id="@+id/text_home_use_plastic"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/tag_right_corners_plastic"
+                android:hint="0"
+                android:padding="@dimen/elevation_all"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorWhite"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/image_home_use_power"
+                app:layout_constraintStart_toEndOf="@+id/image_home_use_plastic"
+                app:layout_constraintTop_toBottomOf="@+id/text_my_use_titile" />
+
+            <ImageView
+                android:id="@+id/image_home_use_power"
+                android:layout_width="40dp"
+                android:layout_height="35dp"
+                android:background="@drawable/tag_left_corners"
+                android:padding="@dimen/elevation_all"
+                android:paddingTop="@dimen/elevation_all"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="@+id/text_home_use_power"
+                app:layout_constraintEnd_toStartOf="@+id/text_home_use_power"
+                app:layout_constraintStart_toEndOf="@+id/text_home_use_plastic"
+                app:layout_constraintTop_toTopOf="@+id/text_home_use_power"
+                app:srcCompat="@drawable/lighting" />
+
+            <TextView
+                android:id="@+id/text_home_use_power"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/tag_right_corners_power"
+                android:hint="0"
+                android:padding="@dimen/elevation_all"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorWhite"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toStartOf="@+id/image_home_use_carbon"
+                app:layout_constraintStart_toEndOf="@+id/image_home_use_power"
+                app:layout_constraintTop_toTopOf="@+id/text_home_use_plastic" />
+
+            <ImageView
+                android:id="@+id/image_home_use_carbon"
+                android:layout_width="40dp"
+                android:layout_height="35dp"
+                android:background="@drawable/tag_left_corners"
+                android:padding="@dimen/elevation_all"
+                android:paddingTop="@dimen/elevation_all"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="@+id/text_home_use_carbon"
+                app:layout_constraintEnd_toStartOf="@+id/text_home_use_carbon"
+                app:layout_constraintStart_toEndOf="@+id/text_home_use_power"
+                app:layout_constraintTop_toTopOf="@+id/text_home_use_carbon"
+                app:layout_constraintVertical_bias="0.0"
+                app:srcCompat="@drawable/carbon_dioxide" />
+
+            <TextView
+                android:id="@+id/text_home_use_carbon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/tag_right_corners_carbon"
+                android:hint="0"
+                android:padding="@dimen/elevation_all"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorWhite"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_home_use_carbon"
+                app:layout_constraintTop_toTopOf="@+id/text_home_use_power" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
