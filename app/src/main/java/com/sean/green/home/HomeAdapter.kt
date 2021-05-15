@@ -1,5 +1,6 @@
 package com.sean.green.home
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -27,7 +28,7 @@ class HomeAdapter():
         class ViewHolder(var binding: ItemHomePictureBinding ) : RecyclerView.ViewHolder(binding.root) {
 
             fun bind(item: Save) {
-//            Log.d("seanDataBinding","ItemBinding , product = $product")
+            Log.d("seanViewHolder","fun bind(item: Save) = $item")
                 binding.picture = item
             }
 

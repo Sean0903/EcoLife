@@ -23,8 +23,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-
-            tools:srcCompat="@drawable/_506964794_4efdd2f969559e8b1c92e99f32ded48e"/>
+            app:srcCompat="@drawable/_506964794_4efdd2f969559e8b1c92e99f32ded48e"/>
 
         <TextView
             android:id="@+id/textView"

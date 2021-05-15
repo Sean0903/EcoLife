@@ -31,7 +31,7 @@ class HomeFragment: Fragment() {
         val adapter = HomeAdapter()
         binding.recyclerViewHome.adapter = adapter
 
-        val mock = Save()
+        val mock = Save("1","2","3","突然就封城了，好可怕",1341)
         val mock2 = Save()
         val mockList = listOf( mock, mock2,mock, mock2)
 
