@@ -1,5 +1,6 @@
 package com.sean.green.home
 
+import android.app.Application
 import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.util.Log
@@ -18,7 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val greenRepository: GreenRepository): ViewModel() {
+class HomeViewModel: ViewModel() {
 
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
@@ -33,27 +34,27 @@ class HomeViewModel(private val greenRepository: GreenRepository): ViewModel() {
 
     var db = FirebaseFirestore.getInstance()
 
-    private val _save = MutableLiveData<List<Save>>()
+//    private val _save = MutableLiveData<List<Save>>()
+//
+//    val save: LiveData<List<Save>>
+//        get() = _save
 
-    val save: LiveData<List<Save>>
-        get() = _save
-
-    fun getAndSetSaveToday(){
-
-        coroutineScope.launch {
-
-            val save = greenRepository.getObject(
-                COLLECTION_SAVE
-            )
-
-            if (save.isNotEmpty()){
-
-                setDataSaveFromFirebase(save[0] as Save)
-
-            }
-        }
-
-    }
+//    fun getAndSetSaveToday(){
+//
+//        coroutineScope.launch {
+//
+//            val save = greenRepository.getObjects(
+//                COLLECTION_SAVE
+//            )
+//
+//            if (save.isNotEmpty()){
+//
+//                setDataSaveFromFirebase(save[0] as Save)
+//
+//            }
+//        }
+//
+//    }
 
 
 //    var totalPlastic = 0.0f

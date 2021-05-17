@@ -5,13 +5,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sean.green.databinding.FragmentSaveBinding
+import java.util.EnumSet.of
+import java.util.List.of
 
 
 class SaveFragment: Fragment() {
@@ -27,6 +28,16 @@ class SaveFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+//        val application = requireNotNull(activity).application
+//
+//        val save = SaveFragmentArgs.fromBundle(requireArguments()).addToHomeFragment
+//
+//        val viewModelFactory = SaveViewModelFactory(save, application)
+//
+//        val viewModel = ViewModelProvider(this,viewModelFactory).get(SaveViewModel::class.java)
+
+
 
         val binding = FragmentSaveBinding.inflate(inflater, container, false)
 

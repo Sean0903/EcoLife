@@ -1,26 +1,42 @@
 package com.sean.green.data.source.remote
 
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
+import com.sean.green.data.FirebaseKey
 import com.sean.green.data.source.GreenDataSource
+import java.sql.Timestamp
 
 object GreenRemoteDataSource : GreenDataSource {
 
-//    override suspend fun getProductDetails(id: Long?): Result<DetailResult> {
-//        if (!isInternetConnected()) {
-//            return Result.Fail(getString(R.string.internet_not_connected))
-//        }
+//    override suspend fun getObjects(
+//        collection: String,
+//        start: Timestamp,
+//        end: Timestamp
+//    ): List<Any> {
+
+//        val listFromFirebase = mutableListOf<Any>()
 //
-//        return try {
-//            // this will run on a thread managed by Retrofit
-//            val listResult = StylishApi.retrofitService.getProductDetails(id)
+//        when (collection) {
 //
-//            listResult.error?.let {
-//                return Result.Fail(it)
+//            FirebaseKey.COLLECTION_SAVE -> {
+//
+//                UserManager.USER_REFERENCE?.let {
+//
+//                    for (shape in it.collection(collection)
+//                        .orderBy(FirebaseKey.TIMESTAMP, Query.Direction.DESCENDING)
+//                        .whereGreaterThanOrEqualTo(FirebaseKey.TIMESTAMP, start)
+//                        .whereLessThanOrEqualTo(FirebaseKey.TIMESTAMP, end)
+//                        .get().await()) {
+//
+//                        listFromFirebase.add(shape.toObject(Shape::class.java))
+//                        (listFromFirebase[listFromFirebase.lastIndex] as Shape).docId =
+//                            shape.id
+//                    }
+//
+//                }
 //            }
-//            Result.Success(listResult)
-//
-//        } catch (e: Exception) {
-//            Logger.w("[${this::class.simpleName}] exception=${e.message}")
-//            Result.Error(e)
 //        }
+//        Logger.i("getListFromFirebase = $collection -> $listFromFirebase")
+//        return listFromFirebase
 //    }
 }

@@ -6,5 +6,5 @@ class Save (
     val carbon: String ?= null,
     val content: String ?= null,
 //    val image: List<String> ?= null,
-    val totalSave: Int ?= null
+//    val totalSave: Int ?= null
 )

@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.sean.green.data.Save
 import com.sean.green.databinding.ActivityMainBinding
 import com.sean.green.ext.getVmFactory
 import kotlinx.android.synthetic.main.activity_main.*
@@ -70,6 +71,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.fabSave.setOnClickListener {
             findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToSaveFragment(
+//                Save()
 //                    Foodie()
             ))
             binding.fabShadow.visibility = View.GONE
