@@ -1,5 +1,6 @@
 package com.sean.green.save
 
+import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,9 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.sean.green.R
 import com.sean.green.databinding.FragmentSaveBinding
-import java.util.EnumSet.of
-import java.util.List.of
 
 
 class SaveFragment: Fragment() {
@@ -37,8 +37,6 @@ class SaveFragment: Fragment() {
 //
 //        val viewModel = ViewModelProvider(this,viewModelFactory).get(SaveViewModel::class.java)
 
-
-
         val binding = FragmentSaveBinding.inflate(inflater, container, false)
 
         binding.lifecycleOwner = this
@@ -60,6 +58,15 @@ class SaveFragment: Fragment() {
 //            viewModel.carbon.value.toString()
             send()
             Log.d("sean", "viewModel.carbon.value = ${viewModel.carbon.value}")
+        }
+
+        binding.imageSavePageInfo.setOnClickListener {
+
+            var saveDialog = Dialog(this.requireContext())
+            val view = layoutInflater.inflate(R.layout.dialog_save, null)
+            saveDialog.setContentView(view)
+            saveDialog.show()
+
         }
 
 

@@ -7,7 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sean.green.data.Save
 
-class SaveViewModel(save: Save, app: Application): AndroidViewModel(app) {
+//SaveViewModel(save: Save, app: Application): AndroidViewModel(app)
+class SaveViewModel(): ViewModel() {
 
 
     //viewModel裡可以保存LiveData，LiveData可以自動通知Observer，來完成activity和fragment的更新
@@ -18,9 +19,9 @@ class SaveViewModel(save: Save, app: Application): AndroidViewModel(app) {
         get() = _save
 
     // Initialize the _selectedProperty MutableLiveData
-    init {
-        _save.value = save
-    }
+//    init {
+//        _save.value = save
+//    }
 
 
     val plastic = MutableLiveData<String>()
