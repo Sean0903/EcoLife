@@ -8,11 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.sean.green.NavigationDirections
 import com.sean.green.R
 import com.sean.green.databinding.FragmentSaveBinding
+import com.sean.green.ext.getVmFactory
 
 
 class SaveFragment: Fragment() {
@@ -38,6 +42,8 @@ class SaveFragment: Fragment() {
 //        val viewModel = ViewModelProvider(this,viewModelFactory).get(SaveViewModel::class.java)
 
         val binding = FragmentSaveBinding.inflate(inflater, container, false)
+
+//        val viewModel by viewModels<SaveViewModel> { getVmFactory(SaveFragmentArgs.fromBundle(requireArguments()).saveKey) }
 
         binding.lifecycleOwner = this
 
@@ -75,6 +81,12 @@ class SaveFragment: Fragment() {
             send()
             }
 
+        binding.imageSavePageBackToHome.setOnClickListener {
+            findNavController().navigate(NavigationDirections.navigateToHomeFragment())
+        }
+
+
+
         return binding.root
     }
 
@@ -87,3 +99,15 @@ class SaveFragment: Fragment() {
         washingtonRef.update("carbon", FieldValue.arrayUnion(viewModel.carbon.value))
     }
 }
+
+
+//        viewModel.navigateToHome.observe(viewLifecycleOwner, Observer {
+//            it?.let {
+//                findNavController().navigate(NavigationDirections.navigateToHomeFragment(it))
+//                viewModel.onDetailNavigated()
+//            }
+//        })
+//
+//        binding.imageSavePageBackToHome.setOnClickListener {it:Save!
+//            viewModel.navigateToHome(it)
+//        }

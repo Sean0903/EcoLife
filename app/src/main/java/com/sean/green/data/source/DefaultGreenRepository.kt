@@ -1,6 +1,7 @@
 package com.sean.green.data.source
 
-import androidx.lifecycle.LiveData
+import com.sean.green.data.Result
+import com.sean.green.data.Save
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import java.sql.Timestamp
@@ -14,6 +15,10 @@ class DefaultGreenRepository(private val greenRemoteDataSource: GreenDataSource,
                                private val greenLocalDataSource: GreenDataSource,
                                private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : GreenRepository {
+
+    override suspend fun getObjects(): Result<List<Save>> {
+        return greenRemoteDataSource.getObjects()
+    }
 //    override suspend fun getObjects(collection: String, start: Timestamp, end: Timestamp): List<Any> {
 //        return greenRemoteDataSource.getObjects(collection= collection)
 //    }

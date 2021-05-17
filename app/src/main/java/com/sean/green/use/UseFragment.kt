@@ -1,5 +1,6 @@
 package com.sean.green.use
 
+import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.sean.green.R
 import com.sean.green.databinding.FragmentHomeBinding
 import com.sean.green.databinding.FragmentUseBinding
 import com.sean.green.home.HomeViewModel
@@ -40,6 +42,15 @@ class UseFragment: Fragment() {
         binding.editTextUsePageCarbon.doOnTextChanged { text, start, before, count ->
             viewModel.carbon.value.toString()
             Log.d("sean", "viewModel.carbon.value = ${viewModel.carbon.value}")
+        }
+
+        binding.imageUsePageInfo.setOnClickListener {
+
+            var useDialog = Dialog(this.requireContext())
+            val view = layoutInflater.inflate(R.layout.dialog_use, null)
+            useDialog.setContentView(view)
+            useDialog.show()
+
         }
 
         return binding.root

@@ -71,6 +71,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.fabSave.setOnClickListener {
             findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToSaveFragment(
+
 //                Save()
 //                    Foodie()
             ))

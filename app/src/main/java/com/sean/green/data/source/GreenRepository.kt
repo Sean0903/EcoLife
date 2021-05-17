@@ -1,5 +1,8 @@
 package com.sean.green.data.source
 
+import com.sean.green.data.Result
+import com.sean.green.data.Save
+
 /**
  *
  * Interface to the Environment layers.
@@ -7,6 +10,6 @@ package com.sean.green.data.source
 
 interface GreenRepository {
 
-//    suspend fun getObjects(collection: String):List<Any>
+    suspend fun getObjects(): Result<List<Save>>
 
 }

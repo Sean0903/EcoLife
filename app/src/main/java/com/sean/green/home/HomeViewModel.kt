@@ -18,6 +18,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.util.*
 
 class HomeViewModel: ViewModel() {
 
@@ -31,6 +32,8 @@ class HomeViewModel: ViewModel() {
     private fun setDataSaveFromFirebase (save : Save){
         _dataSaveFromFirebase.value = save
     }
+
+
 
     var db = FirebaseFirestore.getInstance()
 
@@ -158,6 +161,27 @@ class HomeViewModel: ViewModel() {
 //                    }
 //                }
 //            }
+
+
+//    private val _isCalendarClicked = MutableLiveData<Boolean>()
+//    val isCalendarClicked : LiveData<Boolean>
+//        get() = _isCalendarClicked
+//
+//    fun calendarClicked(){
+//        _isCalendarClicked.value = true
+//    }
+//
+//    fun calendarClickedAgain(){
+//        _isCalendarClicked.value = false
+//    }
+//
+//    fun setCurrentDate(date: Date){
+//        _date.value = date
+//    }
+//
+//    private val _date = MutableLiveData<Date>()
+//    val date : LiveData<Date>
+//        get() = _date
 
 
 }

@@ -1,7 +1,7 @@
 package com.sean.green.data.source
 
-import androidx.lifecycle.LiveData
-import java.sql.Timestamp
+import com.sean.green.data.Result
+import com.sean.green.data.Save
 
 /**
  *
@@ -9,6 +9,6 @@ import java.sql.Timestamp
  */
 interface GreenDataSource {
 
-//    suspend fun getObjects(collection: String): List<Any>
+    suspend fun getObjects(): Result<List<Save>>
 
 }

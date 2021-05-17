@@ -33,6 +33,8 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+        //為解決'kotlin.Result' cannot be used as a return type 在5/18新增
+        freeCompilerArgs = ["-Xallow-result-return-type"]
     }
     buildFeatures{
         dataBinding true
