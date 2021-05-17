@@ -5,13 +5,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
 import com.sean.green.databinding.FragmentSaveBinding
 
 
 class SaveFragment: Fragment() {
+
+        var db = FirebaseFirestore.getInstance()
 
     private lateinit var binding : FragmentSaveBinding
     private val viewModel : SaveViewModel by lazy {
@@ -23,7 +28,7 @@ class SaveFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentSaveBinding.inflate(inflater, container, false)
+        val binding = FragmentSaveBinding.inflate(inflater, container, false)
 
         binding.lifecycleOwner = this
 
@@ -40,10 +45,27 @@ class SaveFragment: Fragment() {
         }
 
         binding.editTextSavePageCarbon.doOnTextChanged { text, start, before, count ->
-            viewModel.carbon.value.toString()
+
+//            viewModel.carbon.value.toString()
+            send()
             Log.d("sean", "viewModel.carbon.value = ${viewModel.carbon.value}")
         }
 
+
+        binding.buttonSavePage.setOnClickListener {
+//                viewModel.addSaveData2fire()
+            send()
+            }
+
         return binding.root
+    }
+
+        private fun send() {
+        //測試
+        val washingtonRef =
+            db.collection("green").document("save")
+        washingtonRef.update("plastic", FieldValue.arrayUnion(viewModel.plastic.value))
+        washingtonRef.update("power", FieldValue.arrayUnion(viewModel.power.value))
+        washingtonRef.update("carbon", FieldValue.arrayUnion(viewModel.carbon.value))
     }
 }

@@ -6,4 +6,7 @@ package com.sean.green.data.source
  */
 
 interface GreenRepository {
+
+    suspend fun getObject(collection: String):List<Any>
+
 }

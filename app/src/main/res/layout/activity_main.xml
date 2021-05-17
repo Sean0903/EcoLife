@@ -220,7 +220,8 @@
             app:layout_constraintEnd_toEndOf="@+id/fab"
             app:layout_constraintStart_toStartOf="@+id/fab"
             app:layout_constraintTop_toTopOf="@+id/fab"
-            app:srcCompat="@drawable/icon_add" />
+            app:srcCompat="@drawable/plus"
+            app:tint="@color/white" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

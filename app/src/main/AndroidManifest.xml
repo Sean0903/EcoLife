@@ -12,8 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Green"
         tools:replace="android:allowBackup"
-        android:usesCleartextTraffic="true"
-        tools:ignore="AllowBackup">
+        android:usesCleartextTraffic="true">
 
         <activity android:name=".MainActivity">
             <intent-filter>

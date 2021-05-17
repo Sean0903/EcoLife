@@ -10,7 +10,22 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_button">
+
+        <ImageView
+            android:id="@+id/addSavePhoto"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:cropToPadding="false"
+            android:scaleType="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@color/colorAllTransparent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
@@ -67,6 +82,7 @@
                 android:textColorHint="@color/colorWhite"
                 android:maxLines ="1"
                 android:text="@={viewModel.plastic}"
+                android:inputType="number"
                 android:textSize="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/image_save_page_power"
@@ -100,6 +116,7 @@
                 android:textColorHint="@color/colorWhite"
                 android:textSize="20dp"
                 android:maxLines ="1"
+                android:inputType="number"
                 android:text="@={viewModel.power}"
                 app:layout_constraintEnd_toStartOf="@+id/image_save_page_carbon"
                 app:layout_constraintStart_toEndOf="@+id/image_save_page_power"
@@ -132,6 +149,7 @@
                 android:textColorHint="@color/colorWhite"
                 android:textSize="20dp"
                 android:maxLines ="1"
+                android:inputType="number"
                 android:text="@={viewModel.carbon}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/image_save_page_carbon"
