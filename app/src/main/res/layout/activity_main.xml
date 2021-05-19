@@ -185,7 +185,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="false"
             android:layout_alignParentBottom="false"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="60dp"
             app:elevation="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -196,7 +196,7 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavView"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="56dp"
             android:background="@color/white"
             android:elevation="4dp"
             app:itemIconTint="@drawable/bottom_nav_item_selector"

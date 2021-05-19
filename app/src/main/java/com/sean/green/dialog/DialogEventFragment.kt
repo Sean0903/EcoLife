@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+
 import com.sean.green.databinding.DialogEventBinding
-import com.sean.green.databinding.DialogSaveBinding
+
 
 class DialogEventFragment : Fragment() {
     private lateinit var binding: DialogEventBinding
@@ -18,10 +20,13 @@ class DialogEventFragment : Fragment() {
     ): View? {
         binding = DialogEventBinding.inflate(inflater)
 
-        binding.imageDialogEventCancel.setOnClickListener {
-            binding.constraintLayoutDialogEvent.visibility = View.GONE
-        }
+        binding.imageDialogEventCancel.setOnClickListener { view: View ->
 
-        return binding.root
+            //可能因為是同一個fragment所以不能跳轉
+//            this.navigate(DialogEventFragmentDirections.actionDialogEventToEventFragment())
+//            this.findNavController().popBackStack()
+//            this.findNavController().navigateUp()
+        }
+            return binding.root
     }
 }

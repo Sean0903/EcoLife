@@ -60,13 +60,19 @@
         android:id="@+id/eventFragment"
         android:name="com.sean.green.event.EventFragment"
         android:label="EventFragment" >
-
     </fragment>
 
     <fragment
         android:id="@+id/dialogEvent"
         android:name="com.sean.green.dialog.DialogEventFragment"
-        android:label="DialogEvent" />
+        android:label="DialogEvent" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/dialogShareFragment"
+        android:name="com.sean.green.dialog.DialogShareFragment"
+        android:label="DialogShareFragment" >
+    </fragment>
 
     <action android:id="@+id/navigate_to_home_fragment" app:destination="@id/homeFragment"
         app:popUpTo="@id/navigation"
@@ -104,9 +110,10 @@
     <action
         android:id="@+id/action_eventFragment_to_dialogEvent"
         app:destination="@id/dialogEvent" />
-    <fragment
-        android:id="@+id/dialogShareFragment"
-        android:name="com.sean.green.dialog.DialogShareFragment"
-        android:label="DialogShareFragment" />
-
+    <action
+        android:id="@+id/action_dialogShareFragment_to_shareFragment"
+        app:destination="@id/shareFragment" />
+    <action
+        android:id="@+id/action_dialogEvent_to_eventFragment"
+        app:destination="@id/eventFragment" />
 </navigation>

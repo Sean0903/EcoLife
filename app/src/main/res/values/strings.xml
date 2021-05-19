@@ -31,6 +31,7 @@
     <string name="text_chart_page_use_title">消耗累積</string>
     <string name="text_dialog_event_title">環保行動</string>
     <string name="text_event_host">發起人：</string>
+    <string name="text_share_host">分享者：</string>
     <string name="text_event_activity">活動目前</string>
     <string name="text_event_num">位會參與</string>
     <string name="share_spinner_title">請選擇以下方式</string>

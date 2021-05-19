@@ -2,7 +2,6 @@
 <resources>
     <string-array name="share_spinner">
         <item>匯出本週圖表</item>
-        <item>匯出本日成果</item>
         <item>無</item>
     </string-array>
 </resources>
