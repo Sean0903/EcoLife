@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.sean.green.MainActivity
 import com.sean.green.databinding.FragmentCalendarBinding
 
 class CalendarFragment: Fragment() {
@@ -22,6 +23,9 @@ class CalendarFragment: Fragment() {
         binding = FragmentCalendarBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+
+        (activity as MainActivity).dismissFabButton(true)
+
         return binding.root
     }
 }

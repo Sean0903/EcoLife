@@ -6,8 +6,17 @@
         <item name="materialThemeOverlay">@style/MyFabOverlay</item>
     </style>
 
+    <style name="MyFloatingActionButtonEvent" parent="@style/Widget.MaterialComponents.FloatingActionButton">
+        <item name="colorPrimary">@color/colorSelectedBottomNav</item>
+        <item name="materialThemeOverlay">@style/MyFabOverlay2</item>
+    </style>
+
     <style name="MyFabOverlay">
         <item name="colorSecondary">@color/colorBlue2</item>
+    </style>
+
+    <style name="MyFabOverlay2">
+        <item name="colorSecondary">@color/colorSelectedBottomNav</item>
     </style>
 
     <style name="home_page_title">

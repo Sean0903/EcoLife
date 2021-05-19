@@ -5,7 +5,7 @@
     <data>
         <variable
             name="dialogSave"
-            type="com.sean.green.noticeDialog.DialogSaveFragment" />
+            type="com.sean.green.dialog.DialogSaveFragment" />
 
         <import type="android.view.View"/>
     </data>

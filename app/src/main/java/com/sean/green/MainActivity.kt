@@ -43,9 +43,14 @@ class MainActivity : AppCompatActivity() {
                 findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToCalendarFragment())
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.communityFragment -> {
+            R.id.shareFragment -> {
 
-                findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToCommunityFragment())
+                findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToShareFragment())
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.eventFragment -> {
+
+                findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToEventFragment())
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -156,6 +161,18 @@ class MainActivity : AppCompatActivity() {
         fabLayout_use.animate().translationY(resources.getDimension(R.dimen.standard_0))
         fabLayout_challenge.animate().translationY(resources.getDimension(R.dimen.standard_0))
 
+    }
+
+    fun dismissFabButton(set: Boolean) {
+        when (set) {
+            true -> {
+                binding.fab.visibility = View.VISIBLE
+            }
+            false -> {
+                binding.fab.visibility = View.GONE
+
+            }
+        }
     }
 
 }

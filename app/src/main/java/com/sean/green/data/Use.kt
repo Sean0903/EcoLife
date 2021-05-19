@@ -1,8 +1,9 @@
 package com.sean.green.data
 
 class Use (
-    val plastic: Int ?= null,
-    val power: Int ?= null,
-    val carbon: Int ?= null,
-    val totalUse: Int ?=null
+    val plastic: String ?= null,
+    val power: String ?= null,
+    val carbon: String ?= null,
+//    val totalUse: String ?=null,
+    val content: String ?=null
 )

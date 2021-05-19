@@ -10,8 +10,8 @@
     </fragment>
 
     <fragment
-        android:id="@+id/communityFragment"
-        android:name="com.sean.green.community.CommunityFragment"
+        android:id="@+id/shareFragment"
+        android:name="com.sean.green.share.ShareFragment"
         android:label="CommunityFragment" />
 
     <fragment
@@ -46,15 +46,27 @@
 
     <fragment
         android:id="@+id/dialogSaveFragment"
-        android:name="com.sean.green.noticeDialog.DialogSaveFragment"
+        android:name="com.sean.green.dialog.DialogSaveFragment"
         android:label="DialogSaveFragment" >
 
     </fragment>
 
     <fragment
         android:id="@+id/dialogUseFragment"
-        android:name="com.sean.green.noticeDialog.DialogUseFragment"
+        android:name="com.sean.green.dialog.DialogUseFragment"
         android:label="DialogUseFragment" />
+
+    <fragment
+        android:id="@+id/eventFragment"
+        android:name="com.sean.green.event.EventFragment"
+        android:label="EventFragment" >
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/dialogEvent"
+        android:name="com.sean.green.dialog.DialogEventFragment"
+        android:label="DialogEvent" />
 
     <action android:id="@+id/navigate_to_home_fragment" app:destination="@id/homeFragment"
         app:popUpTo="@id/navigation"
@@ -65,7 +77,10 @@
     <action android:id="@+id/navigate_to_calendar_fragment" app:destination="@id/calendarFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
-    <action android:id="@+id/navigate_to_community_fragment" app:destination="@id/communityFragment"
+    <action android:id="@+id/navigate_to_share_fragment" app:destination="@id/shareFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+    <action android:id="@+id/navigate_to_event_fragment" app:destination="@id/eventFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
     <action android:id="@+id/navigate_to_save_fragment" app:destination="@id/saveFragment"
@@ -86,4 +101,12 @@
     <action
         android:id="@+id/action_saveFragment_to_homeFragment"
         app:destination="@id/homeFragment" />
+    <action
+        android:id="@+id/action_eventFragment_to_dialogEvent"
+        app:destination="@id/dialogEvent" />
+    <fragment
+        android:id="@+id/dialogShareFragment"
+        android:name="com.sean.green.dialog.DialogShareFragment"
+        android:label="DialogShareFragment" />
+
 </navigation>

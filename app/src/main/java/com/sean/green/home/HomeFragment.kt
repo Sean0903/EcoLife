@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.sean.green.MainActivity
 import com.sean.green.R
 import com.sean.green.data.Save
 import com.sean.green.databinding.FragmentHomeBinding
@@ -36,7 +37,7 @@ class HomeFragment: Fragment() {
         binding.recyclerViewHome.adapter = adapter
 
         val mock = Save("1","2","3","突然就封城了，好可怕")
-        val mock2 = Save()
+        val mock2 = Save("1","2","3","突然就封城了，好可怕")
         val mockList = listOf( mock, mock2,mock, mock2)
 
         adapter.submitList(mockList)
@@ -68,7 +69,7 @@ class HomeFragment: Fragment() {
         }
 
 
-
+        (activity as MainActivity).dismissFabButton(true)
 
 
         return binding.root

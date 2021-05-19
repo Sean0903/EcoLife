@@ -16,7 +16,15 @@
         android:title="@string/navigation_calendar_name" />
 
     <item
-        android:id="@+id/communityFragment"
+        android:id="@+id/eventFragment"
+        android:icon="@drawable/outline_celebration_black_24dp"
+        android:title="@string/navigation_event_name" />
+
+    <item
+        android:id="@+id/shareFragment"
         android:icon="@drawable/outline_forum_black_24dp"
-        android:title="@string/navigation_chart_name" />
+        android:title="@string/navigation_community_name" />
+
+
+
 </menu>
