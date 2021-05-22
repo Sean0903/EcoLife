@@ -116,4 +116,8 @@
     <action
         android:id="@+id/action_dialogEvent_to_eventFragment"
         app:destination="@id/eventFragment" />
+    <fragment
+        android:id="@+id/shareDialogFragment"
+        android:name="com.sean.green.share.ShareDialogFragment"
+        android:label="ShareDialogFragment" />
 </navigation>

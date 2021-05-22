@@ -18,11 +18,11 @@ import com.sean.green.ext.getVmFactory
 class HomeFragment: Fragment() {
 
     private lateinit var binding : FragmentHomeBinding
-    private val viewModel : HomeViewModel by lazy {
-        ViewModelProvider(this).get(HomeViewModel::class.java)
-    }
+//    private val viewModel : HomeViewModel by lazy {
+//        ViewModelProvider(this).get(HomeViewModel::class.java)
+//    }
 
-//    private val viewModel by viewModels<HomeViewModel> { getVmFactory() }
+    private val viewModel by viewModels<HomeViewModel> { getVmFactory() }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -41,14 +41,6 @@ class HomeFragment: Fragment() {
         val mockList = listOf( mock, mock2,mock, mock2)
 
         adapter.submitList(mockList)
-
-        viewModel.dataSaveFromFirebase.observe(viewLifecycleOwner, Observer {
-//            viewModel.getAndSetSaveToday()
-        })
-
-//        viewModel.save.observe(viewLifecycleOwner, Observer {
-//            viewModel.getDocument()
-//        })
 
         binding.imageHomeSaveInfo.setOnClickListener {
 

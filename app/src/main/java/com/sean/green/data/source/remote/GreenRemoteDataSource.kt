@@ -1,5 +1,6 @@
 package com.sean.green.data.source.remote
 
+import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.sean.green.GreenApplication
@@ -19,7 +20,7 @@ object GreenRemoteDataSource : GreenDataSource {
     private const val PATH_GREEN = "green"
     private const val KEY_CREATED_TIME = "createdTime"
 
-    override suspend fun getObjects(): Result<List<Save>> = suspendCoroutine { continuation ->
+    override suspend fun getSaveNum(): Result<List<Save>> = suspendCoroutine { continuation ->
         FirebaseFirestore.getInstance()
             .collection(PATH_GREEN)
             .orderBy(KEY_CREATED_TIME, Query.Direction.DESCENDING)
@@ -28,20 +29,22 @@ object GreenRemoteDataSource : GreenDataSource {
                 if (task.isSuccessful) {
                     val list = mutableListOf<Save>()
                     for (document in task.result!!) {
-//                        Logger.d(document.id + " => " + document.data)
+                        Log.d("seanGetSaveNum",document.id + " => " + document.data)
 
-                        val article = document.toObject(Save::class.java)
-                        list.add(article)
+                        val saveNum = document.toObject(Save::class.java)
+                        list.add(saveNum)
                     }
-//                    continuation.resume(Result.Success(list))
+
+                    continuation.resume(Result.Success(list))
+
                 } else {
                     task.exception?.let {
 
-//                        Logger.w("[${this::class.simpleName}] Error getting documents. ${it.message}")
-//                        continuation.resume(Result.Error(it))
+                        Log.w("sean","[${this::class.simpleName}] Error getting documents. ${it.message}")
+                        continuation.resume(Result.Error(it))
                         return@addOnCompleteListener
                     }
-//                    continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                    continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
                 }
             }
     }

@@ -14,7 +14,7 @@ import kotlinx.coroutines.withContext
  */
 class GreenLocalDataSource(val context: Context) : GreenDataSource {
 
-    override suspend fun getObjects(): Result<List<Save>> {
+    override suspend fun getSaveNum(): Result<List<Save>> {
         TODO("Not yet implemented")
     }
 

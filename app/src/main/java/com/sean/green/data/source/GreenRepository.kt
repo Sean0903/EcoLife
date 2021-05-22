@@ -10,6 +10,6 @@ import com.sean.green.data.Save
 
 interface GreenRepository {
 
-    suspend fun getObjects(): Result<List<Save>>
+    suspend fun getSaveNum(): Result<List<Save>>
 
 }

@@ -9,6 +9,6 @@ import com.sean.green.data.Save
  */
 interface GreenDataSource {
 
-    suspend fun getObjects(): Result<List<Save>>
+    suspend fun getSaveNum(): Result<List<Save>>
 
 }

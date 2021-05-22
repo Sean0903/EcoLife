@@ -1,41 +1,114 @@
 package com.sean.green.home
 
-import android.app.Application
-import android.content.ContentValues
-import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import app.appworks.school.stylish.util.ServiceLocator.greenRepository
-import com.google.firebase.firestore.DocumentChange
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
-import com.sean.green.data.FirebaseKey.Companion.COLLECTION_SAVE
+import com.sean.green.GreenApplication
+import com.sean.green.R
 import com.sean.green.data.Save
 import com.sean.green.data.source.GreenRepository
+import com.sean.green.network.LoadApiStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.util.*
+import com.sean.green.data.Result
 
-class HomeViewModel: ViewModel() {
 
+class HomeViewModel(private val repository: GreenRepository): ViewModel() {
+
+    val plastic = MutableLiveData<String>()
+    val power = MutableLiveData<String>()
+    val carbon = MutableLiveData<String>()
+
+
+    private val _saveNum = MutableLiveData<List<Save>>()
+
+    val saveNum: LiveData<List<Save>>
+        get() = _saveNum
+
+    // status: The internal MutableLiveData that stores the status of the most recent request
+    private val _status = MutableLiveData<LoadApiStatus>()
+
+    val status: LiveData<LoadApiStatus>
+        get() = _status
+
+    // error: The internal MutableLiveData that stores the error of the most recent request
+    private val _error = MutableLiveData<String>()
+
+    val error: LiveData<String>
+        get() = _error
+
+    // status for the loading icon of swl
+    private val _refreshStatus = MutableLiveData<Boolean>()
+
+    val refreshStatus: LiveData<Boolean>
+        get() = _refreshStatus
+
+    // Create a Coroutine scope using a job to be able to cancel when needed
     private var viewModelJob = Job()
+
+    // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    private val _dataSaveFromFirebase = MutableLiveData<Save>()
-    val dataSaveFromFirebase : LiveData<Save>
-        get() = _dataSaveFromFirebase
-
-    private fun setDataSaveFromFirebase (save : Save){
-        _dataSaveFromFirebase.value = save
+    init {
+        getSaveNumResult()
+        Log.d("sean","getSaveNumResult = $_saveNum")
     }
 
+    private fun getSaveNumResult() {
+
+        coroutineScope.launch {
+
+            _status.value = LoadApiStatus.LOADING
+
+            val result = repository.getSaveNum()
+            Log.d("seanHomeViewModelResult","repository.getSaveNum = ${repository.getSaveNum()}")
+
+            _saveNum.value = when (result) {
+                is Result.Success -> {
+                    Log.d("seanHomeViewModel","result.data = ${result.data}")
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                    result.data
+                }
+                is Result.Fail -> {
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+                is Result.Error -> {
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+                else -> {
+                    _error.value = GreenApplication.instance.getString(R.string.you_know_nothing)
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+            }
+            _refreshStatus.value = false
+            Log.d("seanSaveValue","saveValue = ${_saveNum.value}")
+        }
+    }
+}
 
 
-    var db = FirebaseFirestore.getInstance()
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //    private val _save = MutableLiveData<List<Save>>()
 //
@@ -182,6 +255,3 @@ class HomeViewModel: ViewModel() {
 //    private val _date = MutableLiveData<Date>()
 //    val date : LiveData<Date>
 //        get() = _date
-
-
-}

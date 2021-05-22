@@ -16,8 +16,8 @@ class DefaultGreenRepository(private val greenRemoteDataSource: GreenDataSource,
                                private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : GreenRepository {
 
-    override suspend fun getObjects(): Result<List<Save>> {
-        return greenRemoteDataSource.getObjects()
+    override suspend fun getSaveNum(): Result<List<Save>> {
+        return greenRemoteDataSource.getSaveNum()
     }
 //    override suspend fun getObjects(collection: String, start: Timestamp, end: Timestamp): List<Any> {
 //        return greenRemoteDataSource.getObjects(collection= collection)

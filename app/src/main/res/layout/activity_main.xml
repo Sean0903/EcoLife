@@ -29,8 +29,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navGraph="@navigation/navigation"
-            tools:visibility="visible"
-            tools:layout="@layout/activity_main"
             />
 
         <ImageView
@@ -54,8 +52,7 @@
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/fab"
             app:layout_constraintStart_toStartOf="@+id/fab"
-            app:layout_constraintTop_toTopOf="@+id/fab"
-            tools:visibility="visible">
+            app:layout_constraintTop_toTopOf="@+id/fab">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab_save"

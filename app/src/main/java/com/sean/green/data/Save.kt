@@ -5,10 +5,11 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 class Save (
-    val plastic: String ?= null,
-    val power: String ?= null,
-    val carbon: String ?= null,
-    val content: String ?= null,
+    val plastic: String ?= "",
+    val power: String ?= "",
+    val carbon: String ?= "",
+    val content: String ?= "",
+    val createdTime: Long = -1,
 //    val image: List<String> ?= null,
-//    val totalSave: Int ?= null
+//    val totalSave: Int ?= null,
 ) : Parcelable

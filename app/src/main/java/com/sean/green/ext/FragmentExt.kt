@@ -7,8 +7,8 @@ import com.sean.green.data.Save
 import com.sean.green.factory.ViewModelFactory
 
 
-fun Fragment.getVmFactory(planKey: Any): ViewModelFactory {
-    val repository = (requireContext().applicationContext as App).greenRepository
+fun Fragment.getVmFactory(): ViewModelFactory {
+    val repository = (requireContext().applicationContext as GreenApplication).greenRepository
     return ViewModelFactory(repository)
 }
 

@@ -1,17 +1,47 @@
 package com.sean.green.save
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import app.appworks.school.stylish.util.ServiceLocator.greenRepository
+import com.google.firebase.firestore.FirebaseFirestore
+import com.sean.green.GreenApplication
+import com.sean.green.R
 import com.sean.green.data.Save
 import com.sean.green.data.source.GreenRepository
+import com.sean.green.network.LoadApiStatus
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import java.util.*
 
-//SaveViewModel(save: Save, app: Application): AndroidViewModel(app)
-class SaveViewModel() : ViewModel() {
+class SaveViewModel : ViewModel() {
 
 
     val plastic = MutableLiveData<String>()
     val power = MutableLiveData<String>()
     val carbon = MutableLiveData<String>()
+
+    fun addSaveData2Firebase() {
+        val saveNum = FirebaseFirestore.getInstance()
+            .collection("green")
+        val document = saveNum.document()
+        val data = hashMapOf(
+            "user" to hashMapOf(
+                "email" to "sean@school.appworks.tw",
+                "id" to "sean0903",
+                "name" to "凱翔"
+            ),
+            "plastic" to plastic,
+            "power" to power,
+            "carbon" to carbon,
+            "createdTime" to Calendar.getInstance().timeInMillis,
+            "id" to document.id
+        )
+        document.set(data)
+    }
+}
 
 
 
@@ -37,7 +67,7 @@ class SaveViewModel() : ViewModel() {
 //    val save: LiveData<Save?>
 //        get() = _save
 
-    // Initialize the _selectedProperty MutableLiveData
+// Initialize the _selectedProperty MutableLiveData
 //    init {
 //        _save.value = save
 //    }
@@ -61,4 +91,3 @@ class SaveViewModel() : ViewModel() {
 //        )
 //        document.set(data)
 //    }
-}

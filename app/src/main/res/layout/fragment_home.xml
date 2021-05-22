@@ -10,12 +10,14 @@
         <variable
             name="item"
             type="com.sean.green.data.Save" />
+        <variable
+            name="item2"
+            type="com.sean.green.data.Use" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/gradient_button">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
@@ -150,6 +152,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/tag_right_corners_power"
+                android:text="@{item.power}"
                 android:hint="0"
                 android:padding="@dimen/elevation_all"
                 android:textAlignment="center"
@@ -187,12 +190,10 @@
                 android:textColor="@color/colorWhite"
                 android:textColorHint="@color/colorWhite"
                 android:textSize="20dp"
-
+                android:text="@{item.carbon}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/image_home_save_carbon"
                 app:layout_constraintTop_toTopOf="@+id/text_home_save_power" />
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
