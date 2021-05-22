@@ -1,6 +1,6 @@
 package com.sean.green.data
 
-class Event(
+data class Event(
     val name: String? = null,
     val introduction: String? = null,
     val time: String? = null,

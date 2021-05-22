@@ -14,6 +14,10 @@ import kotlinx.coroutines.withContext
  */
 class GreenLocalDataSource(val context: Context) : GreenDataSource {
 
+    override suspend fun addSaveNum2Firebase(save: Save): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun getSaveNum(): Result<List<Save>> {
         TODO("Not yet implemented")
     }

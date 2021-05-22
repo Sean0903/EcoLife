@@ -1,6 +1,6 @@
 package com.sean.green.data
 
-class Challenge (
+data class Challenge (
     val plastic: Int ?= null,
     val power: Int ?= null,
     val carbon: Int ?= null,

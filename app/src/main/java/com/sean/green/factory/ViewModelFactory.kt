@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.sean.green.MainViewModel
 import com.sean.green.data.source.GreenRepository
 import com.sean.green.home.HomeViewModel
+import com.sean.green.save.SaveViewModel
 
 /**
  *
@@ -23,6 +24,10 @@ class ViewModelFactory constructor(
 
                 isAssignableFrom(HomeViewModel::class.java) ->
                     HomeViewModel(greenRepository)
+
+                isAssignableFrom(SaveViewModel::class.java) ->
+                    SaveViewModel(greenRepository)
+
 //
 //                isAssignableFrom(ChartViewModel::class.java) ->
 //                    ChartViewModel(stylishRepository)

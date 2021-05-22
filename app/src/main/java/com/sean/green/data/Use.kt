@@ -1,6 +1,6 @@
 package com.sean.green.data
 
-class Use (
+data class Use (
     val plastic: String ?= null,
     val power: String ?= null,
     val carbon: String ?= null,

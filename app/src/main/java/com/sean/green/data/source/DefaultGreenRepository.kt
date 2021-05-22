@@ -16,6 +16,10 @@ class DefaultGreenRepository(private val greenRemoteDataSource: GreenDataSource,
                                private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : GreenRepository {
 
+    override suspend fun addSaveNum2Firebase(save: Save): Result<Boolean> {
+        return greenRemoteDataSource.addSaveNum2Firebase(save)
+    }
+
     override suspend fun getSaveNum(): Result<List<Save>> {
         return greenRemoteDataSource.getSaveNum()
     }

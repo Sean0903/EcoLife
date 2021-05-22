@@ -10,6 +10,8 @@ import com.sean.green.data.Save
 
 interface GreenRepository {
 
+    suspend fun addSaveNum2Firebase(save: Save): Result<Boolean>
+
     suspend fun getSaveNum(): Result<List<Save>>
 
 }

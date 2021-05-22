@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.firestore.FieldValue
@@ -24,9 +25,12 @@ class SaveFragment: Fragment() {
         var db = FirebaseFirestore.getInstance()
 
     private lateinit var binding : FragmentSaveBinding
-    private val viewModel : SaveViewModel by lazy {
-        ViewModelProvider(this).get(SaveViewModel::class.java)
-    }
+//    private val viewModel : SaveViewModel by lazy {
+//        ViewModelProvider(this).get(SaveViewModel::class.java)
+//    }
+
+    private val viewModel by viewModels<SaveViewModel> { getVmFactory() }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,6 +45,21 @@ class SaveFragment: Fragment() {
 //
 //        val viewModel = ViewModelProvider(this,viewModelFactory).get(SaveViewModel::class.java)
 
+        viewModel.plastic.observe(viewLifecycleOwner, Observer {
+            Log.i("checkSaveData","plastic = ${viewModel.plastic.value}")
+        }
+        )
+
+        viewModel.power.observe(viewLifecycleOwner, Observer {
+            Log.i("checkSaveData","power = ${viewModel.power.value}")
+        }
+        )
+
+        viewModel.carbon.observe(viewLifecycleOwner, Observer {
+            Log.i("checkSaveData","carbon = ${viewModel.carbon.value}")
+        }
+        )
+
         val binding = FragmentSaveBinding.inflate(inflater, container, false)
 
 //        val viewModel by viewModels<SaveViewModel> { getVmFactory(SaveFragmentArgs.fromBundle(requireArguments()).saveKey) }
@@ -49,21 +68,7 @@ class SaveFragment: Fragment() {
 
         binding.viewModel = viewModel
 
-        binding.editTextSavePagePlastic.doOnTextChanged { text, start, before, count ->
-            viewModel.plastic.value.toString()
-            Log.d("sean", "viewModel.plastic.value = ${viewModel.plastic.value}")
-        }
 
-        binding.editTextSavePagePower.doOnTextChanged { text, start, before, count ->
-            viewModel.power.value.toString()
-            Log.d("sean", "viewModel.power.value = ${viewModel.power.value}")
-        }
-
-        binding.editTextSavePageCarbon.doOnTextChanged { text, start, before, count ->
-
-//            viewModel.carbon.value.toString()
-            Log.d("sean", "viewModel.carbon.value = ${viewModel.carbon.value}")
-        }
 
         binding.imageSavePageInfo.setOnClickListener {
 
