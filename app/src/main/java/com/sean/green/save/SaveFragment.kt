@@ -94,14 +94,14 @@ class SaveFragment: Fragment() {
         return binding.root
     }
 
-//        private fun send() {
-//        //測試
-//        val washingtonRef =
-//            db.collection("green").document("2021")
-//        washingtonRef.update("plastic", FieldValue.arrayUnion(viewModel.plastic.value))
-//        washingtonRef.update("power", FieldValue.arrayUnion(viewModel.power.value))
-//        washingtonRef.update("carbon", FieldValue.arrayUnion(viewModel.carbon.value))
-//    }
+        private fun send() {
+        //測試
+        val washingtonRef =
+            db.collection("green").document("2021")
+        washingtonRef.update("plastic", FieldValue.arrayUnion(viewModel.plastic.value))
+        washingtonRef.update("power", FieldValue.arrayUnion(viewModel.power.value))
+        washingtonRef.update("carbon", FieldValue.arrayUnion(viewModel.carbon.value))
+    }
 }
 
 

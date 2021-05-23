@@ -93,6 +93,13 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
             Log.d("seanSaveValue","saveValue = ${_saveNum.value}")
         }
     }
+
+    var totalSavePlastic = 0.0f
+    var totalSavePower = 0.0f
+    var totalSaveCarbon = 0.0f
+    var totalUsePlastic = 0.0f
+    var totalUsePower = 0.0f
+    var totalUseCarbon = 0.0f
 }
 
 

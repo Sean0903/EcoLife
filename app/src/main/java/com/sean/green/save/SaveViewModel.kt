@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.sean.green.data.Result
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sean.green.GreenApplication
 import com.sean.green.R
@@ -75,25 +76,23 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
 
         coroutineScope.launch {
 
-            val newSaveData = Save(
-                plastic = plastic.value!!,
-                power = power.value!!,
-                carbon = carbon.value!!
-            )
-
             val saveNum = FirebaseFirestore.getInstance()
                 .collection("green")
             val document = saveNum.document()
-            val data = hashMapOf(
-                "user" to hashMapOf(
-                    "email" to "sean@school.appworks.tw",
-                    "id" to "sean0903",
-                    "name" to "凱翔"
-                ),
-                "createdTime" to Calendar.getInstance().timeInMillis,
-                "id" to document.id
+
+            val newSaveData = Save(
+                plastic = plastic.value!!,
+                power = power.value!!,
+                carbon = carbon.value!!,
+                createdTime = Calendar.getInstance().timeInMillis,
+                id = document.id
             )
-            document.set(data)
+
+            val washingtonRef =
+                saveNum.document("user")
+            washingtonRef.update("email", FieldValue.arrayUnion("sean@school.appworks.tw"))
+            washingtonRef.update("id", FieldValue.arrayUnion("sean0903"))
+            washingtonRef.update("name", FieldValue.arrayUnion( "梁凱翔"))
 
             when (val result = repository.addSaveNum2Firebase(newSaveData)) {
                 is Result.Success -> {
@@ -116,53 +115,11 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
             }
         }
     }
+
+
+
+
 }
 
 
 
-//    // Handle navigation to homepage
-//    private val _navigateToHome = MutableLiveData<Save>()
-//
-//    val navigateToHome: LiveData<Save>
-//        get() = _navigateToHome
-//
-//
-//    fun navigateToHome(save: Save) {
-//        _navigateToHome.value = save
-//    }
-//
-//    fun onDetailNavigated() {
-//        _navigateToHome.value = null
-//    }
-
-//    //viewModel裡可以保存LiveData，LiveData可以自動通知Observer，來完成activity和fragment的更新
-//    private val _save = MutableLiveData<Save?>()
-//
-//    // The external LiveData for the SelectedProperty
-//    val save: LiveData<Save?>
-//        get() = _save
-
-// Initialize the _selectedProperty MutableLiveData
-//    init {
-//        _save.value = save
-//    }
-
-
-//    fun addSaveData2fire() {
-//        val green = FirebaseFirestore.getInstance()
-//            .collection("green")
-//        val document = green.document()
-//        val data = hashMapOf(
-////            "author" to hashMapOf(
-////                "email" to "wayne@school.appworks.tw",
-////                "id" to "waynechen323",
-////                "name" to "AKA小安老師"
-////            ),
-//            "plastic" to plastic,
-//            "power" to power,
-////            "createdTime" to Calendar.getInstance().timeInMillis,
-//            "carbon" to carbon,
-////            "category" to category
-//        )
-//        document.set(data)
-//    }
