@@ -4,14 +4,14 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Save (
+data class Save(
 
-    var id: String ? ="",
-    var plastic: String ?= "",
-    var power: String ?= "",
-    var carbon: String ?= "",
-    var content: String ?= "",
-    var createdTime: Long ?= -1,
+    var id: String? = "",
+    var plastic: Int? = null,
+    var power: Int? = null,
+    var carbon: Int? = null,
+    var content: String? = "",
+    var createdTime: Long = -1,
 //    val image: List<String> ?= null,
 //    val totalSave: Int ?= null,
 ) : Parcelable

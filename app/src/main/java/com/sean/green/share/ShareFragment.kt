@@ -92,10 +92,10 @@ class ShareFragment: Fragment() {
 
 
             val data = LineData(xvalue, finaldataset as List<ILineDataSet>?)
-            lineChart.data = data
-            lineChart.setBackgroundColor(resources.getColor(R.color.white))
-            lineChart.animateXY(3000,3000)
-            Log.d("checkChart","data = ${lineChart.data}")
+            lineChart1.data = data
+            lineChart1.setBackgroundColor(resources.getColor(R.color.white))
+            lineChart1.animateXY(3000,3000)
+            Log.d("checkChart","data = ${lineChart1.data}")
 
         }
 

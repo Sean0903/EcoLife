@@ -36,8 +36,8 @@ class HomeFragment: Fragment() {
         val adapter = HomeAdapter()
         binding.recyclerViewHome.adapter = adapter
 
-        val mock = Save("1","2","3","突然就封城了，好可怕")
-        val mock2 = Save("1","2","3","突然就封城了，好可怕")
+        val mock = Save("1",2,3,4,"突然就封城了，好可怕")
+        val mock2 = Save("1",2,3,4,"突然就封城了，好可怕")
         val mockList = listOf( mock, mock2,mock, mock2)
 
         adapter.submitList(mockList)
@@ -59,6 +59,20 @@ class HomeFragment: Fragment() {
             useDialog.show()
 
         }
+
+        viewModel.isCallDeleteAction.observe(viewLifecycleOwner, Observer {
+            if (it == true){
+                viewModel.getTotalSaveNum()
+
+            }
+        })
+
+        viewModel.date.observe(viewLifecycleOwner, Observer { it ->
+
+            if (it != null){
+                viewModel.getTotalSaveNum()
+            }
+        })
 
 
         (activity as MainActivity).dismissFabButton(true)

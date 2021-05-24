@@ -4,7 +4,6 @@ import com.sean.green.data.Result
 import com.sean.green.data.Save
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import java.sql.Timestamp
 
 /**
  * Created by Wayne Chen in Jul. 2019.
@@ -20,7 +19,7 @@ class DefaultGreenRepository(private val greenRemoteDataSource: GreenDataSource,
         return greenRemoteDataSource.addSaveNum2Firebase(save)
     }
 
-    override suspend fun getSaveNum(): Result<List<Save>> {
+    override suspend fun getSaveNum(collectionSave: String): Result<List<Save>> {
         return greenRemoteDataSource.getSaveNum()
     }
 //    override suspend fun getObjects(collection: String, start: Timestamp, end: Timestamp): List<Any> {

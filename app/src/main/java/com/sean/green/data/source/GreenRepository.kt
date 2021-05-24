@@ -12,6 +12,6 @@ interface GreenRepository {
 
     suspend fun addSaveNum2Firebase(save: Save): Result<Boolean>
 
-    suspend fun getSaveNum(): Result<List<Save>>
+    suspend fun getSaveNum(collectionSave: String): Result<List<Save>>
 
 }

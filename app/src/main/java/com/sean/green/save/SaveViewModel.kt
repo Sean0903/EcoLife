@@ -81,9 +81,9 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
             val document = saveNum.document()
 
             val newSaveData = Save(
-                plastic = plastic.value!!,
-                power = power.value!!,
-                carbon = carbon.value!!,
+                plastic = plastic.value?.toInt()!!,
+                power = power.value?.toInt()!!,
+                carbon = carbon.value?.toInt()!!,
                 createdTime = Calendar.getInstance().timeInMillis,
                 id = document.id
             )

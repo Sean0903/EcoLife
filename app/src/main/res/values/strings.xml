@@ -13,11 +13,11 @@
     <string name="text_my_use_title">我的消耗</string>
     <string name="button_save">儲存</string>
     <string name="text_save_page_title">新增成果</string>
-    <string name="dialog_save_title">每日成果量表參考</string>
+    <string name="dialog_save_title">— 每日成果量表參考 —</string>
     <string name="text_dialog_save_plastic_1">1分：減少使用一個塑膠製品</string>
     <string name="text_dialog_save_power_1">1分：減少消耗0.5度電(約冷氣運轉一小時)</string>
     <string name="text_dialog_save_carbon_1">1分：減少碳排1公斤(約汽車行駛7公里)</string>
-    <string name="dialog_use_title">每日消耗量表參考</string>
+    <string name="dialog_use_title">— 每日消耗量表參考 —</string>
     <string name="text_dialog_use_plastic_1">1分：使用一個塑膠製品</string>
     <string name="text_dialog_use_power_1">1分：消耗0.5度電(約冷氣運轉一小時)</string>
     <string name="text_dialog_use_carbon_1">1分：碳排1公斤(約汽車行駛7公里)</string>

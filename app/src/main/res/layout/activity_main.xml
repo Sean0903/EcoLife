@@ -48,10 +48,10 @@
             android:id="@+id/fabLayout_save"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="2dp"
+            android:layout_marginEnd="3dp"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/fab"
-            app:layout_constraintStart_toStartOf="@+id/fab"
+            app:layout_constraintEnd_toEndOf="@+id/fab"
             app:layout_constraintTop_toTopOf="@+id/fab">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -62,7 +62,7 @@
                 app:elevation="0dp"
                 app:fabCustomSize="45dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/outline_stars_black_18"
                 app:tint="@color/colorWhite" />
@@ -71,7 +71,7 @@
                 android:id="@+id/text_save_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:fontFamily="@font/noto_sans"
                 android:paddingLeft="@dimen/dialog_padding"
                 android:paddingTop="@dimen/dialog_padding"
@@ -81,9 +81,9 @@
                 android:textAlignment="center"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/text_content"
-                app:layout_constraintBottom_toBottomOf="@+id/fab_save"
-                app:layout_constraintStart_toEndOf="@+id/fab_save"
-                app:layout_constraintTop_toTopOf="@+id/fab_save" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/fab_save"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -91,10 +91,10 @@
             android:id="@+id/fabLayout_use"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="2dp"
+            android:layout_marginEnd="3dp"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/fab"
-            app:layout_constraintStart_toStartOf="@+id/fab"
+            app:layout_constraintEnd_toEndOf="@+id/fab"
             app:layout_constraintTop_toTopOf="@+id/fab"
             tools:visibility="visible">
 
@@ -106,7 +106,7 @@
                 app:elevation="0dp"
                 app:fabCustomSize="45dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/outline_stars_black_18"
                 app:tint="@color/colorWhite" />
@@ -115,7 +115,7 @@
                 android:id="@+id/text_use_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:fontFamily="@font/noto_sans"
                 android:paddingLeft="@dimen/dialog_padding"
                 android:paddingTop="@dimen/dialog_padding"
@@ -125,9 +125,9 @@
                 android:textAlignment="center"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/text_content"
-                app:layout_constraintBottom_toBottomOf="@+id/fab_use"
-                app:layout_constraintStart_toEndOf="@+id/fab_use"
-                app:layout_constraintTop_toTopOf="@+id/fab_use" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/fab_use"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -135,10 +135,10 @@
             android:id="@+id/fabLayout_challenge"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="2dp"
+            android:layout_marginEnd="3dp"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/fab"
-            app:layout_constraintStart_toStartOf="@+id/fab"
+            app:layout_constraintEnd_toEndOf="@+id/fab"
             app:layout_constraintTop_toTopOf="@+id/fab"
             tools:visibility="visible">
 
@@ -150,7 +150,7 @@
                 app:elevation="0dp"
                 app:fabCustomSize="45dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/outline_stars_black_18"
                 app:tint="@color/colorWhite" />
@@ -159,7 +159,7 @@
                 android:id="@+id/text_challenge_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:fontFamily="@font/noto_sans"
                 android:paddingLeft="@dimen/dialog_padding"
                 android:paddingTop="@dimen/dialog_padding"
@@ -169,9 +169,9 @@
                 android:textAlignment="center"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/text_content"
-                app:layout_constraintBottom_toBottomOf="@+id/fab_challenge"
-                app:layout_constraintStart_toEndOf="@+id/fab_challenge"
-                app:layout_constraintTop_toTopOf="@+id/fab_challenge" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/fab_challenge"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -182,13 +182,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="false"
             android:layout_alignParentBottom="false"
+            android:layout_marginEnd="8dp"
             android:layout_marginBottom="60dp"
             app:elevation="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.487"
-            app:layout_constraintStart_toStartOf="parent"
-            app:rippleColor="@color/colorBlue4"/>
+            app:rippleColor="@color/colorBlue4" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavView"

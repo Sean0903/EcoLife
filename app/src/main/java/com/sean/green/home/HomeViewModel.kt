@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sean.green.GreenApplication
 import com.sean.green.R
+import com.sean.green.data.FirebaseKey.Companion.COLLECTION_SAVE
 import com.sean.green.data.Save
 import com.sean.green.data.source.GreenRepository
 import com.sean.green.network.LoadApiStatus
@@ -14,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import com.sean.green.data.Result
+import java.util.*
 
 
 class HomeViewModel(private val repository: GreenRepository): ViewModel() {
@@ -46,6 +48,14 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
     val refreshStatus: LiveData<Boolean>
         get() = _refreshStatus
 
+    private val _isCallDeleteAction = MutableLiveData<Boolean>()
+    val isCallDeleteAction : LiveData<Boolean>
+        get() = _isCallDeleteAction
+
+    private val _date = MutableLiveData<Date>()
+    val date : LiveData<Date>
+        get() = _date
+
     // Create a Coroutine scope using a job to be able to cancel when needed
     private var viewModelJob = Job()
 
@@ -63,8 +73,10 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
 
             _status.value = LoadApiStatus.LOADING
 
-            val result = repository.getSaveNum()
-            Log.d("seanHomeViewModelResult","repository.getSaveNum = ${repository.getSaveNum()}")
+            val result = repository.getSaveNum(COLLECTION_SAVE)
+            Log.d("seanHomeViewModelResult","repository.getSaveNum = ${repository.getSaveNum(
+                COLLECTION_SAVE
+            )}")
 
             _saveNum.value = when (result) {
                 is Result.Success -> {
@@ -94,12 +106,26 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
         }
     }
 
-    var totalSavePlastic = 0.0f
-    var totalSavePower = 0.0f
-    var totalSaveCarbon = 0.0f
-    var totalUsePlastic = 0.0f
-    var totalUsePower = 0.0f
-    var totalUseCarbon = 0.0f
+    fun getTotalSaveNum(){
+        coroutineScope.launch {
+            Log.d("homePage","getTotalSaveNum")
+            val saveList = repository.getSaveNum(
+                COLLECTION_SAVE
+            )
+
+                for(saving in saveList as List<Save>) {
+                    totalSavePower = totalSavePower.plus(saving.power ?: 0)
+                    Log.d("homePage","totalSavePower = $totalSavePower")
+                }
+        }
+    }
+
+    var totalSavePlastic = 0
+    var totalSavePower = 0
+    var totalSaveCarbon = 0
+    var totalUsePlastic = 0
+    var totalUsePower = 0
+    var totalUseCarbon = 0
 }
 
 

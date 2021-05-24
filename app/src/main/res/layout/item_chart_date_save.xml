@@ -14,61 +14,79 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/item_chart_date_time"
-            android:layout_width="84dp"
-            android:layout_height="22dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/noto_sans"
-            android:paddingLeft="@dimen/elevation_all"
-            android:text="@{viewModel.plastic}"
-            android:textAlignment="center"
-            android:textColor="@color/colorMyType"
-            android:textSize="@dimen/text_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/chart_daily_frame"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/item_chart_date_save_plastic"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:fontFamily="@font/noto_sans"
-            android:text="@{viewModel.power}"
-            android:textAlignment="center"
-            android:textColor="@color/colorMyType"
-            android:textSize="@dimen/text_content"
-            app:layout_constraintBottom_toBottomOf="@+id/item_chart_date_time"
-            app:layout_constraintStart_toEndOf="@+id/item_chart_date_time"
-            app:layout_constraintTop_toTopOf="@+id/item_chart_date_time" />
+            <TextView
+                android:id="@+id/item_chart_date_time"
+                android:layout_width="84dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="32dp"
+                android:fontFamily="@font/noto_sans"
+                android:paddingLeft="@dimen/elevation_all"
+                android:text="@{String.valueOf(viewModel.createdTime)}"
+                android:textAlignment="center"
+                android:textColor="@color/colorFlyingLemon1"
+                android:textSize="@dimen/text_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="2020.10.11" />
 
-        <TextView
-            android:id="@+id/item_chart_date_save_power"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:fontFamily="@font/noto_sans"
-            android:text="@{viewModel.carbon}"
-            android:textAlignment="center"
-            android:textColor="@color/colorMyType"
-            android:textSize="@dimen/text_content"
-            app:layout_constraintBottom_toBottomOf="@+id/item_chart_date_save_plastic"
-            app:layout_constraintStart_toEndOf="@+id/item_chart_date_save_plastic"
-            app:layout_constraintTop_toTopOf="@+id/item_chart_date_save_plastic" />
 
-        <TextView
-            android:id="@+id/item_chart_date_save_carbon"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:fontFamily="@font/noto_sans"
-            android:text="@{viewModel.content}"
-            android:textAlignment="center"
-            android:textColor="@color/colorMyType"
-            android:textSize="@dimen/text_content"
-            app:layout_constraintBottom_toBottomOf="@+id/item_chart_date_save_power"
-            app:layout_constraintStart_toEndOf="@+id/item_chart_date_save_power"
-            app:layout_constraintTop_toTopOf="@+id/item_chart_date_save_power" />
+            <TextView
+                android:id="@+id/item_chart_date_save_plastic"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/noto_sans"
+                android:text="@{String.valueOf(viewModel.plastic)}"
+                android:textAlignment="center"
+                android:textColor="@color/colorFlyingLemon1"
+                android:textSize="@dimen/text_content"
+                app:layout_constraintBottom_toBottomOf="@+id/item_chart_date_time"
+                app:layout_constraintStart_toEndOf="@+id/item_chart_date_time"
+                app:layout_constraintTop_toTopOf="@+id/item_chart_date_time"
+                tools:text="11" />
+
+            <TextView
+                android:id="@+id/item_chart_date_save_power"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/noto_sans"
+                android:text="@{String.valueOf(viewModel.power)}"
+                android:textAlignment="center"
+                android:textColor="@color/colorFlyingLemon1"
+                android:textSize="@dimen/text_content"
+                app:layout_constraintBottom_toBottomOf="@+id/item_chart_date_save_plastic"
+                app:layout_constraintStart_toEndOf="@+id/item_chart_date_save_plastic"
+                app:layout_constraintTop_toTopOf="@+id/item_chart_date_save_plastic"
+                tools:text="40" />
+
+            <TextView
+                android:id="@+id/item_chart_date_save_carbon"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/noto_sans"
+                android:text="@{String.valueOf(viewModel.carbon)}"
+                android:textAlignment="center"
+                android:textColor="@color/colorFlyingLemon1"
+                android:textSize="@dimen/text_content"
+                app:layout_constraintBottom_toBottomOf="@+id/item_chart_date_save_power"
+                app:layout_constraintStart_toEndOf="@+id/item_chart_date_save_power"
+                app:layout_constraintTop_toTopOf="@+id/item_chart_date_save_power"
+                tools:text="20" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
