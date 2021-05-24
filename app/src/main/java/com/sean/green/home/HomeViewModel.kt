@@ -68,7 +68,6 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
 
 
     init {
-        getSaveNumResult()
         getTotalSaveNum()
         Log.d("homeViewModel", "getSaveNumResult = $_saveNum")
     }
@@ -111,8 +110,13 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
         }
     }
 
+
+    var showTotalSavePlastic = MutableLiveData<Int>()
+    var showTotalSavePower = MutableLiveData<Int>()
+    var showTotalSaveCarbon = MutableLiveData<Int>()
+
+    var totalSavePower = 0
     var totalSavePlastic = 0
-    var totalSavePower = 5
     var totalSaveCarbon = 0
     var totalUsePlastic = 0
     var totalUsePower = 0
@@ -120,21 +124,34 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
 
     fun getTotalSaveNum() {
         coroutineScope.launch {
-
             _status.value = LoadApiStatus.LOADING
 
             val saveList = repository.getSaveNum(COLLECTION_SAVE)
+
             Log.d("homeViewModel", "getTotalSaveNum = ${repository.getSaveNum(COLLECTION_SAVE)}")
 
             _saveNum.value = when (saveList) {
+
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
+
                     for (saving in saveList.data as List<Save> ) {
+//                        totalSavePower += saving.power!!
+                        totalSavePlastic = totalSavePlastic.plus(saving.plastic ?: 0)
                         totalSavePower = totalSavePower.plus(saving.power ?: 0)
-//                        Log.d("homePage", "totalSavePower = $totalSavePower")
+                        totalSaveCarbon = totalSaveCarbon.plus(saving.carbon ?: 0)
+//                        Log.d("homePage", "totalSavePower_135 = ${totalSavePower}")
                     }
-                    Log.d("homePage", "totalSavePower = $totalSavePower")
+//                    totalSavePower = totalSavePower
+                    showTotalSavePlastic.value = totalSavePlastic
+                    showTotalSavePower.value = totalSavePower
+                    showTotalSaveCarbon.value = totalSaveCarbon
+                    Log.d("homePage", " showTotalSavePlastic.value = ${showTotalSavePlastic.value}")
+                    Log.d("homePage", "showTotalSavePower.value = ${showTotalSavePower.value}")
+                    Log.d("homePage", "showTotalSaveCarbon.value = ${showTotalSaveCarbon.value}")
+
+
                     saveList.data
                 }
                 else -> {
@@ -144,12 +161,8 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
                 }
             }
             _refreshStatus.value = false
-
-
         }
     }
-
-
 }
 
 

@@ -2,6 +2,7 @@ package com.sean.green.home
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -73,6 +74,10 @@ class HomeFragment: Fragment() {
                 viewModel.getTotalSaveNum()
             }
         })
+
+//        viewModel.totalSavePower.observe(viewLifecycleOwner, Observer {
+//            Log.d("homeFragment"," viewModel.totalSavePower.observe = ${viewModel.totalSavePower}")
+//        })
 
 
         (activity as MainActivity).dismissFabButton(true)

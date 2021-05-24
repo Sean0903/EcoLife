@@ -21,7 +21,7 @@
     <string name="text_dialog_use_plastic_1">1分：使用一個塑膠製品</string>
     <string name="text_dialog_use_power_1">1分：消耗0.5度電(約冷氣運轉一小時)</string>
     <string name="text_dialog_use_carbon_1">1分：碳排1公斤(約汽車行駛7公里)</string>
-    <string name="you_know_nothing">You know nothing</string>
+    <string name="you_know_nothing">Please try again later</string>
     <string name="editText_save_page_content_hint">為自己的努力留下紀錄吧~</string>
     <string name="text_save_page_content_title">心情隨筆</string>
     <string name="text_save_page_photo_title">拍照存證</string>
