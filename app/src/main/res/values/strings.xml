@@ -36,4 +36,19 @@
     <string name="text_event_num">位會參與</string>
     <string name="share_spinner_title">請選擇以下方式</string>
 
+    //from vegetable
+    <string name="timestamp_dayend">%s 23:59:59.999999999</string>
+    <string name="timestamp_daybegin">%s 00:00:00.000000000</string>
+    <string name="year_month_date">%s-%s-%s</string>
+    <string name="hour_minute">%s:%s</string>
+    <string name="simpledateformat_yyyy_MM_dd">yyyy-MM-dd</string>
+    <string name="simpledateformat_MM_dd">MM-dd</string>
+    <string name="simpledateformat_yyyy_MM">yyyy-MM</string>
+    <string name="simpledateformat_HH_mm">HH:mm</string>
+    <string name="simpledateformat_HH_mm_ss_fffffffff">HH:mm:ss.%s</string>
+    <string name="simpledateformat_yyyy_MM_dd_HHmmss">yyyy-MM-dd-HHmmss</string>
+    <string name="simpledateformat_date_time_to_timestamp">%s %s:00.000000000</string>
+    <string name="simpledateformat_yyyy_MM_dd_HH_mm_ss_fffffffff">yyyy-MM-dd HH:mm:ss.%s</string>
+
+
 </resources>

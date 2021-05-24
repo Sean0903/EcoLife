@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.sean.green.App
 import com.sean.green.GreenApplication
 import com.sean.green.R
 import com.sean.green.data.FirebaseKey.Companion.COLLECTION_SAVE
@@ -15,6 +16,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import com.sean.green.data.Result
+import com.sean.green.ext.FORMAT_YYYY_MM_DD
+import com.sean.green.ext.toDateFormat
+import java.sql.Timestamp
 import java.util.*
 
 
@@ -49,11 +53,11 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
         get() = _refreshStatus
 
     private val _isCallDeleteAction = MutableLiveData<Boolean>()
-    val isCallDeleteAction : LiveData<Boolean>
+    val isCallDeleteAction: LiveData<Boolean>
         get() = _isCallDeleteAction
 
     private val _date = MutableLiveData<Date>()
-    val date : LiveData<Date>
+    val date: LiveData<Date>
         get() = _date
 
     // Create a Coroutine scope using a job to be able to cancel when needed
@@ -62,9 +66,11 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
     // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
+
     init {
         getSaveNumResult()
-        Log.d("sean","getSaveNumResult = $_saveNum")
+        getTotalSaveNum()
+        Log.d("homeViewModel", "getSaveNumResult = $_saveNum")
     }
 
     private fun getSaveNumResult() {
@@ -74,13 +80,12 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
             _status.value = LoadApiStatus.LOADING
 
             val result = repository.getSaveNum(COLLECTION_SAVE)
-            Log.d("seanHomeViewModelResult","repository.getSaveNum = ${repository.getSaveNum(
-                COLLECTION_SAVE
-            )}")
+            Log.d(
+                "homeViewModel", "repository.getSaveNum = ${repository.getSaveNum(COLLECTION_SAVE)}")
 
             _saveNum.value = when (result) {
                 is Result.Success -> {
-                    Log.d("seanHomeViewModel","result.data = ${result.data}")
+                    Log.d("homeViewModel", "result.data = ${result.data}")
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
                     result.data
@@ -102,31 +107,51 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
                 }
             }
             _refreshStatus.value = false
-            Log.d("seanSaveValue","saveValue = ${_saveNum.value}")
-        }
-    }
-
-    fun getTotalSaveNum(){
-        coroutineScope.launch {
-            Log.d("homePage","getTotalSaveNum")
-            val saveList = repository.getSaveNum(
-                COLLECTION_SAVE
-            )
-
-                for(saving in saveList as List<Save>) {
-                    totalSavePower = totalSavePower.plus(saving.power ?: 0)
-                    Log.d("homePage","totalSavePower = $totalSavePower")
-                }
+            Log.d("homeViewModel", "saveValue = ${_saveNum.value}")
         }
     }
 
     var totalSavePlastic = 0
-    var totalSavePower = 0
+    var totalSavePower = 5
     var totalSaveCarbon = 0
     var totalUsePlastic = 0
     var totalUsePower = 0
     var totalUseCarbon = 0
+
+    fun getTotalSaveNum() {
+        coroutineScope.launch {
+
+            _status.value = LoadApiStatus.LOADING
+
+            val saveList = repository.getSaveNum(COLLECTION_SAVE)
+            Log.d("homeViewModel", "getTotalSaveNum = ${repository.getSaveNum(COLLECTION_SAVE)}")
+
+            _saveNum.value = when (saveList) {
+                is Result.Success -> {
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                    for (saving in saveList.data as List<Save> ) {
+                        totalSavePower = totalSavePower.plus(saving.power ?: 0)
+//                        Log.d("homePage", "totalSavePower = $totalSavePower")
+                    }
+                    Log.d("homePage", "totalSavePower = $totalSavePower")
+                    saveList.data
+                }
+                else -> {
+                    _error.value = GreenApplication.instance.getString(R.string.you_know_nothing)
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+            }
+            _refreshStatus.value = false
+
+
+        }
+    }
+
+
 }
+
 
 
 
