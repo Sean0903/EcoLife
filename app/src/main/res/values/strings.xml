@@ -8,7 +8,7 @@
     <string name="text_save_title">新增成果</string>
     <string name="text_use_title">新增消耗</string>
     <string name="text_challenge_title">新增挑戰</string>
-    <string name="text_challenge_myChallenge">我的挑戰</string>
+    <string name="text_challenge_myChallenge">今天挑戰</string>
     <string name="text_my_save_title">我的成果</string>
     <string name="text_my_use_title">我的消耗</string>
     <string name="button_save">儲存</string>

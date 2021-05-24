@@ -11,8 +11,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/gradient_button">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/image_use_page_back_to_home"
@@ -22,8 +21,8 @@
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/back_button"
-            app:tint="@color/colorWhite" />
+            app:srcCompat="@drawable/_17936_200"
+            app:tint="?android:attr/colorEdgeEffect" />
 
         <TextView
             android:id="@+id/text_use_page_photo_title"
@@ -43,13 +42,14 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
+            android:background="@drawable/normal_frame"
             android:cropToPadding="false"
             android:scaleType="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_use_page_photo_title"
-            app:srcCompat="@color/colorAllTransparent" />
+            app:srcCompat="@drawable/picture" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"

@@ -1,6 +1,7 @@
 package com.sean.green.data.source.local
 
 import android.content.Context
+import com.sean.green.data.Challenge
 import com.sean.green.data.Result
 import com.sean.green.data.Save
 import com.sean.green.data.source.GreenDataSource
@@ -18,11 +19,15 @@ class GreenLocalDataSource(val context: Context) : GreenDataSource {
         TODO("Not yet implemented")
     }
 
+    override suspend fun addChallenge2Firebase(challenge: Challenge): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun getSaveNum(): Result<List<Save>> {
         TODO("Not yet implemented")
     }
 
-//    override suspend fun getProductDetails(id: Long?): Result<DetailResult> {
-//        TODO("Not yet implemented")
-//    }
+    override suspend fun getChallengeNum(): Result<List<Challenge>> {
+        TODO("Not yet implemented")
+    }
 }

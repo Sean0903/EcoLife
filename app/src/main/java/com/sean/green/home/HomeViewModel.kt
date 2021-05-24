@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 import com.sean.green.App
 import com.sean.green.GreenApplication
 import com.sean.green.R
+import com.sean.green.data.Challenge
+import com.sean.green.data.FirebaseKey.Companion.COLLECTION_CHALLENGE
 import com.sean.green.data.FirebaseKey.Companion.COLLECTION_SAVE
 import com.sean.green.data.Save
 import com.sean.green.data.source.GreenRepository
@@ -28,11 +30,14 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
     val power = MutableLiveData<String>()
     val carbon = MutableLiveData<String>()
 
+    private val   _saveNum = MutableLiveData<List<Save>>()
+    val   saveNum: LiveData<List<Save>>
+        get() =   _saveNum
 
-    private val _saveNum = MutableLiveData<List<Save>>()
 
-    val saveNum: LiveData<List<Save>>
-        get() = _saveNum
+    private val _challengeNum = MutableLiveData<List<Challenge>>()
+    val challengeNum: LiveData<List<Challenge>>
+        get() = _challengeNum
 
     // status: The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<LoadApiStatus>()
@@ -68,21 +73,23 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
 
 
     init {
+        getChallengeNumResult()
         getTotalSaveNum()
-        Log.d("homeViewModel", "getSaveNumResult = $_saveNum")
+        getNowChallengeNum()
+//        Log.d("homeViewModel", "getSaveNumResult = $_saveNum")
     }
 
-    private fun getSaveNumResult() {
+    private fun getChallengeNumResult() {
 
         coroutineScope.launch {
 
             _status.value = LoadApiStatus.LOADING
 
-            val result = repository.getSaveNum(COLLECTION_SAVE)
+            val result = repository.getChallengeNum(COLLECTION_CHALLENGE)
             Log.d(
-                "homeViewModel", "repository.getSaveNum = ${repository.getSaveNum(COLLECTION_SAVE)}")
+                "homeViewModel", "repository.getChallengeNum = ${repository.getChallengeNum(COLLECTION_CHALLENGE)}")
 
-            _saveNum.value = when (result) {
+            _challengeNum.value = when (result) {
                 is Result.Success -> {
                     Log.d("homeViewModel", "result.data = ${result.data}")
                     _error.value = null
@@ -106,7 +113,7 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
                 }
             }
             _refreshStatus.value = false
-            Log.d("homeViewModel", "saveValue = ${_saveNum.value}")
+            Log.d("homeViewModel", "saveValue = ${_challengeNum.value}")
         }
     }
 
@@ -153,6 +160,59 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
 
 
                     saveList.data
+                }
+                else -> {
+                    _error.value = GreenApplication.instance.getString(R.string.you_know_nothing)
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+            }
+            _refreshStatus.value = false
+        }
+    }
+
+
+    var showNowChallengePlastic = MutableLiveData<Int>()
+    var showNowChallengePower = MutableLiveData<Int>()
+    var showNowChallengeCarbon = MutableLiveData<Int>()
+
+    var nowChallengePlastic = 0
+    var nowChallengePower = 0
+    var nowChallengeCarbon = 0
+
+    fun getNowChallengeNum() {
+        coroutineScope.launch {
+
+            _status.value = LoadApiStatus.LOADING
+
+            val nowChallenge = repository.getChallengeNum(COLLECTION_CHALLENGE)
+
+            Log.d("homeViewModel", "getNowChallengeNum = ${repository.getChallengeNum(COLLECTION_CHALLENGE)}")
+
+            _challengeNum.value = when (nowChallenge) {
+
+                is Result.Success -> {
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+
+                    for (challenge in nowChallenge.data as List<Challenge> ) {
+//                        totalSavePower += saving.power!!
+                        nowChallengePlastic =  nowChallengePlastic.plus(challenge.challenge_plastic ?: 0)
+                        nowChallengePower = nowChallengePower.plus(challenge.challenge_power ?: 0)
+                        nowChallengeCarbon = nowChallengeCarbon.plus(challenge.challenge_carbon ?: 0)
+                        Log.d("homePage", "nowChallengePlastic = ${nowChallengePlastic}")
+
+                    }
+
+                    showNowChallengePlastic.value = nowChallengePlastic.minus(totalSavePlastic)
+                    showNowChallengePower.value = nowChallengePower.minus(totalSavePower)
+                    showNowChallengeCarbon.value = nowChallengeCarbon.minus(totalSaveCarbon)
+
+                    Log.d("homePage", " showNowChallengePlastic.value = ${showNowChallengePlastic.value}")
+                    Log.d("homePage", " showNowChallengePower.value = ${showNowChallengePower.value}")
+                    Log.d("homePage", " showNowChallengeCarbon.value = ${showNowChallengeCarbon.value}")
+
+                    nowChallenge.data
                 }
                 else -> {
                     _error.value = GreenApplication.instance.getString(R.string.you_know_nothing)

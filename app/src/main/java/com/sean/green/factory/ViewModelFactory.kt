@@ -3,6 +3,7 @@ package com.sean.green.factory
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.sean.green.MainViewModel
+import com.sean.green.challenge.ChallengeViewModel
 import com.sean.green.data.source.GreenRepository
 import com.sean.green.home.HomeViewModel
 import com.sean.green.save.SaveViewModel
@@ -27,6 +28,9 @@ class ViewModelFactory constructor(
 
                 isAssignableFrom(SaveViewModel::class.java) ->
                     SaveViewModel(greenRepository)
+
+                isAssignableFrom(ChallengeViewModel::class.java) ->
+                    ChallengeViewModel(greenRepository)
 
 //
 //                isAssignableFrom(ChartViewModel::class.java) ->

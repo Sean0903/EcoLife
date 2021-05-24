@@ -7,6 +7,7 @@
         android:id="@+id/homeFragment"
         android:name="com.sean.green.home.HomeFragment"
         android:label="HomeFragment" >
+
     </fragment>
 
     <fragment
@@ -74,6 +75,17 @@
         android:label="DialogShareFragment" >
     </fragment>
 
+    <fragment
+        android:id="@+id/shareDialogFragment"
+        android:name="com.sean.green.share.ShareDialogFragment"
+        android:label="ShareDialogFragment" />
+
+    <fragment
+        android:id="@+id/dialogChallengeFragment"
+        android:name="com.sean.green.dialog.DialogChallengeFragment"
+        android:label="DialogChallengeFragment" >
+    </fragment>
+
     <action android:id="@+id/navigate_to_home_fragment" app:destination="@id/homeFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
@@ -116,8 +128,11 @@
     <action
         android:id="@+id/action_dialogEvent_to_eventFragment"
         app:destination="@id/eventFragment" />
-    <fragment
-        android:id="@+id/shareDialogFragment"
-        android:name="com.sean.green.share.ShareDialogFragment"
-        android:label="ShareDialogFragment" />
+    <action
+        android:id="@+id/action_homeFragment_to_dialogChallengeFragment"
+        app:destination="@id/dialogChallengeFragment" />
+    <action
+        android:id="@+id/action_dialogChallengeFragment_to_homeFragment"
+        app:destination="@id/homeFragment" />
+
 </navigation>

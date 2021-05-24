@@ -1,5 +1,6 @@
 package com.sean.green.data.source
 
+import com.sean.green.data.Challenge
 import com.sean.green.data.Result
 import com.sean.green.data.Save
 import kotlinx.coroutines.CoroutineDispatcher
@@ -20,8 +21,16 @@ class DefaultGreenRepository(private val greenRemoteDataSource: GreenDataSource,
         return greenRemoteDataSource.addSaveNum2Firebase(save)
     }
 
+    override suspend fun addChallenge2Firebase(challenge: Challenge): Result<Boolean> {
+        return greenRemoteDataSource.addChallenge2Firebase(challenge)
+    }
+
     override suspend fun getSaveNum(collection: String): Result<List<Save>> {
         return greenRemoteDataSource.getSaveNum()
+    }
+
+    override suspend fun getChallengeNum(collection: String): Result<List<Challenge>> {
+        return greenRemoteDataSource.getChallengeNum()
     }
 //    override suspend fun getObjects(collection: String, start: Timestamp, end: Timestamp): List<Any> {
 //        return greenRemoteDataSource.getObjects(collection= collection)

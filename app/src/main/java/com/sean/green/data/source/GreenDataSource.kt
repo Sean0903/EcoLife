@@ -1,5 +1,6 @@
 package com.sean.green.data.source
 
+import com.sean.green.data.Challenge
 import com.sean.green.data.Result
 import com.sean.green.data.Save
 
@@ -11,6 +12,10 @@ interface GreenDataSource {
 
     suspend fun addSaveNum2Firebase(save: Save): Result<Boolean>
 
+    suspend fun addChallenge2Firebase(challenge: Challenge): Result<Boolean>
+
     suspend fun getSaveNum(): Result<List<Save>>
+
+    suspend fun getChallengeNum(): Result<List<Challenge>>
 
 }

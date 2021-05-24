@@ -1,8 +1,10 @@
 package com.sean.green.data
 
 data class Challenge (
-    val plastic: Int ?= null,
-    val power: Int ?= null,
-    val carbon: Int ?= null,
-    val totalChallenge: Int ?=null
+    var id: String? = "",
+    val challenge_plastic: Int ?= null,
+    val challenge_power: Int ?= null,
+    val challenge_carbon: Int ?= null,
+    var createdTime: Long = -1,
+//    val challenge_totalChallenge: Int ?=null
 )

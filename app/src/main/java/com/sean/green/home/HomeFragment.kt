@@ -61,6 +61,15 @@ class HomeFragment: Fragment() {
 
         }
 
+        binding.imageHomeChallengeInfo.setOnClickListener {
+
+            var challengeDialog = Dialog(this.requireContext())
+            val view = layoutInflater.inflate(R.layout.dialog_challenge, null)
+            challengeDialog.setContentView(view)
+            challengeDialog.show()
+
+        }
+
         viewModel.isCallDeleteAction.observe(viewLifecycleOwner, Observer {
             if (it == true){
                 viewModel.getTotalSaveNum()
