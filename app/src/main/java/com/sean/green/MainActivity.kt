@@ -130,8 +130,9 @@ class MainActivity : AppCompatActivity() {
         fabLayout_save.animate().translationY(-resources.getDimension(R.dimen.standard_155))
         fab.animate().rotation(45.0f)
         fab_custom_pic.animate().rotation(45.0f)
-        binding.fabShadow.visibility = View.VISIBLE
         binding.fab.visibility = View.VISIBLE
+        binding.fabShadow.visibility = View.VISIBLE
+
     }
 
     fun closeFABMenu() {

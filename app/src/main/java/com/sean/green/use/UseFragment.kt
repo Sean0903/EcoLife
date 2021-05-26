@@ -8,18 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.sean.green.R
-import com.sean.green.databinding.FragmentHomeBinding
 import com.sean.green.databinding.FragmentUseBinding
-import com.sean.green.home.HomeViewModel
+import com.sean.green.ext.getVmFactory
+
 
 class UseFragment: Fragment() {
 
     private lateinit var binding : FragmentUseBinding
-    private val viewModel : UseViewModel by lazy {
-        ViewModelProvider(this).get(UseViewModel::class.java)
-    }
+
+    private val viewModel by viewModels<UseViewModel> { getVmFactory() }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,20 +30,22 @@ class UseFragment: Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        binding.editTextUsePagePlastic.doOnTextChanged { text, start, before, count ->
-            viewModel.plastic.value.toString()
-            Log.d("sean", "viewModel.plastic.value = ${viewModel.plastic.value}")
-        }
 
-        binding.editTextUsePagePower.doOnTextChanged { text, start, before, count ->
-            viewModel.power.value.toString()
-            Log.d("sean", "viewModel.power.value = ${viewModel.power.value}")
+        viewModel.plastic.observe(viewLifecycleOwner, Observer {
+            Log.i("useFragment","plastic = ${viewModel.plastic.value}")
         }
+        )
 
-        binding.editTextUsePageCarbon.doOnTextChanged { text, start, before, count ->
-            viewModel.carbon.value.toString()
-            Log.d("sean", "viewModel.carbon.value = ${viewModel.carbon.value}")
+        viewModel.power.observe(viewLifecycleOwner, Observer {
+            Log.i("useFragment","power = ${viewModel.power.value}")
         }
+        )
+
+        viewModel.carbon.observe(viewLifecycleOwner, Observer {
+            Log.i("useFragment","carbon = ${viewModel.carbon.value}")
+        }
+        )
+
 
         binding.imageUsePageInfo.setOnClickListener {
 
@@ -51,6 +54,10 @@ class UseFragment: Fragment() {
             useDialog.setContentView(view)
             useDialog.show()
 
+        }
+
+        binding.buttonUseSave.setOnClickListener {
+            viewModel.addUseData2Firebase()
         }
 
         return binding.root

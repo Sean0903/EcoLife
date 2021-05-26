@@ -10,6 +10,8 @@ import com.sean.green.GreenApplication
 import com.sean.green.R
 import com.sean.green.data.Save
 import com.sean.green.data.source.GreenRepository
+import com.sean.green.data.source.remote.GreenRemoteDataSource
+import com.sean.green.ext.toDisplayFormat
 import com.sean.green.network.LoadApiStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,11 +30,6 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
     val plastic = MutableLiveData<String>()
     val power = MutableLiveData<String>()
     val carbon = MutableLiveData<String>()
-
-//    private val _user = MutableLiveData<User>()
-//
-//    val user: LiveData<User>
-//        get() = _user
 
     private val _save = MutableLiveData<Save>().apply {
         value = Save(
@@ -76,25 +73,33 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
 
         coroutineScope.launch {
 
-            val saveNum = FirebaseFirestore.getInstance()
-                .collection("green")
-            val document = saveNum.document()
+//            repository.addSaveNum2Firebase()
+//
+//            val users = FirebaseFirestore.getInstance().collection("users")
+//                .document(userId).collection("greens").document(Calendar.getInstance()
+//                    .timeInMillis.toDisplayFormat()).collection("save").document()
+
+//            val saveNum = FirebaseFirestore.getInstance().collection("users")
+//            val document = saveNum.document()
 
             val newSaveData = Save(
                 plastic = plastic.value?.toInt()!!,
                 power = power.value?.toInt()!!,
                 carbon = carbon.value?.toInt()!!,
                 createdTime = Calendar.getInstance().timeInMillis,
-                id = document.id
+//                id = document.id
             )
 
-            val washingtonRef =
-                saveNum.document("user")
-            washingtonRef.update("email", FieldValue.arrayUnion("sean@school.appworks.tw"))
-            washingtonRef.update("id", FieldValue.arrayUnion("sean0903"))
-            washingtonRef.update("name", FieldValue.arrayUnion( "梁凱翔"))
+            val userId = "ip29dDcJ24BtyGUzNlPE"
 
-            when (val result = repository.addSaveNum2Firebase(newSaveData)) {
+
+//            val washingtonRef =
+//                saveNum.document("user")
+//            washingtonRef.update("email", FieldValue.arrayUnion("sean@school.appworks.tw"))
+//            washingtonRef.update("id", FieldValue.arrayUnion("sean0903"))
+//            washingtonRef.update("name", FieldValue.arrayUnion( "梁凱翔"))
+
+            when (val result = repository.addSaveNum2Firebase(newSaveData,userId)) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE

@@ -1,9 +1,11 @@
 package com.sean.green
 
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.sean.green.ext.toDisplayFormat
 
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
@@ -15,4 +17,9 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
 //            .placeholder(R.drawable.image_placeholder)
             .into(imgView)
     }
+}
+
+@BindingAdapter("timeToDisplayFormat")
+fun bindDisplayFormatTime(textView: TextView, time: Long?) {
+    textView.text = time?.toDisplayFormat()
 }

@@ -10,6 +10,7 @@ import com.sean.green.R
 import com.sean.green.data.Challenge
 import com.sean.green.data.FirebaseKey.Companion.COLLECTION_CHALLENGE
 import com.sean.green.data.FirebaseKey.Companion.COLLECTION_SAVE
+import com.sean.green.data.FirebaseKey.Companion.COLLECTION_USE
 import com.sean.green.data.Save
 import com.sean.green.data.source.GreenRepository
 import com.sean.green.network.LoadApiStatus
@@ -18,13 +19,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import com.sean.green.data.Result
-import com.sean.green.ext.FORMAT_YYYY_MM_DD
-import com.sean.green.ext.toDateFormat
+import com.sean.green.data.Use
 import java.sql.Timestamp
 import java.util.*
+import kotlin.math.absoluteValue
 
 
 class HomeViewModel(private val repository: GreenRepository): ViewModel() {
+
 
     val plastic = MutableLiveData<String>()
     val power = MutableLiveData<String>()
@@ -34,6 +36,9 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
     val   saveNum: LiveData<List<Save>>
         get() =   _saveNum
 
+    private val _useNum = MutableLiveData<List<Use>>()
+    val useNum: LiveData<List<Use>>
+        get() = _useNum
 
     private val _challengeNum = MutableLiveData<List<Challenge>>()
     val challengeNum: LiveData<List<Challenge>>
@@ -44,6 +49,12 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
 
     val status: LiveData<LoadApiStatus>
         get() = _status
+
+    // status: The internal MutableLiveData that stores the status of the most recent request
+    private val _status2 = MutableLiveData<LoadApiStatus>()
+
+    val status2: LiveData<LoadApiStatus>
+        get() = _status2
 
     // error: The internal MutableLiveData that stores the error of the most recent request
     private val _error = MutableLiveData<String>()
@@ -76,7 +87,7 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
         getChallengeNumResult()
         getTotalSaveNum()
         getNowChallengeNum()
-//        Log.d("homeViewModel", "getSaveNumResult = $_saveNum")
+        getTotalUseNum()
     }
 
     private fun getChallengeNumResult() {
@@ -118,16 +129,14 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
     }
 
 
+
     var showTotalSavePlastic = MutableLiveData<Int>()
     var showTotalSavePower = MutableLiveData<Int>()
     var showTotalSaveCarbon = MutableLiveData<Int>()
 
-    var totalSavePower = 0
     var totalSavePlastic = 0
+    var totalSavePower = 0
     var totalSaveCarbon = 0
-    var totalUsePlastic = 0
-    var totalUsePower = 0
-    var totalUseCarbon = 0
 
     fun getTotalSaveNum() {
         coroutineScope.launch {
@@ -171,14 +180,61 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
         }
     }
 
+    var showTotalUsePlastic = MutableLiveData<Int>()
+    var showTotalUsePower = MutableLiveData<Int>()
+    var showTotalUseCarbon = MutableLiveData<Int>()
 
-    var showNowChallengePlastic = MutableLiveData<Int>()
-    var showNowChallengePower = MutableLiveData<Int>()
-    var showNowChallengeCarbon = MutableLiveData<Int>()
+    var totalUsePlastic = 0
+    var totalUsePower = 0
+    var totalUseCarbon = 0
+
+    fun getTotalUseNum() {
+        coroutineScope.launch {
+            _status2.value = LoadApiStatus.LOADING
+
+            val useList = repository.getUseNum(COLLECTION_USE)
+
+            Log.d("homeViewModel", "getTotalSaveNum = ${repository.getUseNum(COLLECTION_USE)}")
+
+            _useNum.value = when (useList) {
+
+                is Result.Success -> {
+                    _error.value = null
+                    _status2.value = LoadApiStatus.DONE
+
+                    for (using in useList.data as List<Use> ) {
+                        totalUsePlastic = totalUsePlastic.plus(using.use_plastic ?: 0)
+                        totalUsePower = totalUsePower.plus(using.use_power ?: 0)
+                        totalUseCarbon = totalUseCarbon.plus(using.use_carbon ?: 0)
+//                        Log.d("homePage", "totalSavePower_135 = ${totalSavePower}")
+                    }
+//                    totalSavePower = totalSavePower
+                    showTotalUsePlastic.value = totalUsePlastic
+                    showTotalUsePower.value = totalUsePower
+                    showTotalUseCarbon.value = totalUseCarbon
+                    Log.d("homePage", " showTotalUsePlastic.value = ${showTotalUsePlastic.value}")
+                    Log.d("homePage", "showTotalUsePower.value = ${showTotalUsePower.value}")
+                    Log.d("homePage", "showTotalUseCarbon.value = ${showTotalUseCarbon.value}")
+
+                    useList.data
+                }
+                else -> {
+                    _error.value = GreenApplication.instance.getString(R.string.you_know_nothing)
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+            }
+            _refreshStatus.value = false
+        }
+    }
 
     var nowChallengePlastic = 0
     var nowChallengePower = 0
     var nowChallengeCarbon = 0
+
+    var showNowChallengePlastic = MutableLiveData<Int>()
+    var showNowChallengePower = MutableLiveData<Int>()
+    var showNowChallengeCarbon = MutableLiveData<Int>()
 
     fun getNowChallengeNum() {
         coroutineScope.launch {
@@ -204,9 +260,9 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
 
                     }
 
-                    showNowChallengePlastic.value = nowChallengePlastic.minus(totalSavePlastic)
-                    showNowChallengePower.value = nowChallengePower.minus(totalSavePower)
-                    showNowChallengeCarbon.value = nowChallengeCarbon.minus(totalSaveCarbon)
+                    showNowChallengePlastic.value = nowChallengePlastic.minus(totalSavePlastic).plus(totalUsePlastic)
+                    showNowChallengePower.value = nowChallengePower.minus(totalSavePower).plus(totalUsePower)
+                    showNowChallengeCarbon.value = nowChallengeCarbon.minus(totalSaveCarbon).plus(totalUseCarbon)
 
                     Log.d("homePage", " showNowChallengePlastic.value = ${showNowChallengePlastic.value}")
                     Log.d("homePage", " showNowChallengePower.value = ${showNowChallengePower.value}")
@@ -227,162 +283,3 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    private val _save = MutableLiveData<List<Save>>()
-//
-//    val save: LiveData<List<Save>>
-//        get() = _save
-
-//    fun getAndSetSaveToday(){
-//
-//        coroutineScope.launch {
-//
-//            val save = greenRepository.getObjects(
-//                COLLECTION_SAVE
-//            )
-//
-//            if (save.isNotEmpty()){
-//
-//                setDataSaveFromFirebase(save[0] as Save)
-//
-//            }
-//        }
-//
-//    }
-
-
-//    var totalPlastic = 0.0f
-//    var totalPower = 0.0f
-//    var totalCarbon = 0.0f
-
-//    fun getDocument() {
-//        // [START get_document]
-//        val docRef = db.collection("green").document("2021")
-//        docRef.get()
-//            .addOnSuccessListener { document ->
-//                if (document != null) {
-//                    Log.d(TAG, "DocumentSnapshot data: ${document.data}")
-//                } else {
-//                    Log.d(TAG, "No such document")
-//                }
-//            }
-//            .addOnFailureListener { exception ->
-//                Log.d(TAG, "get failed with ", exception)
-//            }
-//        // [END get_document]
-//    }
-//
-//
-//
-//    /**
-//     * For catch data
-//     */
-//    private val citiesRef = db.collection("green")
-//    private val list = citiesRef.orderBy("createdTime", Query.Direction.DESCENDING)
-//    var defaultData = mutableListOf<Save>()
-//    //將從firebase抓下來的資料暫存在mutableListOf<Save>()
-//    var data = mutableListOf<Save>()
-
-//    private fun getData() {
-//        Log.d("sean", "inti data = $data")
-//
-//        db.collection("green")
-//            .orderBy("createdTime", Query.Direction.DESCENDING)
-//            .get()
-//            .addOnSuccessListener { result ->
-//                //★這是一個for loop
-//                for (document in result) {
-//                    Log.d("sean", "${document.id} -> ${document.data}")
-//                    data.add(
-//                        Save(
-//                             plastic = document.data["plastic"].toString(),
-//                            power = document.data["power"].toString(),
-//                            carbon = document.data["carbon"].toString(),
-//                        )
-//                    )
-//                    Log.d("sean", "form of data = $data")
-//                    Log.d("sean","form of title = ${document.data["title"].toString()}")
-//                    break
-//                }
-//                _save.value = data
-//                Log.d("sean", "final = $data")
-//                Log.d("sean", "_save.value = ${_save.value}")
-//
-//            }
-//            .addOnFailureListener { exception ->
-//                Log.d(ContentValues.TAG, "Error getting documents: ", exception)
-//            }
-//
-//    }
-//
-//
-//    /**
-//     * Observe data instantly
-//     */
-//    val personal =
-//
-//        db.collection("save")
-//            .addSnapshotListener { snapshots, e ->
-//                if (e != null) {
-//                    Log.w("sean", "listen:error", e)
-//                    return@addSnapshotListener
-//                }
-//
-//                for (dc in snapshots!!.documentChanges) {
-//                    when (dc.type) {
-//                        DocumentChange.Type.ADDED -> {
-//                            Log.d(
-//                                "sean",
-//                                "New Invitation Card: ${dc.document.data}"
-//                            )
-//                            var mock123 = dc.document.data
-//                            Log.d("TAG", "mock = $mock123")
-//                            getData()
-//                        }
-//                        DocumentChange.Type.MODIFIED -> {
-//                            Log.d(
-//                                "TAG",
-//                                "Changed Data: ${dc.document.data}"
-//                            )
-//                        }
-//                        DocumentChange.Type.REMOVED -> Log.d(
-//                            "TAG",
-//                            "Removed Invitation Card: ${dc.document.data}"
-//                        )
-//                    }
-//                }
-//            }
-
-
-//    private val _isCalendarClicked = MutableLiveData<Boolean>()
-//    val isCalendarClicked : LiveData<Boolean>
-//        get() = _isCalendarClicked
-//
-//    fun calendarClicked(){
-//        _isCalendarClicked.value = true
-//    }
-//
-//    fun calendarClickedAgain(){
-//        _isCalendarClicked.value = false
-//    }
-//
-//    fun setCurrentDate(date: Date){
-//        _date.value = date
-//    }
-//
-//    private val _date = MutableLiveData<Date>()
-//    val date : LiveData<Date>
-//        get() = _date

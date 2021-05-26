@@ -72,6 +72,7 @@ class HomeFragment: Fragment() {
 
         viewModel.isCallDeleteAction.observe(viewLifecycleOwner, Observer {
             if (it == true){
+                viewModel.getTotalUseNum()
                 viewModel.getTotalSaveNum()
 
             }
@@ -80,6 +81,7 @@ class HomeFragment: Fragment() {
         viewModel.date.observe(viewLifecycleOwner, Observer { it ->
 
             if (it != null){
+                viewModel.getTotalUseNum()
                 viewModel.getTotalSaveNum()
             }
         })

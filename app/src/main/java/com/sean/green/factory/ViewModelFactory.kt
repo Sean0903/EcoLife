@@ -7,6 +7,7 @@ import com.sean.green.challenge.ChallengeViewModel
 import com.sean.green.data.source.GreenRepository
 import com.sean.green.home.HomeViewModel
 import com.sean.green.save.SaveViewModel
+import com.sean.green.use.UseViewModel
 
 /**
  *
@@ -31,6 +32,9 @@ class ViewModelFactory constructor(
 
                 isAssignableFrom(ChallengeViewModel::class.java) ->
                     ChallengeViewModel(greenRepository)
+
+                isAssignableFrom(UseViewModel::class.java) ->
+                    UseViewModel(greenRepository)
 
 //
 //                isAssignableFrom(ChartViewModel::class.java) ->

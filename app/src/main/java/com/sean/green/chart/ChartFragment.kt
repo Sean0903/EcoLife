@@ -52,13 +52,13 @@ class ChartFragment: Fragment() {
             val adapter1 = ChartDateUseAdapter()
             binding.recyclerViewChartPageUse.adapter = adapter1
 
-            val mock8 = Use("2021.5.28","20","22","22")
-            val mock9 = Use("2021.5.29","10","24","30")
-            val mock10 = Use("2021.5.28","22","36","21")
-            val mock11 = Use("2021.5.29","31","23","32")
-            val mock12 = Use("2021.5.28","50","34","21")
-            val mock13 = Use("2021.5.29","32","33","26")
-            val mock14 = Use("2021.5.28","22","22","28")
+            val mock8 = Use("2021.5.28",20,22,22)
+            val mock9 = Use("2021.5.29",10,24,30)
+            val mock10 = Use("2021.5.28",22,36,21)
+            val mock11 = Use("2021.5.29",31,23,32)
+            val mock12 = Use("2021.5.28",50,34,21)
+            val mock13 = Use("2021.5.29",32,33,26)
+            val mock14 = Use("2021.5.28",22,22,28)
 
 
             val mockList2 = listOf( mock8, mock9,mock10,mock11,mock12,mock13,mock14)

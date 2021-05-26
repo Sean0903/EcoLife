@@ -260,6 +260,7 @@
                 android:textColor="@color/colorWhite"
                 android:textColorHint="@color/colorWhite"
                 android:textSize="20dp"
+                android:text="@{String.valueOf(viewModel.showTotalUsePlastic)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/image_home_use_power"
                 app:layout_constraintStart_toEndOf="@+id/image_home_use_plastic"
@@ -291,6 +292,7 @@
                 android:textColor="@color/colorWhite"
                 android:textColorHint="@color/colorWhite"
                 android:textSize="20dp"
+                android:text="@{String.valueOf(viewModel.showTotalUsePower)}"
                 app:layout_constraintEnd_toStartOf="@+id/image_home_use_carbon"
                 app:layout_constraintStart_toEndOf="@+id/image_home_use_power"
                 app:layout_constraintTop_toTopOf="@+id/text_home_use_plastic" />
@@ -321,6 +323,7 @@
                 android:textColor="@color/colorWhite"
                 android:textColorHint="@color/colorWhite"
                 android:textSize="20dp"
+                android:text="@{String.valueOf(viewModel.showTotalUseCarbon)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/image_home_use_carbon"
                 app:layout_constraintTop_toTopOf="@+id/text_home_use_power" />
