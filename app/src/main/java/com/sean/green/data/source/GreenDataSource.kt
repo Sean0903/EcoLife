@@ -13,15 +13,15 @@ interface GreenDataSource {
 
     suspend fun addSaveNum2Firebase(save: Save,userId: String): Result<Boolean>
 
-    suspend fun addUseNum2Firebase(use: Use): Result<Boolean>
+    suspend fun addUseNum2Firebase(use: Use, userId: String): Result<Boolean>
 
-    suspend fun addChallenge2Firebase(challenge: Challenge): Result<Boolean>
+    suspend fun addChallenge2Firebase(challenge: Challenge,userId: String): Result<Boolean>
 
-    suspend fun getSaveNum(): Result<List<Save>>
+    suspend fun getSaveNum(userId: String): Result<List<Save>>
 
-    suspend fun getChallengeNum(): Result<List<Challenge>>
+    suspend fun getChallengeNum(userId: String): Result<List<Challenge>>
 
-    suspend fun getUseNum(): Result<List<Use>>
+    suspend fun getUseNum(userId: String): Result<List<Use>>
 
 
 

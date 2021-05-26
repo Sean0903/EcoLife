@@ -67,26 +67,27 @@ class UseViewModel(private val repository: GreenRepository): ViewModel() {
     fun addUseData2Firebase() {
 
         coroutineScope.launch {
-
-            val useNum = FirebaseFirestore.getInstance()
-                .collection("green")
-            val document = useNum.document()
+//
+//            val useNum = FirebaseFirestore.getInstance().collection("green")
+//            val document = useNum.document()
 
             val newUseData = Use(
-                use_plastic = plastic.value?.toInt()!!,
-                use_power = power.value?.toInt()!!,
-                use_carbon = carbon.value?.toInt()!!,
+                plastic = plastic.value?.toInt(),
+                power = power.value?.toInt(),
+                carbon = carbon.value?.toInt(),
                 createdTime = Calendar.getInstance().timeInMillis,
-                id = document.id
+//                id = document.id
             )
 
-            val washingtonRef =
-                useNum.document("user")
-            washingtonRef.update("email", FieldValue.arrayUnion("sean@school.appworks.tw"))
-            washingtonRef.update("id", FieldValue.arrayUnion("sean0903"))
-            washingtonRef.update("name", FieldValue.arrayUnion( "梁凱翔"))
+            val userId = "ip29dDcJ24BtyGUzNlPE"
 
-            when (val result = repository.addUseNum2Firebase(newUseData)) {
+//            val washingtonRef =
+//                useNum.document("user")
+//            washingtonRef.update("email", FieldValue.arrayUnion("sean@school.appworks.tw"))
+//            washingtonRef.update("id", FieldValue.arrayUnion("sean0903"))
+//            washingtonRef.update("name", FieldValue.arrayUnion( "梁凱翔"))
+
+            when (val result = repository.addUseNum2Firebase(newUseData,userId)) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE

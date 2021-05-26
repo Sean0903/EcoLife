@@ -69,25 +69,27 @@ class ChallengeViewModel(private val repository: GreenRepository): ViewModel() {
 
         coroutineScope.launch {
 
-            val challengeNum = FirebaseFirestore.getInstance()
-                .collection("green")
-            val document = challengeNum.document()
+//            val challengeNum = FirebaseFirestore.getInstance()
+//                .collection("green")
+//            val document = challengeNum.document()
 
             val newChallengeData = Challenge(
-                challenge_plastic = plastic.value?.toInt()!!,
-                challenge_power = power.value?.toInt()!!,
-                challenge_carbon = carbon.value?.toInt()!!,
+                plastic = plastic.value?.toInt(),
+                power = power.value?.toInt(),
+                carbon = carbon.value?.toInt(),
                 createdTime = Calendar.getInstance().timeInMillis,
-                id = document.id
+//                id = document.id
             )
 
-            val washingtonRef =
-                challengeNum.document("user")
-            washingtonRef.update("email", FieldValue.arrayUnion("sean@school.appworks.tw"))
-            washingtonRef.update("id", FieldValue.arrayUnion("sean0903"))
-            washingtonRef.update("name", FieldValue.arrayUnion("梁凱翔"))
+            val userId = "ip29dDcJ24BtyGUzNlPE"
 
-            when (val result = repository.addChallenge2Firebase(newChallengeData)) {
+//            val washingtonRef =
+//                challengeNum.document("user")
+//            washingtonRef.update("email", FieldValue.arrayUnion("sean@school.appworks.tw"))
+//            washingtonRef.update("id", FieldValue.arrayUnion("sean0903"))
+//            washingtonRef.update("name", FieldValue.arrayUnion("梁凱翔"))
+
+            when (val result = repository.addChallenge2Firebase(newChallengeData,userId)) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE

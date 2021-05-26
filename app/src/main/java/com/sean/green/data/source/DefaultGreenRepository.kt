@@ -22,24 +22,24 @@ class DefaultGreenRepository(private val greenRemoteDataSource: GreenDataSource,
         return greenRemoteDataSource.addSaveNum2Firebase(save,userId)
     }
 
-    override suspend fun addUseNum2Firebase(use: Use): Result<Boolean> {
-        return greenRemoteDataSource.addUseNum2Firebase(use)
+    override suspend fun addUseNum2Firebase(use: Use, userId: String): Result<Boolean> {
+        return greenRemoteDataSource.addUseNum2Firebase(use,userId)
     }
 
-    override suspend fun addChallenge2Firebase(challenge: Challenge): Result<Boolean> {
-        return greenRemoteDataSource.addChallenge2Firebase(challenge)
+    override suspend fun addChallenge2Firebase(challenge: Challenge,userId: String): Result<Boolean> {
+        return greenRemoteDataSource.addChallenge2Firebase(challenge,userId)
     }
 
-    override suspend fun getSaveNum(collection: String): Result<List<Save>> {
-        return greenRemoteDataSource.getSaveNum()
+    override suspend fun getSaveNum(collection: String,userId: String): Result<List<Save>> {
+        return greenRemoteDataSource.getSaveNum(userId)
     }
 
-    override suspend fun getChallengeNum(collection: String): Result<List<Challenge>> {
-        return greenRemoteDataSource.getChallengeNum()
+    override suspend fun getChallengeNum(collection: String,userId: String): Result<List<Challenge>> {
+        return greenRemoteDataSource.getChallengeNum(userId)
     }
 
-    override suspend fun getUseNum(collection: String): Result<List<Use>> {
-        return greenRemoteDataSource.getUseNum()
+    override suspend fun getUseNum(collection: String,userId: String): Result<List<Use>> {
+        return greenRemoteDataSource.getUseNum(userId)
     }
 
 

@@ -23,9 +23,10 @@ object GreenRemoteDataSource : GreenDataSource {
     private const val PATH_GREENS = "greens"
     private const val KEY_CREATED_TIME = "createdTime"
 
-    override suspend fun getSaveNum(): Result<List<Save>> = suspendCoroutine { continuation ->
+    override suspend fun getSaveNum(userId: String): Result<List<Save>> = suspendCoroutine { continuation ->
         FirebaseFirestore.getInstance()
-            .collection(PATH_GREEN)
+            .collection(PATH_USERS).document(userId).collection("greens").document(Calendar.getInstance()
+                .timeInMillis.toDisplayFormat()).collection("save")
             .orderBy(KEY_CREATED_TIME, Query.Direction.DESCENDING)
             .get()
             .addOnCompleteListener { task ->
@@ -52,9 +53,10 @@ object GreenRemoteDataSource : GreenDataSource {
             }
     }
 
-    override suspend fun getUseNum(): Result<List<Use>> = suspendCoroutine { continuation ->
+    override suspend fun getUseNum(userId: String): Result<List<Use>> = suspendCoroutine { continuation ->
         FirebaseFirestore.getInstance()
-            .collection(PATH_GREEN)
+            .collection(PATH_USERS).document(userId).collection("greens").document(Calendar.getInstance()
+                .timeInMillis.toDisplayFormat()).collection("use")
             .orderBy(KEY_CREATED_TIME, Query.Direction.DESCENDING)
             .get()
             .addOnCompleteListener { task ->
@@ -81,16 +83,17 @@ object GreenRemoteDataSource : GreenDataSource {
             }
     }
 
-    override suspend fun getChallengeNum(): Result<List<Challenge>> = suspendCoroutine { continuation ->
+    override suspend fun getChallengeNum(userId: String): Result<List<Challenge>> = suspendCoroutine { continuation ->
         FirebaseFirestore.getInstance()
-            .collection(PATH_GREEN)
+            .collection(PATH_USERS).document(userId).collection("greens").document(Calendar.getInstance()
+                .timeInMillis.toDisplayFormat()).collection("challenge")
             .orderBy(KEY_CREATED_TIME, Query.Direction.DESCENDING)
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val list = mutableListOf<Challenge>()
                     for (document in task.result!!) {
-                        Log.d("seanGetSaveNum",document.id + " => " + document.data)
+                        Log.d("seanGetChallengeNum",document.id + " => " + document.data)
 
                         val challengeNum = document.toObject(Challenge::class.java)
                         list.add(challengeNum)
@@ -114,17 +117,14 @@ object GreenRemoteDataSource : GreenDataSource {
         val users = FirebaseFirestore.getInstance().collection(PATH_USERS)
             .document(userId).collection("greens").document(Calendar.getInstance()
                 .timeInMillis.toDisplayFormat()).collection("save").document()
-//        val subCollection = users
-//        val document =  subCollection.document()
-//
-//            .document("greens").collection(Date().toString())
-//        val plans = FirebaseFirestore.getInstance().collection(PATH_ARTICLES).document(taskID)
-//        val subCollection = plans.collection("completedList")
-//        val document = subCollection.document()
 
-        save.id = users.id
+//        val users = FirebaseFirestore.getInstance().collection(PATH_USERS)
+//            .document(userId).collection("greens").document(Calendar.getInstance()
+//                .timeInMillis.toDisplayFormat()).collection("save").document()
+
 //        save.createdTime = Calendar.getInstance().timeInMillis
 
+        save.id = users.id
         users
             .set(save)
             .addOnCompleteListener { task ->
@@ -144,14 +144,13 @@ object GreenRemoteDataSource : GreenDataSource {
             }
     }
 
-    override suspend fun addUseNum2Firebase(use: Use): Result<Boolean> = suspendCoroutine { continuation ->
-        val useNum = FirebaseFirestore.getInstance().collection(PATH_GREEN)
-        val document =  useNum.document()
+    override suspend fun addUseNum2Firebase(use: Use,userId: String): Result<Boolean> = suspendCoroutine { continuation ->
+        val users = FirebaseFirestore.getInstance().collection(PATH_USERS)
+            .document(userId).collection("greens").document(Calendar.getInstance()
+                .timeInMillis.toDisplayFormat()).collection("use").document()
 
-        use.id = document.id
-        use.createdTime = Calendar.getInstance().timeInMillis
-
-        document
+        use.id = users.id
+        users
             .set(use)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -170,14 +169,18 @@ object GreenRemoteDataSource : GreenDataSource {
             }
     }
 
-    override suspend fun addChallenge2Firebase(challenge: Challenge): Result<Boolean> = suspendCoroutine { continuation ->
-        val challengeNum = FirebaseFirestore.getInstance().collection(PATH_GREEN)
-        val document =  challengeNum.document()
+    override suspend fun addChallenge2Firebase(challenge: Challenge,userId: String): Result<Boolean> = suspendCoroutine { continuation ->
+        val users = FirebaseFirestore.getInstance().collection(PATH_USERS)
+            .document(userId).collection("greens").document(Calendar.getInstance()
+                .timeInMillis.toDisplayFormat()).collection("challenge").document()
 
-        challenge.id = document.id
-        challenge.createdTime = Calendar.getInstance().timeInMillis
+        challenge.id = users.id
+        users
 
-        document
+//        challenge.id = document.id
+//        challenge.createdTime = Calendar.getInstance().timeInMillis
+//
+//        document
             .set(challenge)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {

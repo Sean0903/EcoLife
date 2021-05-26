@@ -73,19 +73,13 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
 
         coroutineScope.launch {
 
-//            repository.addSaveNum2Firebase()
-//
-//            val users = FirebaseFirestore.getInstance().collection("users")
-//                .document(userId).collection("greens").document(Calendar.getInstance()
-//                    .timeInMillis.toDisplayFormat()).collection("save").document()
-
 //            val saveNum = FirebaseFirestore.getInstance().collection("users")
 //            val document = saveNum.document()
 
             val newSaveData = Save(
-                plastic = plastic.value?.toInt()!!,
-                power = power.value?.toInt()!!,
-                carbon = carbon.value?.toInt()!!,
+                plastic = plastic.value?.toInt(),
+                power = power.value?.toInt(),
+                carbon = carbon.value?.toInt(),
                 createdTime = Calendar.getInstance().timeInMillis,
 //                id = document.id
             )

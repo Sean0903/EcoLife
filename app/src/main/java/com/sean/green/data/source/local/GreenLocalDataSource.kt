@@ -20,23 +20,23 @@ class GreenLocalDataSource(val context: Context) : GreenDataSource {
         TODO("Not yet implemented")
     }
 
-    override suspend fun addUseNum2Firebase(use: Use): Result<Boolean> {
+    override suspend fun addUseNum2Firebase(use: Use, userId: String): Result<Boolean> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun addChallenge2Firebase(challenge: Challenge): Result<Boolean> {
+    override suspend fun addChallenge2Firebase(challenge: Challenge,userId: String): Result<Boolean> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getSaveNum(): Result<List<Save>> {
+    override suspend fun getSaveNum(userId: String): Result<List<Save>> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getChallengeNum(): Result<List<Challenge>> {
+    override suspend fun getChallengeNum(userId: String): Result<List<Challenge>> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getUseNum(): Result<List<Use>> {
+    override suspend fun getUseNum(userId: String): Result<List<Use>> {
         TODO("Not yet implemented")
     }
 }

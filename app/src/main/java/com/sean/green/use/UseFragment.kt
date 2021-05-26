@@ -10,6 +10,8 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import com.sean.green.NavigationDirections
 import com.sean.green.R
 import com.sean.green.databinding.FragmentUseBinding
 import com.sean.green.ext.getVmFactory
@@ -58,6 +60,10 @@ class UseFragment: Fragment() {
 
         binding.buttonUseSave.setOnClickListener {
             viewModel.addUseData2Firebase()
+        }
+
+        binding.imageUsePageBackToHome.setOnClickListener {
+            findNavController().navigate(NavigationDirections.navigateToHomeFragment())
         }
 
         return binding.root
