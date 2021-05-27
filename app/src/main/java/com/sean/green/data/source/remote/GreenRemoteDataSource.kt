@@ -1,6 +1,3 @@
-package com.sean.green.data.source.remote
-
-
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -97,6 +94,35 @@ object GreenRemoteDataSource : GreenDataSource {
 
                         val challengeNum = document.toObject(Challenge::class.java)
                         list.add(challengeNum)
+                    }
+
+                    continuation.resume(Result.Success(list))
+
+                } else {
+                    task.exception?.let {
+
+                        Log.w("sean","[${this::class.simpleName}] Error getting documents. ${it.message}")
+                        continuation.resume(Result.Error(it))
+                        return@addOnCompleteListener
+                    }
+                    continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                }
+            }
+    }
+
+    override suspend fun getCalendarEvent(): Result<List<CalendarEvent>> = suspendCoroutine { continuation ->
+        FirebaseFirestore.getInstance()
+            .collection(PATH_USERS)
+            .orderBy(KEY_CREATED_TIME, Query.Direction.DESCENDING)
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val list = mutableListOf<CalendarEvent>()
+                    for (document in task.result!!) {
+                        Log.d("seanGetCalendarEvent",document.id + " => " + document.data)
+
+                        val calendarEvent = document.toObject(CalendarEvent::class.java)
+                        list.add(calendarEvent)
                     }
 
                     continuation.resume(Result.Success(list))

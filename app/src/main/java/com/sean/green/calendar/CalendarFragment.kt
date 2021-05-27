@@ -8,11 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.applandeo.materialcalendarview.EventDay
 import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException
 import com.sean.green.MainActivity
 import com.sean.green.databinding.FragmentCalendarBinding
+import com.sean.green.ext.getVmFactory
+import com.sean.green.home.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_calendar.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -24,9 +27,9 @@ import java.util.*
 class CalendarFragment: Fragment() {
 
     private lateinit var binding : FragmentCalendarBinding
-    private val viewModel : CalendarViewModel by lazy {
-        ViewModelProvider(this).get(CalendarViewModel::class.java)
-    }
+
+    private val viewModel by viewModels<CalendarViewModel> { getVmFactory() }
+
     @SuppressLint("SimpleDateFormat")
     override fun onCreateView(
         inflater: LayoutInflater,

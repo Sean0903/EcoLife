@@ -10,7 +10,6 @@ import com.sean.green.GreenApplication
 import com.sean.green.R
 import com.sean.green.data.Save
 import com.sean.green.data.source.GreenRepository
-import com.sean.green.data.source.remote.GreenRemoteDataSource
 import com.sean.green.ext.toDisplayFormat
 import com.sean.green.network.LoadApiStatus
 import kotlinx.coroutines.CoroutineScope

@@ -1,5 +1,9 @@
 package com.sean.green.data
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Use(
 
     var id: String? = "",
@@ -9,4 +13,4 @@ data class Use(
     var createdTime: Long = -1,
     //    val totalUse: Int ?= null,
 //    val use_content: String ?= null,
-)
+) : Parcelable

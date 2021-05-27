@@ -1,5 +1,9 @@
 package com.sean.green.data
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Challenge(
 
     var id: String? = "",
@@ -9,4 +13,4 @@ data class Challenge(
     var createdTime: Long = -1,
 //    val challenge_totalChallenge: Int ?=null
 
-)
+): Parcelable

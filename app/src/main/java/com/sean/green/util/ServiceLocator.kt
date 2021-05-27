@@ -1,12 +1,13 @@
 package app.appworks.school.stylish.util
 
+import GreenRemoteDataSource
 import android.content.Context
 import androidx.annotation.VisibleForTesting
 import com.sean.green.data.source.DefaultGreenRepository
 import com.sean.green.data.source.GreenDataSource
 import com.sean.green.data.source.GreenRepository
 import com.sean.green.data.source.local.GreenLocalDataSource
-import com.sean.green.data.source.remote.GreenRemoteDataSource
+
 
 /**
  * A Service Locator for the [StylishRepository].
