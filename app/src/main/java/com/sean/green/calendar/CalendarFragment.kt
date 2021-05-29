@@ -13,7 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
-import com.sean.green.App
+import com.sean.green.GreenApplication
 import com.sean.green.MainActivity
 import com.sean.green.R
 import com.sean.green.databinding.FragmentCalendarBinding
@@ -58,18 +58,25 @@ class CalendarFragment: Fragment() {
         widget.setSelectedDate(localDate)
 
         // Add dots based on my events
-        viewModel.allLiveEvents.observe(viewLifecycleOwner, Observer {
+        viewModel.allEvent.observe(viewLifecycleOwner, Observer {
 
-            Log.d("calendarViewModl","viewModel.allEvents.observe, it=$it")
+            Log.d("calendarViewModel","viewModel.allEvents.observe, it=$it")
 
             it?.let {
 
                 it.forEach { event ->
-                    val year = TimeUtil.stampToYear(event.createdTime).toInt()
-                    val month = TimeUtil.stampToMonthInt(event.createdTime).toInt()
-                    val day = TimeUtil.stampToDay(event.createdTime).toInt()
+                    val year = event.year.toInt()
+                    Log.d("calendarFragment","year = $year")
+
+                    val month = event.month.toInt()
+                    Log.d("calendarFragment","month = $month")
+
+                    val day = event.day.toInt()
+                    Log.d("calendarFragment","day = $day")
 
                     addDotDecoration(year, month, day)
+
+
                 }
                 viewModel.createDailyEvent(TimeUtil.dateToStamp(localDate.toString(), Locale.TAIWAN))
             }
@@ -108,7 +115,7 @@ class CalendarFragment: Fragment() {
     private fun addDotDecoration(year: Int, month: Int, day: Int) {
         widget.addDecorators(
             SingleDateDecorator(
-                App.appContext.resources.getColor(R.color.brightBlue2),
+                GreenApplication.appContext.applicationContext.getColor(R.color.brightBlue2),
                 CalendarDay.from(year, month, day)
             )
         )

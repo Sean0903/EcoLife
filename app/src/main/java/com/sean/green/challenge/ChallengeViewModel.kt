@@ -83,7 +83,8 @@ class ChallengeViewModel(private val repository: GreenRepository): ViewModel() {
                 "day" to  (Calendar.getInstance().timeInMillis.toDisplayFormatDay()),
                 "month" to (Calendar.getInstance().timeInMillis.toDisplayFormatMonth()),
                 "year" to (Calendar.getInstance().timeInMillis.toDisplayFormatYear()),
-                "createdTime" to (Calendar.getInstance().timeInMillis)
+                "createdTime" to (Calendar.getInstance().timeInMillis),
+                "challenge" to ("challenge")
             )
             val saveTime = FirebaseFirestore.getInstance()
                 .collection("users").document(userId).collection("greens")
@@ -98,14 +99,6 @@ class ChallengeViewModel(private val repository: GreenRepository): ViewModel() {
                 createdTime = Calendar.getInstance().timeInMillis,
 //                id = document.id
             )
-
-            val time = FirebaseFirestore.getInstance()
-                .collection("users").document(userId).collection("greens")
-                .document(Calendar.getInstance().timeInMillis.toDisplayFormat())
-
-            time.update("day", (Calendar.getInstance().timeInMillis.toDisplayFormatDay()))
-            time.update("month", (Calendar.getInstance().timeInMillis.toDisplayFormatMonth()))
-            time.update("year",  (Calendar.getInstance().timeInMillis.toDisplayFormatYear()))
 
             when (val result = repository.addChallenge2Firebase(newChallengeData,userId)) {
                 is Result.Success -> {

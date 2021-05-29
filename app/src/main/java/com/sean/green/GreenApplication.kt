@@ -1,6 +1,7 @@
 package com.sean.green
 
 import android.app.Application
+import android.content.Context
 import app.appworks.school.stylish.util.ServiceLocator
 import kotlin.properties.Delegates
 import com.sean.green.data.source.GreenRepository
@@ -21,10 +22,12 @@ class GreenApplication: Application() {
 
     companion object {
         var instance: GreenApplication by Delegates.notNull()
+        lateinit var appContext : Context
     }
 
     override fun onCreate() {
         super.onCreate()
+        appContext = applicationContext
         instance = this
     }
 }

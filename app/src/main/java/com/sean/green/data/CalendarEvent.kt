@@ -5,11 +5,11 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class CalendarEvent(
-    val challenge: List<Challenge> = listOf(),
-    val save: List<Save> = listOf(),
-    val use: List<Use> = listOf(),
-    val event: List<Event> = listOf(),
-    val share: List<Share> = listOf(),
+    val challenge: String? = null,
+    val save: String? = null,
+    val use: String? = null,
+    val event: String? = null,
+    val share: String? = null,
     val createdTime: Long = -1,
     val day: String = "",
     val month: String = "",

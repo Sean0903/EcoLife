@@ -85,7 +85,8 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
                 "day" to  (Calendar.getInstance().timeInMillis.toDisplayFormatDay()),
             "month" to (Calendar.getInstance().timeInMillis.toDisplayFormatMonth()),
             "year" to (Calendar.getInstance().timeInMillis.toDisplayFormatYear()),
-            "createdTime" to (Calendar.getInstance().timeInMillis)
+            "createdTime" to (Calendar.getInstance().timeInMillis),
+                "save" to ("save")
             )
             val saveTime = FirebaseFirestore.getInstance()
                 .collection("users").document(userId).collection("greens")
