@@ -43,8 +43,8 @@ class DefaultGreenRepository(
         return greenRemoteDataSource.getUseNum(userId)
     }
 
-    override suspend fun getCalendarEvent(): Result<List<CalendarEvent>> {
-        return greenRemoteDataSource.getCalendarEvent()
+    override suspend fun getCalendarEvent(collection: String, userId: String): Result<List<CalendarEvent>> {
+        return greenRemoteDataSource.getCalendarEvent(userId)
     }
 
 }

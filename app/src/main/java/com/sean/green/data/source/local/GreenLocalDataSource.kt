@@ -37,7 +37,7 @@ class GreenLocalDataSource(val context: Context) : GreenDataSource {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getCalendarEvent(): Result<List<CalendarEvent>> {
+    override suspend fun getCalendarEvent(userId: String): Result<List<CalendarEvent>> {
         TODO("Not yet implemented")
     }
 }

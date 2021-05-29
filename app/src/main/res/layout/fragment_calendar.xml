@@ -14,22 +14,27 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-        <com.applandeo.materialcalendarview.CalendarView
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
             android:id="@+id/calendarView"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            app:eventsEnabled="true"
-            app:headerColor="#FF9800"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:selectionColor="#FF9800"
-            app:selectionLabelColor="#FFFFFF"
-            app:todayLabelColor="#FF9800"
-            app:type="one_day_picker" />
+            android:layout_marginTop="8dp"
+            app:mcv_dateTextAppearance="@style/calendarDateText"
+            app:mcv_selectionColor="@color/lakeBlue"
+            app:mcv_showOtherDates="all"
+            tools:ignore="MissingConstraints" />
+
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            android:id="@+id/calendarView_week"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:visibility="invisible"
+            app:mcv_calendarMode="week"
+            app:mcv_dateTextAppearance="@style/calendarDateText"
+            app:mcv_selectionColor="@color/lakeBlue"
+            app:mcv_showOtherDates="all"
+            tools:ignore="MissingConstraints" />
 
         <Button
             android:id="@+id/button_SetTarget"
@@ -37,6 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="設置標記"
+            android:visibility="gone"
             app:layout_constraintEnd_toStartOf="@+id/button_Today"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/calendarView" />
@@ -45,16 +51,18 @@
             android:id="@+id/button_Today"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="150dp"
             android:text="回到今日"
-            app:layout_constraintBottom_toBottomOf="@+id/button_SetTarget"
-            app:layout_constraintEnd_toStartOf="@+id/button_CancelTarget"
-            app:layout_constraintStart_toEndOf="@+id/button_SetTarget" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/button_CancelTarget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="解除標記"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/button_Today"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/button_Today" />
@@ -65,15 +73,18 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="1"
+            android:visibility="gone"
             app:layout_constraintEnd_toStartOf="@+id/button_2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_SetTarget" />
+            app:layout_constraintTop_toBottomOf="@+id/button_SetTarget"
+            tools:visibility="gone" />
 
         <Button
             android:id="@+id/button_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2"
+            android:visibility="gone"
             app:layout_constraintEnd_toStartOf="@+id/button_3"
             app:layout_constraintStart_toEndOf="@+id/button_1"
             app:layout_constraintTop_toTopOf="@+id/button_1" />
@@ -83,6 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="3"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/button_2"
             app:layout_constraintTop_toTopOf="@+id/button_2" />

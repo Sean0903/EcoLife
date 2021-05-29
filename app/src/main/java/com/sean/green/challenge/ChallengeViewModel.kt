@@ -1,5 +1,6 @@
 package com.sean.green.challenge
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,6 +12,10 @@ import com.sean.green.data.Challenge
 import com.sean.green.data.Result
 import com.sean.green.data.Save
 import com.sean.green.data.source.GreenRepository
+import com.sean.green.ext.toDisplayFormat
+import com.sean.green.ext.toDisplayFormatDay
+import com.sean.green.ext.toDisplayFormatMonth
+import com.sean.green.ext.toDisplayFormatYear
 import com.sean.green.network.LoadApiStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -69,9 +74,22 @@ class ChallengeViewModel(private val repository: GreenRepository): ViewModel() {
 
         coroutineScope.launch {
 
-//            val challengeNum = FirebaseFirestore.getInstance()
-//                .collection("green")
-//            val document = challengeNum.document()
+            val userId = "ip29dDcJ24BtyGUzNlPE"
+
+            val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
+            Log.d("seanSaveTime","today = $today")
+
+            val saveTimeData = hashMapOf(
+                "day" to  (Calendar.getInstance().timeInMillis.toDisplayFormatDay()),
+                "month" to (Calendar.getInstance().timeInMillis.toDisplayFormatMonth()),
+                "year" to (Calendar.getInstance().timeInMillis.toDisplayFormatYear()),
+                "createdTime" to (Calendar.getInstance().timeInMillis)
+            )
+            val saveTime = FirebaseFirestore.getInstance()
+                .collection("users").document(userId).collection("greens")
+                .document(today).set(saveTimeData)
+
+            Log.d("seanSaveTime","saveTimeData = $saveTimeData ")
 
             val newChallengeData = Challenge(
                 plastic = plastic.value?.toInt(),
@@ -81,13 +99,13 @@ class ChallengeViewModel(private val repository: GreenRepository): ViewModel() {
 //                id = document.id
             )
 
-            val userId = "ip29dDcJ24BtyGUzNlPE"
+            val time = FirebaseFirestore.getInstance()
+                .collection("users").document(userId).collection("greens")
+                .document(Calendar.getInstance().timeInMillis.toDisplayFormat())
 
-//            val washingtonRef =
-//                challengeNum.document("user")
-//            washingtonRef.update("email", FieldValue.arrayUnion("sean@school.appworks.tw"))
-//            washingtonRef.update("id", FieldValue.arrayUnion("sean0903"))
-//            washingtonRef.update("name", FieldValue.arrayUnion("梁凱翔"))
+            time.update("day", (Calendar.getInstance().timeInMillis.toDisplayFormatDay()))
+            time.update("month", (Calendar.getInstance().timeInMillis.toDisplayFormatMonth()))
+            time.update("year",  (Calendar.getInstance().timeInMillis.toDisplayFormatYear()))
 
             when (val result = repository.addChallenge2Firebase(newChallengeData,userId)) {
                 is Result.Success -> {

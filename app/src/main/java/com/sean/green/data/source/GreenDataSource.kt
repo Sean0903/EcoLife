@@ -20,7 +20,7 @@ interface GreenDataSource {
 
     suspend fun getUseNum(userId: String): Result<List<Use>>
 
-    suspend fun getCalendarEvent(): Result<List<CalendarEvent>>
+    suspend fun getCalendarEvent(userId: String): Result<List<CalendarEvent>>
 
 
 }

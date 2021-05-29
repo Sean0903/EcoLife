@@ -87,8 +87,12 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3'
 
-    //calendar
-    implementation 'com.applandeo:material-calendar-view:1.7.0'
+//    //calendar
+//    implementation 'com.applandeo:material-calendar-view:1.7.0'
+
+    // Calendar
+    implementation 'com.github.prolificinteractive:material-calendarview:2.0.1'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.0'
 
     //lineChart
     implementation 'com.github.PhilJay:MPAndroidChart:v2.2.4'

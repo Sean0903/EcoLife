@@ -22,7 +22,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="300dp"
-            android:layout_height="100dp"
+            android:layout_height="110dp"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,37 +48,43 @@
 
             <TextView
                 android:id="@+id/text_challenge_plastic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/text_round"
                 android:fontFamily="@font/noto_sans_bold"
+                android:gravity="center"
                 android:text="@{String.valueOf(viewModel.showNowChallengePlastic)}"
                 app:layout_constraintEnd_toStartOf="@+id/text_challenge_power"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_my_challenge_title" />
+                app:layout_constraintTop_toBottomOf="@+id/text_my_challenge_title"
+                tools:text="100" />
 
             <TextView
                 android:id="@+id/text_challenge_power"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:background="@drawable/text_round_2"
                 android:fontFamily="@font/noto_sans_bold"
+                android:gravity="center"
                 android:text="@{String.valueOf(viewModel.showNowChallengePower)}"
                 app:layout_constraintEnd_toStartOf="@+id/text_challenge_corban"
                 app:layout_constraintStart_toEndOf="@+id/text_challenge_plastic"
-                app:layout_constraintTop_toTopOf="@+id/text_challenge_plastic" />
+                app:layout_constraintTop_toTopOf="@+id/text_challenge_plastic"
+                tools:text="100" />
 
             <TextView
                 android:id="@+id/text_challenge_corban"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:background="@drawable/text_round_3"
                 android:fontFamily="@font/noto_sans_bold"
+                android:gravity="center"
                 android:text="@{String.valueOf(viewModel.showNowChallengeCarbon)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/text_challenge_power"
-                app:layout_constraintTop_toTopOf="@+id/text_challenge_power" />
+                app:layout_constraintTop_toTopOf="@+id/text_challenge_power"
+                tools:text="100" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

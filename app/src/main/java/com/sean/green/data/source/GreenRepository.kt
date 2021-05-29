@@ -22,5 +22,5 @@ interface GreenRepository {
 
     suspend fun getUseNum(collection: String, userId: String): Result<List<Use>>
 
-    suspend fun getCalendarEvent(): Result<List<CalendarEvent>>
+    suspend fun getCalendarEvent(collection: String, userId: String): Result<List<CalendarEvent>>
 }

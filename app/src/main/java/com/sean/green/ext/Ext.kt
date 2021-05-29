@@ -8,10 +8,49 @@ import com.google.firebase.firestore.FirebaseFirestore
 import java.util.*
 
 
-
 @RequiresApi(Build.VERSION_CODES.N)
 fun Long.toDisplayFormat(): String {
-    return SimpleDateFormat("yyyy.MM.dd", Locale.TAIWAN).format(this)
+    return SimpleDateFormat("yyyy-MM-dd", Locale.TAIWAN).format(this)
+}
+
+fun Long.toDisplayFormatYear(): String {
+    return SimpleDateFormat("yyyy", Locale.TAIWAN).format(this)
+}
+
+fun Long.toDisplayFormatMonth(): String {
+    return SimpleDateFormat("MM", Locale.TAIWAN).format(this)
+}
+
+fun Long.toDisplayFormatDay(): String {
+    return SimpleDateFormat("dd", Locale.TAIWAN).format(this)
+}
+
+object TimeUtil {
+
+    @JvmStatic
+    fun stampToYear(time: Long): String {
+        val simpleDateFormat = java.text.SimpleDateFormat("yyyy")
+        return simpleDateFormat.format(Date(time))
+    }
+
+    @JvmStatic
+    fun stampToMonthInt(time: Long): String {
+        val simpleDateFormat = java.text.SimpleDateFormat("MM")
+        return simpleDateFormat.format(Date(time))
+    }
+
+    @JvmStatic
+    fun stampToDay(time: Long): String {
+        val simpleDateFormat = java.text.SimpleDateFormat("dd")
+        return simpleDateFormat.format(Date(time))
+    }
+
+    @JvmStatic
+    fun dateToStamp(date: String, locale: Locale): Long {
+        val simpleDateFormat = java.text.SimpleDateFormat("yyyy-MM-dd", locale)
+        return simpleDateFormat.parse(date).time
+    }
+
 }
 
 

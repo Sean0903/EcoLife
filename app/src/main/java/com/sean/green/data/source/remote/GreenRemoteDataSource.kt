@@ -7,6 +7,7 @@ import com.sean.green.data.*
 import com.sean.green.data.source.GreenDataSource
 import com.sean.green.ext.toDisplayFormat
 import com.sean.green.util.Logger
+import kotlinx.android.synthetic.main.fragment_calendar.*
 import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
@@ -110,10 +111,11 @@ object GreenRemoteDataSource : GreenDataSource {
             }
     }
 
-    override suspend fun getCalendarEvent(): Result<List<CalendarEvent>> = suspendCoroutine { continuation ->
+
+
+    override suspend fun getCalendarEvent(userId: String): Result<List<CalendarEvent>> = suspendCoroutine { continuation ->
         FirebaseFirestore.getInstance()
-            .collection(PATH_USERS)
-            .orderBy(KEY_CREATED_TIME, Query.Direction.DESCENDING)
+            .collection(PATH_USERS).document(userId).collection("greens")
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -224,5 +226,4 @@ object GreenRemoteDataSource : GreenDataSource {
                 }
             }
     }
-
 }

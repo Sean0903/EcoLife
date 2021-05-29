@@ -1,16 +1,21 @@
 package com.sean.green.save
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.sean.green.data.Result
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.sean.green.GreenApplication
 import com.sean.green.R
 import com.sean.green.data.Save
 import com.sean.green.data.source.GreenRepository
 import com.sean.green.ext.toDisplayFormat
+import com.sean.green.ext.toDisplayFormatDay
+import com.sean.green.ext.toDisplayFormatMonth
+import com.sean.green.ext.toDisplayFormatYear
 import com.sean.green.network.LoadApiStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -58,22 +63,35 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
         viewModelJob.cancel()
     }
 
-    fun navigateToHome () {
+    fun navigateToHome() {
         _navigateToHome.value = true
     }
 
-    fun navigateToHomeAfterSend (needRefresh: Boolean = false) {
+    fun navigateToHomeAfterSend(needRefresh: Boolean = false) {
         _navigateToHome.value = needRefresh
     }
-
 
 
     fun addSaveData2Firebase() {
 
         coroutineScope.launch {
 
-//            val saveNum = FirebaseFirestore.getInstance().collection("users")
-//            val document = saveNum.document()
+            val userId = "ip29dDcJ24BtyGUzNlPE"
+
+            val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
+            Log.d("seanSaveTime","today = $today")
+
+            val saveTimeData = hashMapOf(
+                "day" to  (Calendar.getInstance().timeInMillis.toDisplayFormatDay()),
+            "month" to (Calendar.getInstance().timeInMillis.toDisplayFormatMonth()),
+            "year" to (Calendar.getInstance().timeInMillis.toDisplayFormatYear()),
+            "createdTime" to (Calendar.getInstance().timeInMillis)
+            )
+            val saveTime = FirebaseFirestore.getInstance()
+                .collection("users").document(userId).collection("greens")
+                .document(today).set(saveTimeData)
+
+            Log.d("seanSaveTime","saveTimeData = $saveTimeData ")
 
             val newSaveData = Save(
                 plastic = plastic.value?.toInt(),
@@ -83,16 +101,7 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
 //                id = document.id
             )
 
-            val userId = "ip29dDcJ24BtyGUzNlPE"
-
-
-//            val washingtonRef =
-//                saveNum.document("user")
-//            washingtonRef.update("email", FieldValue.arrayUnion("sean@school.appworks.tw"))
-//            washingtonRef.update("id", FieldValue.arrayUnion("sean0903"))
-//            washingtonRef.update("name", FieldValue.arrayUnion( "梁凱翔"))
-
-            when (val result = repository.addSaveNum2Firebase(newSaveData,userId)) {
+            when (val result = repository.addSaveNum2Firebase(newSaveData, userId)) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
@@ -113,10 +122,6 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
             }
         }
     }
-
-
-
-
 }
 
 
