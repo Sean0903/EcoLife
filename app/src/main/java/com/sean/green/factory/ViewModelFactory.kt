@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.sean.green.MainViewModel
 import com.sean.green.calendar.CalendarViewModel
 import com.sean.green.challenge.ChallengeViewModel
+import com.sean.green.chart.save.ChartSaveViewModel
 import com.sean.green.data.source.GreenRepository
 import com.sean.green.home.HomeViewModel
 import com.sean.green.save.SaveViewModel
@@ -40,6 +41,9 @@ class ViewModelFactory constructor(
 
                 isAssignableFrom(CalendarViewModel::class.java) ->
                     CalendarViewModel(greenRepository)
+
+                isAssignableFrom(ChartSaveViewModel::class.java) ->
+                    ChartSaveViewModel(greenRepository)
 //
 //                isAssignableFrom(ChartViewModel::class.java) ->
 //                    ChartViewModel(stylishRepository)

@@ -4,6 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+        <import type="android.view.View" />
         <variable
             name="viewModel"
             type="com.sean.green.calendar.CalendarViewModel" />
@@ -102,7 +103,6 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
-
             android:layout_width="match_parent"
             android:layout_height="110dp"
             android:layout_marginBottom="60dp"
@@ -111,7 +111,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/calendarView"
-            tools:listitem="@layout/item_calendar_event" />
+            tools:listitem="@layout/item_calendar_event"
+            tools:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="176dp"
+            android:layout_height="133dp"
+            android:layout_marginBottom="110dp"
+            android:visibility="@{viewModel.selectedLiveEvent.size() &lt;= 0 ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/island" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

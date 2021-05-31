@@ -6,7 +6,7 @@
         android:title="@string/navigation_home_name" />
 
     <item
-        android:id="@+id/chartFragment"
+        android:id="@+id/pagerFragment"
         android:icon="@drawable/outline_score_black_24dp"
         android:title="@string/navigation_chart_name" />
 

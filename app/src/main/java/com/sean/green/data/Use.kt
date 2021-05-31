@@ -5,7 +5,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Use(
-
     var id: String? = "",
     val plastic: Int? = null,
     val power: Int? = null,

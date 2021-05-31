@@ -1,4 +1,4 @@
-package com.sean.green.chart
+package com.sean.green.chart.use
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -6,15 +6,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.sean.green.data.Save
 import com.sean.green.data.Use
 import com.sean.green.databinding.ItemChartDateUseBinding
 
-class ChartDateUseAdapter(): ListAdapter<Use, ChartDateUseAdapter.ViewHolder>(ChartDateUseAdapter.DiffCallback()) {
+class ChartUseAdapter(): ListAdapter<Use, ChartUseAdapter.ViewHolder>(
+    DiffCallback()
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        return ViewHolder.from(parent)
+        return ViewHolder.from(
+            parent
+        )
 
     }
 
@@ -27,7 +30,7 @@ class ChartDateUseAdapter(): ListAdapter<Use, ChartDateUseAdapter.ViewHolder>(Ch
     class ViewHolder(var binding: ItemChartDateUseBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Use) {
-            Log.d("seanViewHolder","fun bind(item: Save) = $item")
+            Log.d("seanViewHolder","fun bind(item: use) = $item")
             binding.viewModel = item
         }
 
@@ -35,7 +38,9 @@ class ChartDateUseAdapter(): ListAdapter<Use, ChartDateUseAdapter.ViewHolder>(Ch
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ItemChartDateUseBinding.inflate(layoutInflater, parent, false)
-                return ViewHolder(binding)
+                return ViewHolder(
+                    binding
+                )
             }
         }
     }

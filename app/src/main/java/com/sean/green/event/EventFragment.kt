@@ -9,9 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.sean.green.MainActivity
 import com.sean.green.R
-import com.sean.green.chart.ChartDateSaveAdapter
 import com.sean.green.data.Event
-import com.sean.green.data.Save
 import com.sean.green.databinding.FragmentEventBinding
 
 class EventFragment: Fragment() {

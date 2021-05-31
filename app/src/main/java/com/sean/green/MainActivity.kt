@@ -33,9 +33,9 @@ class MainActivity : AppCompatActivity() {
                 findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToHomeFragment())
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.chartFragment -> {
+            R.id.pagerFragment -> {
 
-                findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToChartFragment())
+                findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToPagerFragment())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.calendarFragment -> {

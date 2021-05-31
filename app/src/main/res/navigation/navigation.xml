@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/chartFragment"
-        android:name="com.sean.green.chart.ChartFragment"
+        android:name="com.sean.green.chart.save.ChartSaveFragment"
         android:label="ChartFragment" />
 
     <fragment
@@ -86,7 +86,15 @@
         android:label="DialogChallengeFragment" >
     </fragment>
 
+    <fragment
+        android:id="@+id/pagerFragment"
+        android:name="com.sean.green.chart.PagerFragment"
+        android:label="PagerFragment" />
+
     <action android:id="@+id/navigate_to_home_fragment" app:destination="@id/homeFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+    <action android:id="@+id/navigate_to_pager_fragment" app:destination="@id/pagerFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
     <action android:id="@+id/navigate_to_chart_fragment" app:destination="@id/chartFragment"
@@ -134,5 +142,10 @@
     <action
         android:id="@+id/action_dialogChallengeFragment_to_homeFragment"
         app:destination="@id/homeFragment" />
+    <fragment
+        android:id="@+id/chartUseFragment"
+        android:name="com.sean.green.chart.use.ChartUseFragment"
+        android:label="ChartUseFragment" />
+
 
 </navigation>

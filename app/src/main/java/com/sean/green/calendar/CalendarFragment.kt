@@ -192,7 +192,7 @@ class CalendarFragment: Fragment() {
     private fun addDotDecoration(year: Int, month: Int, day: Int) {
         widget.addDecorators(
             SingleDateDecorator(
-                GreenApplication.appContext.applicationContext.getColor(R.color.brightBlue2),
+                GreenApplication.appContext.applicationContext.getColor(R.color.colorBlue4),
                 CalendarDay.from(year, month, day)
             )
         )

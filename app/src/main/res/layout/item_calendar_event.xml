@@ -88,7 +88,6 @@
                     android:layout_height="20dp"
                     android:layout_marginStart="110dp"
                     android:text="@{calendarEvent.challenge}"
-
                     app:layout_constraintBottom_toTopOf="@+id/textView_save_event"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

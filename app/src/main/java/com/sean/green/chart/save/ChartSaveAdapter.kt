@@ -1,4 +1,4 @@
-package com.sean.green.chart
+package com.sean.green.chart.save
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,11 +9,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sean.green.data.Save
 import com.sean.green.databinding.ItemChartDateSaveBinding
 
-class ChartDateSaveAdapter():ListAdapter<Save, ChartDateSaveAdapter.ViewHolder>(ChartDateSaveAdapter.DiffCallback()) {
+class ChartSaveAdapter():ListAdapter<Save, ChartSaveAdapter.ViewHolder>(
+    DiffCallback()
+) {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-            return ViewHolder.from(parent)
+            return ViewHolder.from(
+                parent
+            )
 
         }
 
@@ -34,7 +38,9 @@ class ChartDateSaveAdapter():ListAdapter<Save, ChartDateSaveAdapter.ViewHolder>(
                 fun from(parent: ViewGroup): ViewHolder {
                     val layoutInflater = LayoutInflater.from(parent.context)
                     val binding = ItemChartDateSaveBinding.inflate(layoutInflater, parent, false)
-                    return ViewHolder(binding)
+                    return ViewHolder(
+                        binding
+                    )
                 }
             }
         }
