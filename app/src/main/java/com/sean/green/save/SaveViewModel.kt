@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.SetOptions
 import com.sean.green.GreenApplication
 import com.sean.green.R
 import com.sean.green.data.Save
@@ -79,20 +80,22 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
             val userId = "ip29dDcJ24BtyGUzNlPE"
 
             val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
-            Log.d("seanSaveTime","today = $today")
+            val year = Calendar.getInstance().timeInMillis.toDisplayFormatYear()
+            val month = Calendar.getInstance().timeInMillis.toDisplayFormatMonth()
+            val day = Calendar.getInstance().timeInMillis.toDisplayFormatDay()
+            val createdTime = Calendar.getInstance().timeInMillis
 
-            val saveTimeData = hashMapOf(
-                "day" to  (Calendar.getInstance().timeInMillis.toDisplayFormatDay()),
-            "month" to (Calendar.getInstance().timeInMillis.toDisplayFormatMonth()),
-            "year" to (Calendar.getInstance().timeInMillis.toDisplayFormatYear()),
-            "createdTime" to (Calendar.getInstance().timeInMillis),
-                "save" to ("save")
+            val data = hashMapOf(
+                "day" to day,
+                "month" to month,
+                "year" to year,
+                "createdTime" to createdTime,
+                "save" to "save"
             )
+
             val saveTime = FirebaseFirestore.getInstance()
                 .collection("users").document(userId).collection("greens")
-                .document(today).set(saveTimeData)
-
-            Log.d("seanSaveTime","saveTimeData = $saveTimeData ")
+                .document(today).set(data, SetOptions.merge())
 
             val newSaveData = Save(
                 plastic = plastic.value?.toInt(),

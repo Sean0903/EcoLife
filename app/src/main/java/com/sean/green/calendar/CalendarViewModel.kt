@@ -122,11 +122,13 @@ class CalendarViewModel(private val repository: GreenRepository): ViewModel() {
         }
     }
 
-    fun createDailyEvent (toTimeStamp: Long) {
-        selectedLiveEvent.value = allLiveEvents.value.sortByTimeStamp(toTimeStamp)
+    fun createdDailyEvent (toTimeStamp: Long) {
+        selectedLiveEvent.value = allEvent.value.sortByTimeStamp(toTimeStamp)
         _navigationToPostDialog.value = toTimeStamp
 
         Log.d("calendarViewModel"," selectedLiveEvent.value = ${selectedLiveEvent.value}")
+        Log.d("createdDailyEvent","allLiveEvents.value = ${allEvent.value}")
+
     }
 
     private fun todayDate() {

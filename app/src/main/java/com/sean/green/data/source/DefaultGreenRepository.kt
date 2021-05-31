@@ -24,10 +24,7 @@ class DefaultGreenRepository(
         return greenRemoteDataSource.addUseNum2Firebase(use, userId)
     }
 
-    override suspend fun addChallenge2Firebase(
-        challenge: Challenge,
-        userId: String
-    ): Result<Boolean> {
+    override suspend fun addChallenge2Firebase(challenge: Challenge, userId: String): Result<Boolean> {
         return greenRemoteDataSource.addChallenge2Firebase(challenge, userId)
     }
 

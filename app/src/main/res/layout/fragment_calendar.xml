@@ -53,6 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="150dp"
             android:text="回到今日"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -99,6 +100,34 @@
             app:layout_constraintStart_toEndOf="@+id/button_2"
             app:layout_constraintTop_toTopOf="@+id/button_2" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_marginBottom="60dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/calendarView"
+            tools:listitem="@layout/item_calendar_event" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
+
+
+
+<!--<androidx.recyclerview.widget.RecyclerView-->
+<!--android:id="@+id/recyclerView"-->
+<!--ShowEvent="@{viewModel.selectedLiveEvent}"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="110dp"-->
+<!--android:layout_marginBottom="60dp"-->
+<!--app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--app:layout_constraintBottom_toBottomOf="parent"-->
+<!--app:layout_constraintEnd_toEndOf="parent"-->
+<!--app:layout_constraintStart_toStartOf="parent"-->
+<!--app:layout_constraintTop_toBottomOf="@+id/calendarView"-->
+<!--tools:listitem="@layout/item_calendar_event" />-->

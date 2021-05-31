@@ -19,6 +19,8 @@ import com.sean.green.R
 import com.sean.green.databinding.FragmentCalendarBinding
 import com.sean.green.ext.TimeUtil
 import com.sean.green.ext.getVmFactory
+import com.sean.green.util.Logger
+import com.sean.green.util.OneDayDecorator
 import com.sean.green.util.SingleDateDecorator
 import kotlinx.android.synthetic.main.fragment_calendar.*
 import org.threeten.bp.LocalDate
@@ -33,6 +35,8 @@ class CalendarFragment: Fragment() {
 
     private lateinit var widget: MaterialCalendarView
 
+    private val oneDayDecorator: OneDayDecorator = OneDayDecorator()
+
     @SuppressLint("SimpleDateFormat")
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,11 +50,83 @@ class CalendarFragment: Fragment() {
 
         binding.viewModel = viewModel
 
+        widget = binding.calendarView
+
         (activity as MainActivity).dismissFabButton(true)
+
+        var adapter = CalendarEventAdapter()
+        binding.recyclerView.adapter = adapter
+
+
+        viewModel.allEvent.observe(viewLifecycleOwner, Observer { it ->
+//            Log.d("events_in_calendar_page", "events = $it")
+            it?.forEach {
+                Log.d("events_in_calendar_page", "events = $it")
+
+//                Log.d("events_in_calendar_page", "it.attendeesName.component1() = ${it.attendeesName.component1()}")
+            }
+
+        })
+//
+//        // Get the current selected date
+//        widget.setOnDateChangedListener { _, date, selected ->
+//            if (selected) {
+//                oneDayDecorator.setDate(date.date)
+//
+//                val selectedDate = TimeUtil.dateToStamp(date.date.toString(), Locale.TAIWAN)
+//
+//                // Create a sorted list of event based on the current date
+//                viewModel.createdDailyEvent(selectedDate)
+//
+//                Logger.d("$selectedDate")
+//            }
+//        }
+
+//        viewModel.allEvent.observe(viewLifecycleOwner, Observer {
+//            adapter.submitList(it)
+//
+//            Log.d("calendarViewModel","calendarEvent =$it")
+//
+//        })
+
+
+
+        viewModel.selectedLiveEvent.observe(viewLifecycleOwner, Observer {
+            Logger.d("Sorted Event List : $it")
+            it?.let {
+                adapter.submitList(it)
+                adapter.notifyDataSetChanged()
+                binding.viewModel = viewModel
+            }
+        })
+
+
+        // Get the current selected date
+        widget.setOnDateChangedListener { _, date, selected ->
+            if (selected) {
+                oneDayDecorator.setDate(date.date)
+
+                val selectedDate = TimeUtil.dateToStamp(date.date.toString(), Locale.TAIWAN)
+
+                // Create a sorted list of event based on the current date
+                viewModel.createdDailyEvent(selectedDate)
+
+                Logger.d("$selectedDate")
+            }
+        }
+
+
+
+
+
+
+
+
+
 
         val localDate = LocalDate.now()
 
-        widget = binding.calendarView
+
 
         widget.setCurrentDate(localDate)
 
@@ -76,11 +152,12 @@ class CalendarFragment: Fragment() {
 
                     addDotDecoration(year, month, day)
 
-
                 }
-                viewModel.createDailyEvent(TimeUtil.dateToStamp(localDate.toString(), Locale.TAIWAN))
+                viewModel.createdDailyEvent(TimeUtil.dateToStamp(localDate.toString(), Locale.TAIWAN))
             }
         })
+
+
 
         viewModel.navigationToPostDialog.observe(viewLifecycleOwner, Observer { date ->
 
