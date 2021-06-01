@@ -22,5 +22,6 @@ interface GreenDataSource {
 
     suspend fun getCalendarEvent(userId: String): Result<List<CalendarEvent>>
 
+    suspend fun getSaveDataForChart(userId: String,documentId: String): Result<List<Save>>
 
 }

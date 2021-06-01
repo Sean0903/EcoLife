@@ -13,7 +13,7 @@ import kotlinx.coroutines.withContext
  */
 class GreenLocalDataSource(val context: Context) : GreenDataSource {
 
-    override suspend fun addSaveNum2Firebase(save: Save,userId: String): Result<Boolean> {
+    override suspend fun addSaveNum2Firebase(save: Save, userId: String): Result<Boolean> {
         TODO("Not yet implemented")
     }
 
@@ -21,7 +21,10 @@ class GreenLocalDataSource(val context: Context) : GreenDataSource {
         TODO("Not yet implemented")
     }
 
-    override suspend fun addChallenge2Firebase(challenge: Challenge,userId: String): Result<Boolean> {
+    override suspend fun addChallenge2Firebase(
+        challenge: Challenge,
+        userId: String
+    ): Result<Boolean> {
         TODO("Not yet implemented")
     }
 
@@ -38,6 +41,10 @@ class GreenLocalDataSource(val context: Context) : GreenDataSource {
     }
 
     override suspend fun getCalendarEvent(userId: String): Result<List<CalendarEvent>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getSaveDataForChart(userId: String, documentId: String): Result<List<Save>> {
         TODO("Not yet implemented")
     }
 }

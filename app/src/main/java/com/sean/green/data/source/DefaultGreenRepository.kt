@@ -44,4 +44,8 @@ class DefaultGreenRepository(
         return greenRemoteDataSource.getCalendarEvent(userId)
     }
 
+    override suspend fun getSaveDataForChart(collection: String, userId: String,documentId: String): Result<List<Save>> {
+        return greenRemoteDataSource.getSaveDataForChart(userId,documentId)
+    }
+
 }

@@ -27,12 +27,58 @@ object GreenRemoteDataSource : GreenDataSource {
     private const val PATH_GREENS = "greens"
     private const val KEY_CREATED_TIME = "createdTime"
 
+
+    override suspend fun getSaveDataForChart(userId: String,documentId: String): Result<List<Save>> =
+        suspendCoroutine { continuation ->
+
+            val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
+//            val oneWeek =
+
+            val firestore = FirebaseFirestore.getInstance().collection(PATH_USERS)
+            val userDocument = firestore.document(userId)
+            val greensCollenction = userDocument.collection("greens")
+            val dayDocument = greensCollenction.document(documentId)
+            val dayCollection = dayDocument.collection("save")
+
+                    dayCollection
+                .orderBy(KEY_CREATED_TIME, Query.Direction.DESCENDING)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val list = mutableListOf<Save>()
+                        for (document in task.result!!) {
+                            Log.d("getSaveDataForChart", document.id + " => " + document.data)
+
+                            val saveNum = document.toObject(Save::class.java)
+                            list.add(saveNum)
+                        }
+
+                        continuation.resume(Result.Success(list))
+
+                    } else {
+                        task.exception?.let {
+
+                            Log.w(
+                                "sean",
+                                "[${this::class.simpleName}] Error getting documents. ${it.message}"
+                            )
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                    }
+                }
+        }
+
+
     override suspend fun getSaveNum(userId: String): Result<List<Save>> =
         suspendCoroutine { continuation ->
-            FirebaseFirestore.getInstance()
-                .collection(PATH_USERS).document(userId).collection("greens").document(
-                    Calendar.getInstance()
-                        .timeInMillis.toDisplayFormat()
+
+            val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
+
+            FirebaseFirestore.getInstance().collection(PATH_USERS).document(userId)
+                .collection("greens").document(
+                    today
                 ).collection("save")
                 .orderBy(KEY_CREATED_TIME, Query.Direction.DESCENDING)
                 .get()
@@ -65,10 +111,12 @@ object GreenRemoteDataSource : GreenDataSource {
 
     override suspend fun getUseNum(userId: String): Result<List<Use>> =
         suspendCoroutine { continuation ->
+
+            val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
+
             FirebaseFirestore.getInstance()
                 .collection(PATH_USERS).document(userId).collection("greens").document(
-                    Calendar.getInstance()
-                        .timeInMillis.toDisplayFormat()
+                    today
                 ).collection("use")
                 .orderBy(KEY_CREATED_TIME, Query.Direction.DESCENDING)
                 .get()
@@ -101,10 +149,12 @@ object GreenRemoteDataSource : GreenDataSource {
 
     override suspend fun getChallengeNum(userId: String): Result<List<Challenge>> =
         suspendCoroutine { continuation ->
+
+            val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
+
             FirebaseFirestore.getInstance()
                 .collection(PATH_USERS).document(userId).collection("greens").document(
-                    Calendar.getInstance()
-                        .timeInMillis.toDisplayFormat()
+                    today
                 ).collection("challenge")
                 .orderBy(KEY_CREATED_TIME, Query.Direction.DESCENDING)
                 .get()
@@ -168,6 +218,8 @@ object GreenRemoteDataSource : GreenDataSource {
                 }
         }
 
+
+
     override suspend fun addSaveNum2Firebase(save: Save, userId: String): Result<Boolean> =
         suspendCoroutine { continuation ->
 
@@ -215,26 +267,26 @@ object GreenRemoteDataSource : GreenDataSource {
             val todayDocument = greensCollenction.document(today)
             val useCollection = todayDocument.collection("use").document()
 
-                useCollection
-                    .set(use)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            Log.d("dataSource", "addUseNum2Firebase: $use")
+            useCollection
+                .set(use)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Log.d("dataSource", "addUseNum2Firebase: $use")
 
-                            continuation.resume(Result.Success(true))
-                        } else {
-                            task.exception?.let {
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
 
-                                Log.d(
-                                    "dataSource",
-                                    "[${this::class.simpleName}] Error getting documents. ${it.message}"
-                                )
-                                continuation.resume(Result.Error(it))
-                                return@addOnCompleteListener
-                            }
-                            continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                            Log.d(
+                                "dataSource",
+                                "[${this::class.simpleName}] Error getting documents. ${it.message}"
+                            )
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
                         }
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
                     }
+                }
 
 //            greensCollenction
 //                .whereEqualTo("year", year)

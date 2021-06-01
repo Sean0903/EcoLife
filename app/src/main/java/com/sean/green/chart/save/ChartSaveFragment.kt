@@ -52,7 +52,7 @@ class ChartSaveFragment: Fragment() {
 
             (activity as MainActivity).dismissFabButton(true)
 
-            binding.button3.setOnClickListener{
+            binding.imageChartPageCalender.setOnClickListener{
                 setLineChartData()
             }
 
