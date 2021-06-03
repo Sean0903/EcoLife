@@ -31,7 +31,7 @@ class ChartSaveAdapter():ListAdapter<Save, ChartSaveAdapter.ViewHolder>(
 
             fun bind(item: Save) {
                 Log.d("seanViewHolder","fun bind(item: Save) = $item")
-                binding.viewModel = item
+                binding.saveChartData = item
             }
 
             companion object {

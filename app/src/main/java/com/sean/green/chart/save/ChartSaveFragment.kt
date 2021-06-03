@@ -1,11 +1,13 @@
 package com.sean.green.chart.save
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -19,6 +21,9 @@ import com.sean.green.databinding.FragmentSaveChartBinding
 import com.sean.green.ext.getVmFactory
 import kotlinx.android.synthetic.main.fragment_save_chart.*
 import kotlinx.android.synthetic.main.fragment_use_chart.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 
 class ChartSaveFragment: Fragment() {
 
@@ -56,46 +61,61 @@ class ChartSaveFragment: Fragment() {
                 setLineChartData()
             }
 
+            viewModel.saveDataSevenDays.observe(viewLifecycleOwner, Observer {
+                viewModel.setSaveDataForChart()
+                viewModel.setDataForRecycleView()
+//                viewModel.getOneWeekTotal()
+//                setLineChartData()
+                Log.d("seanChartSaveFragment","observe = ${viewModel.saveDataSevenDays.value}")
+
+
+            })
+
+//            viewModel.saveDataForChart.observe(viewLifecycleOwner, Observer {
+//                setLineChartData()
+//
+//            })
+
             return binding.root
         }
 
     fun setLineChartData(){
 
         val xvalue = ArrayList<String>()
-        xvalue.add("一")
-        xvalue.add("二")
-        xvalue.add("三")
-        xvalue.add("四")
-        xvalue.add("五")
-        xvalue.add("六")
-        xvalue.add("日")
+        xvalue.add("")
+        xvalue.add("")
+        xvalue.add("")
+        xvalue.add("")
+        xvalue.add("")
+        xvalue.add("")
+        xvalue.add("")
 
         val lineentrySavePlastic = ArrayList<Entry>();
-        lineentrySavePlastic.add(Entry(20f, 0))
-        lineentrySavePlastic.add(Entry(10f, 1))
-        lineentrySavePlastic.add(Entry(22f, 2))
-        lineentrySavePlastic.add(Entry(31f, 3))
-        lineentrySavePlastic.add(Entry(50f, 4))
-        lineentrySavePlastic.add(Entry(32f, 5))
-        lineentrySavePlastic.add(Entry(22f, 6))
+        lineentrySavePlastic.add(Entry(viewModel.plasticList[6].toFloat(), 0))
+        lineentrySavePlastic.add(Entry(viewModel.plasticList[5].toFloat(), 1))
+        lineentrySavePlastic.add(Entry(viewModel.plasticList[4].toFloat(), 2))
+        lineentrySavePlastic.add(Entry(viewModel.plasticList[3].toFloat(), 3))
+        lineentrySavePlastic.add(Entry(viewModel.plasticList[2].toFloat(), 4))
+        lineentrySavePlastic.add(Entry(viewModel.plasticList[1].toFloat(), 5))
+        lineentrySavePlastic.add(Entry(viewModel.plasticList[0].toFloat(), 6))
 
         val lineentrySavePower = ArrayList<Entry>();
-        lineentrySavePower.add(Entry(22f, 0))
-        lineentrySavePower.add(Entry(24f, 1))
-        lineentrySavePower.add(Entry(36f, 2))
-        lineentrySavePower.add(Entry(23f, 3))
-        lineentrySavePower.add(Entry(34f, 4))
-        lineentrySavePower.add(Entry(33f, 5))
-        lineentrySavePower.add(Entry(22f, 6))
+        lineentrySavePower.add(Entry(viewModel.powerList[6].toFloat(), 0))
+        lineentrySavePower.add(Entry(viewModel.powerList[5].toFloat(), 1))
+        lineentrySavePower.add(Entry(viewModel.powerList[4].toFloat(), 2))
+        lineentrySavePower.add(Entry(viewModel.powerList[3].toFloat(), 3))
+        lineentrySavePower.add(Entry(viewModel.powerList[2].toFloat(), 4))
+        lineentrySavePower.add(Entry(viewModel.powerList[1].toFloat(), 5))
+        lineentrySavePower.add(Entry(viewModel.powerList[0].toFloat(), 6))
 
         val lineentrySaveCarbon = ArrayList<Entry>();
-        lineentrySaveCarbon.add(Entry(22f, 0))
-        lineentrySaveCarbon.add(Entry(30f, 1))
-        lineentrySaveCarbon.add(Entry(21f, 2))
-        lineentrySaveCarbon.add(Entry(32f, 3))
-        lineentrySaveCarbon.add(Entry(21f, 4))
-        lineentrySaveCarbon.add(Entry(26f, 5))
-        lineentrySaveCarbon.add(Entry(28f, 6))
+        lineentrySaveCarbon.add(Entry(viewModel.carbonList[6].toFloat(), 0))
+        lineentrySaveCarbon.add(Entry(viewModel.carbonList[5].toFloat(), 1))
+        lineentrySaveCarbon.add(Entry(viewModel.carbonList[4].toFloat(), 2))
+        lineentrySaveCarbon.add(Entry(viewModel.carbonList[3].toFloat(), 3))
+        lineentrySaveCarbon.add(Entry(viewModel.carbonList[2].toFloat(), 4))
+        lineentrySaveCarbon.add(Entry(viewModel.carbonList[1].toFloat(), 5))
+        lineentrySaveCarbon.add(Entry(viewModel.carbonList[0].toFloat(), 6))
 
         val linedatasetSavePlastic = LineDataSet(lineentrySavePlastic,"Plastic")
         linedatasetSavePlastic.color=resources.getColor(R.color.colorBlue5)
@@ -105,8 +125,6 @@ class ChartSaveFragment: Fragment() {
 
         val linedatasetSaveCarbon = LineDataSet(lineentrySaveCarbon,"Carbon")
         linedatasetSaveCarbon.color=resources.getColor(R.color.colorNight)
-
-
 
 //            linedataset.circleRadius = 0f
 //            linedataset.setDrawFilled(true)
