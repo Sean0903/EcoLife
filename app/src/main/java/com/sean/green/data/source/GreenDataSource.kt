@@ -24,4 +24,6 @@ interface GreenDataSource {
 
     suspend fun getSaveDataForChart(userId: String,documentId: String): Result<List<Save>>
 
+    suspend fun getUseDataForChart(userId: String,documentId: String): Result<List<Use>>
+
 }

@@ -4,10 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable
-            name="viewModel"
-            type="com.sean.green.data.Use" />
-
+        <variable name="useChartData" type="com.sean.green.data.Use" />
+        <variable name="viewModel" type="com.sean.green.chart.use.ChartUseViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,7 +30,7 @@
                 android:layout_marginStart="32dp"
                 android:fontFamily="@font/noto_sans"
                 android:paddingLeft="@dimen/elevation_all"
-                android:text="@{String.valueOf(viewModel.id)}"
+                android:text="@{String.valueOf(useChartData.today)}"
                 android:textAlignment="center"
                 android:textColor="@color/colorFlyingLemon1"
                 android:textSize="@dimen/text_content"
@@ -46,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:fontFamily="@font/noto_sans"
-                android:text="@{String.valueOf(viewModel.plastic)}"
+                android:text="@{String.valueOf(useChartData.plastic)}"
                 android:textAlignment="center"
                 android:textColor="@color/colorFlyingLemon1"
                 android:textSize="@dimen/text_content"
@@ -61,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:fontFamily="@font/noto_sans"
-                android:text="@{String.valueOf(viewModel.power)}"
+                android:text="@{String.valueOf(useChartData.power)}"
                 android:textAlignment="center"
                 android:textColor="@color/colorFlyingLemon1"
                 android:textSize="@dimen/text_content"
@@ -76,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:fontFamily="@font/noto_sans"
-                android:text="@{String.valueOf(viewModel.carbon)}"
+                android:text="@{String.valueOf(useChartData.carbon)}"
                 android:textAlignment="center"
                 android:textColor="@color/colorFlyingLemon1"
                 android:textSize="@dimen/text_content"

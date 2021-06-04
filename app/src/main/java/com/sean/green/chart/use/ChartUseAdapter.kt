@@ -31,7 +31,7 @@ class ChartUseAdapter(): ListAdapter<Use, ChartUseAdapter.ViewHolder>(
 
         fun bind(item: Use) {
             Log.d("seanViewHolder","fun bind(item: use) = $item")
-            binding.viewModel = item
+            binding.useChartData = item
         }
 
         companion object {

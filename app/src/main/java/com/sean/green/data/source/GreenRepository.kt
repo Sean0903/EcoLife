@@ -25,4 +25,6 @@ interface GreenRepository {
     suspend fun getCalendarEvent(collection: String, userId: String): Result<List<CalendarEvent>>
 
     suspend fun getSaveDataForChart(collection: String, userId: String,documentId: String): Result<List<Save>>
+
+    suspend fun getUseDataForChart(collection: String, userId: String,documentId: String): Result<List<Use>>
 }

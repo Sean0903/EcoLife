@@ -99,6 +99,7 @@ class UseViewModel(private val repository: GreenRepository): ViewModel() {
                 power = power.value?.toInt(),
                 carbon = carbon.value?.toInt(),
                 createdTime = Calendar.getInstance().timeInMillis,
+                today = today
 //                id = document.id
             )
 

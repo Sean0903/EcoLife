@@ -48,4 +48,8 @@ class DefaultGreenRepository(
         return greenRemoteDataSource.getSaveDataForChart(userId,documentId)
     }
 
+    override suspend fun getUseDataForChart(collection: String, userId: String,documentId: String): Result<List<Use>> {
+        return greenRemoteDataSource.getUseDataForChart(userId,documentId)
+    }
+
 }

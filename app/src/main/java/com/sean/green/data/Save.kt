@@ -12,7 +12,7 @@ data class Save(
     var carbon: Int? = null,
     var content: String? = "",
     var createdTime: Long = -1,
-//    var today: String? = "",
+    var today: String? = "",
 //    val image: List<String> ?= null,
 //    val totalSave: Int ?= null,
 ) : Parcelable

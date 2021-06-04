@@ -22,7 +22,6 @@ import kotlin.coroutines.suspendCoroutine
 object GreenRemoteDataSource : GreenDataSource {
 
     private const val PATH_GREEN = "green"
-
     private const val PATH_USERS = "users"
     private const val PATH_GREENS = "greens"
     private const val KEY_CREATED_TIME = "createdTime"
@@ -69,6 +68,49 @@ object GreenRemoteDataSource : GreenDataSource {
                     }
                 }
         }
+
+
+    override suspend fun getUseDataForChart(userId: String,documentId: String): Result<List<Use>> =
+        suspendCoroutine { continuation ->
+
+            val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
+
+            val firestore = FirebaseFirestore.getInstance().collection(PATH_USERS)
+            val userDocument = firestore.document(userId)
+            val greensCollenction = userDocument.collection("greens")
+            val dayDocument = greensCollenction.document(documentId)
+            val dayCollection = dayDocument.collection("use")
+
+            dayCollection
+                .orderBy(KEY_CREATED_TIME, Query.Direction.DESCENDING)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val list = mutableListOf<Use>()
+                        for (document in task.result!!) {
+                            Log.d("getUseDataForChart", document.id + " => " + document.data)
+
+                            val useNum = document.toObject(Use::class.java)
+                            list.add(useNum)
+                        }
+
+                        continuation.resume(Result.Success(list))
+
+                    } else {
+                        task.exception?.let {
+
+                            Log.w(
+                                "sean",
+                                "[${this::class.simpleName}] Error getting documents. ${it.message}"
+                            )
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                    }
+                }
+        }
+
 
 
     override suspend fun getSaveNum(userId: String): Result<List<Save>> =

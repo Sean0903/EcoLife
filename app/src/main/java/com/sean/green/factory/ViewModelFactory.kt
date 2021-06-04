@@ -6,6 +6,7 @@ import com.sean.green.MainViewModel
 import com.sean.green.calendar.CalendarViewModel
 import com.sean.green.challenge.ChallengeViewModel
 import com.sean.green.chart.save.ChartSaveViewModel
+import com.sean.green.chart.use.ChartUseViewModel
 import com.sean.green.data.source.GreenRepository
 import com.sean.green.home.HomeViewModel
 import com.sean.green.save.SaveViewModel
@@ -44,18 +45,10 @@ class ViewModelFactory constructor(
 
                 isAssignableFrom(ChartSaveViewModel::class.java) ->
                     ChartSaveViewModel(greenRepository)
-//
-//                isAssignableFrom(ChartViewModel::class.java) ->
-//                    ChartViewModel(stylishRepository)
-//
-//                isAssignableFrom(PaymentViewModel::class.java) ->
-//                    PaymentViewModel(stylishRepository)
-//
-//                isAssignableFrom(LoginViewModel::class.java) ->
-//                    LoginViewModel(stylishRepository)
-//
-//                isAssignableFrom(CheckoutSuccessViewModel::class.java) ->
-//                    CheckoutSuccessViewModel(stylishRepository)
+
+                isAssignableFrom(ChartUseViewModel::class.java) ->
+                    ChartUseViewModel(greenRepository)
+
                 else ->
                     throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
             }

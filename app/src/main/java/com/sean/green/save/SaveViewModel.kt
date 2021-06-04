@@ -1,13 +1,10 @@
 package com.sean.green.save
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import com.sean.green.data.Result
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import com.sean.green.GreenApplication
 import com.sean.green.R
@@ -102,6 +99,7 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
                 power = power.value?.toInt(),
                 carbon = carbon.value?.toInt(),
                 createdTime = Calendar.getInstance().timeInMillis,
+                today = today
 //                id = document.id
             )
 

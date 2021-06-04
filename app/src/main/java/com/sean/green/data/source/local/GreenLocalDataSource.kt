@@ -47,4 +47,8 @@ class GreenLocalDataSource(val context: Context) : GreenDataSource {
     override suspend fun getSaveDataForChart(userId: String, documentId: String): Result<List<Save>> {
         TODO("Not yet implemented")
     }
+
+    override suspend fun getUseDataForChart(userId: String, documentId: String): Result<List<Use>> {
+        TODO("Not yet implemented")
+    }
 }
