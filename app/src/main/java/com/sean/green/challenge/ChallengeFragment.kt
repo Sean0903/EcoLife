@@ -10,15 +10,15 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.sean.green.NavigationDirections
 import com.sean.green.databinding.FragmentChallengeBinding
 import com.sean.green.ext.getVmFactory
 
 
+class ChallengeFragment : Fragment() {
 
-class ChallengeFragment: Fragment() {
-
-//    private lateinit var binding : FragmentChallengeBinding
+    private lateinit var binding: FragmentChallengeBinding
 
     private val viewModel by viewModels<ChallengeViewModel> { getVmFactory() }
 
@@ -28,21 +28,20 @@ class ChallengeFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val binding = FragmentChallengeBinding.inflate(inflater, container, false)
-
+        binding = FragmentChallengeBinding.inflate(inflater, container, false)
 
         viewModel.plastic.observe(viewLifecycleOwner, Observer {
-            Log.i("challengeFragment","plastic = ${viewModel.plastic.value}")
+            Log.i("challengeFragment", "plastic = ${viewModel.plastic.value}")
         }
         )
 
         viewModel.power.observe(viewLifecycleOwner, Observer {
-            Log.i("challengeFragment","power = ${viewModel.power.value}")
+            Log.i("challengeFragment", "power = ${viewModel.power.value}")
         }
         )
 
         viewModel.carbon.observe(viewLifecycleOwner, Observer {
-            Log.i("challengeFragment","carbon = ${viewModel.carbon.value}")
+            Log.i("challengeFragment", "carbon = ${viewModel.carbon.value}")
         }
         )
 
@@ -57,7 +56,7 @@ class ChallengeFragment: Fragment() {
         }
 
         binding.imageUsePageBackToHome2.setOnClickListener {
-            findNavController().navigate(NavigationDirections.navigateToHomeFragment())
+            findNavController().navigate(NavigationDirections.navigateToHomeFragment(FirebaseAuth.getInstance().currentUser!!.uid))
         }
 
         return binding.root

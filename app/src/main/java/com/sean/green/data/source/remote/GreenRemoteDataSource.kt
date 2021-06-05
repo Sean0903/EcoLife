@@ -1,19 +1,13 @@
-import android.provider.DocumentsContract
-import android.provider.SyncStateContract.Helpers.update
+
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.SetOptions
 import com.sean.green.GreenApplication
 import com.sean.green.R
 import com.sean.green.data.*
 import com.sean.green.data.source.GreenDataSource
 import com.sean.green.ext.toDisplayFormat
-import com.sean.green.ext.toDisplayFormatDay
-import com.sean.green.ext.toDisplayFormatMonth
-import com.sean.green.ext.toDisplayFormatYear
 import com.sean.green.util.Logger
-import kotlinx.android.synthetic.main.fragment_calendar.*
 import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
@@ -27,7 +21,10 @@ object GreenRemoteDataSource : GreenDataSource {
     private const val KEY_CREATED_TIME = "createdTime"
 
 
-    override suspend fun getSaveDataForChart(userId: String,documentId: String): Result<List<Save>> =
+    override suspend fun getSaveDataForChart(
+        userId: String,
+        documentId: String
+    ): Result<List<Save>> =
         suspendCoroutine { continuation ->
 
             val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
@@ -39,7 +36,7 @@ object GreenRemoteDataSource : GreenDataSource {
             val dayDocument = greensCollenction.document(documentId)
             val dayCollection = dayDocument.collection("save")
 
-                    dayCollection
+            dayCollection
                 .orderBy(KEY_CREATED_TIME, Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener { task ->
@@ -70,7 +67,7 @@ object GreenRemoteDataSource : GreenDataSource {
         }
 
 
-    override suspend fun getUseDataForChart(userId: String,documentId: String): Result<List<Use>> =
+    override suspend fun getUseDataForChart(userId: String, documentId: String): Result<List<Use>> =
         suspendCoroutine { continuation ->
 
             val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
@@ -110,8 +107,6 @@ object GreenRemoteDataSource : GreenDataSource {
                     }
                 }
         }
-
-
 
     override suspend fun getSaveNum(userId: String): Result<List<Save>> =
         suspendCoroutine { continuation ->
@@ -261,7 +256,6 @@ object GreenRemoteDataSource : GreenDataSource {
         }
 
 
-
     override suspend fun addSaveNum2Firebase(save: Save, userId: String): Result<Boolean> =
         suspendCoroutine { continuation ->
 
@@ -392,4 +386,42 @@ object GreenRemoteDataSource : GreenDataSource {
                 }
             }
     }
+
+    override suspend fun createUser(user: User): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            FirebaseFirestore.getInstance().collection(PATH_USERS).document(user.userId).set(user)
+                .addOnCompleteListener { addUser ->
+                    if (addUser.isSuccessful) {
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        addUser.exception?.let {
+
+                            Logger.w("[${this::class.simpleName}] Error getting documents. ${it.message}")
+                            continuation.resume(Result.Error(it))
+                        }
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                    }
+                }
+        }
+
+    override suspend fun findUser(firebaseUserId: String): Result<User?> =
+        suspendCoroutine { continuation ->
+            FirebaseFirestore.getInstance().collection(PATH_USERS).document(firebaseUserId)
+                .get()
+                .addOnCompleteListener { findUser ->
+                    if (findUser.isSuccessful) {
+                        findUser.result?.let { documentU ->
+                            val user = documentU.toObject(User::class.java)
+                            continuation.resume(Result.Success(user))
+                        }
+                    } else {
+                        findUser.exception?.let {
+                            Logger.w("[${this::class.simpleName}] Error getting documents. ${it.message}")
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                    }
+                }
+        }
 }

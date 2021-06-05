@@ -51,4 +51,12 @@ class GreenLocalDataSource(val context: Context) : GreenDataSource {
     override suspend fun getUseDataForChart(userId: String, documentId: String): Result<List<Use>> {
         TODO("Not yet implemented")
     }
+
+    override suspend fun createUser(user: User): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun findUser(firebaseUserId: String): Result<User?> {
+        TODO("Not yet implemented")
+    }
 }

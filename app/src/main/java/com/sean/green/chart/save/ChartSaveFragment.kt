@@ -59,6 +59,14 @@ class ChartSaveFragment : Fragment() {
             count++
             if (count == 7) {
                 setLineChartData()
+                binding.lottieAnimationView.visibility = View.GONE
+                binding.imageChartPageSavePlastic.visibility = View.VISIBLE
+                binding.imageChartPageSavePower.visibility = View.VISIBLE
+                binding.imageChartPageSaveCarbon.visibility = View.VISIBLE
+                binding.textChartPageSavePlastic.visibility = View.VISIBLE
+                binding.textChartPageSavePower.visibility = View.VISIBLE
+                binding.textChartPageSaveCarbon.visibility = View.VISIBLE
+                binding.imageView8.visibility = View.GONE
             }
             Log.d("0604", "count ++ = ${count}")
             Log.d("0604", "plasticList = ${viewModel.plasticList}")
@@ -69,10 +77,20 @@ class ChartSaveFragment : Fragment() {
 
         })
 
-//            viewModel.saveDataForChart.observe(viewLifecycleOwner, Observer {
-//                setLineChartData()
-//
-//            })
+
+        binding.lottieAnimationView.repeatCount = -1
+        // 开始播放动画
+        binding.lottieAnimationView.playAnimation()
+        binding.imageChartPageSavePlastic.visibility = View.INVISIBLE
+        binding.imageChartPageSavePower.visibility = View.INVISIBLE
+        binding.imageChartPageSaveCarbon.visibility = View.INVISIBLE
+        binding.textChartPageSavePlastic.visibility = View.INVISIBLE
+        binding.textChartPageSavePower.visibility = View.INVISIBLE
+        binding.textChartPageSaveCarbon.visibility = View.INVISIBLE
+        binding.imageView8.visibility = View.VISIBLE
+
+
+
 
         return binding.root
     }

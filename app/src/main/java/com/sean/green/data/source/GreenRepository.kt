@@ -27,4 +27,8 @@ interface GreenRepository {
     suspend fun getSaveDataForChart(collection: String, userId: String,documentId: String): Result<List<Save>>
 
     suspend fun getUseDataForChart(collection: String, userId: String,documentId: String): Result<List<Use>>
+
+    suspend fun createUser(user: User): Result<Boolean>
+
+    suspend fun findUser(firebaseUserId: String): Result<User?>
 }

@@ -26,7 +26,7 @@ import java.util.*
 import kotlin.math.absoluteValue
 
 
-class HomeViewModel(private val repository: GreenRepository): ViewModel() {
+class HomeViewModel(private val repository: GreenRepository, private val arguments: String): ViewModel() {
 
 
     val plastic = MutableLiveData<String>()

@@ -26,4 +26,8 @@ interface GreenDataSource {
 
     suspend fun getUseDataForChart(userId: String,documentId: String): Result<List<Use>>
 
+    suspend fun createUser(user: User): Result<Boolean>
+
+    suspend fun findUser(firebaseUserId: String): Result<User?>
+
 }

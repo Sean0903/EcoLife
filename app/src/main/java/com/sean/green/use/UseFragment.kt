@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.sean.green.NavigationDirections
 import com.sean.green.R
 import com.sean.green.databinding.FragmentUseBinding
@@ -63,7 +64,7 @@ class UseFragment: Fragment() {
         }
 
         binding.imageUsePageBackToHome.setOnClickListener {
-            findNavController().navigate(NavigationDirections.navigateToHomeFragment())
+            findNavController().navigate(NavigationDirections.navigateToHomeFragment(FirebaseAuth.getInstance().currentUser!!.uid))
         }
 
         return binding.root

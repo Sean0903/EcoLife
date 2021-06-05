@@ -49,6 +49,10 @@
     <string name="simpledateformat_yyyy_MM_dd_HHmmss">yyyy-MM-dd-HHmmss</string>
     <string name="simpledateformat_date_time_to_timestamp">%s %s:00.000000000</string>
     <string name="simpledateformat_yyyy_MM_dd_HH_mm_ss_fffffffff">yyyy-MM-dd HH:mm:ss.%s</string>
+    <string name="diary_select_date">d/M/yyyy</string>
 
+    <!--Login-->
+    <string name="login_success">登入成功</string>
+    <string name="login_name_unknown">你是誰~</string>
 
 </resources>

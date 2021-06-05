@@ -52,4 +52,13 @@ class DefaultGreenRepository(
         return greenRemoteDataSource.getUseDataForChart(userId,documentId)
     }
 
+    override suspend fun createUser(user: User): Result<Boolean> {
+        return  greenRemoteDataSource.createUser(user)
+    }
+
+    override suspend fun findUser(firebaseUserId: String): Result<User?> {
+        return greenRemoteDataSource.findUser(firebaseUserId)
+    }
+
+
 }

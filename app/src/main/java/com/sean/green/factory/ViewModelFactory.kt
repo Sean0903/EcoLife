@@ -9,6 +9,7 @@ import com.sean.green.chart.save.ChartSaveViewModel
 import com.sean.green.chart.use.ChartUseViewModel
 import com.sean.green.data.source.GreenRepository
 import com.sean.green.home.HomeViewModel
+import com.sean.green.login.LoginViewModel
 import com.sean.green.save.SaveViewModel
 import com.sean.green.use.UseViewModel
 import java.util.*
@@ -28,8 +29,8 @@ class ViewModelFactory constructor(
                 isAssignableFrom(MainViewModel::class.java) ->
                     MainViewModel(greenRepository)
 
-                isAssignableFrom(HomeViewModel::class.java) ->
-                    HomeViewModel(greenRepository)
+//                isAssignableFrom(HomeViewModel::class.java) ->
+//                    HomeViewModel(greenRepository)
 
                 isAssignableFrom(SaveViewModel::class.java) ->
                     SaveViewModel(greenRepository)
@@ -48,6 +49,9 @@ class ViewModelFactory constructor(
 
                 isAssignableFrom(ChartUseViewModel::class.java) ->
                     ChartUseViewModel(greenRepository)
+
+                isAssignableFrom(LoginViewModel::class.java) ->
+                    LoginViewModel(greenRepository)
 
                 else ->
                     throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")

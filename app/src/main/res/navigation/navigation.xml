@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.sean.green.home.HomeFragment"
         android:label="HomeFragment" >
-
+        <argument
+            android:name="userIDKey"
+            app:argType="string" />
     </fragment>
 
     <fragment
@@ -36,8 +38,6 @@
         android:label="SaveFragment" >
 <!--        <argument android:name="saveKey"-->
 <!--            app:argType="com.sean.green.data.Save"/>-->
-
-
     </fragment>
 
     <fragment
@@ -49,7 +49,6 @@
         android:id="@+id/dialogSaveFragment"
         android:name="com.sean.green.dialog.DialogSaveFragment"
         android:label="DialogSaveFragment" >
-
     </fragment>
 
     <fragment
@@ -91,6 +90,18 @@
         android:name="com.sean.green.chart.PagerFragment"
         android:label="PagerFragment" />
 
+    <fragment
+        android:id="@+id/chartUseFragment"
+        android:name="com.sean.green.chart.use.ChartUseFragment"
+        android:label="ChartUseFragment" />
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.sean.green.login.LoginFragment"
+        android:label="LoginFragment" >
+    </fragment>
+
+
     <action android:id="@+id/navigate_to_home_fragment" app:destination="@id/homeFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
@@ -119,6 +130,8 @@
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
     <action
+        android:id="@+id/action_global_loginFragment" app:destination="@id/loginFragment" />
+    <action
         android:id="@+id/action_homeFragment_to_dialogSaveFragment"
         app:destination="@id/dialogSaveFragment" />
     <action
@@ -142,10 +155,6 @@
     <action
         android:id="@+id/action_dialogChallengeFragment_to_homeFragment"
         app:destination="@id/homeFragment" />
-    <fragment
-        android:id="@+id/chartUseFragment"
-        android:name="com.sean.green.chart.use.ChartUseFragment"
-        android:label="ChartUseFragment" />
 
 
 </navigation>

@@ -8,6 +8,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.sean.green.data.Save
 import com.sean.green.databinding.ActivityMainBinding
 import com.sean.green.ext.getVmFactory
@@ -30,7 +33,9 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.homeFragment -> {
 
-                findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToHomeFragment())
+                findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToHomeFragment(
+                    FirebaseAuth.getInstance().currentUser!!.uid
+                ))
                 return@OnNavigationItemSelectedListener true
             }
             R.id.pagerFragment -> {
@@ -174,6 +179,12 @@ class MainActivity : AppCompatActivity() {
 
             }
         }
+    }
+
+    private fun signOut() {
+        // [START auth_sign_out]
+        Firebase.auth.signOut()
+        // [END auth_sign_out]
     }
 
 }

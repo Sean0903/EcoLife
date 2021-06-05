@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sean.green.NavigationDirections
 import com.sean.green.R
@@ -68,7 +69,7 @@ class SaveFragment: Fragment() {
             }
 
         binding.imageSavePageBackToHome.setOnClickListener {
-            findNavController().navigate(NavigationDirections.navigateToHomeFragment())
+            findNavController().navigate(NavigationDirections.navigateToHomeFragment(FirebaseAuth.getInstance().currentUser!!.uid))
         }
 
 
