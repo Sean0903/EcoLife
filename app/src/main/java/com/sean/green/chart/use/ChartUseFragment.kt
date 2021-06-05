@@ -61,12 +61,33 @@ class ChartUseFragment : Fragment() {
             count++
             if (count == 7) {
                 setLineChartData()
+                binding.lottieAnimationView.visibility = View.GONE
+                binding.imageChartPageUsePlastic.visibility = View.VISIBLE
+                binding.imageChartPageUsePower.visibility = View.VISIBLE
+                binding.imageChartPageUseCarbon.visibility = View.VISIBLE
+                binding.textChartPageUsePlastic.visibility = View.VISIBLE
+                binding.textChartPageUsePower.visibility = View.VISIBLE
+                binding.textChartPageUseCarbon.visibility = View.VISIBLE
+                binding.imageChartPageCalender.visibility = View.VISIBLE
+                binding.imageChartPageUsePlasticIcon1.visibility = View.VISIBLE
+                binding.imageChartPageUsePowerIcon1.visibility = View.VISIBLE
+                binding.imageChartPageUseCarbonIcon1.visibility = View.VISIBLE
             }
         })
 
-        binding.button4.setOnClickListener {
-            setLineChartData()
-        }
+        binding.lottieAnimationView.repeatCount = -1
+        // 开始播放动画
+        binding.lottieAnimationView.playAnimation()
+        binding.imageChartPageUsePlastic.visibility = View.INVISIBLE
+        binding.imageChartPageUsePower.visibility = View.INVISIBLE
+        binding.imageChartPageUseCarbon.visibility = View.INVISIBLE
+        binding.textChartPageUsePlastic.visibility = View.INVISIBLE
+        binding.textChartPageUsePower.visibility = View.INVISIBLE
+        binding.textChartPageUseCarbon.visibility = View.INVISIBLE
+        binding.imageChartPageCalender.visibility = View.INVISIBLE
+        binding.imageChartPageUsePlasticIcon1.visibility = View.INVISIBLE
+        binding.imageChartPageUsePowerIcon1.visibility = View.INVISIBLE
+        binding.imageChartPageUseCarbonIcon1.visibility = View.INVISIBLE
 
         return binding.root
     }

@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "409647628078-ktpn28rq58op5cphihe1fp8eob306u4h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sean.green",
+            "certificate_hash": "21035264d665512e48a1dc9de7e5c94bd14001bb"
+          }
+        },
+        {
           "client_id": "409647628078-3avb0pg99n3fhbvd91bta4a2jbr5lt6b.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -2,6 +2,7 @@ package com.sean.green.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.auth.FirebaseAuth
 import com.sean.green.MainViewModel
 import com.sean.green.calendar.CalendarViewModel
 import com.sean.green.challenge.ChallengeViewModel
@@ -29,8 +30,8 @@ class ViewModelFactory constructor(
                 isAssignableFrom(MainViewModel::class.java) ->
                     MainViewModel(greenRepository)
 
-//                isAssignableFrom(HomeViewModel::class.java) ->
-//                    HomeViewModel(greenRepository)
+                isAssignableFrom(HomeViewModel::class.java) ->
+                    HomeViewModel(greenRepository,(FirebaseAuth.getInstance().currentUser!!.uid))
 
                 isAssignableFrom(SaveViewModel::class.java) ->
                     SaveViewModel(greenRepository)

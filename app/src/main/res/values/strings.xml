@@ -54,5 +54,6 @@
     <!--Login-->
     <string name="login_success">登入成功</string>
     <string name="login_name_unknown">你是誰~</string>
+    <string name="token_id">409647628078-i23ohi769v3p5snc7mt2j28o19oueqgh.apps.googleusercontent.com</string>
 
 </resources>

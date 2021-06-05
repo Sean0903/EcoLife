@@ -66,7 +66,10 @@ class ChartSaveFragment : Fragment() {
                 binding.textChartPageSavePlastic.visibility = View.VISIBLE
                 binding.textChartPageSavePower.visibility = View.VISIBLE
                 binding.textChartPageSaveCarbon.visibility = View.VISIBLE
-                binding.imageView8.visibility = View.GONE
+                binding.imageChartPageCalender.visibility = View.VISIBLE
+                binding.imageChartPageSavePlasticIcon1.visibility = View.VISIBLE
+                binding.imageChartPageSavePowerIcon1.visibility = View.VISIBLE
+                binding.imageChartPageSaveCarbonIcon1.visibility = View.VISIBLE
             }
             Log.d("0604", "count ++ = ${count}")
             Log.d("0604", "plasticList = ${viewModel.plasticList}")
@@ -79,7 +82,7 @@ class ChartSaveFragment : Fragment() {
 
 
         binding.lottieAnimationView.repeatCount = -1
-        // 开始播放动画
+        // start lottie
         binding.lottieAnimationView.playAnimation()
         binding.imageChartPageSavePlastic.visibility = View.INVISIBLE
         binding.imageChartPageSavePower.visibility = View.INVISIBLE
@@ -87,7 +90,11 @@ class ChartSaveFragment : Fragment() {
         binding.textChartPageSavePlastic.visibility = View.INVISIBLE
         binding.textChartPageSavePower.visibility = View.INVISIBLE
         binding.textChartPageSaveCarbon.visibility = View.INVISIBLE
-        binding.imageView8.visibility = View.VISIBLE
+        binding.imageChartPageCalender.visibility = View.INVISIBLE
+        binding.imageChartPageSavePlasticIcon1.visibility = View.INVISIBLE
+        binding.imageChartPageSavePowerIcon1.visibility = View.INVISIBLE
+        binding.imageChartPageSaveCarbonIcon1.visibility = View.INVISIBLE
+
 
 
 

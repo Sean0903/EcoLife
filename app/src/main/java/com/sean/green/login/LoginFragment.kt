@@ -20,8 +20,6 @@ import com.sean.green.R
 import com.sean.green.databinding.FragmentLoginBinding
 import com.sean.green.ext.getVmFactory
 
-
-
 /**
  * Demonstrate Firebase Authentication using a Google ID Token.
  */
@@ -63,7 +61,7 @@ class LoginFragment : Fragment() {
         viewModel.loginAttempt.observe(viewLifecycleOwner, Observer {
             it?.let {
                 val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestIdToken(getString(R.string.default_web_client_id))
+                    .requestIdToken(getString(R.string.token_id))
                     .requestEmail()
                     .build()
                 googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
@@ -73,7 +71,9 @@ class LoginFragment : Fragment() {
             }
         })
 
-//        binding.signInButton.setOnClickListener { onClick(binding.signInButton) }
+        binding.signInButton.setOnClickListener {
+            viewModel.loginGoogle()
+        }
 
         return binding.root
     }
@@ -95,7 +95,7 @@ class LoginFragment : Fragment() {
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)!!
                 Log.d(TAG, "firebaseAuthWithGoogle:" + account.id)
-                viewModel.firebaseAuthWithGoogle(account!!)
+                viewModel.firebaseAuthWithGoogle(account)
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e)

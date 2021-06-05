@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
     app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.sean.green.home.HomeFragment"
-        android:label="HomeFragment" >
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
         <argument
             android:name="userIDKey"
             app:argType="string" />
@@ -15,27 +18,32 @@
     <fragment
         android:id="@+id/shareFragment"
         android:name="com.sean.green.share.ShareFragment"
-        android:label="CommunityFragment" />
+        android:label="CommunityFragment"
+        tools:layout="@layout/fragment_share"/>
 
     <fragment
         android:id="@+id/chartFragment"
         android:name="com.sean.green.chart.save.ChartSaveFragment"
-        android:label="ChartFragment" />
+        android:label="ChartFragment"
+        tools:layout="@layout/fragment_save_chart"/>
 
     <fragment
         android:id="@+id/calendarFragment"
         android:name="com.sean.green.calendar.CalendarFragment"
-        android:label="CalendarFragment" />
+        android:label="CalendarFragment"
+        tools:layout="@layout/fragment_calendar"/>
 
     <fragment
         android:id="@+id/challengeFragment"
         android:name="com.sean.green.challenge.ChallengeFragment"
-        android:label="ChallengeFragment" />
+        android:label="ChallengeFragment"
+        tools:layout="@layout/fragment_challenge"/>
 
     <fragment
         android:id="@+id/saveFragment"
         android:name="com.sean.green.save.SaveFragment"
-        android:label="SaveFragment" >
+        android:label="SaveFragment"
+        tools:layout="@layout/fragment_save">
 <!--        <argument android:name="saveKey"-->
 <!--            app:argType="com.sean.green.data.Save"/>-->
     </fragment>
@@ -43,35 +51,41 @@
     <fragment
         android:id="@+id/useFragment"
         android:name="com.sean.green.use.UseFragment"
-        android:label="UseFragment" />
+        android:label="UseFragment"
+        tools:layout="@layout/fragment_use"/>
 
     <fragment
         android:id="@+id/dialogSaveFragment"
         android:name="com.sean.green.dialog.DialogSaveFragment"
-        android:label="DialogSaveFragment" >
+        android:label="DialogSaveFragment"
+        tools:layout="@layout/dialog_save">
     </fragment>
 
     <fragment
         android:id="@+id/dialogUseFragment"
         android:name="com.sean.green.dialog.DialogUseFragment"
-        android:label="DialogUseFragment" />
+        android:label="DialogUseFragment"
+        tools:layout="@layout/dialog_use"/>
 
     <fragment
         android:id="@+id/eventFragment"
         android:name="com.sean.green.event.EventFragment"
-        android:label="EventFragment" >
+        android:label="EventFragment"
+        tools:layout="@layout/fragment_event">
     </fragment>
 
     <fragment
         android:id="@+id/dialogEvent"
         android:name="com.sean.green.dialog.DialogEventFragment"
-        android:label="DialogEvent" >
+        android:label="DialogEvent"
+        tools:layout="@layout/dialog_event">
     </fragment>
 
     <fragment
         android:id="@+id/dialogShareFragment"
         android:name="com.sean.green.dialog.DialogShareFragment"
-        android:label="DialogShareFragment" >
+        android:label="DialogShareFragment"
+        tools:layout="@layout/dialog_share">
     </fragment>
 
     <fragment
@@ -82,7 +96,8 @@
     <fragment
         android:id="@+id/dialogChallengeFragment"
         android:name="com.sean.green.dialog.DialogChallengeFragment"
-        android:label="DialogChallengeFragment" >
+        android:label="DialogChallengeFragment"
+        tools:layout="@layout/dialog_challenge">
     </fragment>
 
     <fragment
@@ -93,12 +108,14 @@
     <fragment
         android:id="@+id/chartUseFragment"
         android:name="com.sean.green.chart.use.ChartUseFragment"
-        android:label="ChartUseFragment" />
+        android:label="ChartUseFragment"
+        tools:layout="@layout/fragment_use_chart"/>
 
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.sean.green.login.LoginFragment"
-        android:label="LoginFragment" >
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
     </fragment>
 
 

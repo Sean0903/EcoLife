@@ -89,7 +89,9 @@ class CalendarFragment: Fragment() {
 //
 //        })
 
-
+        binding.lottieAnimationView.repeatCount = -1
+        // start lottie
+        binding.lottieAnimationView.playAnimation()
 
         viewModel.selectedLiveEvent.observe(viewLifecycleOwner, Observer {
             Logger.d("Sorted Event List : $it")

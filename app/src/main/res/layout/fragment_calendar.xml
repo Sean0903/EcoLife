@@ -114,17 +114,28 @@
             tools:listitem="@layout/item_calendar_event"
             tools:visibility="gone" />
 
-        <ImageView
-            android:id="@+id/imageView5"
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieAnimationView"
             android:layout_width="176dp"
             android:layout_height="133dp"
             android:layout_marginBottom="110dp"
-            android:background="@drawable/image_round"
             android:visibility="@{viewModel.selectedLiveEvent.size() &lt;= 0 ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/island" />
+            app:lottie_rawRes="@raw/summer_camp_animations_raccoon_snorkel" />
+
+<!--        <ImageView-->
+<!--            android:id="@+id/imageView5"-->
+<!--            android:layout_width="176dp"-->
+<!--            android:layout_height="133dp"-->
+<!--            android:layout_marginBottom="110dp"-->
+<!--            android:background="@drawable/image_round"-->
+<!--            android:visibility="@{viewModel.selectedLiveEvent.size() &lt;= 0 ? View.VISIBLE : View.GONE}"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:srcCompat="@drawable/island" />-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
