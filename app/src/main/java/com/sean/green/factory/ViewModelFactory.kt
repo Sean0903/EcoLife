@@ -12,6 +12,8 @@ import com.sean.green.data.source.GreenRepository
 import com.sean.green.home.HomeViewModel
 import com.sean.green.login.LoginViewModel
 import com.sean.green.save.SaveViewModel
+import com.sean.green.share.ShareViewModel
+import com.sean.green.share.toShare.ToShareViewModel
 import com.sean.green.use.UseViewModel
 import java.util.*
 
@@ -31,7 +33,10 @@ class ViewModelFactory constructor(
                     MainViewModel(greenRepository)
 
                 isAssignableFrom(HomeViewModel::class.java) ->
-                    HomeViewModel(greenRepository,(FirebaseAuth.getInstance().currentUser!!.uid))
+                    HomeViewModel(greenRepository)
+
+//                isAssignableFrom(HomeViewModel::class.java) ->
+//                    HomeViewModel(greenRepository,(FirebaseAuth.getInstance().currentUser!!.uid))
 
                 isAssignableFrom(SaveViewModel::class.java) ->
                     SaveViewModel(greenRepository)
@@ -53,6 +58,12 @@ class ViewModelFactory constructor(
 
                 isAssignableFrom(LoginViewModel::class.java) ->
                     LoginViewModel(greenRepository)
+
+                isAssignableFrom(ShareViewModel::class.java) ->
+                    ShareViewModel(greenRepository)
+
+                isAssignableFrom(ToShareViewModel::class.java) ->
+                    ToShareViewModel(greenRepository)
 
                 else ->
                     throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")

@@ -56,8 +56,11 @@ class ChallengeFragment : Fragment() {
         }
 
         binding.imageUsePageBackToHome2.setOnClickListener {
-            findNavController().navigate(NavigationDirections.navigateToHomeFragment(FirebaseAuth.getInstance().currentUser!!.uid))
+            findNavController().navigate(NavigationDirections.navigateToHomeFragment(
+//                FirebaseAuth.getInstance().currentUser!!.uid
+            ))
         }
+
 
         return binding.root
     }

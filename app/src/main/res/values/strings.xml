@@ -7,6 +7,7 @@
     <string name="navigation_event_name">活動</string>
     <string name="text_save_title">新增成果</string>
     <string name="text_use_title">新增消耗</string>
+    <string name="text_share_title">新增分享</string>
     <string name="text_challenge_title">新增挑戰</string>
     <string name="text_challenge_myChallenge">今天挑戰</string>
     <string name="text_my_save_title">我的成果</string>
@@ -55,5 +56,15 @@
     <string name="login_success">登入成功</string>
     <string name="login_name_unknown">你是誰~</string>
     <string name="token_id">409647628078-i23ohi769v3p5snc7mt2j28o19oueqgh.apps.googleusercontent.com</string>
+    <string name="button_dialog_share_send">發送</string>
+    <string name="text_dialog_share_title">分享成果</string>
+    <string name="editText_dialog_share_host">請輸入姓名</string>
+    <string name="text_dialog_share_explain">你的成就</string>
+    <string name="editText_dialog_share_explain">例如：無塑一週</string>
+    <string name="text_dialog_share_time">時間</string>
+    <string name="editText_dialog_share_time">請輸入時間</string>
+    <string name="text_dialog_share_content">內容</string>
+    <string name="editText_dialog_share_content">請分享你的心情</string>
+    <string name="text_dialog_share_chart">分享本週圖表</string>
 
 </resources>

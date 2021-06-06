@@ -69,7 +69,9 @@ class SaveFragment: Fragment() {
             }
 
         binding.imageSavePageBackToHome.setOnClickListener {
-            findNavController().navigate(NavigationDirections.navigateToHomeFragment(FirebaseAuth.getInstance().currentUser!!.uid))
+            findNavController().navigate(NavigationDirections.navigateToHomeFragment(
+//                FirebaseAuth.getInstance().currentUser!!.uid
+            ))
         }
 
 

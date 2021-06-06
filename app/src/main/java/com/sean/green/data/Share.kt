@@ -4,11 +4,15 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Share (
-    val name: String ?= null,
-    val achievement: String ?= null,
-    val time: String ?= null,
-    val content: String ?= null,
-    val dialog: String ?= null
+data class Share(
+
+    var id: String? = "",
+    val name: String? = "",
+    val achievement: String? = "",
+    val time: String? = "",
+    val content: String? = "",
+    val dialog: String? = "",
+    var today: String? = "",
+    var createdTime: Long = -1,
 
 ) : Parcelable

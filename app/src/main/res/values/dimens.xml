@@ -16,6 +16,7 @@
     <dimen name="standard_55">55dp</dimen> //各個高度
     <dimen name="standard_105">105dp</dimen>
     <dimen name="standard_155">155dp</dimen>
+    <dimen name="standard_205">205dp</dimen>
     <dimen name="standard_0">0dp</dimen>
 
 </resources>

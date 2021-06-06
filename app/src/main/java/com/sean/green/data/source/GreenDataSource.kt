@@ -30,4 +30,7 @@ interface GreenDataSource {
 
     suspend fun findUser(firebaseUserId: String): Result<User?>
 
+    suspend fun addSharing2Firebase(share: Share, userId: String): Result<Boolean>
+
+    suspend fun getSharingData(userId: String,documentId: String): Result<List<Share>>
 }

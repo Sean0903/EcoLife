@@ -8,17 +8,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.sean.green.MainActivity
 import com.sean.green.R
-import com.sean.green.chart.save.ChartSaveAdapter
-import com.sean.green.chart.save.ChartSaveViewModel
-import com.sean.green.data.Use
-import com.sean.green.databinding.FragmentSaveChartBinding
 import com.sean.green.databinding.FragmentUseChartBinding
 import com.sean.green.ext.getVmFactory
 import kotlinx.android.synthetic.main.fragment_use_chart.*

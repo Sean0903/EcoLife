@@ -64,7 +64,9 @@ class UseFragment: Fragment() {
         }
 
         binding.imageUsePageBackToHome.setOnClickListener {
-            findNavController().navigate(NavigationDirections.navigateToHomeFragment(FirebaseAuth.getInstance().currentUser!!.uid))
+            findNavController().navigate(NavigationDirections.navigateToHomeFragment(
+//                FirebaseAuth.getInstance().currentUser!!.uid
+            ))
         }
 
         return binding.root

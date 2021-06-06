@@ -25,8 +25,8 @@ import java.sql.Timestamp
 import java.util.*
 import kotlin.math.absoluteValue
 
-
-class HomeViewModel(private val repository: GreenRepository, private val arguments: String): ViewModel() {
+//, private val arguments: String
+class HomeViewModel(private val repository: GreenRepository): ViewModel() {
 
 
     val plastic = MutableLiveData<String>()

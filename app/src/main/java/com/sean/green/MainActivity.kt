@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
             R.id.homeFragment -> {
 
                 findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToHomeFragment(
-                    FirebaseAuth.getInstance().currentUser!!.uid
+//                    FirebaseAuth.getInstance().currentUser!!.uid
                 ))
                 return@OnNavigationItemSelectedListener true
             }
@@ -81,9 +81,6 @@ class MainActivity : AppCompatActivity() {
 
         binding.fabSave.setOnClickListener {
             findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToSaveFragment(
-
-//                Save()
-//                    Foodie()
             ))
             binding.fabShadow.visibility = View.GONE
             closeFABMenu()
@@ -91,7 +88,6 @@ class MainActivity : AppCompatActivity() {
 
         binding.fabUse.setOnClickListener {
             findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToUseFragment(
-//                    Foodie()
             ))
             binding.fabShadow.visibility = View.GONE
             closeFABMenu()
@@ -99,14 +95,23 @@ class MainActivity : AppCompatActivity() {
 
         binding.fabChallenge.setOnClickListener {
             findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToChallengeFragment(
-//                    Foodie()
             ))
             binding.fabShadow.visibility = View.GONE
             closeFABMenu()
         }
 
+        binding.fabShare.setOnClickListener {
+            findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToToShareFragment(
+            ))
+            binding.fabShadow.visibility = View.GONE
+            closeFABMenu()
+        }
+
+
         setupBottomNav()
     }
+
+
 
     private fun setupBottomNav() {
         binding.bottomNavView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
@@ -129,10 +134,15 @@ class MainActivity : AppCompatActivity() {
             resources.getDimension(R.dimen.standard_0) -> fabLayout_challenge.visibility = View.INVISIBLE
             else -> fabLayout_challenge.visibility = View.VISIBLE
         }
+        when (fabLayout_share.y){
+            resources.getDimension(R.dimen.standard_0) -> fabLayout_challenge.visibility = View.INVISIBLE
+            else -> fabLayout_share.visibility = View.VISIBLE
+        }
         isFABOpen = true
-        fabLayout_challenge.animate().translationY(-resources.getDimension(R.dimen.standard_55))
-        fabLayout_use.animate().translationY(-resources.getDimension(R.dimen.standard_105))
-        fabLayout_save.animate().translationY(-resources.getDimension(R.dimen.standard_155))
+        fabLayout_share.animate().translationY(-resources.getDimension(R.dimen.standard_55))
+        fabLayout_challenge.animate().translationY(-resources.getDimension(R.dimen.standard_105))
+        fabLayout_use.animate().translationY(-resources.getDimension(R.dimen.standard_155))
+        fabLayout_save.animate().translationY(-resources.getDimension(R.dimen.standard_205))
         fab.animate().rotation(45.0f)
         fab_custom_pic.animate().rotation(45.0f)
         binding.fab.visibility = View.VISIBLE
@@ -145,6 +155,7 @@ class MainActivity : AppCompatActivity() {
         fab_save.visibility = View.VISIBLE
         fab_use.visibility = View.VISIBLE
         fab_challenge.visibility = View.VISIBLE
+        fab_share.visibility = View.VISIBLE
 
         when (fabLayout_save.y){
             resources.getDimension(R.dimen.standard_0) -> fabLayout_save.visibility = View.INVISIBLE
@@ -158,6 +169,10 @@ class MainActivity : AppCompatActivity() {
             resources.getDimension(R.dimen.standard_0) -> fabLayout_challenge.visibility = View.INVISIBLE
             else -> fabLayout_challenge.visibility = View.VISIBLE
         }
+        when (fabLayout_share.y){
+            resources.getDimension(R.dimen.standard_0) -> fabLayout_challenge.visibility = View.INVISIBLE
+            else -> fabLayout_challenge.visibility = View.VISIBLE
+        }
 
         isFABOpen = false
         binding.fabShadow.visibility = View.GONE
@@ -166,6 +181,7 @@ class MainActivity : AppCompatActivity() {
         fabLayout_save.animate().translationY(resources.getDimension(R.dimen.standard_0))
         fabLayout_use.animate().translationY(resources.getDimension(R.dimen.standard_0))
         fabLayout_challenge.animate().translationY(resources.getDimension(R.dimen.standard_0))
+        fabLayout_share.animate().translationY(resources.getDimension(R.dimen.standard_0))
 
     }
 

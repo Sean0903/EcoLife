@@ -59,4 +59,13 @@ class GreenLocalDataSource(val context: Context) : GreenDataSource {
     override suspend fun findUser(firebaseUserId: String): Result<User?> {
         TODO("Not yet implemented")
     }
+
+    override suspend fun addSharing2Firebase(share: Share, userId: String): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getSharingData(userId: String, documentId: String): Result<List<Share>> {
+        TODO("Not yet implemented")
+    }
+
 }

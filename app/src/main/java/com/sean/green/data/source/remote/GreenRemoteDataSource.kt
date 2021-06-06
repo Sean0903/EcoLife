@@ -15,7 +15,6 @@ import kotlin.coroutines.suspendCoroutine
 
 object GreenRemoteDataSource : GreenDataSource {
 
-    private const val PATH_GREEN = "green"
     private const val PATH_USERS = "users"
     private const val PATH_GREENS = "greens"
     private const val KEY_CREATED_TIME = "createdTime"
@@ -386,6 +385,80 @@ object GreenRemoteDataSource : GreenDataSource {
                 }
             }
     }
+
+    override suspend fun addSharing2Firebase(share: Share, userId: String): Result<Boolean> =
+        suspendCoroutine { continuation ->
+
+            val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
+
+            val firestore = FirebaseFirestore.getInstance().collection(PATH_USERS)
+            val userDocument = firestore.document(userId)
+            val greensCollenction = userDocument.collection("greens")
+            val todayDocument = greensCollenction.document(today)
+            val saveCollection = todayDocument.collection("share").document()
+
+            share.id = saveCollection.id
+            saveCollection.set(share)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Log.d("dataSource", "addSharing2Firebase: $share")
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+
+                            Log.d(
+                                "dataSource",
+                                "[${this::class.simpleName}] Error getting documents. ${it.message}"
+                            )
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                    }
+                }
+        }
+
+    override suspend fun getSharingData(userId: String, documentId: String): Result<List<Share>> =
+        suspendCoroutine { continuation ->
+
+            val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
+
+            val firestore = FirebaseFirestore.getInstance().collection(PATH_USERS)
+            val userDocument = firestore.document(userId)
+            val greensCollenction = userDocument.collection("greens")
+            val dayDocument = greensCollenction.document(documentId)
+            val dayCollection = dayDocument.collection("share")
+
+            dayCollection
+                .orderBy(KEY_CREATED_TIME, Query.Direction.DESCENDING)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val list = mutableListOf<Share>()
+                        for (document in task.result!!) {
+                            Log.d("getUseDataForChart", document.id + " => " + document.data)
+
+                            val shareData = document.toObject(Share::class.java)
+                            list.add(shareData)
+                        }
+
+                        continuation.resume(Result.Success(list))
+
+                    } else {
+                        task.exception?.let {
+
+                            Log.w(
+                                "sean",
+                                "[${this::class.simpleName}] Error getting documents. ${it.message}"
+                            )
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                    }
+                }
+        }
+
 
     override suspend fun createUser(user: User): Result<Boolean> =
         suspendCoroutine { continuation ->

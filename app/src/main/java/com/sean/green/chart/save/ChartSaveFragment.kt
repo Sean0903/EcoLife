@@ -95,10 +95,6 @@ class ChartSaveFragment : Fragment() {
         binding.imageChartPageSavePowerIcon1.visibility = View.INVISIBLE
         binding.imageChartPageSaveCarbonIcon1.visibility = View.INVISIBLE
 
-
-
-
-
         return binding.root
     }
 

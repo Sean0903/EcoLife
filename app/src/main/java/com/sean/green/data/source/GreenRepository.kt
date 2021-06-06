@@ -31,4 +31,8 @@ interface GreenRepository {
     suspend fun createUser(user: User): Result<Boolean>
 
     suspend fun findUser(firebaseUserId: String): Result<User?>
+
+    suspend fun addSharing2Firebase(share: Share, userId: String): Result<Boolean>
+
+    suspend fun getSharingData(collection: String, userId: String,documentId: String): Result<List<Share>>
 }

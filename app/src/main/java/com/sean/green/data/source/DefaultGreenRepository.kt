@@ -60,5 +60,13 @@ class DefaultGreenRepository(
         return greenRemoteDataSource.findUser(firebaseUserId)
     }
 
+    override suspend fun addSharing2Firebase(share: Share, userId: String): Result<Boolean> {
+        return greenRemoteDataSource.addSharing2Firebase(share, userId)
+    }
+
+    override suspend fun getSharingData(collection: String, userId: String, documentId: String): Result<List<Share>> {
+        return greenRemoteDataSource.getSharingData(userId, documentId)
+    }
+
 
 }

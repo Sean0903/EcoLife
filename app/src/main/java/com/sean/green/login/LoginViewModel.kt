@@ -23,7 +23,7 @@ import com.sean.green.data.Result
 import com.sean.green.util.Util.getString
 import java.util.*
 
-class LoginViewModel(private val repository: GreenRepository): ViewModel() {
+class LoginViewModel(private val repository: GreenRepository) : ViewModel() {
 
     private val _user = MutableLiveData<User>()
 
@@ -58,6 +58,28 @@ class LoginViewModel(private val repository: GreenRepository): ViewModel() {
         viewModelJob.cancel()
     }
 
+    private fun createUser(user: User, firstLogin: Boolean) {
+        coroutineScope.launch {
+            _user.value = when (repository.createUser(user)) {
+                is Result.Success -> {
+                    if (!firstLogin) {
+                        loginSuccess()
+                    }
+                    user
+                }
+                is Result.Fail -> {
+                    null
+                }
+                is Result.Error -> {
+                    null
+                }
+                else -> {
+                    null
+                }
+            }
+        }
+    }
+
     fun findUser(firebaseUser: FirebaseUser, firstLogin: Boolean) {
         coroutineScope.launch {
             val result = repository.findUser(firebaseUser.uid)
@@ -79,28 +101,6 @@ class LoginViewModel(private val repository: GreenRepository): ViewModel() {
                         createUser(newUser, firstLogin)
                         null
                     }
-                }
-                is Result.Fail -> {
-                    null
-                }
-                is Result.Error -> {
-                    null
-                }
-                else -> {
-                    null
-                }
-            }
-        }
-    }
-
-    private fun createUser(user: User, firstLogin: Boolean) {
-        coroutineScope.launch {
-            _user.value = when (repository.createUser(user)) {
-                is Result.Success -> {
-                    if (!firstLogin) {
-                        loginSuccess()
-                    }
-                    user
                 }
                 is Result.Fail -> {
                     null
@@ -145,18 +145,14 @@ class LoginViewModel(private val repository: GreenRepository): ViewModel() {
         ).show()
     }
 
-
     fun onSucceeded() {
         _navigateToHome.value = null
     }
 
-
-    
-
     fun firebaseAuthWithGoogle(idToken: GoogleSignInAccount) {
         val credential = GoogleAuthProvider.getCredential(idToken.idToken, null)
         auth.signInWithCredential(credential)
-            .addOnCompleteListener{ task ->
+            .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(LoginFragment.TAG, "signInWithCredential:success")

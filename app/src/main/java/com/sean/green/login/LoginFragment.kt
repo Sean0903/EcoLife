@@ -52,7 +52,7 @@ class LoginFragment : Fragment() {
         viewModel.navigateToHome.observe(viewLifecycleOwner, Observer {
             it.let {
                 findNavController().navigate(NavigationDirections.navigateToHomeFragment(
-                    FirebaseAuth.getInstance().currentUser!!.uid
+//                    FirebaseAuth.getInstance().currentUser!!.uid
                 ))
                 viewModel.onSucceeded()
             }
@@ -77,12 +77,6 @@ class LoginFragment : Fragment() {
 
         return binding.root
     }
-
-//    fun onClick(v: View) {
-//        when (v.id) {
-//            R.id.sign_in_button -> signIn()
-//        }
-//    }
 
     // [START onactivityresult]
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
