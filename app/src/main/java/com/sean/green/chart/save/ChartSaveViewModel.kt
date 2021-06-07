@@ -15,6 +15,7 @@ import com.sean.green.data.Chart
 import com.sean.green.data.Use
 import com.sean.green.data.source.GreenRepository
 import com.sean.green.ext.toDisplayFormat
+import com.sean.green.login.UserManager
 import com.sean.green.network.LoadApiStatus
 import kotlinx.coroutines.*
 import java.util.*
@@ -47,14 +48,12 @@ class ChartSaveViewModel(private val repository: GreenRepository) : ViewModel() 
     private val _refreshStatus = MutableLiveData<Boolean>()
 
     init {
-        getSaveDataForChart()
+        getSaveDataForChart(UserManager.user.email)
     }
 
 
-    fun getSaveDataForChart() {
+    fun getSaveDataForChart(userEmail: String) {
         coroutineScope.launch {
-
-//            daydocument.run { add(two) }
 
             var today = Calendar.getInstance().timeInMillis
 
@@ -65,8 +64,8 @@ class ChartSaveViewModel(private val repository: GreenRepository) : ViewModel() 
 
                 _status.value = LoadApiStatus.LOADING
                 val daysAgo = today.toDisplayFormat()
-                val saveList = repository.getSaveDataForChart(COLLECTION_SAVE, USER_ID, daysAgo)
-                val saveList2 = repository.getSaveDataForChart(COLLECTION_SAVE, USER_ID, daysAgo)
+                val saveList = repository.getSaveDataForChart(userEmail,COLLECTION_SAVE, daysAgo)
+                val saveList2 = repository.getSaveDataForChart(userEmail,COLLECTION_SAVE, daysAgo)
                 Log.d("days", "time = $daysAgo")
                 today -= 85000000
 

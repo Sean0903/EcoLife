@@ -5,7 +5,6 @@ import com.google.firebase.auth.FirebaseUser
 import com.sean.green.data.*
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import java.sql.Timestamp
 
 /**
  * Created by Wayne Chen in Jul. 2019.
@@ -22,56 +21,52 @@ class DefaultGreenRepository(
         return greenRemoteDataSource.addSaveNum2Firebase(userEmail,save)
     }
 
-    override suspend fun addUseNum2Firebase(use: Use, userId: String): Result<Boolean> {
-        return greenRemoteDataSource.addUseNum2Firebase(use, userId)
+    override suspend fun addUseNum2Firebase(userEmail: String, use: Use): Result<Boolean> {
+        return greenRemoteDataSource.addUseNum2Firebase(userEmail,use)
     }
 
-    override suspend fun addChallenge2Firebase(challenge: Challenge, userId: String): Result<Boolean> {
-        return greenRemoteDataSource.addChallenge2Firebase(challenge, userId)
+    override suspend fun addChallenge2Firebase(userEmail: String,challenge: Challenge): Result<Boolean> {
+        return greenRemoteDataSource.addChallenge2Firebase(userEmail,challenge)
     }
 
     override suspend fun getSaveNum( userEmail: String, collection: String): Result<List<Save>> {
         return greenRemoteDataSource.getSaveNum(userEmail,collection)
     }
 
-    override suspend fun getChallengeNum(collection: String, userId: String): Result<List<Challenge>> {
-        return greenRemoteDataSource.getChallengeNum(userId)
+    override suspend fun getChallengeNum(userEmail: String,collection: String): Result<List<Challenge>> {
+        return greenRemoteDataSource.getChallengeNum(userEmail,collection)
     }
 
-    override suspend fun getUseNum(collection: String, userId: String): Result<List<Use>> {
-        return greenRemoteDataSource.getUseNum(userId)
+    override suspend fun getUseNum(userEmail: String,collection: String): Result<List<Use>> {
+        return greenRemoteDataSource.getUseNum(userEmail,collection)
     }
 
-    override suspend fun getCalendarEvent(collection: String, userId: String): Result<List<CalendarEvent>> {
-        return greenRemoteDataSource.getCalendarEvent(userId)
+    override suspend fun getCalendarEvent(userEmail: String, collection: String): Result<List<CalendarEvent>> {
+        return greenRemoteDataSource.getCalendarEvent(userEmail,collection)
     }
 
-    override suspend fun getSaveDataForChart(collection: String, userId: String,documentId: String): Result<List<Save>> {
-        return greenRemoteDataSource.getSaveDataForChart(userId,documentId)
+    override suspend fun getSaveDataForChart(userEmail: String, collection: String, documentId: String): Result<List<Save>> {
+        return greenRemoteDataSource.getSaveDataForChart(userEmail,collection,documentId)
     }
 
-    override suspend fun getUseDataForChart(collection: String, userId: String,documentId: String): Result<List<Use>> {
-        return greenRemoteDataSource.getUseDataForChart(userId,documentId)
+    override suspend fun getUseDataForChart(userEmail: String, collection: String, documentId: String): Result<List<Use>> {
+        return greenRemoteDataSource.getUseDataForChart(userEmail,collection,documentId)
     }
 
-//    override suspend fun createUser(user: User): Result<Boolean> {
-//        return  greenRemoteDataSource.createUser(user)
-//    }
-//
-//    override suspend fun findUser(firebaseUserId: String): Result<User?> {
-//        return greenRemoteDataSource.findUser(firebaseUserId)
-//    }
-
-    override suspend fun addSharing2Firebase(share: Share, userId: String): Result<Boolean> {
-        return greenRemoteDataSource.addSharing2Firebase(share, userId)
+    override suspend fun addSharing2Firebase(collection: String, share: Share): Result<Boolean> {
+        return greenRemoteDataSource.addSharing2Firebase(collection,share)
     }
 
-    override suspend fun getSharingData(collection: String, userId: String, documentId: String): Result<List<Share>> {
-        return greenRemoteDataSource.getSharingData(userId, documentId)
+    override suspend fun getSharingData(collection: String): Result<List<Share>> {
+        return greenRemoteDataSource.getSharingData(collection)
     }
 
     override suspend fun postUser(user: User): Result<Boolean> {
         return greenRemoteDataSource.postUser(user)
+    }
+
+    override suspend fun getUser(userEmail: String,collection: String): Result<List<User>> {
+        return greenRemoteDataSource.getUser(userEmail,collection)
     }
 
     override suspend fun firebaseAuthWithGoogle(account : GoogleSignInAccount?): Result<FirebaseUser?> {

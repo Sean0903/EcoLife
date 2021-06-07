@@ -13,8 +13,12 @@ import com.google.firebase.firestore.SetOptions
 import com.sean.green.GreenApplication
 import com.sean.green.R
 import com.sean.green.data.*
+import com.sean.green.data.FirebaseKey.Companion.COLLECTION_SHARE
+import com.sean.green.data.FirebaseKey.Companion.COLLECTION_USE
+import com.sean.green.data.FirebaseKey.Companion.COLLECTION_USERS
 import com.sean.green.data.source.GreenRepository
 import com.sean.green.ext.toDisplayFormat
+import com.sean.green.login.UserManager
 import com.sean.green.network.LoadApiStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -36,6 +40,11 @@ class ShareViewModel(private val repository: GreenRepository) : ViewModel() {
     private val _saveDataSevenDays = MutableLiveData<List<Save>>()
     val saveDataSevenDays: LiveData<List<Save>>
         get() = _saveDataSevenDays
+
+    private val _userImage = MutableLiveData<List<User>>()
+
+    val userImage: LiveData<List<User>>
+        get() = _userImage
 
     private val _status = MutableLiveData<LoadApiStatus>()
 
@@ -70,25 +79,20 @@ class ShareViewModel(private val repository: GreenRepository) : ViewModel() {
 
     init {
         getShareData()
-        getSaveDataForChart()
+        getSaveDataForChart(UserManager.user.email)
+        getUser(UserManager.user.email)
 //        setSaveDataForChart()
     }
 
     fun getShareData() {
         coroutineScope.launch {
 
-            var today = Calendar.getInstance().timeInMillis
-
             val share7List = mutableListOf<Share>()
 
-            for (i in 0..6) {
-
                 _status.value = LoadApiStatus.LOADING
-                val daysAgo = today.toDisplayFormat()
-                val shareList = repository.getSharingData(FirebaseKey.COLLECTION_USE, FirebaseKey.USER_ID, daysAgo)
 
-                Log.d("days", "time = $daysAgo")
-                today -= 85000000
+                val shareList = repository.getSharingData(COLLECTION_SHARE)
+            Log.d("shareData","shareList = ${repository.getSharingData(COLLECTION_SHARE)}")
 
                 when (shareList) {
                     is Result.Success -> {
@@ -105,7 +109,6 @@ class ShareViewModel(private val repository: GreenRepository) : ViewModel() {
                 }
 
                 _refreshStatus.value = false
-            }
 
             _shareDataForRecycleView.value = share7List
 
@@ -114,7 +117,7 @@ class ShareViewModel(private val repository: GreenRepository) : ViewModel() {
 
 
 
-    fun getSaveDataForChart() {
+    fun getSaveDataForChart(userEmail: String) {
         coroutineScope.launch {
 
             var today = Calendar.getInstance().timeInMillis
@@ -125,7 +128,7 @@ class ShareViewModel(private val repository: GreenRepository) : ViewModel() {
 
                 _status.value = LoadApiStatus.LOADING
                 val daysAgo = today.toDisplayFormat()
-                val saveList2 = repository.getSaveDataForChart(FirebaseKey.COLLECTION_SAVE, FirebaseKey.USER_ID, daysAgo)
+                val saveList2 = repository.getSaveDataForChart(userEmail, FirebaseKey.COLLECTION_SAVE, daysAgo)
                 Log.d("days", "time = $daysAgo")
                 today -= 85000000
 
@@ -192,6 +195,44 @@ class ShareViewModel(private val repository: GreenRepository) : ViewModel() {
         Log.d("sean0903", " savePowerList = $powerList")
         Log.d("sean0903", " saveCarbonList = $carbonList")
 
+    }
+
+    private fun getUser(userEmail: String) {
+
+        coroutineScope.launch {
+
+            _status.value = LoadApiStatus.LOADING
+
+            val result = repository.getUser(userEmail, COLLECTION_USERS)
+            Log.d("getUser", "repository.getUser =" +
+                    "${repository.getUser(userEmail, COLLECTION_USERS)}")
+
+            _userImage.value = when (result) {
+                is Result.Success -> {
+                    Log.d("calendarViewModel", "result.data = ${result.data}")
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                    result.data
+                }
+                is Result.Fail -> {
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+                is Result.Error -> {
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+                else -> {
+                    _error.value = GreenApplication.instance.getString(com.sean.green.R.string.you_know_nothing)
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+            }
+            _refreshStatus.value = false
+            Log.d("getUser", "_userImage.value = ${_userImage.value}")
+        }
     }
 
 

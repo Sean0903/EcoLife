@@ -19,11 +19,11 @@ class GreenLocalDataSource(val context: Context) : GreenDataSource {
         TODO("Not yet implemented")
     }
 
-    override suspend fun addUseNum2Firebase(use: Use, userId: String): Result<Boolean> {
+    override suspend fun addUseNum2Firebase(userEmail: String,use: Use): Result<Boolean> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun addChallenge2Firebase(challenge: Challenge, userId: String): Result<Boolean> {
+    override suspend fun addChallenge2Firebase(userEmail: String,challenge: Challenge): Result<Boolean> {
         TODO("Not yet implemented")
     }
 
@@ -31,23 +31,23 @@ class GreenLocalDataSource(val context: Context) : GreenDataSource {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getChallengeNum(userId: String): Result<List<Challenge>> {
+    override suspend fun getChallengeNum(userEmail: String,collection: String): Result<List<Challenge>> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getUseNum(userId: String): Result<List<Use>> {
+    override suspend fun getUseNum(userEmail: String,collection: String): Result<List<Use>> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getCalendarEvent(userId: String): Result<List<CalendarEvent>> {
+    override suspend fun getCalendarEvent(userEmail: String,collection: String): Result<List<CalendarEvent>> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getSaveDataForChart(userId: String, documentId: String): Result<List<Save>> {
+    override suspend fun getSaveDataForChart(userEmail: String,collection: String, documentId: String): Result<List<Save>> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getUseDataForChart(userId: String, documentId: String): Result<List<Use>> {
+    override suspend fun getUseDataForChart(userEmail: String, collection: String, documentId: String): Result<List<Use>> {
         TODO("Not yet implemented")
     }
 
@@ -59,15 +59,19 @@ class GreenLocalDataSource(val context: Context) : GreenDataSource {
 //        TODO("Not yet implemented")
 //    }
 
-    override suspend fun addSharing2Firebase(share: Share, userId: String): Result<Boolean> {
+    override suspend fun addSharing2Firebase(collection: String, share: Share): Result<Boolean> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getSharingData(userId: String, documentId: String): Result<List<Share>> {
+    override suspend fun getSharingData(collection: String): Result<List<Share>> {
         TODO("Not yet implemented")
     }
 
     override suspend fun postUser(user: User): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getUser(userEmail: String,collection: String): Result<List<User>> {
         TODO("Not yet implemented")
     }
 

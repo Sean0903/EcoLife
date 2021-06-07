@@ -57,6 +57,10 @@ class ShareFragment: Fragment() {
             findNavController().navigate(NavigationDirections.actionShareFragmentToToShareFragment())
         }
 
+        viewModel.userImage.observe(viewLifecycleOwner, Observer {
+            Log.d("userImage","userImage = ${viewModel.userImage.value}")
+        })
+
         binding.lottieAnimationView.repeatCount = -1
         // start lottie
         binding.lottieAnimationView.playAnimation()

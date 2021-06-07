@@ -9,6 +9,7 @@ import com.sean.green.R
 import com.sean.green.data.*
 import com.sean.green.data.source.GreenRepository
 import com.sean.green.ext.toDisplayFormat
+import com.sean.green.login.UserManager
 import com.sean.green.network.LoadApiStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -44,11 +45,11 @@ class ChartUseViewModel(private val repository: GreenRepository) : ViewModel() {
     private val _refreshStatus = MutableLiveData<Boolean>()
 
     init {
-        getUseDataForChart()
+        getUseDataForChart(UserManager.user.email)
     }
 
 
-    fun getUseDataForChart() {
+    fun getUseDataForChart(userEmail: String) {
         coroutineScope.launch {
 
             var today = Calendar.getInstance().timeInMillis
@@ -61,11 +62,9 @@ class ChartUseViewModel(private val repository: GreenRepository) : ViewModel() {
                 _status.value = LoadApiStatus.LOADING
                 val daysAgo = today.toDisplayFormat()
                 val useList = repository.getUseDataForChart(
-                    FirebaseKey.COLLECTION_USE,
-                    FirebaseKey.USER_ID, daysAgo)
+                    userEmail, FirebaseKey.COLLECTION_USE, daysAgo)
                 val useList2 = repository.getUseDataForChart(
-                    FirebaseKey.COLLECTION_USE,
-                    FirebaseKey.USER_ID, daysAgo)
+                    userEmail, FirebaseKey.COLLECTION_USE, daysAgo)
                 Log.d("days", "time = $daysAgo")
                 today -= 85000000
 

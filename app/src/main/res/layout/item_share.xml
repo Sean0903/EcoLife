@@ -6,6 +6,7 @@
     <data>
         <variable name="shareData" type="com.sean.green.data.Share" />
         <variable name="viewModel" type="com.sean.green.data.Share" />
+        <variable name="image" type="com.sean.green.share.ShareViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,19 +28,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="@{@string/text_share_host + String.valueOf(shareData.name)}"
-                app:layout_constraintBottom_toTopOf="@+id/image_item_event_host2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="分享者：Sean" />
-
 
             <TextView
                 android:id="@+id/textView6"
@@ -52,14 +40,25 @@
                 app:layout_constraintTop_toTopOf="@+id/image_item_event_host2"
                 tools:text="2021.5.18  9:00" />
 
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="@{shareData.userName}"
+                app:layout_constraintBottom_toTopOf="@+id/textView6"
+                app:layout_constraintStart_toEndOf="@+id/card_view_image"
+                tools:text="Kai Hsiang Liang" />
+
             <ImageView
                 android:id="@+id/image_item_event_host2"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="5dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView10"
+                app:layout_constraintTop_toBottomOf="@+id/card_view_image"
                 app:srcCompat="@drawable/icon_calendar" />
 
             <ImageView
@@ -104,20 +103,33 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView9">
-            </com.github.mikephil.charting.charts.LineChart>
+                app:layout_constraintTop_toBottomOf="@+id/textView9"></com.github.mikephil.charting.charts.LineChart>
 
-            <!--            <ImageView-->
-            <!--                android:id="@+id/imageView2"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginTop="8dp"-->
-            <!--                android:layout_marginBottom="8dp"-->
-            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/textView4"-->
-            <!--                app:srcCompat="@drawable/chart" />-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_view_image"
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="8dp"
+                app:cardCornerRadius="30dp"
+                app:layout_constraintBottom_toTopOf="@+id/image_item_event_host2"
+                app:layout_constraintEnd_toEndOf="@+id/image_item_event_host2"
+                app:layout_constraintStart_toStartOf="@+id/image_item_event_host2"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="92dp"
+                    app:imageUrl="@{shareData.image}"
+                    app:layout_constraintBottom_toBottomOf="@+id/card_view_image"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/card_view_image"
+                    app:layout_constraintVertical_bias="0.0" />
+
+            </androidx.cardview.widget.CardView>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

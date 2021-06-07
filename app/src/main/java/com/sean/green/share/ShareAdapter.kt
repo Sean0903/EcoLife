@@ -14,6 +14,7 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.sean.green.R
+import com.sean.green.data.User
 import com.sean.green.util.Util
 import com.sean.green.util.Util.getColor
 import kotlinx.android.synthetic.main.item_share.view.*
@@ -40,6 +41,7 @@ class ShareAdapter(private val viewModel: ShareViewModel) :
         fun bind(viewModel: ShareViewModel, item: Share) {
             Log.d("seanViewHolder", "fun bind(item: Save) = $item")
             binding.shareData = item
+//            binding.image = item
             binding.lineChart1
 
             fun setLine() {

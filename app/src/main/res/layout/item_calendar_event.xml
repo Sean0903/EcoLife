@@ -82,6 +82,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+
+
                 <TextView
                     android:id="@+id/textView_challenge_event"
                     android:layout_width="70dp"
@@ -116,6 +118,17 @@
                     app:layout_constraintStart_toStartOf="@+id/textView_challenge_event"
                     app:layout_constraintTop_toBottomOf="@+id/textView_save_event"
                     tools:text="use" />
+
+                <TextView
+                    android:id="@+id/textView_share_event"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="24dp"
+                    android:text="@{calendarEvent.share}"
+                    app:layout_constraintBottom_toTopOf="@+id/textView_save_event"
+                    app:layout_constraintStart_toEndOf="@+id/textView_challenge_event"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="share" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>

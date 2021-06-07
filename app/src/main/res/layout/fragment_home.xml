@@ -34,15 +34,15 @@
                 android:layout_height="8dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/underline"
-                app:layout_constraintEnd_toStartOf="@+id/image_home_challenge_info"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintEnd_toEndOf="@+id/text_my_challenge_title"
                 app:layout_constraintStart_toStartOf="@+id/text_my_challenge_title"
                 app:layout_constraintTop_toTopOf="@+id/text_my_challenge_title" />
 
             <ImageView
                 android:id="@+id/image_home_challenge_info"
-                android:layout_width="45dp"
-                android:layout_height="0dp"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="8dp"
                 android:scaleType="fitStart"
                 app:layout_constraintBottom_toBottomOf="@+id/text_my_challenge_title"
                 app:layout_constraintStart_toEndOf="@+id/text_my_challenge_title"
@@ -52,6 +52,8 @@
             <TextView
                 android:id="@+id/text_my_challenge_title"
                 style="@style/home_page_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/text_challenge_myChallenge"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -119,8 +121,9 @@
 
             <ImageView
                 android:id="@+id/image_home_save_info"
-                android:layout_width="45dp"
-                android:layout_height="0dp"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="8dp"
                 android:scaleType="fitStart"
                 app:layout_constraintBottom_toBottomOf="@+id/text_my_save_title"
                 app:layout_constraintStart_toEndOf="@+id/text_my_save_title"
@@ -131,7 +134,7 @@
                 android:id="@+id/image_home_save_plastic"
                 android:layout_width="40dp"
                 android:layout_height="35dp"
-                android:background="@drawable/tag_left_corners"
+                android:background="@drawable/tag_left_plastic_corners"
                 android:padding="@dimen/elevation_all"
                 android:paddingTop="@dimen/elevation_all"
                 android:scaleType="fitCenter"
@@ -163,7 +166,7 @@
                 android:id="@+id/image_home_save_power"
                 android:layout_width="40dp"
                 android:layout_height="35dp"
-                android:background="@drawable/tag_left_corners"
+                android:background="@drawable/tag_left_power_corners"
                 android:padding="@dimen/elevation_all"
                 android:paddingTop="@dimen/elevation_all"
                 android:scaleType="fitCenter"
@@ -195,7 +198,7 @@
                 android:id="@+id/image_home_save_carbon"
                 android:layout_width="40dp"
                 android:layout_height="35dp"
-                android:background="@drawable/tag_left_corners"
+                android:background="@drawable/tag_left_carbon_corners"
                 android:padding="@dimen/elevation_all"
                 android:paddingTop="@dimen/elevation_all"
                 android:scaleType="fitCenter"
@@ -204,7 +207,7 @@
                 app:layout_constraintStart_toEndOf="@+id/text_home_save_power"
                 app:layout_constraintTop_toTopOf="@+id/text_home_save_carbon"
                 app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/carbon_dioxide" />
+                app:srcCompat="@drawable/co2" />
 
             <TextView
                 android:id="@+id/text_home_save_carbon"
@@ -265,8 +268,9 @@
 
             <ImageView
                 android:id="@+id/image_home_use_info"
-                android:layout_width="45dp"
-                android:layout_height="0dp"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="8dp"
                 android:scaleType="fitStart"
                 app:layout_constraintBottom_toBottomOf="@+id/text_my_use_title"
                 app:layout_constraintStart_toEndOf="@+id/text_my_use_title"
@@ -277,7 +281,7 @@
                 android:id="@+id/image_home_use_plastic"
                 android:layout_width="40dp"
                 android:layout_height="35dp"
-                android:background="@drawable/tag_left_corners"
+                android:background="@drawable/tag_left_plastic_corners"
                 android:padding="@dimen/elevation_all"
                 android:paddingTop="@dimen/elevation_all"
                 android:scaleType="fitCenter"
@@ -309,7 +313,7 @@
                 android:id="@+id/image_home_use_power"
                 android:layout_width="40dp"
                 android:layout_height="35dp"
-                android:background="@drawable/tag_left_corners"
+                android:background="@drawable/tag_left_power_corners"
                 android:padding="@dimen/elevation_all"
                 android:paddingTop="@dimen/elevation_all"
                 android:scaleType="fitCenter"
@@ -340,7 +344,7 @@
                 android:id="@+id/image_home_use_carbon"
                 android:layout_width="40dp"
                 android:layout_height="35dp"
-                android:background="@drawable/tag_left_corners"
+                android:background="@drawable/tag_left_carbon_corners"
                 android:padding="@dimen/elevation_all"
                 android:paddingTop="@dimen/elevation_all"
                 android:scaleType="fitCenter"
@@ -349,7 +353,7 @@
                 app:layout_constraintStart_toEndOf="@+id/text_home_use_power"
                 app:layout_constraintTop_toTopOf="@+id/text_home_use_carbon"
                 app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/carbon_dioxide" />
+                app:srcCompat="@drawable/co2" />
 
             <TextView
                 android:id="@+id/text_home_use_carbon"

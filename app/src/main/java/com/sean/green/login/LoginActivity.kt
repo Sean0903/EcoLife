@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -15,6 +16,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.sean.green.MainActivity
 import com.sean.green.R
 import com.sean.green.data.User
+import com.sean.green.databinding.ActivityLoginBinding
 import com.sean.green.ext.getVmFactory
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -23,7 +25,7 @@ import kotlinx.android.synthetic.main.activity_login.*
  */
 class LoginActivity : AppCompatActivity() {
 
-//    lateinit var binding: FragmentLoginBinding
+    lateinit var binding: ActivityLoginBinding
 
     private val viewModel by viewModels<LoginViewModel> { getVmFactory() }
     private var auth: FirebaseAuth? = null
@@ -35,7 +37,11 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         auth = FirebaseAuth.getInstance()
 
-        google_sign_in_button.setOnClickListener {
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+
+        binding.googleSignInButton.setOnClickListener {
             //First step
             googleLogin()
         }
@@ -52,6 +58,16 @@ class LoginActivity : AppCompatActivity() {
                 moveMainPage(it)
             }
         })
+
+
+
+        binding.lottieAnimationView.repeatCount = -1
+        // 开始播放动画
+        binding.lottieAnimationView.playAnimation()
+
+        binding.lottieAnimationView2.repeatCount = -1
+        // 开始播放动画
+        binding.lottieAnimationView2.playAnimation()
 
     }
 

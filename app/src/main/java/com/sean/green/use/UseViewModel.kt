@@ -70,7 +70,7 @@ class UseViewModel(private val repository: GreenRepository): ViewModel() {
         _navigateToHome.value = needRefresh
     }
 
-    fun addUseData2Firebase() {
+    fun addUseData2Firebase(userEmail: String) {
 
         coroutineScope.launch {
 
@@ -91,7 +91,7 @@ class UseViewModel(private val repository: GreenRepository): ViewModel() {
             )
 
             val saveTime = FirebaseFirestore.getInstance()
-                .collection("users").document(userId).collection("greens")
+                .collection("users").document(userEmail).collection("greens")
                 .document(today).set(data, SetOptions.merge())
 
             val newUseData = Use(
@@ -103,7 +103,7 @@ class UseViewModel(private val repository: GreenRepository): ViewModel() {
 //                id = document.id
             )
 
-            when (val result = repository.addUseNum2Firebase(newUseData,userId)) {
+            when (val result = repository.addUseNum2Firebase(userEmail,newUseData)) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE

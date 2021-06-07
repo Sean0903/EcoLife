@@ -71,11 +71,9 @@ class ChallengeViewModel(private val repository: GreenRepository): ViewModel() {
         _navigateToHome.value = needRefresh
     }
 
-    fun addChallengeData2Firebase() {
+    fun addChallengeData2Firebase(userEmail: String) {
 
         coroutineScope.launch {
-
-            val userId = "ip29dDcJ24BtyGUzNlPE"
 
             val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
             val year = Calendar.getInstance().timeInMillis.toDisplayFormatYear()
@@ -92,7 +90,7 @@ class ChallengeViewModel(private val repository: GreenRepository): ViewModel() {
             )
 
             val saveTime = FirebaseFirestore.getInstance()
-                .collection("users").document(userId).collection("greens")
+                .collection("users").document(userEmail).collection("greens")
                 .document(today).set(data, SetOptions.merge())
 
             val newChallengeData = Challenge(
@@ -100,10 +98,9 @@ class ChallengeViewModel(private val repository: GreenRepository): ViewModel() {
                 power = power.value?.toInt(),
                 carbon = carbon.value?.toInt(),
                 createdTime = Calendar.getInstance().timeInMillis,
-//                id = document.id
             )
 
-            when (val result = repository.addChallenge2Firebase(newChallengeData,userId)) {
+            when (val result = repository.addChallenge2Firebase(userEmail,newChallengeData)) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE

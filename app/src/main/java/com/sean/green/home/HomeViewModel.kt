@@ -86,57 +86,34 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
 
 
     init {
-        getChallengeNumResult()
         getTotalSaveNum(UserManager.user.email)
-        getNowChallengeNum()
-        getTotalUseNum()
+//        getTotalUseNum(UserManager.user.email)
+//        getNowChallengeNum(UserManager.user.email)
     }
 
-    private fun getChallengeNumResult() {
+    var nowChallengePlastic = 0
+    var nowChallengePower = 0
+    var nowChallengeCarbon = 0
 
-        coroutineScope.launch {
-
-            _status.value = LoadApiStatus.LOADING
-
-            val result = repository.getChallengeNum(COLLECTION_CHALLENGE, USER_ID)
-            Log.d(
-                "homeViewModel", "repository.getChallengeNum = ${repository.getChallengeNum(COLLECTION_CHALLENGE, USER_ID)}")
-
-            _challengeNum.value = when (result) {
-                is Result.Success -> {
-                    Log.d("homeViewModel", "result.data = ${result.data}")
-                    _error.value = null
-                    _status.value = LoadApiStatus.DONE
-                    result.data
-                }
-                is Result.Fail -> {
-                    _error.value = result.error
-                    _status.value = LoadApiStatus.ERROR
-                    null
-                }
-                is Result.Error -> {
-                    _error.value = result.exception.toString()
-                    _status.value = LoadApiStatus.ERROR
-                    null
-                }
-                else -> {
-                    _error.value = GreenApplication.instance.getString(R.string.you_know_nothing)
-                    _status.value = LoadApiStatus.ERROR
-                    null
-                }
-            }
-            _refreshStatus.value = false
-            Log.d("homeViewModel", "saveValue = ${_challengeNum.value}")
-        }
-    }
-
-    var showTotalSavePlastic = MutableLiveData<Int>()
-    var showTotalSavePower = MutableLiveData<Int>()
-    var showTotalSaveCarbon = MutableLiveData<Int>()
+    var totalUsePlastic = 0
+    var totalUsePower = 0
+    var totalUseCarbon = 0
 
     var totalSavePlastic = 0
     var totalSavePower = 0
     var totalSaveCarbon = 0
+
+    var showNowChallengePlastic = MutableLiveData<Int>()
+    var showNowChallengePower = MutableLiveData<Int>()
+    var showNowChallengeCarbon = MutableLiveData<Int>()
+
+    var showTotalUsePlastic = MutableLiveData<Int>()
+    var showTotalUsePower = MutableLiveData<Int>()
+    var showTotalUseCarbon = MutableLiveData<Int>()
+
+    var showTotalSavePlastic = MutableLiveData<Int>()
+    var showTotalSavePower = MutableLiveData<Int>()
+    var showTotalSaveCarbon = MutableLiveData<Int>()
 
     fun getTotalSaveNum(userEmail: String) {
         coroutineScope.launch {
@@ -144,9 +121,10 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
 
             val saveList = repository.getSaveNum(userEmail,COLLECTION_SAVE)
 
-            Log.d("homeViewModel", "getTotalSaveNum = ${repository.getSaveNum(userEmail,COLLECTION_SAVE)}")
+            Log.d("homeViewModel", "getTotalSaveNum = " +
+                    "${repository.getSaveNum(userEmail,COLLECTION_SAVE)}")
 
-            Log.d("homePage", "saveList = $saveList")
+            Log.d("homePage", "challengeNum = $saveList")
 
             _saveNum.value = when (saveList) {
 
@@ -183,21 +161,21 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
         }
     }
 
-    var showTotalUsePlastic = MutableLiveData<Int>()
-    var showTotalUsePower = MutableLiveData<Int>()
-    var showTotalUseCarbon = MutableLiveData<Int>()
+    init {
+//        getTotalSaveNum(UserManager.user.email)
+        getTotalUseNum(UserManager.user.email)
+//        getNowChallengeNum(UserManager.user.email)
+    }
 
-    var totalUsePlastic = 0
-    var totalUsePower = 0
-    var totalUseCarbon = 0
 
-    fun getTotalUseNum() {
+
+    fun getTotalUseNum(userEmail: String) {
         coroutineScope.launch {
             _status2.value = LoadApiStatus.LOADING
 
-            val useList = repository.getUseNum(COLLECTION_USE, USER_ID)
+            val useList = repository.getUseNum(userEmail,COLLECTION_USE)
 
-            Log.d("homeViewModel", "getTotalUseNum = ${repository.getUseNum(COLLECTION_USE, USER_ID)}")
+            Log.d("homeViewModel", "getTotalUseNum = ${repository.getUseNum(userEmail,COLLECTION_USE)}")
             Log.d("homeViewModel", "useList = $useList")
 
             _useNum.value = when (useList) {
@@ -216,7 +194,7 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
                     showTotalUsePlastic.value = totalUsePlastic
                     showTotalUsePower.value = totalUsePower
                     showTotalUseCarbon.value = totalUseCarbon
-                    Log.d("homePage", " showTotalUsePlastic.value = ${showTotalUsePlastic.value}")
+                    Log.d("homePage", "showTotalUsePlastic.value = ${showTotalUsePlastic.value}")
                     Log.d("homePage", "showTotalUsePower.value = ${showTotalUsePower.value}")
                     Log.d("homePage", "showTotalUseCarbon.value = ${showTotalUseCarbon.value}")
 
@@ -232,22 +210,21 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
         }
     }
 
-    var nowChallengePlastic = 0
-    var nowChallengePower = 0
-    var nowChallengeCarbon = 0
+    init {
+//        getTotalSaveNum(UserManager.user.email)
+//        getTotalUseNum(UserManager.user.email)
+        getNowChallengeNum(UserManager.user.email)
+    }
 
-    var showNowChallengePlastic = MutableLiveData<Int>()
-    var showNowChallengePower = MutableLiveData<Int>()
-    var showNowChallengeCarbon = MutableLiveData<Int>()
 
-    fun getNowChallengeNum() {
+    fun getNowChallengeNum(userEmail: String) {
         coroutineScope.launch {
 
             _status.value = LoadApiStatus.LOADING
 
-            val nowChallenge = repository.getChallengeNum(COLLECTION_CHALLENGE, USER_ID)
+            val nowChallenge = repository.getChallengeNum(userEmail,COLLECTION_CHALLENGE)
 
-            Log.d("homeViewModel", "getNowChallengeNum = ${repository.getChallengeNum(COLLECTION_CHALLENGE, USER_ID)}")
+            Log.d("homeViewModel", "getNowChallengeNum = ${repository.getChallengeNum(userEmail,COLLECTION_CHALLENGE)}")
 
             _challengeNum.value = when (nowChallenge) {
 
@@ -283,6 +260,7 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
             _refreshStatus.value = false
         }
     }
+
 }
 
 

@@ -71,29 +71,23 @@ class HomeFragment: Fragment() {
 
         }
 
-        viewModel.isCallDeleteAction.observe(viewLifecycleOwner, Observer {
-            if (it == true){
-                viewModel.getTotalUseNum()
-                viewModel.getTotalSaveNum(UserManager.user.email)
-
-            }
-        })
-
-        viewModel.date.observe(viewLifecycleOwner, Observer { it ->
-
-            if (it != null){
-                viewModel.getTotalUseNum()
-                viewModel.getTotalSaveNum(UserManager.user.email)
-            }
-        })
-
-//        viewModel.totalSavePower.observe(viewLifecycleOwner, Observer {
-//            Log.d("homeFragment"," viewModel.totalSavePower.observe = ${viewModel.totalSavePower}")
+//        viewModel.isCallDeleteAction.observe(viewLifecycleOwner, Observer {
+//            if (it == true){
+//                viewModel.getTotalUseNum(UserManager.user.email)
+//                viewModel.getTotalSaveNum(UserManager.user.email)
+//
+//            }
+//        })
+//
+//        viewModel.date.observe(viewLifecycleOwner, Observer { it ->
+//
+//            if (it != null){
+//                viewModel.getTotalUseNum(UserManager.user.email)
+//                viewModel.getTotalSaveNum(UserManager.user.email)
+//            }
 //        })
 
-
         (activity as MainActivity).dismissFabButton(true)
-
 
         return binding.root
     }
@@ -101,27 +95,3 @@ class HomeFragment: Fragment() {
 
 }
 
-
-
-//        viewModel.isCalendarClicked.observe(viewLifecycleOwner, Observer {
-//
-//            when (it){
-//
-//                true ->
-//                    binding.diaryDate.setOnClickListener {
-//                        binding.buttonExpandArrow.animate().rotation(0f).start()
-//                        binding.diaryCalendar.animate().translationY(-resources.getDimension(R.dimen.standard_305)).start()
-//                        binding.diaryCalendar.visibility = View.GONE
-//                        viewModel.setCurrentDate(binding.diaryCalendar.selectedDayOut)
-//                        viewModel.calendarClickedAgain()
-//                    }
-//                false ->
-//                    binding.diaryDate.setOnClickListener {
-//                        binding.buttonExpandArrow.animate().rotation(180f).start()
-//                        binding.diaryCalendar.animate().translationY(resources.getDimension(R.dimen.standard_0)).start()
-//                        binding.diaryCalendar.visibility = View.VISIBLE
-//                        binding.diaryCalendar.getThisMonth()
-//                        viewModel.calendarClicked()
-//                    }
-//            }
-//        })

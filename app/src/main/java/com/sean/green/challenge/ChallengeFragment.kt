@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.sean.green.NavigationDirections
 import com.sean.green.databinding.FragmentChallengeBinding
 import com.sean.green.ext.getVmFactory
+import com.sean.green.login.UserManager
 
 
 class ChallengeFragment : Fragment() {
@@ -52,7 +53,7 @@ class ChallengeFragment : Fragment() {
 
         binding.buttonChallengeSave.setOnClickListener {
 
-            viewModel.addChallengeData2Firebase()
+            viewModel.addChallengeData2Firebase(UserManager.user.email)
         }
 
         binding.imageUsePageBackToHome2.setOnClickListener {

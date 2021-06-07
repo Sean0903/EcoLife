@@ -16,6 +16,7 @@ import com.sean.green.data.Result
 import com.sean.green.data.source.GreenRepository
 import com.sean.green.ext.TimeUtil
 import com.sean.green.ext.sortByTimeStamp
+import com.sean.green.login.UserManager
 import com.sean.green.network.LoadApiStatus
 import kotlinx.coroutines.*
 import org.threeten.bp.LocalDate
@@ -80,19 +81,19 @@ class CalendarViewModel(private val repository: GreenRepository): ViewModel() {
         get() = _refreshStatus
 
     init {
-        getCalendarEvent()
+        getCalendarEvent(UserManager.user.email)
         todayDate()
     }
 
-    private fun getCalendarEvent() {
+    private fun getCalendarEvent(userEmail: String) {
 
         coroutineScope.launch {
 
             _status.value = LoadApiStatus.LOADING
 
-            val result = repository.getCalendarEvent(PATH_GREENS,USER_ID)
+            val result = repository.getCalendarEvent(userEmail,PATH_GREENS)
             Log.d("calendarViewModel", "repository.getChallengeNum =" +
-                    "${repository.getCalendarEvent(PATH_GREENS,USER_ID)}")
+                    "${repository.getCalendarEvent(userEmail,PATH_GREENS)}")
 
             _allEvents.value = when (result) {
                 is Result.Success -> {

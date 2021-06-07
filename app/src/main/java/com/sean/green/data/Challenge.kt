@@ -11,6 +11,5 @@ data class Challenge(
     val power: Int? = null,
     val carbon: Int? = null,
     var createdTime: Long = -1,
-//    val challenge_totalChallenge: Int ?=null
 
 ): Parcelable

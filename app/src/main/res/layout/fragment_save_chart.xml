@@ -34,7 +34,7 @@
                     android:id="@+id/constraintLayout2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="16dp"
                     app:layout_constraintBottom_toTopOf="@+id/lineChart1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +44,7 @@
                         android:id="@+id/image_chart_page_save_plastic"
                         android:layout_width="40dp"
                         android:layout_height="35dp"
-                        android:background="@drawable/tag_left_corners"
+                        android:background="@drawable/tag_left_plastic_corners"
                         android:padding="@dimen/elevation_all"
                         android:paddingTop="@dimen/elevation_all"
                         android:scaleType="fitCenter"
@@ -74,7 +74,7 @@
                         android:layout_width="40dp"
                         android:layout_height="35dp"
                         android:layout_marginStart="24dp"
-                        android:background="@drawable/tag_left_corners"
+                        android:background="@drawable/tag_left_power_corners"
                         android:padding="@dimen/elevation_all"
                         android:paddingTop="@dimen/elevation_all"
                         android:scaleType="fitCenter"
@@ -121,14 +121,14 @@
                         android:layout_width="40dp"
                         android:layout_height="35dp"
                         android:layout_marginStart="24dp"
-                        android:background="@drawable/tag_left_corners"
+                        android:background="@drawable/tag_left_carbon_corners"
                         android:padding="@dimen/elevation_all"
                         android:paddingTop="@dimen/elevation_all"
                         android:scaleType="fitCenter"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/text_chart_page_save_power"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/carbon_dioxide" />
+                        app:srcCompat="@drawable/co2" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <com.github.mikephil.charting.charts.LineChart
@@ -213,7 +213,7 @@
                         android:scaleType="fitCenter"
                         app:layout_constraintBottom_toBottomOf="@+id/image_chart_page_save_power_icon1"
                         app:layout_constraintStart_toEndOf="@+id/image_chart_page_save_power_icon1"
-                        app:srcCompat="@drawable/carbon_dioxide" />
+                        app:srcCompat="@drawable/co2" />
 
                     <ImageView
                         android:id="@+id/image_chart_page_calender"

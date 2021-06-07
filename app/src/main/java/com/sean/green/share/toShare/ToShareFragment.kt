@@ -11,8 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.sean.green.NavigationDirections
 import com.sean.green.databinding.FragmentToShareBinding
 import com.sean.green.ext.getVmFactory
+import com.sean.green.login.UserManager
 
 class ToShareFragment: Fragment() {
 
@@ -31,10 +33,10 @@ class ToShareFragment: Fragment() {
             this.findNavController().popBackStack()
         }
 
-        binding.editTextDialogShareHost.doOnTextChanged { text, start, before, count ->
-            viewModel.name.value = text.toString()
-            Log.d("toShareFragment", "name = ${viewModel.name.value}")
-        }
+//        binding.editTextDialogShareHost.doOnTextChanged { text, start, before, count ->
+//            viewModel.name.value = text.toString()
+//            Log.d("toShareFragment", "name = ${viewModel.name.value}")
+//        }
 
         binding.editTextDialogShareExplain.doOnTextChanged { text, start, before, count ->
             viewModel.achievement.value = text.toString()
@@ -59,9 +61,16 @@ class ToShareFragment: Fragment() {
                     viewModel.achievement.value.isNullOrBlank())  {
                 Toast.makeText(context, "請在各欄輸入完整訊息", Toast.LENGTH_SHORT).show()
             } else {
-                viewModel.addSharingData2Firebase()
+                viewModel.addSharingData2Firebase(UserManager.user.email,UserManager.user.image,UserManager.user.userName)
                 Toast.makeText(context, "發送成功", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        binding.imageDialogShareCancel.setOnClickListener {
+            findNavController().navigate(
+                NavigationDirections.navigateToHomeFragment(
+//                FirebaseAuth.getInstance().currentUser!!.uid
+            ))
         }
 
         return binding.root

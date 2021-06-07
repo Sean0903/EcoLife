@@ -16,6 +16,7 @@ import com.sean.green.NavigationDirections
 import com.sean.green.R
 import com.sean.green.databinding.FragmentUseBinding
 import com.sean.green.ext.getVmFactory
+import com.sean.green.login.UserManager.user
 
 
 class UseFragment: Fragment() {
@@ -60,7 +61,7 @@ class UseFragment: Fragment() {
         }
 
         binding.buttonUseSave.setOnClickListener {
-            viewModel.addUseData2Firebase()
+            viewModel.addUseData2Firebase(user.email)
         }
 
         binding.imageUsePageBackToHome.setOnClickListener {

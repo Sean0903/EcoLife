@@ -11,15 +11,15 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_dialog_save"
-            android:layout_width="300dp"
-            android:layout_height="400dp"
-            android:background="@drawable/dialog_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
+            android:background="@drawable/dialog_frame"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,8 +29,8 @@
                 android:id="@+id/image_dialog_save_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
 
+                android:layout_marginTop="8dp"
                 android:fontFamily="@font/noto_sans"
                 android:text="@string/dialog_save_title"
                 android:textSize="@dimen/text_content"
@@ -42,9 +42,9 @@
                 android:id="@+id/image_dialog_save_plastic"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+
                 android:layout_marginTop="16dp"
                 android:background="@drawable/dialog_image"
-
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image_dialog_save_title"
@@ -56,8 +56,53 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/text_dialog_save_plastic_1"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image_dialog_save_plastic" />
+
+            <TextView
+                android:id="@+id/text_dialog_save_plastic_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/text_dialog_save_plastic_2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_dialog_save_plastic_1"
+                tools:layout_editor_absoluteX="4dp" />
+
+            <TextView
+                android:id="@+id/text_dialog_save_plastic_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/text_dialog_save_plastic_3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_dialog_save_plastic_2"
+                tools:layout_editor_absoluteX="1dp" />
+
+            <TextView
+                android:id="@+id/text_dialog_save_plastic_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/text_dialog_save_plastic_4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_dialog_save_plastic_3"
+                tools:layout_editor_absoluteX="6dp" />
+
+            <TextView
+                android:id="@+id/text_dialog_save_plastic_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/text_dialog_save_plastic_5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_dialog_save_plastic_4"
+                tools:layout_editor_absoluteX="6dp" />
 
             <ImageView
                 android:id="@+id/image_dialog_save_power"
@@ -67,17 +112,65 @@
                 android:background="@drawable/dialog_image_2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_dialog_save_plastic_1"
+                app:layout_constraintTop_toBottomOf="@+id/text_dialog_save_plastic_5"
                 app:srcCompat="@drawable/lighting" />
 
             <TextView
                 android:id="@+id/text_dialog_save_power_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
                 android:text="@string/text_dialog_save_power_1"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image_dialog_save_power" />
+
+            <TextView
+                android:id="@+id/text_dialog_save_power_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/text_dialog_save_power_2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_dialog_save_power_1"
+                tools:layout_editor_absoluteX="16dp" />
+
+            <TextView
+                android:id="@+id/text_dialog_save_power_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/text_dialog_save_power_3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_dialog_save_power_2"
+                tools:layout_editor_absoluteX="16dp" />
+
+            <TextView
+                android:id="@+id/text_dialog_save_power_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/text_dialog_save_power_4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_dialog_save_power_3"
+                tools:layout_editor_absoluteX="22dp" />
+
+            <TextView
+                android:id="@+id/text_dialog_save_power_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/text_dialog_save_power_5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_dialog_save_power_4"
+                tools:layout_editor_absoluteX="16dp" />
+
 
             <ImageView
                 android:id="@+id/image_dialog_save_carbon"
@@ -87,7 +180,7 @@
                 android:background="@drawable/dialog_image_3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_dialog_save_power_1"
+                app:layout_constraintTop_toBottomOf="@+id/text_dialog_save_power_5"
                 app:srcCompat="@drawable/carbon_dioxide" />
 
             <TextView
@@ -96,8 +189,54 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/text_dialog_save_carbon_1"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image_dialog_save_carbon" />
+
+            <TextView
+                android:id="@+id/text_dialog_save_carbon_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/text_dialog_save_carbon_2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_dialog_save_carbon_1"
+                tools:layout_editor_absoluteX="66dp" />
+
+            <TextView
+                android:id="@+id/text_dialog_save_carbon_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/text_dialog_save_carbon_3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_dialog_save_carbon_2"
+                tools:layout_editor_absoluteX="60dp" />
+
+            <TextView
+                android:id="@+id/text_dialog_save_carbon_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/text_dialog_save_carbon_4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_dialog_save_carbon_3"
+                tools:layout_editor_absoluteX="64dp" />
+
+            <TextView
+                android:id="@+id/text_dialog_save_carbon_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/text_dialog_save_carbon_5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_dialog_save_carbon_4" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
