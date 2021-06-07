@@ -70,11 +70,9 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
     }
 
 
-    fun addSaveData2Firebase() {
+    fun addSaveData2Firebase(userEmail: String) {
 
         coroutineScope.launch {
-
-            val userId = "ip29dDcJ24BtyGUzNlPE"
 
             val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
             val year = Calendar.getInstance().timeInMillis.toDisplayFormatYear()
@@ -91,7 +89,7 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
             )
 
             val saveTime = FirebaseFirestore.getInstance()
-                .collection("users").document(userId).collection("greens")
+                .collection("users").document(userEmail).collection("greens")
                 .document(today).set(data, SetOptions.merge())
 
             val newSaveData = Save(
@@ -103,7 +101,7 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
 //                id = document.id
             )
 
-            when (val result = repository.addSaveNum2Firebase(newSaveData, userId)) {
+            when (val result = repository.addSaveNum2Firebase(userEmail,newSaveData)) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE

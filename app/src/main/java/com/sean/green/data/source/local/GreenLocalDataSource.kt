@@ -1,6 +1,8 @@
 package com.sean.green.data.source.local
 
 import android.content.Context
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.firebase.auth.FirebaseUser
 import com.sean.green.data.*
 import com.sean.green.data.source.GreenDataSource
 import kotlinx.coroutines.Dispatchers
@@ -13,7 +15,7 @@ import kotlinx.coroutines.withContext
  */
 class GreenLocalDataSource(val context: Context) : GreenDataSource {
 
-    override suspend fun addSaveNum2Firebase(save: Save, userId: String): Result<Boolean> {
+    override suspend fun addSaveNum2Firebase(userEmail: String,save: Save): Result<Boolean> {
         TODO("Not yet implemented")
     }
 
@@ -21,14 +23,11 @@ class GreenLocalDataSource(val context: Context) : GreenDataSource {
         TODO("Not yet implemented")
     }
 
-    override suspend fun addChallenge2Firebase(
-        challenge: Challenge,
-        userId: String
-    ): Result<Boolean> {
+    override suspend fun addChallenge2Firebase(challenge: Challenge, userId: String): Result<Boolean> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getSaveNum(userId: String): Result<List<Save>> {
+    override suspend fun getSaveNum(userEmail: String,collection: String): Result<List<Save>> {
         TODO("Not yet implemented")
     }
 
@@ -52,13 +51,13 @@ class GreenLocalDataSource(val context: Context) : GreenDataSource {
         TODO("Not yet implemented")
     }
 
-    override suspend fun createUser(user: User): Result<Boolean> {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun findUser(firebaseUserId: String): Result<User?> {
-        TODO("Not yet implemented")
-    }
+//    override suspend fun createUser(user: User): Result<Boolean> {
+//        TODO("Not yet implemented")
+//    }
+//
+//    override suspend fun findUser(firebaseUserId: String): Result<User?> {
+//        TODO("Not yet implemented")
+//    }
 
     override suspend fun addSharing2Firebase(share: Share, userId: String): Result<Boolean> {
         TODO("Not yet implemented")
@@ -66,6 +65,14 @@ class GreenLocalDataSource(val context: Context) : GreenDataSource {
 
     override suspend fun getSharingData(userId: String, documentId: String): Result<List<Share>> {
         TODO("Not yet implemented")
+    }
+
+    override suspend fun postUser(user: User): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun firebaseAuthWithGoogle(account: GoogleSignInAccount?): Result<FirebaseUser?> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 }

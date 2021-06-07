@@ -51,12 +51,6 @@
     <string name="simpledateformat_date_time_to_timestamp">%s %s:00.000000000</string>
     <string name="simpledateformat_yyyy_MM_dd_HH_mm_ss_fffffffff">yyyy-MM-dd HH:mm:ss.%s</string>
     <string name="diary_select_date">d/M/yyyy</string>
-
-    <!--Login-->
-    <string name="login_success">登入成功</string>
-    <string name="login_name_unknown">你是誰~</string>
-    <string name="token_id">409647628078-i23ohi769v3p5snc7mt2j28o19oueqgh.apps.googleusercontent.com</string>
-    <string name="button_dialog_share_send">發送</string>
     <string name="text_dialog_share_title">分享成果</string>
     <string name="editText_dialog_share_host">請輸入姓名</string>
     <string name="text_dialog_share_explain">你的成就</string>
@@ -66,5 +60,12 @@
     <string name="text_dialog_share_content">內容</string>
     <string name="editText_dialog_share_content">請分享你的心情</string>
     <string name="text_dialog_share_chart">分享本週圖表</string>
+
+    <!--Login-->
+    <string name="login_success">登入成功</string>
+    <string name="login_name_unknown">你是誰~</string>
+    <string name="token_id">409647628078-i23ohi769v3p5snc7mt2j28o19oueqgh.apps.googleusercontent.com</string>
+    <string name="button_dialog_share_send">發送</string>
+    <string name="sign_up_with_google">Sign Up With Google</string>
 
 </resources>

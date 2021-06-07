@@ -15,6 +15,7 @@ import com.sean.green.R
 import com.sean.green.data.Save
 import com.sean.green.databinding.FragmentHomeBinding
 import com.sean.green.ext.getVmFactory
+import com.sean.green.login.UserManager
 
 class HomeFragment: Fragment() {
 
@@ -73,7 +74,7 @@ class HomeFragment: Fragment() {
         viewModel.isCallDeleteAction.observe(viewLifecycleOwner, Observer {
             if (it == true){
                 viewModel.getTotalUseNum()
-                viewModel.getTotalSaveNum()
+                viewModel.getTotalSaveNum(UserManager.user.email)
 
             }
         })
@@ -82,7 +83,7 @@ class HomeFragment: Fragment() {
 
             if (it != null){
                 viewModel.getTotalUseNum()
-                viewModel.getTotalSaveNum()
+                viewModel.getTotalSaveNum(UserManager.user.email)
             }
         })
 

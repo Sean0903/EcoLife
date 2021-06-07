@@ -110,9 +110,9 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.sean.green.login.LoginFragment"
+        android:name="com.sean.green.login.LoginActivity"
         android:label="LoginFragment"
-        tools:layout="@layout/fragment_login">
+        tools:layout="@layout/activity_login">
     </fragment>
 
     <fragment

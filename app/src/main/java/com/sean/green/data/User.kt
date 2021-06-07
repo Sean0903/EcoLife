@@ -9,6 +9,8 @@ data class User(
 
     var userId: String = "",
     var userName: String = "",
-    var userImage: String = "",
+    var email: String = "",
     var createdTime: Long = Calendar.getInstance().timeInMillis,
+    var image: String = "",
+
 ) : Parcelable

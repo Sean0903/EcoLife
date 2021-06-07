@@ -2,10 +2,12 @@ package com.sean.green.save
 
 import android.app.Dialog
 import android.os.Bundle
+import android.os.UserManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.UserManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -16,6 +18,7 @@ import com.sean.green.NavigationDirections
 import com.sean.green.R
 import com.sean.green.databinding.FragmentSaveBinding
 import com.sean.green.ext.getVmFactory
+import com.sean.green.login.UserManager.user
 
 
 class SaveFragment: Fragment() {
@@ -65,7 +68,7 @@ class SaveFragment: Fragment() {
 
         binding.buttonSavePage.setOnClickListener {
 //                viewModel.addSaveData2fire()
-            viewModel.addSaveData2Firebase()
+            viewModel.addSaveData2Firebase(user.email)
             }
 
         binding.imageSavePageBackToHome.setOnClickListener {

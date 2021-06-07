@@ -1,5 +1,7 @@
 package com.sean.green.data.source
 
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.firebase.auth.FirebaseUser
 import com.sean.green.data.*
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -16,8 +18,8 @@ class DefaultGreenRepository(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : GreenRepository {
 
-    override suspend fun addSaveNum2Firebase(save: Save, userId: String): Result<Boolean> {
-        return greenRemoteDataSource.addSaveNum2Firebase(save, userId)
+    override suspend fun addSaveNum2Firebase(userEmail: String,save: Save): Result<Boolean> {
+        return greenRemoteDataSource.addSaveNum2Firebase(userEmail,save)
     }
 
     override suspend fun addUseNum2Firebase(use: Use, userId: String): Result<Boolean> {
@@ -28,8 +30,8 @@ class DefaultGreenRepository(
         return greenRemoteDataSource.addChallenge2Firebase(challenge, userId)
     }
 
-    override suspend fun getSaveNum(collection: String, userId: String): Result<List<Save>> {
-        return greenRemoteDataSource.getSaveNum(userId)
+    override suspend fun getSaveNum( userEmail: String, collection: String): Result<List<Save>> {
+        return greenRemoteDataSource.getSaveNum(userEmail,collection)
     }
 
     override suspend fun getChallengeNum(collection: String, userId: String): Result<List<Challenge>> {
@@ -52,13 +54,13 @@ class DefaultGreenRepository(
         return greenRemoteDataSource.getUseDataForChart(userId,documentId)
     }
 
-    override suspend fun createUser(user: User): Result<Boolean> {
-        return  greenRemoteDataSource.createUser(user)
-    }
-
-    override suspend fun findUser(firebaseUserId: String): Result<User?> {
-        return greenRemoteDataSource.findUser(firebaseUserId)
-    }
+//    override suspend fun createUser(user: User): Result<Boolean> {
+//        return  greenRemoteDataSource.createUser(user)
+//    }
+//
+//    override suspend fun findUser(firebaseUserId: String): Result<User?> {
+//        return greenRemoteDataSource.findUser(firebaseUserId)
+//    }
 
     override suspend fun addSharing2Firebase(share: Share, userId: String): Result<Boolean> {
         return greenRemoteDataSource.addSharing2Firebase(share, userId)
@@ -68,5 +70,12 @@ class DefaultGreenRepository(
         return greenRemoteDataSource.getSharingData(userId, documentId)
     }
 
+    override suspend fun postUser(user: User): Result<Boolean> {
+        return greenRemoteDataSource.postUser(user)
+    }
+
+    override suspend fun firebaseAuthWithGoogle(account : GoogleSignInAccount?): Result<FirebaseUser?> {
+        return greenRemoteDataSource.firebaseAuthWithGoogle(account)
+    }
 
 }

@@ -53,7 +53,6 @@ class ShareAdapter(private val viewModel: ShareViewModel) :
                 xvalue.add("")
 
                 val lineentrySavePlastic = ArrayList<Entry>();
-                lineentrySavePlastic.add(Entry(viewModel.plasticList[6].toFloat(), 0))
                 lineentrySavePlastic.add(Entry(viewModel.plasticList[5].toFloat(), 1))
                 lineentrySavePlastic.add(Entry(viewModel.plasticList[4].toFloat(), 2))
                 lineentrySavePlastic.add(Entry(viewModel.plasticList[3].toFloat(), 3))

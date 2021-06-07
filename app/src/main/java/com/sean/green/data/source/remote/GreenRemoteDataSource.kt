@@ -1,5 +1,9 @@
 
 import android.util.Log
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.sean.green.GreenApplication
@@ -107,12 +111,12 @@ object GreenRemoteDataSource : GreenDataSource {
                 }
         }
 
-    override suspend fun getSaveNum(userId: String): Result<List<Save>> =
+    override suspend fun getSaveNum(userEmail: String, collection: String): Result<List<Save>> =
         suspendCoroutine { continuation ->
 
             val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
 
-            FirebaseFirestore.getInstance().collection(PATH_USERS).document(userId)
+            FirebaseFirestore.getInstance().collection(PATH_USERS).document(userEmail)
                 .collection("greens").document(
                     today
                 ).collection("save")
@@ -255,13 +259,13 @@ object GreenRemoteDataSource : GreenDataSource {
         }
 
 
-    override suspend fun addSaveNum2Firebase(save: Save, userId: String): Result<Boolean> =
+    override suspend fun addSaveNum2Firebase(userEmail: String,save: Save): Result<Boolean> =
         suspendCoroutine { continuation ->
 
             val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
 
             val firestore = FirebaseFirestore.getInstance().collection(PATH_USERS)
-            val userDocument = firestore.document(userId)
+            val userDocument = firestore.document(userEmail)
             val greensCollenction = userDocument.collection("greens")
             val todayDocument = greensCollenction.document(today)
             val saveCollection = todayDocument.collection("save").document()
@@ -460,41 +464,92 @@ object GreenRemoteDataSource : GreenDataSource {
         }
 
 
-    override suspend fun createUser(user: User): Result<Boolean> =
-        suspendCoroutine { continuation ->
-            FirebaseFirestore.getInstance().collection(PATH_USERS).document(user.userId).set(user)
-                .addOnCompleteListener { addUser ->
-                    if (addUser.isSuccessful) {
-                        continuation.resume(Result.Success(true))
-                    } else {
-                        addUser.exception?.let {
+//    override suspend fun createUser(user: User): Result<Boolean> =
+//        suspendCoroutine { continuation ->
+//            FirebaseFirestore.getInstance().collection(PATH_USERS).document(user.userId).set(user)
+//                .addOnCompleteListener { addUser ->
+//                    if (addUser.isSuccessful) {
+//                        continuation.resume(Result.Success(true))
+//                    } else {
+//                        addUser.exception?.let {
+//
+//                            Logger.w("[${this::class.simpleName}] Error getting documents. ${it.message}")
+//                            continuation.resume(Result.Error(it))
+//                        }
+//                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+//                    }
+//                }
+//        }
+//
+//    override suspend fun findUser(firebaseUserId: String): Result<User?> =
+//        suspendCoroutine { continuation ->
+//            FirebaseFirestore.getInstance().collection(PATH_USERS).document(firebaseUserId)
+//                .get()
+//                .addOnCompleteListener { findUser ->
+//                    if (findUser.isSuccessful) {
+//                        findUser.result?.let { documentU ->
+//                            val user = documentU.toObject(User::class.java)
+//                            continuation.resume(Result.Success(user))
+//                        }
+//                    } else {
+//                        findUser.exception?.let {
+//                            Logger.w("[${this::class.simpleName}] Error getting documents. ${it.message}")
+//                            continuation.resume(Result.Error(it))
+//                            return@addOnCompleteListener
+//                        }
+//                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+//                    }
+//                }
+//        }
 
-                            Logger.w("[${this::class.simpleName}] Error getting documents. ${it.message}")
-                            continuation.resume(Result.Error(it))
+
+    override suspend fun postUser(user: User): Result<Boolean> = suspendCoroutine { continuation ->
+
+        val users = FirebaseFirestore.getInstance().collection(PATH_USERS)
+        val document = users.document(user.email)
+        user.userId = document.id
+
+        users.whereEqualTo("email", user.email)
+            .get()
+            .addOnSuccessListener { result ->
+                if (result.isEmpty) {
+                    document
+                        .set(user)
+                        .addOnSuccessListener {
+                            Logger.d("DocumentSnapshot added with ID: ${users}")
                         }
-                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                        .addOnFailureListener { e ->
+                            Logger.w("Error adding document $e")
+                        }
+                } else {
+                    for (myDocument in result) {
+                        Logger.d("Already initialized")
                     }
                 }
-        }
+            }
+    }
 
-    override suspend fun findUser(firebaseUserId: String): Result<User?> =
+    override suspend fun firebaseAuthWithGoogle(account: GoogleSignInAccount?): Result<FirebaseUser?> =
         suspendCoroutine { continuation ->
-            FirebaseFirestore.getInstance().collection(PATH_USERS).document(firebaseUserId)
-                .get()
-                .addOnCompleteListener { findUser ->
-                    if (findUser.isSuccessful) {
-                        findUser.result?.let { documentU ->
-                            val user = documentU.toObject(User::class.java)
-                            continuation.resume(Result.Success(user))
+        val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
+        val auth = FirebaseAuth.getInstance()
+
+            auth?.signInWithCredential(credential)
+                ?.addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Logger.i("Post: $credential")
+                        task.result?.let {
+                            continuation.resume(Result.Success(it.user))
                         }
                     } else {
-                        findUser.exception?.let {
-                            Logger.w("[${this::class.simpleName}] Error getting documents. ${it.message}")
+                        task.exception?.let {
+
+                            Logger.w("[${this::class.simpleName}] Error getting documents.")
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
                         continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
                     }
                 }
-        }
+    }
 }

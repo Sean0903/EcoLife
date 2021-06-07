@@ -21,6 +21,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import com.sean.green.data.Result
 import com.sean.green.data.Use
+import com.sean.green.login.UserManager
 import java.sql.Timestamp
 import java.util.*
 import kotlin.math.absoluteValue
@@ -86,7 +87,7 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
 
     init {
         getChallengeNumResult()
-        getTotalSaveNum()
+        getTotalSaveNum(UserManager.user.email)
         getNowChallengeNum()
         getTotalUseNum()
     }
@@ -137,13 +138,15 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
     var totalSavePower = 0
     var totalSaveCarbon = 0
 
-    fun getTotalSaveNum() {
+    fun getTotalSaveNum(userEmail: String) {
         coroutineScope.launch {
             _status.value = LoadApiStatus.LOADING
 
-            val saveList = repository.getSaveNum(COLLECTION_SAVE, USER_ID)
+            val saveList = repository.getSaveNum(userEmail,COLLECTION_SAVE)
 
-            Log.d("homeViewModel", "getTotalSaveNum = ${repository.getSaveNum(COLLECTION_SAVE,USER_ID)}")
+            Log.d("homeViewModel", "getTotalSaveNum = ${repository.getSaveNum(userEmail,COLLECTION_SAVE)}")
+
+            Log.d("homePage", "saveList = $saveList")
 
             _saveNum.value = when (saveList) {
 
@@ -157,6 +160,7 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
                         totalSavePower = totalSavePower.plus(saving.power ?: 0)
                         totalSaveCarbon = totalSaveCarbon.plus(saving.carbon ?: 0)
                         Log.d("homePage", "totalSavePlastic = ${totalSavePlastic}")
+                        Log.d("homePage", "saveList = $saveList")
                     }
 //                    totalSavePower = totalSavePower
                     showTotalSavePlastic.value = totalSavePlastic
@@ -166,7 +170,6 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
                     Log.d("homePage", "showTotalSavePower.value = ${showTotalSavePower.value}")
                     Log.d("homePage", "showTotalSaveCarbon.value = ${showTotalSaveCarbon.value}")
 
-
                     saveList.data
                 }
                 else -> {
@@ -175,6 +178,7 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
                     null
                 }
             }
+            Log.d("homeViewModel", "saveList = $saveList")
             _refreshStatus.value = false
         }
     }
@@ -194,6 +198,7 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
             val useList = repository.getUseNum(COLLECTION_USE, USER_ID)
 
             Log.d("homeViewModel", "getTotalUseNum = ${repository.getUseNum(COLLECTION_USE, USER_ID)}")
+            Log.d("homeViewModel", "useList = $useList")
 
             _useNum.value = when (useList) {
 
