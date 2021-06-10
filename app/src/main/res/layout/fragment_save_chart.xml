@@ -26,16 +26,17 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
                 tools:visibility="visible">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    app:layout_constraintBottom_toTopOf="@+id/lineChart1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -43,20 +44,22 @@
                     <ImageView
                         android:id="@+id/image_chart_page_save_plastic"
                         android:layout_width="40dp"
-                        android:layout_height="35dp"
+                        android:layout_height="30dp"
                         android:background="@drawable/tag_left_plastic_corners"
                         android:padding="@dimen/elevation_all"
                         android:paddingTop="@dimen/elevation_all"
                         android:scaleType="fitCenter"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/text_chart_page_save_plastic"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/bag" />
 
                     <TextView
                         android:id="@+id/text_chart_page_save_plastic"
-                        android:layout_width="65dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginEnd="16dp"
                         android:background="@drawable/tag_right_corners_plastic"
                         android:hint="0"
                         android:padding="@dimen/elevation_all"
@@ -64,29 +67,33 @@
                         android:textAlignment="center"
                         android:textColor="@color/colorWhite"
                         android:textColorHint="@color/colorWhite"
-                        android:textSize="20dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:textSize="15dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/image_chart_page_save_plastic"
+                        app:layout_constraintEnd_toStartOf="@+id/image_chart_page_save_power"
                         app:layout_constraintStart_toEndOf="@+id/image_chart_page_save_plastic"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@+id/image_chart_page_save_plastic"
+                        app:layout_constraintVertical_bias="0.0" />
 
                     <ImageView
                         android:id="@+id/image_chart_page_save_power"
                         android:layout_width="40dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="24dp"
+                        android:layout_height="0dp"
                         android:background="@drawable/tag_left_power_corners"
                         android:padding="@dimen/elevation_all"
                         android:paddingTop="@dimen/elevation_all"
                         android:scaleType="fitCenter"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@+id/text_chart_page_save_plastic"
+                        app:layout_constraintEnd_toStartOf="@+id/text_chart_page_save_power"
                         app:layout_constraintStart_toEndOf="@+id/text_chart_page_save_plastic"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/text_chart_page_save_plastic"
+                        app:layout_constraintVertical_bias="0.0"
                         app:srcCompat="@drawable/lighting" />
 
                     <TextView
                         android:id="@+id/text_chart_page_save_power"
-                        android:layout_width="65dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginEnd="16dp"
                         android:background="@drawable/tag_right_corners_power"
                         android:hint="0"
                         android:padding="@dimen/elevation_all"
@@ -94,15 +101,17 @@
                         android:textAlignment="center"
                         android:textColor="@color/colorWhite"
                         android:textColorHint="@color/colorWhite"
-                        android:textSize="20dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:textSize="15dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/image_chart_page_save_power"
+                        app:layout_constraintEnd_toStartOf="@+id/image_chart_page_save_carbon"
                         app:layout_constraintStart_toEndOf="@+id/image_chart_page_save_power"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@+id/image_chart_page_save_power"
+                        app:layout_constraintVertical_bias="0.0" />
 
                     <TextView
                         android:id="@+id/text_chart_page_save_carbon"
-                        android:layout_width="65dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
                         android:background="@drawable/tag_right_corners_carbon"
                         android:hint="0"
                         android:padding="@dimen/elevation_all"
@@ -110,24 +119,24 @@
                         android:textAlignment="center"
                         android:textColor="@color/colorWhite"
                         android:textColorHint="@color/colorWhite"
-                        android:textSize="20dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:textSize="15dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/image_chart_page_save_carbon"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/image_chart_page_save_carbon"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@+id/image_chart_page_save_carbon" />
 
                     <ImageView
                         android:id="@+id/image_chart_page_save_carbon"
                         android:layout_width="40dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="24dp"
+                        android:layout_height="30dp"
                         android:background="@drawable/tag_left_carbon_corners"
                         android:padding="@dimen/elevation_all"
                         android:paddingTop="@dimen/elevation_all"
                         android:scaleType="fitCenter"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@+id/text_chart_page_save_power"
+                        app:layout_constraintEnd_toStartOf="@+id/text_chart_page_save_carbon"
                         app:layout_constraintStart_toEndOf="@+id/text_chart_page_save_power"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/text_chart_page_save_power"
                         app:srcCompat="@drawable/co2" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -150,40 +159,26 @@
                     android:visibility="visible"
                     app:lottie_rawRes="@raw/empty_status_ver_color"
                     tools:layout_editor_absoluteX="-26dp"
-                    tools:layout_editor_absoluteY="177dp" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView_chart_page_save"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginBottom="60dp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout9"
-                    tools:listitem="@layout/item_chart_date_save"
-                    tools:visibility="visible">
-
-                </androidx.recyclerview.widget.RecyclerView>
+                    tools:layout_editor_absoluteY="177dp"
+                    tools:visibility="gone" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout9"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    app:layout_constraintBottom_toTopOf="@+id/recyclerView_chart_page_save"
-                    app:layout_constraintEnd_toEndOf="@+id/recyclerView_chart_page_save"
-                    app:layout_constraintStart_toStartOf="@+id/recyclerView_chart_page_save"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="24dp"
+                    app:layout_constraintBottom_toTopOf="@+id/constraintLayout10"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/lineChart1">
 
                     <ImageView
                         android:id="@+id/image_chart_page_save_power_icon1"
-                        android:layout_width="40dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="16dp"
+                        android:layout_width="30dp"
+                        android:layout_height="25dp"
+                        android:layout_marginStart="28dp"
                         android:padding="@dimen/elevation_all"
                         android:paddingTop="@dimen/elevation_all"
                         android:scaleType="fitCenter"
@@ -193,21 +188,21 @@
 
                     <ImageView
                         android:id="@+id/image_chart_page_save_plastic_icon1"
-                        android:layout_width="40dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="40dp"
+                        android:layout_width="30dp"
+                        android:layout_height="25dp"
+                        android:layout_marginStart="55dp"
                         android:padding="@dimen/elevation_all"
                         android:paddingTop="@dimen/elevation_all"
                         android:scaleType="fitCenter"
-                        app:layout_constraintBottom_toBottomOf="@+id/image_chart_page_calender"
                         app:layout_constraintStart_toEndOf="@+id/image_chart_page_calender"
+                        app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/bag" />
 
                     <ImageView
                         android:id="@+id/image_chart_page_save_carbon_icon1"
-                        android:layout_width="40dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="16dp"
+                        android:layout_width="30dp"
+                        android:layout_height="25dp"
+                        android:layout_marginStart="26dp"
                         android:padding="@dimen/elevation_all"
                         android:paddingTop="@dimen/elevation_all"
                         android:scaleType="fitCenter"
@@ -217,14 +212,42 @@
 
                     <ImageView
                         android:id="@+id/image_chart_page_calender"
-                        android:layout_width="40dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="60dp"
+                        android:layout_width="25dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="62dp"
                         android:clickable="true"
                         android:focusable="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/icon_calendar" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout10"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="60dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/constraintLayout9"
+                    app:layout_constraintStart_toStartOf="@+id/constraintLayout9"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout9">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView_chart_page_save"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:visibility="visible"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:listitem="@layout/item_chart_date_save"
+                        tools:visibility="visible">
+
+                    </androidx.recyclerview.widget.RecyclerView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>

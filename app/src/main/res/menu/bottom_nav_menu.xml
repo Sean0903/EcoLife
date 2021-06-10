@@ -22,7 +22,7 @@
 
     <item
         android:id="@+id/shareFragment"
-        android:icon="@drawable/outline_forum_black_24dp"
+        android:icon="@drawable/outline_emoji_events_black_24dp"
         android:title="@string/navigation_community_name" />
 
 

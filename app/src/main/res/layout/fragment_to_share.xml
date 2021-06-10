@@ -71,7 +71,6 @@
             android:fontFamily="@font/noto_sans"
             android:gravity="top"
             android:hint="@string/editText_dialog_share_explain"
-
             android:lines="5"
             android:paddingStart="12dp"
             android:paddingTop="12dp"

@@ -19,7 +19,7 @@
             android:id="@+id/cardView_event"
             android:layout_width="match_parent"
             android:layout_height="108dp"
-            app:cardCornerRadius="8dp"
+            app:cardCornerRadius="12dp"
             app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +28,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraint_layout_category_background"
-                android:layout_width="80dp"
+                android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:background="@color/colorBlue4">
 
@@ -42,11 +42,11 @@
 
                     <TextView
                         android:id="@+id/textView_title_month"
-                        android:text="@{calendarEvent.month}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="2dp"
+                        android:text="@{calendarEvent.month}"
                         android:textColor="@color/white"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -54,10 +54,10 @@
 
                     <TextView
                         android:id="@+id/textView_title_day"
-                        android:text="@{calendarEvent.day}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
+                        android:text="@{calendarEvent.day}"
                         android:textColor="@color/white"
                         app:layout_constraintStart_toEndOf="@+id/textView_title_month"
                         app:layout_constraintTop_toTopOf="@+id/textView_title_month"
@@ -83,12 +83,11 @@
                 android:layout_height="match_parent">
 
 
-
                 <TextView
                     android:id="@+id/textView_challenge_event"
                     android:layout_width="70dp"
                     android:layout_height="20dp"
-                    android:layout_marginStart="110dp"
+                    android:layout_marginStart="120dp"
                     android:text="@{calendarEvent.challenge}"
                     app:layout_constraintBottom_toTopOf="@+id/textView_save_event"
                     app:layout_constraintStart_toStartOf="parent"

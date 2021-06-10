@@ -14,7 +14,7 @@ data class Share(
     val achievement: String? = "",
     val time: String? = "",
     val content: String? = "",
-    val dialog: String? = "",
+//    val dialog: String? = "",
     var today: String? = "",
     var createdTime: Long = -1,
     var image: String = "",

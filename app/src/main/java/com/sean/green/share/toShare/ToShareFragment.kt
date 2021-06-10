@@ -33,11 +33,6 @@ class ToShareFragment: Fragment() {
             this.findNavController().popBackStack()
         }
 
-//        binding.editTextDialogShareHost.doOnTextChanged { text, start, before, count ->
-//            viewModel.name.value = text.toString()
-//            Log.d("toShareFragment", "name = ${viewModel.name.value}")
-//        }
-
         binding.editTextDialogShareExplain.doOnTextChanged { text, start, before, count ->
             viewModel.achievement.value = text.toString()
             Log.d("toShareFragment", "achievement = ${viewModel.achievement.value}")
@@ -56,7 +51,6 @@ class ToShareFragment: Fragment() {
         binding.buttonDialogShareSend.setOnClickListener {
 
             if (viewModel.content.value.isNullOrBlank() ||
-                viewModel.name.value.isNullOrBlank() ||
                 viewModel.time.value.isNullOrBlank()||
                     viewModel.achievement.value.isNullOrBlank())  {
                 Toast.makeText(context, "請在各欄輸入完整訊息", Toast.LENGTH_SHORT).show()

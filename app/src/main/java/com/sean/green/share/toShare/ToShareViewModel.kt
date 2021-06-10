@@ -32,7 +32,6 @@ import java.util.*
 
 class ToShareViewModel(private val repository: GreenRepository): ViewModel() {
 
-    val name = MutableLiveData<String>()
     val achievement = MutableLiveData<String>()
     val time = MutableLiveData<String>()
     val content = MutableLiveData<String>()
@@ -74,9 +73,9 @@ class ToShareViewModel(private val repository: GreenRepository): ViewModel() {
         _navigateToHome.value = true
     }
 
-    init {
-        getUser(UserManager.user.email)
-    }
+//    init {
+//        getUser(UserManager.user.email)
+//    }
 
     fun navigateToHomeAfterSend(needRefresh: Boolean = false) {
         _navigateToHome.value = needRefresh
@@ -105,7 +104,6 @@ class ToShareViewModel(private val repository: GreenRepository): ViewModel() {
                 collection("greens").document(today).set(data, SetOptions.merge())
 
             val newShareData = Share(
-                name = name.value?.toString(),
                 achievement = achievement.value?.toString(),
                 time = time.value?.toString(),
                 content = content.value?.toString(),
@@ -139,42 +137,42 @@ class ToShareViewModel(private val repository: GreenRepository): ViewModel() {
         }
     }
 
-    private fun getUser(userEmail: String) {
-
-        coroutineScope.launch {
-
-            _status.value = LoadApiStatus.LOADING
-
-            val result = repository.getUser(userEmail, COLLECTION_USERS)
-            Log.d("getUser", "repository.getUser =" +
-                    "${repository.getUser(userEmail, COLLECTION_USERS)}")
-
-            _userImage.value = when (result) {
-                is Result.Success -> {
-                    Log.d("calendarViewModel", "result.data = ${result.data}")
-                    _error.value = null
-                    _status.value = LoadApiStatus.DONE
-                    result.data
-                }
-                is Result.Fail -> {
-                    _error.value = result.error
-                    _status.value = LoadApiStatus.ERROR
-                    null
-                }
-                is Result.Error -> {
-                    _error.value = result.exception.toString()
-                    _status.value = LoadApiStatus.ERROR
-                    null
-                }
-                else -> {
-                    _error.value = GreenApplication.instance.getString(com.sean.green.R.string.you_know_nothing)
-                    _status.value = LoadApiStatus.ERROR
-                    null
-                }
-            }
-            _refreshStatus.value = false
-            Log.d("getUser", "_userImage.value = ${_userImage.value}")
-        }
-    }
+//    private fun getUser(userEmail: String) {
+//
+//        coroutineScope.launch {
+//
+//            _status.value = LoadApiStatus.LOADING
+//
+//            val result = repository.getUser(userEmail, COLLECTION_USERS)
+//            Log.d("getUser", "repository.getUser =" +
+//                    "${repository.getUser(userEmail, COLLECTION_USERS)}")
+//
+//            _userImage.value = when (result) {
+//                is Result.Success -> {
+//                    Log.d("calendarViewModel", "result.data = ${result.data}")
+//                    _error.value = null
+//                    _status.value = LoadApiStatus.DONE
+//                    result.data
+//                }
+//                is Result.Fail -> {
+//                    _error.value = result.error
+//                    _status.value = LoadApiStatus.ERROR
+//                    null
+//                }
+//                is Result.Error -> {
+//                    _error.value = result.exception.toString()
+//                    _status.value = LoadApiStatus.ERROR
+//                    null
+//                }
+//                else -> {
+//                    _error.value = GreenApplication.instance.getString(com.sean.green.R.string.you_know_nothing)
+//                    _status.value = LoadApiStatus.ERROR
+//                    null
+//                }
+//            }
+//            _refreshStatus.value = false
+//            Log.d("getUser", "_userImage.value = ${_userImage.value}")
+//        }
+//    }
 
 }

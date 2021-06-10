@@ -66,8 +66,8 @@ class ChartSaveViewModel(private val repository: GreenRepository) : ViewModel() 
                 val daysAgo = today.toDisplayFormat()
                 val saveList = repository.getSaveDataForChart(userEmail,COLLECTION_SAVE, daysAgo)
                 val saveList2 = repository.getSaveDataForChart(userEmail,COLLECTION_SAVE, daysAgo)
-                Log.d("days", "time = $daysAgo")
-                today -= 85000000
+                Log.d("days", "chartSavetime = $daysAgo")
+                today -= 87000000
 
                 when (saveList) {
                     is Result.Success -> {

@@ -65,8 +65,8 @@ class ChartUseViewModel(private val repository: GreenRepository) : ViewModel() {
                     userEmail, FirebaseKey.COLLECTION_USE, daysAgo)
                 val useList2 = repository.getUseDataForChart(
                     userEmail, FirebaseKey.COLLECTION_USE, daysAgo)
-                Log.d("days", "time = $daysAgo")
-                today -= 85000000
+                Log.d("days", "charUsetime = $daysAgo")
+                today -= 87000000
 
                 when (useList) {
                     is Result.Success -> {

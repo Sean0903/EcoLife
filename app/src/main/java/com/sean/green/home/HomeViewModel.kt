@@ -87,8 +87,8 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
 
     init {
         getTotalSaveNum(UserManager.user.email)
-//        getTotalUseNum(UserManager.user.email)
-//        getNowChallengeNum(UserManager.user.email)
+        getTotalUseNum(UserManager.user.email)
+        getNowChallengeNum(UserManager.user.email)
     }
 
     var nowChallengePlastic = 0
@@ -161,11 +161,11 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
         }
     }
 
-    init {
-//        getTotalSaveNum(UserManager.user.email)
-        getTotalUseNum(UserManager.user.email)
-//        getNowChallengeNum(UserManager.user.email)
-    }
+//    init {
+////        getTotalSaveNum(UserManager.user.email)
+//        getTotalUseNum(UserManager.user.email)
+////        getNowChallengeNum(UserManager.user.email)
+//    }
 
 
 
@@ -210,11 +210,11 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
         }
     }
 
-    init {
-//        getTotalSaveNum(UserManager.user.email)
-//        getTotalUseNum(UserManager.user.email)
-        getNowChallengeNum(UserManager.user.email)
-    }
+//    init {
+////        getTotalSaveNum(UserManager.user.email)
+////        getTotalUseNum(UserManager.user.email)
+//        getNowChallengeNum(UserManager.user.email)
+//    }
 
 
     fun getNowChallengeNum(userEmail: String) {

@@ -73,4 +73,12 @@ class DefaultGreenRepository(
         return greenRemoteDataSource.firebaseAuthWithGoogle(account)
     }
 
+    override suspend fun addEvent2Firebase(collection: String, event: Event): Result<Boolean> {
+        return greenRemoteDataSource.addEvent2Firebase(collection,event)
+    }
+
+    override suspend fun getEventData(collection: String): Result<List<Event>> {
+        return greenRemoteDataSource.getEventData(collection)
+    }
+
 }

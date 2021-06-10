@@ -1,5 +1,6 @@
 package com.sean.green.ext
 
+import android.annotation.SuppressLint
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
 import android.os.Build
@@ -24,6 +25,26 @@ fun Long.toDisplayFormatMonth(): String {
 fun Long.toDisplayFormatDay(): String {
     return SimpleDateFormat("dd", Locale.TAIWAN).format(this)
 }
+
+@SuppressLint("SimpleDateFormat")
+fun Long.toDisplayFormat1(): String {
+    return SimpleDateFormat("yyyy-MM-dd").format(this)
+}
+
+@SuppressLint("SimpleDateFormat")
+fun Long.toDisplayFormatYear1(): String {
+    return SimpleDateFormat("yyyy").format(this)
+}
+
+fun Long.toDisplayFormatMonth1(): String {
+    return SimpleDateFormat("MM").format(this)
+}
+
+fun Long.toDisplayFormatDay1(): String {
+    return SimpleDateFormat("dd").format(this)
+}
+
+
 
 object TimeUtil {
 

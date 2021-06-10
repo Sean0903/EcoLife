@@ -11,7 +11,6 @@ import com.sean.green.R
 import com.sean.green.data.*
 import com.sean.green.data.source.GreenDataSource
 import com.sean.green.ext.toDisplayFormat
-import com.sean.green.util.Logger
 import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
@@ -472,14 +471,14 @@ object GreenRemoteDataSource : GreenDataSource {
                     document
                         .set(user)
                         .addOnSuccessListener {
-                            Logger.d("DocumentSnapshot added with ID: ${users}")
+                            Log.d("postUser","DocumentSnapshot added with ID: ${users}")
                         }
                         .addOnFailureListener { e ->
-                            Logger.w("Error adding document $e")
+                            Log.w("postUser","Error adding document $e")
                         }
                 } else {
                     for (myDocument in result) {
-                        Logger.d("Already initialized")
+                        Log.d("postUser,","Already initialized")
                     }
                 }
             }
@@ -528,14 +527,14 @@ object GreenRemoteDataSource : GreenDataSource {
             auth?.signInWithCredential(credential)
                 ?.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Logger.i("Post: $credential")
+                        Log.i("firebaseAuthWithGoogle","Post: $credential")
                         task.result?.let {
                             continuation.resume(Result.Success(it.user))
                         }
                     } else {
                         task.exception?.let {
 
-                            Logger.w("[${this::class.simpleName}] Error getting documents.")
+                            Log.w("firebaseAuthWithGoogle","[${this::class.simpleName}] Error getting documents.")
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
@@ -543,4 +542,74 @@ object GreenRemoteDataSource : GreenDataSource {
                     }
                 }
     }
+
+    override suspend fun addEvent2Firebase(collection: String, event: Event): Result<Boolean> =
+        suspendCoroutine { continuation ->
+
+            val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
+
+            val firestore = FirebaseFirestore.getInstance().collection(PATH_EVENT)
+            val eventDocument = firestore.document()
+
+            event.id = eventDocument.id
+            eventDocument.set(event)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Log.d("dataSource", "addEvent2Firebase: $event")
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+
+                            Log.d(
+                                "dataSource",
+                                "[${this::class.simpleName}] Error getting documents. ${it.message}"
+                            )
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                    }
+                }
+        }
+
+    override suspend fun getEventData(collection: String): Result<List<Event>> =
+        suspendCoroutine { continuation ->
+
+            val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
+
+            val firestore = FirebaseFirestore.getInstance().collection(PATH_EVENT)
+//            val shareDocument = firestore.document()
+//            val greensCollenction = userDocument.collection("greens")
+//            val dayDocument = greensCollenction.document(documentId)
+//            val dayCollection = dayDocument.collection("share")
+
+            firestore
+                .orderBy(KEY_CREATED_TIME, Query.Direction.DESCENDING)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val list = mutableListOf<Event>()
+                        for (document in task.result!!) {
+                            Log.d("getEventData", document.id + " => " + document.data)
+
+                            val eventData = document.toObject(Event::class.java)
+                            list.add(eventData)
+                        }
+
+                        continuation.resume(Result.Success(list))
+
+                    } else {
+                        task.exception?.let {
+
+                            Log.w(
+                                "sean",
+                                "[${this::class.simpleName}] Error getting documents. ${it.message}"
+                            )
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                    }
+                }
+        }
 }

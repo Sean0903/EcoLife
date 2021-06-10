@@ -9,6 +9,8 @@ import com.sean.green.challenge.ChallengeViewModel
 import com.sean.green.chart.save.ChartSaveViewModel
 import com.sean.green.chart.use.ChartUseViewModel
 import com.sean.green.data.source.GreenRepository
+import com.sean.green.event.EventViewModel
+import com.sean.green.event.toEvent.ToEventViewModel
 import com.sean.green.home.HomeViewModel
 import com.sean.green.login.LoginViewModel
 import com.sean.green.save.SaveViewModel
@@ -64,6 +66,12 @@ class ViewModelFactory constructor(
 
                 isAssignableFrom(ToShareViewModel::class.java) ->
                     ToShareViewModel(greenRepository)
+
+                isAssignableFrom(ToEventViewModel::class.java) ->
+                    ToEventViewModel(greenRepository)
+
+                isAssignableFrom(EventViewModel::class.java) ->
+                    EventViewModel(greenRepository)
 
                 else ->
                     throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")

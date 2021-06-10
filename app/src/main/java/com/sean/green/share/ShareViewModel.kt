@@ -41,10 +41,10 @@ class ShareViewModel(private val repository: GreenRepository) : ViewModel() {
     val saveDataSevenDays: LiveData<List<Save>>
         get() = _saveDataSevenDays
 
-    private val _userImage = MutableLiveData<List<User>>()
-
-    val userImage: LiveData<List<User>>
-        get() = _userImage
+//    private val _userImage = MutableLiveData<List<User>>()
+//
+//    val userImage: LiveData<List<User>>
+//        get() = _userImage
 
     private val _status = MutableLiveData<LoadApiStatus>()
 
@@ -80,14 +80,14 @@ class ShareViewModel(private val repository: GreenRepository) : ViewModel() {
     init {
         getShareData()
         getSaveDataForChart(UserManager.user.email)
-        getUser(UserManager.user.email)
+//        getUser(UserManager.user.email)
 //        setSaveDataForChart()
     }
 
     fun getShareData() {
         coroutineScope.launch {
 
-            val share7List = mutableListOf<Share>()
+            val shareListForRecycleView = mutableListOf<Share>()
 
                 _status.value = LoadApiStatus.LOADING
 
@@ -96,7 +96,7 @@ class ShareViewModel(private val repository: GreenRepository) : ViewModel() {
 
                 when (shareList) {
                     is Result.Success -> {
-                        share7List.addAll(shareList.data)
+                        shareListForRecycleView.addAll(shareList.data)
                         _error.value = null
                         _status.value = LoadApiStatus.DONE
                     }
@@ -110,7 +110,7 @@ class ShareViewModel(private val repository: GreenRepository) : ViewModel() {
 
                 _refreshStatus.value = false
 
-            _shareDataForRecycleView.value = share7List
+            _shareDataForRecycleView.value = shareListForRecycleView
 
         }
     }
@@ -197,43 +197,43 @@ class ShareViewModel(private val repository: GreenRepository) : ViewModel() {
 
     }
 
-    private fun getUser(userEmail: String) {
-
-        coroutineScope.launch {
-
-            _status.value = LoadApiStatus.LOADING
-
-            val result = repository.getUser(userEmail, COLLECTION_USERS)
-            Log.d("getUser", "repository.getUser =" +
-                    "${repository.getUser(userEmail, COLLECTION_USERS)}")
-
-            _userImage.value = when (result) {
-                is Result.Success -> {
-                    Log.d("calendarViewModel", "result.data = ${result.data}")
-                    _error.value = null
-                    _status.value = LoadApiStatus.DONE
-                    result.data
-                }
-                is Result.Fail -> {
-                    _error.value = result.error
-                    _status.value = LoadApiStatus.ERROR
-                    null
-                }
-                is Result.Error -> {
-                    _error.value = result.exception.toString()
-                    _status.value = LoadApiStatus.ERROR
-                    null
-                }
-                else -> {
-                    _error.value = GreenApplication.instance.getString(com.sean.green.R.string.you_know_nothing)
-                    _status.value = LoadApiStatus.ERROR
-                    null
-                }
-            }
-            _refreshStatus.value = false
-            Log.d("getUser", "_userImage.value = ${_userImage.value}")
-        }
-    }
+//    private fun getUser(userEmail: String) {
+//
+//        coroutineScope.launch {
+//
+//            _status.value = LoadApiStatus.LOADING
+//
+//            val result = repository.getUser(userEmail, COLLECTION_USERS)
+//            Log.d("getUser", "repository.getUser =" +
+//                    "${repository.getUser(userEmail, COLLECTION_USERS)}")
+//
+//            _userImage.value = when (result) {
+//                is Result.Success -> {
+//                    Log.d("calendarViewModel", "result.data = ${result.data}")
+//                    _error.value = null
+//                    _status.value = LoadApiStatus.DONE
+//                    result.data
+//                }
+//                is Result.Fail -> {
+//                    _error.value = result.error
+//                    _status.value = LoadApiStatus.ERROR
+//                    null
+//                }
+//                is Result.Error -> {
+//                    _error.value = result.exception.toString()
+//                    _status.value = LoadApiStatus.ERROR
+//                    null
+//                }
+//                else -> {
+//                    _error.value = GreenApplication.instance.getString(com.sean.green.R.string.you_know_nothing)
+//                    _status.value = LoadApiStatus.ERROR
+//                    null
+//                }
+//            }
+//            _refreshStatus.value = false
+//            Log.d("getUser", "_userImage.value = ${_userImage.value}")
+//        }
+//    }
 
 
 

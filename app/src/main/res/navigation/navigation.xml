@@ -76,13 +76,7 @@
         android:name="com.sean.green.event.EventFragment"
         android:label="EventFragment"
         tools:layout="@layout/fragment_event">
-    </fragment>
 
-    <fragment
-        android:id="@+id/dialogEvent"
-        android:name="com.sean.green.dialog.DialogEventFragment"
-        android:label="DialogEvent"
-        tools:layout="@layout/dialog_event">
     </fragment>
 
     <fragment
@@ -121,6 +115,12 @@
         android:label="ToShareFragment"
         tools:layout="@layout/fragment_to_share"/>
 
+    <fragment
+        android:id="@+id/toEventFragment"
+        android:name="com.sean.green.event.toEvent.ToEventFragment"
+        android:label="ToEventFragment"
+        tools:layout="@layout/fragment_to_event"/>
+
 
     <action android:id="@+id/navigate_to_home_fragment" app:destination="@id/homeFragment"
         app:popUpTo="@id/navigation"
@@ -152,6 +152,9 @@
     <action android:id="@+id/navigate_to_toShare_fragment" app:destination="@id/toShareFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
+    <action android:id="@+id/navigate_to_toEvent_fragment" app:destination="@id/toEventFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
     <action
         android:id="@+id/action_global_loginFragment" app:destination="@id/loginFragment" />
     <action
@@ -163,9 +166,6 @@
     <action
         android:id="@+id/action_saveFragment_to_homeFragment"
         app:destination="@id/homeFragment" />
-    <action
-        android:id="@+id/action_eventFragment_to_dialogEvent"
-        app:destination="@id/dialogEvent" />
     <action
         android:id="@+id/action_dialogShareFragment_to_shareFragment"
         app:destination="@id/shareFragment" />
@@ -181,7 +181,9 @@
     <action
         android:id="@+id/action_shareFragment_to_toShareFragment"
         app:destination="@id/toShareFragment" />
-
+    <action
+        android:id="@+id/action_eventFragment_to_toEventFragment"
+        app:destination="@id/toEventFragment" />
 
 
 </navigation>

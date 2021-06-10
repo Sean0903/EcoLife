@@ -37,4 +37,8 @@ interface GreenDataSource {
     suspend fun getUser(userEmail: String,collection: String): Result<List<User>>
 
     suspend fun firebaseAuthWithGoogle(account : GoogleSignInAccount?): Result<FirebaseUser?>
+
+    suspend fun addEvent2Firebase(collection: String, event: Event): Result<Boolean>
+
+    suspend fun getEventData(collection: String): Result<List<Event>>
 }

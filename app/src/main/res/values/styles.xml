@@ -31,4 +31,17 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="AppTheme.NumberPicker">
+        <item name="colorControlNormal">@color/black_3f3a3a</item>
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/black_3f3a3a</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorAccent">@color/black_3f3a3a</item>
+        <item name="android:fontFamily">@font/noto_sans</item>
+    </style>
+
 </resources>

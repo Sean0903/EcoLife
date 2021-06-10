@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.sean.green.event.toEvent.ToEventViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".family.create_event.CreateEventDialog">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout_dialog_event"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/image_dialog_event_cancel"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/text_dialog_event_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/text_dialog_event_title"
+                app:srcCompat="@drawable/error" />
+
+            <TextView
+                android:id="@+id/text_dialog_event_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/noto_sans_bold"
+                android:text="環保行動"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/image_dialog_event_explain"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_dialog_event_title"
+                app:srcCompat="@drawable/presentation" />
+
+            <TextView
+                android:id="@+id/text_dialog_event_explain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:fontFamily="@font/noto_sans"
+                android:text="活動介紹"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="@+id/image_dialog_event_explain"
+                app:layout_constraintStart_toEndOf="@+id/image_dialog_event_explain" />
+
+            <EditText
+                android:id="@+id/editText_dialog_event_explain"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/dialog_edit_text_frame"
+                android:ems="10"
+                android:fontFamily="@font/noto_sans"
+                android:gravity="top"
+                android:hint="請輸入活動介紹　例如：淨灘"
+                android:inputType="textPersonName"
+                android:lines="5"
+                android:paddingStart="12dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="12dp"
+                android:text="@={viewModel.introduction}"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_dialog_event_explain" />
+
+            <ImageView
+                android:id="@+id/image_dialog_event_time"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/icon_calendar"
+                app:layout_constraintStart_toStartOf="@+id/editText_dialog_event_explain"
+                app:layout_constraintTop_toBottomOf="@+id/editText_dialog_event_explain" />
+
+            <TextView
+                android:id="@+id/text_dialog_event_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:fontFamily="@font/noto_sans"
+                android:text="時間"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/image_dialog_event_time"
+                app:layout_constraintStart_toEndOf="@+id/image_dialog_event_time"
+                app:layout_constraintTop_toTopOf="@+id/image_dialog_event_time" />
+
+            <DatePicker
+                android:id="@+id/end_date"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner"
+                android:fadeScrollbars="true"
+                android:gravity="center"
+                android:theme="@style/AppTheme.NumberPicker"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_dialog_event_time"
+                tools:visibility="visible" />
+
+            <EditText
+                android:id="@+id/editText_dialog_event_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/dialog_edit_text_frame"
+                android:ems="10"
+                android:fontFamily="@font/noto_sans"
+                android:gravity="top"
+                android:hint="請輸入時間"
+                android:inputType="textPersonName"
+                android:lines="5"
+                android:paddingStart="12dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="12dp"
+                android:text="@={viewModel.time}"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_dialog_event_time"
+                tools:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/image_dialog_event_location"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/end_date"
+                app:srcCompat="@drawable/location" />
+
+            <TextView
+                android:id="@+id/text_dialog_event_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:fontFamily="@font/noto_sans"
+                android:text="地點"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/image_dialog_event_location"
+                app:layout_constraintStart_toEndOf="@+id/image_dialog_event_location"
+                app:layout_constraintTop_toTopOf="@+id/image_dialog_event_location" />
+
+            <EditText
+                android:id="@+id/editText_dialog_event_location"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/dialog_edit_text_frame"
+                android:ems="10"
+                android:fontFamily="@font/noto_sans"
+                android:gravity="top"
+                android:hint="請輸入地點"
+                android:inputType="textPersonName"
+                android:lines="5"
+                android:paddingStart="12dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="12dp"
+                android:text="@={viewModel.location}"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_dialog_event_location" />
+
+            <ImageView
+                android:id="@+id/image_dialog_event_content"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="@+id/editText_dialog_event_location"
+                app:layout_constraintTop_toBottomOf="@+id/editText_dialog_event_location"
+                app:srcCompat="@drawable/office_material"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/text_dialog_event_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:fontFamily="@font/noto_sans"
+                android:text="內容"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/image_dialog_event_content"
+                app:layout_constraintStart_toEndOf="@+id/image_dialog_event_content"
+                app:layout_constraintTop_toTopOf="@+id/image_dialog_event_content"
+                tools:visibility="visible" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editText_dialog_event_content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/dialog_edit_text_frame"
+                android:gravity="top"
+                android:hint="請輸入活動詳細內容"
+                android:lines="5"
+                android:paddingStart="12dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="12dp"
+                android:text="@={viewModel.content}"
+                app:layout_constraintBottom_toTopOf="@+id/button_dialog_event_send"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_dialog_event_content"
+                tools:visibility="visible" />
+
+            <Button
+                android:id="@+id/button_dialog_event_send"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="70dp"
+                android:background="@drawable/dialog_frame"
+                android:fontFamily="@font/noto_sans_bold"
+                android:text="發送"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText_dialog_event_content"
+                tools:visibility="visible" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

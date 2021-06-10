@@ -19,7 +19,6 @@ import com.sean.green.R
 import com.sean.green.databinding.FragmentCalendarBinding
 import com.sean.green.ext.TimeUtil
 import com.sean.green.ext.getVmFactory
-import com.sean.green.util.Logger
 import com.sean.green.util.OneDayDecorator
 import com.sean.green.util.SingleDateDecorator
 import kotlinx.android.synthetic.main.fragment_calendar.*
@@ -94,7 +93,7 @@ class CalendarFragment: Fragment() {
         binding.lottieAnimationView.playAnimation()
 
         viewModel.selectedLiveEvent.observe(viewLifecycleOwner, Observer {
-            Logger.d("Sorted Event List : $it")
+            Log.d("viewModel.selectedLiveEvent","Sorted Event List : $it")
             it?.let {
                 adapter.submitList(it)
                 adapter.notifyDataSetChanged()
@@ -113,7 +112,7 @@ class CalendarFragment: Fragment() {
                 // Create a sorted list of event based on the current date
                 viewModel.createdDailyEvent(selectedDate)
 
-                Logger.d("$selectedDate")
+                Log.d(" Get the current selected date","date = $selectedDate")
             }
         }
 
@@ -127,8 +126,6 @@ class CalendarFragment: Fragment() {
 
 
         val localDate = LocalDate.now()
-
-
 
         widget.setCurrentDate(localDate)
 
