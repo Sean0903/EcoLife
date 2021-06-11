@@ -26,26 +26,6 @@ fun Long.toDisplayFormatDay(): String {
     return SimpleDateFormat("dd", Locale.TAIWAN).format(this)
 }
 
-@SuppressLint("SimpleDateFormat")
-fun Long.toDisplayFormat1(): String {
-    return SimpleDateFormat("yyyy-MM-dd").format(this)
-}
-
-@SuppressLint("SimpleDateFormat")
-fun Long.toDisplayFormatYear1(): String {
-    return SimpleDateFormat("yyyy").format(this)
-}
-
-fun Long.toDisplayFormatMonth1(): String {
-    return SimpleDateFormat("MM").format(this)
-}
-
-fun Long.toDisplayFormatDay1(): String {
-    return SimpleDateFormat("dd").format(this)
-}
-
-
-
 object TimeUtil {
 
     @JvmStatic
@@ -67,11 +47,16 @@ object TimeUtil {
     }
 
     @JvmStatic
+    fun stampToYMD(time: Long): String {
+        val simpleDateFormat = java.text.SimpleDateFormat("yyyy-MM-dd")
+        return simpleDateFormat.format(Date(time))
+    }
+
+    @JvmStatic
     fun dateToStamp(date: String, locale: Locale): Long {
         val simpleDateFormat = java.text.SimpleDateFormat("yyyy-MM-dd", locale)
         return simpleDateFormat.parse(date).time
     }
-
 }
 
 

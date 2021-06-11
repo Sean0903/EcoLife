@@ -81,4 +81,8 @@ class DefaultGreenRepository(
         return greenRemoteDataSource.getEventData(collection)
     }
 
+    override suspend fun addEventMember(eventId: String, userEmail: String, userImage: String): Result<Boolean> {
+        return greenRemoteDataSource.addEventMember(eventId,userEmail,userImage)
+    }
+
 }

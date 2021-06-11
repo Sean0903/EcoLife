@@ -145,7 +145,6 @@
                     android:layout_width="380dp"
                     android:layout_height="300dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
                     android:autofillHints=""
                     app:layout_constraintEnd_toEndOf="parent"
@@ -176,9 +175,9 @@
 
                     <ImageView
                         android:id="@+id/image_chart_page_save_power_icon1"
-                        android:layout_width="30dp"
-                        android:layout_height="25dp"
-                        android:layout_marginStart="28dp"
+                        android:layout_width="40dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="18dp"
                         android:padding="@dimen/elevation_all"
                         android:paddingTop="@dimen/elevation_all"
                         android:scaleType="fitCenter"
@@ -188,9 +187,9 @@
 
                     <ImageView
                         android:id="@+id/image_chart_page_save_plastic_icon1"
-                        android:layout_width="30dp"
-                        android:layout_height="25dp"
-                        android:layout_marginStart="55dp"
+                        android:layout_width="40dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="40dp"
                         android:padding="@dimen/elevation_all"
                         android:paddingTop="@dimen/elevation_all"
                         android:scaleType="fitCenter"
@@ -200,9 +199,9 @@
 
                     <ImageView
                         android:id="@+id/image_chart_page_save_carbon_icon1"
-                        android:layout_width="30dp"
-                        android:layout_height="25dp"
-                        android:layout_marginStart="26dp"
+                        android:layout_width="40dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="18dp"
                         android:padding="@dimen/elevation_all"
                         android:paddingTop="@dimen/elevation_all"
                         android:scaleType="fitCenter"
@@ -212,8 +211,8 @@
 
                     <ImageView
                         android:id="@+id/image_chart_page_calender"
-                        android:layout_width="25dp"
-                        android:layout_height="20dp"
+                        android:layout_width="35dp"
+                        android:layout_height="25dp"
                         android:layout_marginStart="62dp"
                         android:clickable="true"
                         android:focusable="true"

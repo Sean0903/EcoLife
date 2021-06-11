@@ -41,4 +41,6 @@ interface GreenDataSource {
     suspend fun addEvent2Firebase(collection: String, event: Event): Result<Boolean>
 
     suspend fun getEventData(collection: String): Result<List<Event>>
+
+    suspend fun addEventMember(eventId: String, userEmail: String, userImage: String): Result<Boolean>
 }

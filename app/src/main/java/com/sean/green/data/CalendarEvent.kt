@@ -14,4 +14,5 @@ data class CalendarEvent(
     val day: String = "",
     val month: String = "",
     val year: String = "",
+    val introduction: String = ""
 ) : Parcelable

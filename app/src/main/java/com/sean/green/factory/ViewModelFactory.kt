@@ -2,7 +2,6 @@ package com.sean.green.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.google.firebase.auth.FirebaseAuth
 import com.sean.green.MainViewModel
 import com.sean.green.calendar.CalendarViewModel
 import com.sean.green.challenge.ChallengeViewModel
@@ -17,7 +16,6 @@ import com.sean.green.save.SaveViewModel
 import com.sean.green.share.ShareViewModel
 import com.sean.green.share.toShare.ToShareViewModel
 import com.sean.green.use.UseViewModel
-import java.util.*
 
 /**
  *

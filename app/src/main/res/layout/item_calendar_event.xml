@@ -22,9 +22,73 @@
             app:cardCornerRadius="12dp"
             app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:visibility="visible">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="400dp"
+                android:layout_height="match_parent">
+
+
+                <TextView
+                    android:id="@+id/textView_challenge_event"
+                    android:layout_width="70dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="120dp"
+                    android:text="@{calendarEvent.challenge}"
+                    app:layout_constraintBottom_toTopOf="@+id/textView_save_event"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="challenge" />
+
+                <TextView
+                    android:id="@+id/textView_save_event"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="@{calendarEvent.save}"
+                    android:visibility="@{calendarEvent.save != null ?  View.VISIBLE : View.GONE }"
+                    app:layout_constraintBottom_toTopOf="@+id/textView_use_event"
+                    app:layout_constraintEnd_toEndOf="@+id/textView_challenge_event"
+                    app:layout_constraintStart_toStartOf="@+id/textView_challenge_event"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_challenge_event"
+                    tools:text="save" />
+
+                <TextView
+                    android:id="@+id/textView_use_event"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="@{calendarEvent.use}"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/textView_save_event"
+                    app:layout_constraintStart_toStartOf="@+id/textView_challenge_event"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_save_event"
+                    tools:text="use" />
+
+                <TextView
+                    android:id="@+id/textView_share_event"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:text="@{calendarEvent.share}"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView_save_event"
+                    app:layout_constraintStart_toStartOf="@+id/textView_save_event2"
+                    app:layout_constraintTop_toTopOf="@+id/textView_save_event"
+                    tools:text="share" />
+
+                <TextView
+                    android:id="@+id/textView_save_event2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:text="@{calendarEvent.introduction}"
+                    android:visibility="@{calendarEvent.introduction != null ?  View.VISIBLE : View.GONE }"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView_challenge_event"
+                    app:layout_constraintStart_toEndOf="@+id/textView_challenge_event"
+                    app:layout_constraintTop_toTopOf="@+id/textView_challenge_event"
+                    tools:text="一起去淨灘" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraint_layout_category_background"
@@ -68,7 +132,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="活動回顧"
+                        android:text="活動簡介"
                         android:textColor="@color/white"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -78,56 +142,77 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView_event2"
+            android:layout_width="match_parent"
+            android:layout_height="108dp"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:cardCornerRadius="12dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView_event"
+            tools:visibility="gone">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_layout_category_background2"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorBlue4">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="64dp"
+                    android:layout_height="69dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/textView_title_month2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="2dp"
+                        android:text="@{calendarEvent.month}"
+                        android:textColor="@color/white"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="05" />
+
+                    <TextView
+                        android:id="@+id/textView_title_day2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@{calendarEvent.day}"
+                        android:textColor="@color/white"
+                        app:layout_constraintStart_toEndOf="@+id/textView_title_month2"
+                        app:layout_constraintTop_toTopOf="@+id/textView_title_month2"
+                        tools:text="26" />
+
+                    <TextView
+                        android:id="@+id/textView_title_category2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="活動提醒"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/textView_title_month2" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-
-                <TextView
-                    android:id="@+id/textView_challenge_event"
-                    android:layout_width="70dp"
-                    android:layout_height="20dp"
-                    android:layout_marginStart="120dp"
-                    android:text="@{calendarEvent.challenge}"
-                    app:layout_constraintBottom_toTopOf="@+id/textView_save_event"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="challenge" />
-
-                <TextView
-                    android:id="@+id/textView_save_event"
-                    android:layout_width="70dp"
-                    android:layout_height="wrap_content"
-                    android:text="@{calendarEvent.save}"
-                    android:visibility="@{calendarEvent.save != null ?  View.VISIBLE : View.GONE }"
-                    app:layout_constraintBottom_toTopOf="@+id/textView_use_event"
-                    app:layout_constraintEnd_toEndOf="@+id/textView_challenge_event"
-                    app:layout_constraintStart_toStartOf="@+id/textView_challenge_event"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_challenge_event"
-                    tools:text="save" />
-
-                <TextView
-                    android:id="@+id/textView_use_event"
-                    android:layout_width="70dp"
-                    android:layout_height="wrap_content"
-                    android:text="@{calendarEvent.use}"
-
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/textView_save_event"
-                    app:layout_constraintStart_toStartOf="@+id/textView_challenge_event"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_save_event"
-                    tools:text="use" />
-
-                <TextView
-                    android:id="@+id/textView_share_event"
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_marginStart="24dp"
-                    android:text="@{calendarEvent.share}"
-                    app:layout_constraintBottom_toTopOf="@+id/textView_save_event"
-                    app:layout_constraintStart_toEndOf="@+id/textView_challenge_event"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="share" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>

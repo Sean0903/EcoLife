@@ -4,6 +4,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.sean.green.GreenApplication
@@ -11,6 +12,7 @@ import com.sean.green.R
 import com.sean.green.data.*
 import com.sean.green.data.source.GreenDataSource
 import com.sean.green.ext.toDisplayFormat
+import com.sean.green.login.UserManager
 import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
@@ -23,6 +25,8 @@ object GreenRemoteDataSource : GreenDataSource {
     private const val PATH_EVENT = "event"
     private const val PATH_GREENS = "greens"
     private const val KEY_CREATED_TIME = "createdTime"
+    private const val KEY_EVENT_MEMBER = "member"
+    private const val KEY_EVENT_MEMBER_IMAGE = "memberImage"
 
 
     override suspend fun getSaveDataForChart(userEmail: String, collection: String, documentId: String): Result<List<Save>> =
@@ -603,6 +607,30 @@ object GreenRemoteDataSource : GreenDataSource {
 
                             Log.w(
                                 "sean",
+                                "[${this::class.simpleName}] Error getting documents. ${it.message}"
+                            )
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                    }
+                }
+        }
+
+    override suspend fun addEventMember(eventId: String, userEmail: String, userImage: String): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            FirebaseFirestore.getInstance().collection(PATH_EVENT).document(eventId)
+                .update(KEY_EVENT_MEMBER, FieldValue.arrayUnion(UserManager.user.email),
+                    KEY_EVENT_MEMBER_IMAGE,FieldValue.arrayUnion(UserManager.user.image))
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Log.d("dataSource", "addEventMember: $task")
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+
+                            Log.d(
+                                "dataSource",
                                 "[${this::class.simpleName}] Error getting documents. ${it.message}"
                             )
                             continuation.resume(Result.Error(it))

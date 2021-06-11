@@ -17,34 +17,39 @@
             style="@style/home_page_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:text="@string/text_save_page_photo_title"
             app:layout_constraintStart_toStartOf="@+id/add_save_photo"
             app:layout_constraintTop_toBottomOf="@+id/image_save_page_back_to_home" />
 
+        <TextView
+            android:id="@+id/text_underLine4"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:background="@drawable/underline"
+            app:layout_constraintBottom_toBottomOf="@+id/text_save_page_photo_title"
+            app:layout_constraintEnd_toEndOf="@+id/text_save_page_photo_title"
+            app:layout_constraintStart_toStartOf="@+id/text_save_page_photo_title" />
+
         <ImageView
             android:id="@+id/image_save_page_back_to_home"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            app:tint="?android:attr/colorEdgeEffect"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/_17936_200" />
+            app:srcCompat="@drawable/_17936_200"
+            app:tint="?android:attr/colorEdgeEffect" />
 
         <ImageView
             android:id="@+id/add_save_photo"
-            android:layout_width="0dp"
+            android:layout_width="300dp"
             android:layout_height="150dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/normal_frame"
             android:cropToPadding="false"
             android:scaleType="center"
-            android:background="@drawable/normal_frame"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_save_page_photo_title"
             app:srcCompat="@drawable/picture" />
@@ -53,13 +58,20 @@
             android:id="@+id/constraintLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/add_save_photo"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/add_save_photo"
             app:layout_constraintTop_toBottomOf="@+id/add_save_photo">
+
+            <TextView
+                android:id="@+id/text_underLine6"
+                android:layout_width="0dp"
+                android:layout_height="8dp"
+                android:background="@drawable/underline"
+                app:layout_constraintBottom_toBottomOf="@+id/text_save_page_my_title"
+                app:layout_constraintEnd_toEndOf="@+id/text_save_page_my_title"
+                app:layout_constraintStart_toStartOf="@+id/text_save_page_my_title" />
 
             <TextView
                 android:id="@+id/text_save_page_my_title"
@@ -72,8 +84,8 @@
 
             <ImageView
                 android:id="@+id/image_save_page_info"
-                android:layout_width="45dp"
-                android:layout_height="0dp"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
                 android:scaleType="fitStart"
                 app:layout_constraintBottom_toBottomOf="@+id/text_save_page_my_title"
                 app:layout_constraintStart_toEndOf="@+id/text_save_page_my_title"
@@ -82,104 +94,75 @@
 
             <ImageView
                 android:id="@+id/image_save_page_plastic"
-                android:layout_width="40dp"
-                android:layout_height="35dp"
+                style="@style/element_image"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/tag_left_plastic_corners"
                 android:padding="@dimen/elevation_all"
-                android:paddingTop="@dimen/elevation_all"
-                android:scaleType="fitCenter"
-                app:layout_constraintBottom_toBottomOf="@+id/editText_save_page_plastic"
                 app:layout_constraintEnd_toStartOf="@+id/editText_save_page_plastic"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/editText_save_page_plastic"
+                app:layout_constraintTop_toBottomOf="@+id/text_save_page_my_title"
                 app:srcCompat="@drawable/bag" />
 
             <EditText
                 android:id="@+id/editText_save_page_plastic"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/tag_right_corners_plastic"
-                android:hint="0"
                 android:inputType="number"
                 android:maxLines="1"
-                android:padding="@dimen/elevation_all"
                 android:text="@={viewModel.plastic}"
-                android:textAlignment="center"
-                android:textColor="@color/colorWhite"
-                android:textColorHint="@color/colorWhite"
-                android:textSize="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:textSize="15dp"
+                style="@style/element_text"
+                app:layout_constraintBottom_toBottomOf="@+id/image_save_page_plastic"
                 app:layout_constraintEnd_toStartOf="@+id/image_save_page_power"
                 app:layout_constraintStart_toEndOf="@+id/image_save_page_plastic"
-                app:layout_constraintTop_toBottomOf="@+id/text_save_page_my_title" />
+                app:layout_constraintTop_toTopOf="@+id/image_save_page_plastic"
+                app:layout_constraintVertical_bias="1.0" />
 
             <ImageView
                 android:id="@+id/image_save_page_power"
-                android:layout_width="40dp"
-                android:layout_height="35dp"
                 android:background="@drawable/tag_left_power_corners"
-                android:padding="@dimen/elevation_all"
-                android:paddingTop="@dimen/elevation_all"
-                android:scaleType="fitCenter"
-                app:layout_constraintBottom_toBottomOf="@+id/editText_save_page_power"
+                style="@style/element_image"
+                app:layout_constraintBottom_toBottomOf="@+id/image_save_page_plastic"
                 app:layout_constraintEnd_toStartOf="@+id/editText_save_page_power"
                 app:layout_constraintStart_toEndOf="@+id/editText_save_page_plastic"
-                app:layout_constraintTop_toTopOf="@+id/editText_save_page_power"
+                app:layout_constraintTop_toTopOf="@+id/image_save_page_plastic"
                 app:srcCompat="@drawable/lighting" />
 
             <EditText
                 android:id="@+id/editText_save_page_power"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/tag_right_corners_power"
-                android:hint="0"
                 android:inputType="number"
                 android:maxLines="1"
-                android:padding="@dimen/elevation_all"
                 android:text="@={viewModel.power}"
-                android:textAlignment="center"
-                android:textColor="@color/colorWhite"
-                android:textColorHint="@color/colorWhite"
-                android:textSize="20dp"
+                style="@style/element_text"
+                app:layout_constraintBottom_toBottomOf="@+id/image_save_page_power"
                 app:layout_constraintEnd_toStartOf="@+id/image_save_page_carbon"
                 app:layout_constraintStart_toEndOf="@+id/image_save_page_power"
-                app:layout_constraintTop_toTopOf="@+id/editText_save_page_plastic" />
+                app:layout_constraintTop_toTopOf="@+id/image_save_page_power" />
 
             <ImageView
                 android:id="@+id/image_save_page_carbon"
-                android:layout_width="40dp"
-                android:layout_height="35dp"
                 android:background="@drawable/tag_left_carbon_corners"
-                android:padding="@dimen/elevation_all"
-                android:paddingTop="@dimen/elevation_all"
-                android:scaleType="fitCenter"
-                app:layout_constraintBottom_toBottomOf="@+id/editText_save_page_carbon"
+                style="@style/element_image"
+                app:layout_constraintBottom_toBottomOf="@+id/image_save_page_plastic"
                 app:layout_constraintEnd_toStartOf="@+id/editText_save_page_carbon"
                 app:layout_constraintStart_toEndOf="@+id/editText_save_page_power"
-                app:layout_constraintTop_toTopOf="@+id/editText_save_page_carbon"
+                app:layout_constraintTop_toTopOf="@+id/image_save_page_plastic"
                 app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@drawable/carbon_dioxide" />
 
             <EditText
                 android:id="@+id/editText_save_page_carbon"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:background="@drawable/tag_right_corners_carbon"
-                android:hint="0"
                 android:inputType="number"
                 android:maxLines="1"
-                android:padding="@dimen/elevation_all"
                 android:text="@={viewModel.carbon}"
-                android:textAlignment="center"
-                android:textColor="@color/colorWhite"
-                android:textColorHint="@color/colorWhite"
-                android:textSize="20dp"
+                style="@style/element_text"
+                app:layout_constraintBottom_toBottomOf="@+id/image_save_page_carbon"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/image_save_page_carbon"
-                app:layout_constraintTop_toTopOf="@+id/editText_save_page_power" />
+                app:layout_constraintTop_toTopOf="@+id/image_save_page_carbon" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -194,11 +177,20 @@
             app:layout_constraintStart_toStartOf="@+id/editText_save_page_content"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
+        <TextView
+            android:id="@+id/text_underLine7"
+            android:layout_width="81dp"
+            android:layout_height="8dp"
+            android:background="@drawable/underline"
+            app:layout_constraintBottom_toBottomOf="@+id/text_save_page_content_title"
+            app:layout_constraintEnd_toEndOf="@+id/text_save_page_content_title"
+            app:layout_constraintStart_toStartOf="@+id/text_save_page_content_title" />
+
         <EditText
             android:id="@+id/editText_save_page_content"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="24dp"
             android:background="@drawable/fragment_content"
             android:gravity="top"
@@ -206,7 +198,7 @@
             android:inputType="none"
             android:textColor="@color/colorWhite"
             android:textColorHint="@color/colorWhite"
-            android:textSize="20dp"
+            android:textSize="15dp"
             app:layout_constraintBottom_toTopOf="@+id/button_save_page"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout"

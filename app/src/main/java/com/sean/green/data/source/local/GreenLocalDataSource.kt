@@ -87,4 +87,8 @@ class GreenLocalDataSource(val context: Context) : GreenDataSource {
         TODO("Not yet implemented")
     }
 
+    override suspend fun addEventMember(eventId: String, userEmail: String, userImage: String): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
 }

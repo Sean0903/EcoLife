@@ -5,9 +5,12 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.FirebaseAuth
 import com.sean.green.GreenApplication
 import com.sean.green.R
 import com.sean.green.data.*
+import com.sean.green.data.FirebaseKey.Companion.COLLECTION_EVENT
+import com.sean.green.data.FirebaseKey.Companion.COLLECTION_SHARE
 import com.sean.green.data.source.GreenRepository
 import com.sean.green.ext.toDisplayFormat
 import com.sean.green.login.UserManager
@@ -20,7 +23,6 @@ import java.util.*
 
 
 class EventViewModel(private val repository: GreenRepository) : ViewModel() {
-
 
     private var viewModelJob = Job()
 
@@ -92,7 +94,19 @@ class EventViewModel(private val repository: GreenRepository) : ViewModel() {
             _refreshStatus.value = false
 
             _eventDataForRecycleView.value = eventListForRecycleView
+            Log.d("eventViewModel","_eventDataForRecycleView.value = ${_eventDataForRecycleView.value}")
+        }
+
+    }
+
+    fun addMemberToEvent(event: Event,userEmail: String, userImage: String) {
+
+        coroutineScope.launch {
+
+            val result = repository.addEventMember(event.id,userEmail,userImage)
+            _eventDataForRecycleView.value = _eventDataForRecycleView.value
 
         }
+
     }
 }

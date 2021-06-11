@@ -35,16 +35,25 @@ class EventFragment: Fragment() {
 
         binding.viewModel = viewModel
 
-        val adapter = EventAdapter()
-        binding.recyclerViewEvent.adapter = adapter
-
-        viewModel.eventDataForRecycleView.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                Log.d("eventFragment", "it = ${it}")
-                adapter.notifyDataSetChanged()
-                adapter.submitList(it)
-            }
+//        val adapter = EventAdapter(viewModel,EventAdapter.OnClickListener())
+        binding.recyclerViewEvent.adapter = EventAdapter(viewModel,EventAdapter.OnClickListener {
+            Log.d("test","eventMember= $it")
         })
+
+
+
+//        binding.RecyclerOther.adapter = OtherAdapter(viewModel, OtherAdapter.OnClickListener{
+//            Log.d("test","otherPlan = $it")
+//        })
+
+
+//        viewModel.eventDataForRecycleView.observe(viewLifecycleOwner, Observer {
+//            it?.let {
+//                Log.d("eventFragment", "it = ${it}")
+//                adapter.notifyDataSetChanged()
+//                adapter.submitList(it)
+//            }
+//        })
 
         binding.fab.setOnClickListener {
             findNavController().navigate(NavigationDirections.actionEventFragmentToToEventFragment())

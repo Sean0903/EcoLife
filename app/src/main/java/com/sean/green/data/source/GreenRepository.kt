@@ -43,4 +43,6 @@ interface GreenRepository {
 
     suspend fun getEventData(collection: String): Result<List<Event>>
 
+    suspend fun addEventMember(eventId: String, userEmail: String, userImage: String): Result<Boolean>
+
 }

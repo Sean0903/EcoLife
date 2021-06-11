@@ -5,7 +5,7 @@
 
     <data>
         <import type="com.sean.green.ext.TimeUtil"/>
-        <variable name="viewModel" type="com.sean.green.data.Event" />
+        <variable name="eventData" type="com.sean.green.data.Event" />
 
     </data>
 
@@ -40,7 +40,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginEnd="92dp"
-                    app:imageUrl="@{viewModel.image}"
+                    app:imageUrl="@{eventData.image}"
                     app:layout_constraintBottom_toBottomOf="@+id/card_view_image"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/card_view_image"
@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="@{viewModel.userName}"
+                android:text="@{eventData.userName}"
                 app:layout_constraintBottom_toBottomOf="@+id/card_view_image"
                 app:layout_constraintStart_toEndOf="@+id/card_view_image"
                 tools:text="Kai Hsiang Liang" />
@@ -62,9 +62,10 @@
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
-                android:layout_height="24dp"
+                android:layout_height="0dp"
                 android:layout_marginStart="8dp"
-                android:text="@{String.valueOf(viewModel.time)}"
+                android:layout_marginTop="3dp"
+                android:text="@{String.valueOf(eventData.time)}"
                 app:layout_constraintBottom_toBottomOf="@+id/image_item_event_host2"
                 app:layout_constraintStart_toEndOf="@+id/image_item_event_host2"
                 app:layout_constraintTop_toTopOf="@+id/image_item_event_host2"
@@ -95,7 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:layout_marginStart="8dp"
-                android:text="@{viewModel.location}"
+                android:text="@{eventData.location}"
                 app:layout_constraintBottom_toBottomOf="@+id/image_item_event_host3"
                 app:layout_constraintStart_toEndOf="@+id/image_item_event_host3"
                 app:layout_constraintTop_toTopOf="@+id/image_item_event_host3"
@@ -116,7 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:layout_marginStart="8dp"
-                android:text="@{viewModel.introduction}"
+                android:text="@{eventData.introduction}"
                 app:layout_constraintBottom_toBottomOf="@+id/image_item_event_host4"
                 app:layout_constraintStart_toEndOf="@+id/image_item_event_host4"
                 app:layout_constraintTop_toTopOf="@+id/image_item_event_host4"
@@ -130,14 +131,14 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/dialog_edit_text_frame"
-                android:text="@{viewModel.content}"
+                android:text="@{eventData.content}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image_item_event_host4"
                 tools:text="之前去宜蘭玩的時候，看到沙灘的垃圾好多，我們一起去淨灘吧。" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/button_item_event_attend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -151,21 +152,38 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="活動結束"
-                app:layout_constraintBottom_toBottomOf="@+id/button2"
+                app:layout_constraintBottom_toBottomOf="@+id/button_item_event_attend"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/button2"
-                app:layout_constraintTop_toTopOf="@+id/button2" />
+                app:layout_constraintStart_toEndOf="@+id/button_item_event_attend"
+                app:layout_constraintTop_toTopOf="@+id/button_item_event_attend" />
 
             <TextView
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="@{@string/text_event_activity + viewModel.member + @string/text_event_num}"
+
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button2"
+                app:layout_constraintTop_toBottomOf="@+id/button_item_event_attend"
                 tools:text="活動目前145位會參與" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_event_image"
+                listEventImage="@{eventData.memberImage}"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_item_event_attend"
+                tools:listitem="@layout/item_event_member_image" />
+
+            <!--            android:text="@{@string/text_event_activity + eventData + @string/text_event_num}"-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,14 +4,19 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import com.google.firebase.ktx.Firebase
 import com.sean.green.GreenApplication
 import com.sean.green.R
 import com.sean.green.data.*
+import com.sean.green.data.FirebaseKey.Companion.COLLECTION_EVENT
 import com.sean.green.data.source.GreenRepository
 import com.sean.green.ext.*
+import com.sean.green.login.UserManager
 import com.sean.green.network.LoadApiStatus
+import io.grpc.InternalChannelz.id
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -19,7 +24,7 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ToEventViewModel (private val repository: GreenRepository): ViewModel() {
+class ToEventViewModel(private val repository: GreenRepository) : ViewModel() {
 
     val time = MutableLiveData<String>()
     val location = MutableLiveData<String>()
@@ -28,7 +33,7 @@ class ToEventViewModel (private val repository: GreenRepository): ViewModel() {
 
     var dueDate = MutableLiveData<Long>().apply {
         value = android.icu.util.Calendar.getInstance().timeInMillis
-        Log.d("dueDate","eventDate = $value")
+        Log.d("dueDate", "eventDate = ${value}")
     }
 
     private var viewModelJob = Job()
@@ -68,50 +73,46 @@ class ToEventViewModel (private val repository: GreenRepository): ViewModel() {
         _navigateToHome.value = true
     }
 
-    init {
-        stampToDate(dueDate.value!!)
-    }
-
-
     fun navigateToHomeAfterSend(needRefresh: Boolean = false) {
         _navigateToHome.value = needRefresh
     }
 
-    fun stampToDate(time: Long): String {
-        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
-        return simpleDateFormat.format(Date(time))
-    }
-
-
-
-    fun addEventData2Firebase(userEmail: String, userImage: String, userName: String) {
+    fun addEventData2Firebase(event: Event,userEmail: String, userImage: String, userName: String) {
 
         coroutineScope.launch {
 
+            val eventTimeStamp = dueDate.value!!
+            val eventYMD = TimeUtil.stampToYMD(eventTimeStamp)
+            val eventYear = TimeUtil.stampToYear(eventTimeStamp)
+            val eventMonth = TimeUtil.stampToMonthInt(eventTimeStamp)
+            val eventDate = TimeUtil.stampToDay(eventTimeStamp)
+
+            Log.d("eventYMD", "YMD = ${eventYMD}")
+            Log.d("eventYear", "year = ${eventYear}")
+            Log.d("eventMonth", "month = ${eventMonth}")
+            Log.d("eventDate", "date = ${eventDate}")
+
             val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
-            val year = Calendar.getInstance().timeInMillis.toDisplayFormatYear()
-            val month = Calendar.getInstance().timeInMillis.toDisplayFormatMonth()
-            val day = Calendar.getInstance().timeInMillis.toDisplayFormatDay()
-            val createdTime = Calendar.getInstance().timeInMillis
+//            val year = Calendar.getInstance().timeInMillis.toDisplayFormatYear()
+//            val month = Calendar.getInstance().timeInMillis.toDisplayFormatMonth()
+//            val day = Calendar.getInstance().timeInMillis.toDisplayFormatDay()
+//            val createdTime = Calendar.getInstance().timeInMillis
 
-//            val data = hashMapOf(
-//                "event" to "event",
-//                "introduction" to introduction.value?.toString(),
-//                "day" to dueDate.value
-//                "year" to
-//                "createdTime" to Calendar.getInstance().timeInMillis
-//                "day" to day,
-//                "month" to month,
-//                "year" to year,
-//                "createdTime" to createdTime,
-//            )
+            val data = hashMapOf(
+                "event" to "event",
+                "introduction" to introduction.value?.toString(),
+                "year" to eventYear,
+                "month" to eventMonth,
+                "day" to eventDate,
+                "createdTime" to eventTimeStamp,
+            )
 
-//            val saveTime = FirebaseFirestore.getInstance()
-//                .collection(FirebaseKey.COLLECTION_USERS).document(userEmail).collection("greens")
-//                .document(dueDate.value!!.toString()).set(data, SetOptions.merge())
+            val saveTime = FirebaseFirestore.getInstance()
+                .collection(FirebaseKey.COLLECTION_USERS).document(userEmail).collection("greens")
+                .document(eventYMD).set(data, SetOptions.merge())
 
             val newEventData = Event(
-                time =  dueDate.value!!,
+                time = eventYMD,
                 content = content.value?.toString(),
                 createdTime = Calendar.getInstance().timeInMillis,
                 introduction = introduction.value?.toString(),
@@ -119,11 +120,19 @@ class ToEventViewModel (private val repository: GreenRepository): ViewModel() {
                 today = today,
                 image = userImage,
                 userName = userName,
-                email = userEmail
+                email = userEmail,
+                memberImage = listOf(userImage),
+                member = listOf(userEmail)
             )
 
+//            val addMemberImage = FirebaseFirestore.getInstance()
+//                .collection(COLLECTION_EVENT).document(event.id).update("KEY_EVENT_MEMBER_IMAGE",
+//                    FieldValue.arrayUnion(UserManager.user.image))
+
+            Log.d("dueDate", "eventDate = ${dueDate.value}")
+
             when (val result =
-                repository.addEvent2Firebase(FirebaseKey.COLLECTION_SHARE, newEventData)) {
+                repository.addEvent2Firebase(COLLECTION_EVENT, newEventData)) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE

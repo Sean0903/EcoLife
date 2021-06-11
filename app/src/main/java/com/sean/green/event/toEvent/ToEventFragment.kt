@@ -14,10 +14,12 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.sean.green.NavigationDirections
 import com.sean.green.R
+import com.sean.green.data.Event
 import com.sean.green.databinding.FragmentToEventBinding
 import com.sean.green.ext.getVmFactory
 import com.sean.green.login.UserManager
 import com.sean.green.share.toShare.ToShareViewModel
+import io.grpc.InternalChannelz.id
 import java.text.SimpleDateFormat
 
 
@@ -63,6 +65,7 @@ class ToEventFragment : Fragment() {
 
         binding.buttonDialogEventSend.setOnClickListener {
             viewModel.addEventData2Firebase(
+                Event(),
                 UserManager.user.email,
                 UserManager.user.image,
                 UserManager.user.userName)
@@ -73,6 +76,9 @@ class ToEventFragment : Fragment() {
             setOnDateChangedListener { _, year, month, date ->
                 val format = SimpleDateFormat(getString(R.string.diary_record_date))
                 viewModel.dueDate.value = format.parse("$date/${month + 1}/$year").time
+                Log.d("endDate","minDate = $minDate")
+                Log.d("endDate","format = $format")
+                Log.d("endDate","viewModel.dueDate.value =${viewModel.dueDate.value}")
             }
         }
 
