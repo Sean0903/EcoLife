@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">Green</string>
     <string name="app_name2">EcoLife</string>
-    <string name="navigation_home_name">挑戰</string>
-    <string name="navigation_chart_name">成果</string>
+    <string name="navigation_home_name">首頁</string>
+    <string name="navigation_chart_name">累積</string>
     <string name="navigation_calendar_name">日曆</string>
-    <string name="navigation_community_name">社群</string>
+    <string name="navigation_community_name">分享</string>
     <string name="navigation_event_name">活動</string>
     <string name="text_save_title">新增成果</string>
     <string name="text_use_title">新增消耗</string>

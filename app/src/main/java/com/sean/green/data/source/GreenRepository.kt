@@ -45,4 +45,10 @@ interface GreenRepository {
 
     suspend fun addEventMember(eventId: String, userEmail: String, userImage: String): Result<Boolean>
 
+    suspend fun addArticle2Firebase(userEmail: String, article: Article): Result<Boolean>
+
+    suspend fun getArticle(userEmail: String, collection: String): Result<List<Article>>
+
+    suspend fun addEventInfo2UserFirebase(event: Event,eventId: String, eventDay: String,userEmail: String): Result<Boolean>
+
 }

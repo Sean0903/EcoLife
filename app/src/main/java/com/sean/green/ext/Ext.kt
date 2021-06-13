@@ -57,6 +57,12 @@ object TimeUtil {
         val simpleDateFormat = java.text.SimpleDateFormat("yyyy-MM-dd", locale)
         return simpleDateFormat.parse(date).time
     }
+
+    @JvmStatic
+    fun stampToHM(time: Long): String {
+        val simpleDateFormat = java.text.SimpleDateFormat("HH:mm")
+        return simpleDateFormat.format(Date(time))
+    }
 }
 
 

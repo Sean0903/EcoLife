@@ -51,14 +51,6 @@ class GreenLocalDataSource(val context: Context) : GreenDataSource {
         TODO("Not yet implemented")
     }
 
-//    override suspend fun createUser(user: User): Result<Boolean> {
-//        TODO("Not yet implemented")
-//    }
-//
-//    override suspend fun findUser(firebaseUserId: String): Result<User?> {
-//        TODO("Not yet implemented")
-//    }
-
     override suspend fun addSharing2Firebase(collection: String, share: Share): Result<Boolean> {
         TODO("Not yet implemented")
     }
@@ -88,6 +80,18 @@ class GreenLocalDataSource(val context: Context) : GreenDataSource {
     }
 
     override suspend fun addEventMember(eventId: String, userEmail: String, userImage: String): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun addArticle2Firebase(userEmail: String, article: Article): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getArticle(userEmail: String, collection: String): Result<List<Article>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun addEventInfo2UserFirebase(event: Event,eventId: String, eventDay: String,userEmail: String): Result<Boolean> {
         TODO("Not yet implemented")
     }
 

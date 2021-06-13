@@ -34,6 +34,7 @@ class EventAdapter(val viewModel: EventViewModel, val onClickListener: OnClickLi
 
         holder.itemView.button_item_event_attend.setOnClickListener {
             viewModel.addMemberToEvent(event, UserManager.user.email, UserManager.user.image)
+            viewModel.addEventInfo2UserFirebase(event,UserManager.user.email)
         }
 
     }

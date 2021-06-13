@@ -74,7 +74,7 @@ class UseViewModel(private val repository: GreenRepository): ViewModel() {
 
         coroutineScope.launch {
 
-            val userId = "ip29dDcJ24BtyGUzNlPE"
+//            val userId = "ip29dDcJ24BtyGUzNlPE"
 
             val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
             val year = Calendar.getInstance().timeInMillis.toDisplayFormatYear()

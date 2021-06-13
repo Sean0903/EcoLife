@@ -38,12 +38,12 @@
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/_17936_200"
-            app:tint="?android:attr/colorEdgeEffect" />
+            app:srcCompat="@drawable/back_button"
+            app:tint="@color/colorBlue5" />
 
         <ImageView
             android:id="@+id/add_save_photo"
-            android:layout_width="300dp"
+            android:layout_width="330dp"
             android:layout_height="150dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/normal_frame"
@@ -199,6 +199,7 @@
             android:textColor="@color/colorWhite"
             android:textColorHint="@color/colorWhite"
             android:textSize="15dp"
+            android:text="@={viewModel.content}"
             app:layout_constraintBottom_toTopOf="@+id/button_save_page"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout"

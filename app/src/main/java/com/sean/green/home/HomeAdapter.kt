@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.sean.green.data.Article
 import com.sean.green.data.Save
 import com.sean.green.databinding.ItemHomePictureBinding
 
 class HomeAdapter():
-    ListAdapter<Save, HomeAdapter.ViewHolder>(HomeAdapter.DiffCallback()) {
+    ListAdapter<Article, HomeAdapter.ViewHolder>(HomeAdapter.DiffCallback()) {
 
         //實體化ViewHolder然後把View與ViewHolder綁定
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,9 +28,9 @@ class HomeAdapter():
 
         class ViewHolder(var binding: ItemHomePictureBinding ) : RecyclerView.ViewHolder(binding.root) {
 
-            fun bind(item: Save) {
+            fun bind(item: Article) {
             Log.d("seanViewHolder","fun bind(item: Save) = $item")
-                binding.picture = item
+                binding.article = item
             }
 
             companion object {
@@ -41,13 +42,13 @@ class HomeAdapter():
             }
         }
 
-        class DiffCallback : DiffUtil.ItemCallback<Save>() {
-            override fun areItemsTheSame(oldItem: Save, newItem: Save): Boolean {
+        class DiffCallback : DiffUtil.ItemCallback<Article>() {
+            override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
                 return oldItem == newItem
             }
 
 
-            override fun areContentsTheSame(oldItem:Save, newItem:Save): Boolean {
+            override fun areContentsTheSame(oldItem:Article, newItem:Article): Boolean {
                 return oldItem == newItem
             }
         }

@@ -7,20 +7,19 @@ import androidx.lifecycle.ViewModel
 import com.sean.green.App
 import com.sean.green.GreenApplication
 import com.sean.green.R
-import com.sean.green.data.Challenge
+import com.sean.green.data.*
+import com.sean.green.data.FirebaseKey.Companion.COLLECTION_ARTICLE
 import com.sean.green.data.FirebaseKey.Companion.COLLECTION_CHALLENGE
 import com.sean.green.data.FirebaseKey.Companion.COLLECTION_SAVE
+import com.sean.green.data.FirebaseKey.Companion.COLLECTION_SHARE
 import com.sean.green.data.FirebaseKey.Companion.COLLECTION_USE
 import com.sean.green.data.FirebaseKey.Companion.USER_ID
-import com.sean.green.data.Save
 import com.sean.green.data.source.GreenRepository
 import com.sean.green.network.LoadApiStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import com.sean.green.data.Result
-import com.sean.green.data.Use
 import com.sean.green.login.UserManager
 import java.sql.Timestamp
 import java.util.*
@@ -45,6 +44,10 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
     private val _challengeNum = MutableLiveData<List<Challenge>>()
     val challengeNum: LiveData<List<Challenge>>
         get() = _challengeNum
+
+    private val _articleDataForRecycleView = MutableLiveData<List<Article>>()
+    val articleDataForRecycleView: LiveData<List<Article>>
+        get() = _articleDataForRecycleView
 
     // status: The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<LoadApiStatus>()
@@ -89,6 +92,7 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
         getTotalSaveNum(UserManager.user.email)
         getTotalUseNum(UserManager.user.email)
         getNowChallengeNum(UserManager.user.email)
+        getArticleData(UserManager.user.email)
     }
 
     var nowChallengePlastic = 0
@@ -161,14 +165,6 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
         }
     }
 
-//    init {
-////        getTotalSaveNum(UserManager.user.email)
-//        getTotalUseNum(UserManager.user.email)
-////        getNowChallengeNum(UserManager.user.email)
-//    }
-
-
-
     fun getTotalUseNum(userEmail: String) {
         coroutineScope.launch {
             _status2.value = LoadApiStatus.LOADING
@@ -209,13 +205,6 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
             _refreshStatus.value = false
         }
     }
-
-//    init {
-////        getTotalSaveNum(UserManager.user.email)
-////        getTotalUseNum(UserManager.user.email)
-//        getNowChallengeNum(UserManager.user.email)
-//    }
-
 
     fun getNowChallengeNum(userEmail: String) {
         coroutineScope.launch {
@@ -258,6 +247,38 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
                 }
             }
             _refreshStatus.value = false
+        }
+    }
+
+    fun getArticleData(userEmail: String) {
+        coroutineScope.launch {
+
+            val articleListForRecycleView = mutableListOf<Article>()
+
+            _status.value = LoadApiStatus.LOADING
+
+            val articleList = repository.getArticle(userEmail, COLLECTION_ARTICLE)
+            Log.d("articleData","articleList = ${repository.getArticle(userEmail, COLLECTION_ARTICLE)}")
+
+            when (articleList) {
+                is Result.Success -> {
+                    articleListForRecycleView.addAll(articleList.data)
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                }
+                else -> {
+                    _error.value =
+                        GreenApplication.instance.getString(R.string.you_know_nothing)
+                    _status.value = LoadApiStatus.ERROR
+
+                }
+            }
+
+            _refreshStatus.value = false
+
+            _articleDataForRecycleView.value = articleListForRecycleView
+            Log.d("homeViewModel","_articleDataForRecycleView.value = ${_articleDataForRecycleView.value}")
+
         }
     }
 

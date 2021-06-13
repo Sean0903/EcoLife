@@ -85,4 +85,16 @@ class DefaultGreenRepository(
         return greenRemoteDataSource.addEventMember(eventId,userEmail,userImage)
     }
 
+    override suspend fun addArticle2Firebase(userEmail: String, article: Article): Result<Boolean> {
+        return greenRemoteDataSource.addArticle2Firebase(userEmail,article)
+    }
+
+    override suspend fun getArticle(userEmail: String, collection: String): Result<List<Article>> {
+        return greenRemoteDataSource.getArticle(userEmail,collection)
+    }
+
+    override suspend fun addEventInfo2UserFirebase(event: Event,eventId: String, eventDay: String,userEmail: String): Result<Boolean> {
+        return greenRemoteDataSource.addEventInfo2UserFirebase(event,eventId,eventDay,userEmail)
+    }
+
 }

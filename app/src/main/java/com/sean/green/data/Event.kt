@@ -9,7 +9,6 @@ data class Event(
     var id: String = "",
     val name: String? = "",
     val introduction: String? = "",
-    val time:String? = "",
     val location: String? = "",
     val content: String? = "",
     val member: List<String> = listOf(""),
@@ -19,5 +18,10 @@ data class Event(
     var image: String = "",
     var userName: String = "",
     var email: String = "",
+    val eventTime: String = "",
+    var eventYear: String? = "",
+    var eventMonth: String? = "",
+    var eventDay: String? = "",
+    var eventTimestamp: Long =  -1,
 
-): Parcelable
+    ) : Parcelable

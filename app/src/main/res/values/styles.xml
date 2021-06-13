@@ -64,4 +64,11 @@
         <item name="android:textColorHint">@color/colorWhite</item>
     </style>
 
+    <style name="icon_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">18dp</item>
+        <item name="android:textColor">@color/colorFlyingLemon1</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
 </resources>

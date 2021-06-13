@@ -6,13 +6,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.sean.green.GreenApplication
 import com.sean.green.R
 import com.sean.green.data.*
 import com.sean.green.data.FirebaseKey.Companion.COLLECTION_EVENT
 import com.sean.green.data.FirebaseKey.Companion.COLLECTION_SHARE
+import com.sean.green.data.FirebaseKey.Companion.COLLECTION_USERS
 import com.sean.green.data.source.GreenRepository
-import com.sean.green.ext.toDisplayFormat
+import com.sean.green.ext.*
 import com.sean.green.login.UserManager
 import com.sean.green.network.LoadApiStatus
 import kotlinx.coroutines.CoroutineScope
@@ -75,7 +78,10 @@ class EventViewModel(private val repository: GreenRepository) : ViewModel() {
             _status.value = LoadApiStatus.LOADING
 
             val eventList = repository.getEventData(FirebaseKey.COLLECTION_EVENT)
-            Log.d("eventData","eventList = ${repository.getEventData(FirebaseKey.COLLECTION_EVENT)}")
+            Log.d(
+                "eventData",
+                "eventList = ${repository.getEventData(FirebaseKey.COLLECTION_EVENT)}"
+            )
 
             when (eventList) {
                 is Result.Success -> {
@@ -94,19 +100,48 @@ class EventViewModel(private val repository: GreenRepository) : ViewModel() {
             _refreshStatus.value = false
 
             _eventDataForRecycleView.value = eventListForRecycleView
-            Log.d("eventViewModel","_eventDataForRecycleView.value = ${_eventDataForRecycleView.value}")
+            Log.d(
+                "eventViewModel",
+                "_eventDataForRecycleView.value = ${_eventDataForRecycleView.value}"
+            )
         }
 
     }
 
-    fun addMemberToEvent(event: Event,userEmail: String, userImage: String) {
+
+    fun addMemberToEvent(event: Event, userEmail: String, userImage: String) {
 
         coroutineScope.launch {
 
-            val result = repository.addEventMember(event.id,userEmail,userImage)
+            val result = repository.addEventMember(event.id, userEmail, userImage)
             _eventDataForRecycleView.value = _eventDataForRecycleView.value
-
         }
+    }
 
+    fun addEventInfo2UserFirebase(event: Event,userEmail: String) {
+
+        coroutineScope.launch {
+
+            when (val result =
+                repository.addEventInfo2UserFirebase(event,event.id, event.eventTime, userEmail)) {
+                is Result.Success -> {
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                    navigateToHomeAfterSend(true)
+                }
+                is Result.Fail -> {
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                }
+                is Result.Error -> {
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                }
+                else -> {
+                    _error.value = GreenApplication.instance.getString(R.string.you_know_nothing)
+                    _status.value = LoadApiStatus.ERROR
+                }
+            }
+        }
     }
 }

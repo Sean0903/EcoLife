@@ -7,6 +7,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.SetOptions
 import com.sean.green.GreenApplication
 import com.sean.green.R
 import com.sean.green.data.*
@@ -29,7 +30,11 @@ object GreenRemoteDataSource : GreenDataSource {
     private const val KEY_EVENT_MEMBER_IMAGE = "memberImage"
 
 
-    override suspend fun getSaveDataForChart(userEmail: String, collection: String, documentId: String): Result<List<Save>> =
+    override suspend fun getSaveDataForChart(
+        userEmail: String,
+        collection: String,
+        documentId: String
+    ): Result<List<Save>> =
         suspendCoroutine { continuation ->
 
             val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
@@ -71,7 +76,11 @@ object GreenRemoteDataSource : GreenDataSource {
         }
 
 
-    override suspend fun getUseDataForChart(userEmail: String, collection: String, documentId: String): Result<List<Use>> =
+    override suspend fun getUseDataForChart(
+        userEmail: String,
+        collection: String,
+        documentId: String
+    ): Result<List<Use>> =
         suspendCoroutine { continuation ->
 
             val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
@@ -188,7 +197,10 @@ object GreenRemoteDataSource : GreenDataSource {
                 }
         }
 
-    override suspend fun getChallengeNum(userEmail: String, collection: String): Result<List<Challenge>> =
+    override suspend fun getChallengeNum(
+        userEmail: String,
+        collection: String
+    ): Result<List<Challenge>> =
         suspendCoroutine { continuation ->
 
             val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
@@ -227,7 +239,10 @@ object GreenRemoteDataSource : GreenDataSource {
         }
 
 
-    override suspend fun getCalendarEvent(userEmail: String,collection: String): Result<List<CalendarEvent>> =
+    override suspend fun getCalendarEvent(
+        userEmail: String,
+        collection: String
+    ): Result<List<CalendarEvent>> =
         suspendCoroutine { continuation ->
             FirebaseFirestore.getInstance()
                 .collection(PATH_USERS).document(userEmail).collection(PATH_GREENS)
@@ -260,7 +275,7 @@ object GreenRemoteDataSource : GreenDataSource {
         }
 
 
-    override suspend fun addSaveNum2Firebase(userEmail: String,save: Save): Result<Boolean> =
+    override suspend fun addSaveNum2Firebase(userEmail: String, save: Save): Result<Boolean> =
         suspendCoroutine { continuation ->
 
             val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
@@ -292,7 +307,7 @@ object GreenRemoteDataSource : GreenDataSource {
                 }
         }
 
-    override suspend fun addUseNum2Firebase(userEmail: String,use: Use): Result<Boolean> =
+    override suspend fun addUseNum2Firebase(userEmail: String, use: Use): Result<Boolean> =
         suspendCoroutine { continuation ->
 
             val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
@@ -307,6 +322,7 @@ object GreenRemoteDataSource : GreenDataSource {
             val todayDocument = greensCollenction.document(today)
             val useCollection = todayDocument.collection("use").document()
 
+            use.id = useCollection.id
             useCollection
                 .set(use)
                 .addOnCompleteListener { task ->
@@ -356,7 +372,7 @@ object GreenRemoteDataSource : GreenDataSource {
 //                }
         }
 
-    override suspend fun addChallenge2Firebase(userEmail: String,challenge: Challenge)
+    override suspend fun addChallenge2Firebase(userEmail: String, challenge: Challenge)
             : Result<Boolean> = suspendCoroutine { continuation ->
 
         val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
@@ -389,7 +405,7 @@ object GreenRemoteDataSource : GreenDataSource {
             }
     }
 
-    override suspend fun addSharing2Firebase(collection: String,share: Share): Result<Boolean> =
+    override suspend fun addSharing2Firebase(collection: String, share: Share): Result<Boolean> =
         suspendCoroutine { continuation ->
 
             val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
@@ -475,77 +491,80 @@ object GreenRemoteDataSource : GreenDataSource {
                     document
                         .set(user)
                         .addOnSuccessListener {
-                            Log.d("postUser","DocumentSnapshot added with ID: ${users}")
+                            Log.d("postUser", "DocumentSnapshot added with ID: ${users}")
                         }
                         .addOnFailureListener { e ->
-                            Log.w("postUser","Error adding document $e")
+                            Log.w("postUser", "Error adding document $e")
                         }
                 } else {
                     for (myDocument in result) {
-                        Log.d("postUser,","Already initialized")
+                        Log.d("postUser,", "Already initialized")
                     }
                 }
             }
     }
 
-    override suspend fun getUser(userEmail: String,collection: String): Result<List<User>> =
-    suspendCoroutine { continuation ->
-
-        val firestore = FirebaseFirestore.getInstance().collection(PATH_USERS)
-
-
-        firestore.whereEqualTo("email", userEmail)
-            .get()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val list = mutableListOf<User>()
-                    for (document in task.result!!) {
-                        Log.d("seanGetChallengeNum", document.id + " => " + document.data)
-
-                        val challengeNum = document.toObject(User::class.java)
-                        list.add(challengeNum)
-                    }
-
-                    continuation.resume(Result.Success(list))
-
-                } else {
-                    task.exception?.let {
-
-                        Log.w(
-                            "sean",
-                            "[${this::class.simpleName}] Error getting documents. ${it.message}"
-                        )
-                        continuation.resume(Result.Error(it))
-                        return@addOnCompleteListener
-                    }
-                    continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
-                }
-            }
-    }
-
-    override suspend fun firebaseAuthWithGoogle(account: GoogleSignInAccount?): Result<FirebaseUser?> =
+    override suspend fun getUser(userEmail: String, collection: String): Result<List<User>> =
         suspendCoroutine { continuation ->
-        val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
-        val auth = FirebaseAuth.getInstance()
 
-            auth?.signInWithCredential(credential)
-                ?.addOnCompleteListener { task ->
+            val firestore = FirebaseFirestore.getInstance().collection(PATH_USERS)
+
+
+            firestore.whereEqualTo("email", userEmail)
+                .get()
+                .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Log.i("firebaseAuthWithGoogle","Post: $credential")
-                        task.result?.let {
-                            continuation.resume(Result.Success(it.user))
+                        val list = mutableListOf<User>()
+                        for (document in task.result!!) {
+                            Log.d("seanGetChallengeNum", document.id + " => " + document.data)
+
+                            val challengeNum = document.toObject(User::class.java)
+                            list.add(challengeNum)
                         }
+
+                        continuation.resume(Result.Success(list))
+
                     } else {
                         task.exception?.let {
 
-                            Log.w("firebaseAuthWithGoogle","[${this::class.simpleName}] Error getting documents.")
+                            Log.w(
+                                "sean",
+                                "[${this::class.simpleName}] Error getting documents. ${it.message}"
+                            )
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
                         continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
                     }
                 }
-    }
+        }
+
+    override suspend fun firebaseAuthWithGoogle(account: GoogleSignInAccount?): Result<FirebaseUser?> =
+        suspendCoroutine { continuation ->
+            val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
+            val auth = FirebaseAuth.getInstance()
+
+            auth?.signInWithCredential(credential)
+                ?.addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Log.i("firebaseAuthWithGoogle", "Post: $credential")
+                        task.result?.let {
+                            continuation.resume(Result.Success(it.user))
+                        }
+                    } else {
+                        task.exception?.let {
+
+                            Log.w(
+                                "firebaseAuthWithGoogle",
+                                "[${this::class.simpleName}] Error getting documents."
+                            )
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                    }
+                }
+        }
 
     override suspend fun addEvent2Firebase(collection: String, event: Event): Result<Boolean> =
         suspendCoroutine { continuation ->
@@ -620,8 +639,124 @@ object GreenRemoteDataSource : GreenDataSource {
     override suspend fun addEventMember(eventId: String, userEmail: String, userImage: String): Result<Boolean> =
         suspendCoroutine { continuation ->
             FirebaseFirestore.getInstance().collection(PATH_EVENT).document(eventId)
-                .update(KEY_EVENT_MEMBER, FieldValue.arrayUnion(UserManager.user.email),
-                    KEY_EVENT_MEMBER_IMAGE,FieldValue.arrayUnion(UserManager.user.image))
+                .update(
+                    KEY_EVENT_MEMBER, FieldValue.arrayUnion(UserManager.user.email),
+                    KEY_EVENT_MEMBER_IMAGE, FieldValue.arrayUnion(UserManager.user.image)
+                )
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Log.d("dataSource", "addEventMember: $task")
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+
+                            Log.d(
+                                "dataSource",
+                                "[${this::class.simpleName}] Error getting documents. ${it.message}"
+                            )
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                    }
+                }
+        }
+
+    override suspend fun addArticle2Firebase(userEmail: String, article: Article): Result<Boolean> =
+        suspendCoroutine { continuation ->
+
+            val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
+
+            val firestore = FirebaseFirestore.getInstance().collection(PATH_USERS)
+            val userDocument = firestore.document(userEmail)
+            val greensCollenction = userDocument.collection(PATH_GREENS)
+            val todayDocument = greensCollenction.document(today)
+            val articleCollection = todayDocument.collection("article").document()
+
+            article.id = articleCollection.id
+            articleCollection
+                .set(article)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Log.d("dataSource", "addArticle2Firebase: $article")
+
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+
+                            Log.d(
+                                "dataSource",
+                                "[${this::class.simpleName}] Error getting documents. ${it.message}"
+                            )
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                    }
+                }
+        }
+
+    override suspend fun getArticle(userEmail: String, collection: String): Result<List<Article>> =
+    suspendCoroutine { continuation ->
+
+        val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
+        val firestore = FirebaseFirestore.getInstance().collection(PATH_USERS)
+        val userDocument = firestore.document(userEmail)
+        val greensCollenction = userDocument.collection(PATH_GREENS)
+        val todayDocument = greensCollenction.document(today)
+        val articleCollection = todayDocument.collection("article")
+
+        articleCollection
+            .orderBy(KEY_CREATED_TIME, Query.Direction.DESCENDING)
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val list = mutableListOf<Article>()
+                    for (document in task.result!!) {
+                        Log.d("getArticle", document.id + " => " + document.data)
+
+                        val article = document.toObject(Article::class.java)
+                        list.add(article)
+                    }
+
+                    continuation.resume(Result.Success(list))
+
+                } else {
+                    task.exception?.let {
+
+                        Log.w(
+                            "sean",
+                            "[${this::class.simpleName}] Error getting documents. ${it.message}"
+                        )
+                        continuation.resume(Result.Error(it))
+                        return@addOnCompleteListener
+                    }
+                    continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                }
+            }
+    }
+
+    override suspend fun addEventInfo2UserFirebase(event: Event,eventId: String, eventDay: String,userEmail: String): Result<Boolean> =
+        suspendCoroutine { continuation ->
+
+            val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
+
+            val firestore = FirebaseFirestore.getInstance().collection(PATH_USERS)
+            val userDocument = firestore.document(userEmail)
+            val greensCollenction = userDocument.collection(PATH_GREENS)
+            val document = greensCollenction.document(event.eventTime)
+
+            val data = hashMapOf(
+                "event" to "event",
+                "introduction" to event.introduction.toString(),
+                "year" to event.eventYear.toString(),
+                "month" to event.eventMonth.toString(),
+                "day" to event.eventDay.toString(),
+                "createdTime" to event.eventTimestamp,
+            )
+
+
+            document.set(data, SetOptions.merge())
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Log.d("dataSource", "addEventMember: $task")

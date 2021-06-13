@@ -7,7 +7,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.UserManagerCompat
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -21,9 +23,9 @@ import com.sean.green.ext.getVmFactory
 import com.sean.green.login.UserManager.user
 
 
-class SaveFragment: Fragment() {
+class SaveFragment : Fragment() {
 
-        var db = FirebaseFirestore.getInstance()
+    var db = FirebaseFirestore.getInstance()
 
 //    private lateinit var binding : FragmentSaveBinding
 
@@ -38,17 +40,17 @@ class SaveFragment: Fragment() {
         val binding = FragmentSaveBinding.inflate(inflater, container, false)
 
         viewModel.plastic.observe(viewLifecycleOwner, Observer {
-            Log.i("saveFragment","plastic = ${viewModel.plastic.value}")
+            Log.i("saveFragment", "plastic = ${viewModel.plastic.value}")
         }
         )
 
         viewModel.power.observe(viewLifecycleOwner, Observer {
-            Log.i("saveFragment","power = ${viewModel.power.value}")
+            Log.i("saveFragment", "power = ${viewModel.power.value}")
         }
         )
 
         viewModel.carbon.observe(viewLifecycleOwner, Observer {
-            Log.i("saveFragment","carbon = ${viewModel.carbon.value}")
+            Log.i("saveFragment", "carbon = ${viewModel.carbon.value}")
         }
         )
 
@@ -65,33 +67,35 @@ class SaveFragment: Fragment() {
 
         }
 
-
         binding.buttonSavePage.setOnClickListener {
-//                viewModel.addSaveData2fire()
-            viewModel.addSaveData2Firebase(user.email)
+
+            if (viewModel.plastic.value.isNullOrBlank() &&
+                viewModel.power.value.isNullOrBlank() &&
+                viewModel.carbon.value.isNullOrBlank()) {
+                Toast.makeText(context, "請輸入成果", Toast.LENGTH_LONG).show()
+            } else {
+                viewModel.addSaveData2Firebase(user.email)
             }
 
-        binding.imageSavePageBackToHome.setOnClickListener {
-            findNavController().navigate(NavigationDirections.navigateToHomeFragment(
-//                FirebaseAuth.getInstance().currentUser!!.uid
-            ))
+            if (viewModel.content.value != null) {
+                viewModel.addArticle2Firebase(user.email)
+            }
         }
 
+        binding.imageSavePageBackToHome.setOnClickListener {
+            findNavController().navigate(
+                NavigationDirections.navigateToHomeFragment(
+                )
+            )
+        }
 
-
-
+        binding.editTextSavePageContent.doOnTextChanged { text, start, before, count ->
+            viewModel.content.value = text.toString()
+            Log.d("saveFragment", "content = ${viewModel.content.value}")
+        }
 
         return binding.root
     }
-
-//        private fun send() {
-//        //測試
-//        val washingtonRef =
-//            db.collection("green").document("2021")
-//        washingtonRef.update("plastic", FieldValue.arrayUnion(viewModel.plastic.value))
-//        washingtonRef.update("power", FieldValue.arrayUnion(viewModel.power.value))
-//        washingtonRef.update("carbon", FieldValue.arrayUnion(viewModel.carbon.value))
-//    }
 }
 
 

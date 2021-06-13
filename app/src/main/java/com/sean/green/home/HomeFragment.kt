@@ -17,16 +17,17 @@ import com.sean.green.databinding.FragmentHomeBinding
 import com.sean.green.ext.getVmFactory
 import com.sean.green.login.UserManager
 
-class HomeFragment: Fragment() {
+class HomeFragment : Fragment() {
 
-    private lateinit var binding : FragmentHomeBinding
+    private lateinit var binding: FragmentHomeBinding
 //    private val viewModel : HomeViewModel by lazy {
 //        ViewModelProvider(this).get(HomeViewModel::class.java)
 //    }
 
     private val viewModel by viewModels<HomeViewModel> { getVmFactory() }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
 
         binding = FragmentHomeBinding.inflate(inflater)
@@ -38,11 +39,21 @@ class HomeFragment: Fragment() {
         val adapter = HomeAdapter()
         binding.recyclerViewHome.adapter = adapter
 
-        val mock = Save("1",2,3,4,"突然就封城了，好可怕")
-        val mock2 = Save("1",2,3,4,"突然就封城了，好可怕")
-        val mockList = listOf( mock, mock2,mock, mock2)
+        viewModel.articleDataForRecycleView.observe(viewLifecycleOwner, Observer {
+            adapter.submitList(it)
 
-        adapter.submitList(mockList)
+            if (viewModel.articleDataForRecycleView.value.isNullOrEmpty()) {
+                binding.imageHomeCard.visibility = View.VISIBLE
+                binding.textHomeSlogan1.visibility = View.VISIBLE
+                binding.textHomeSlogan2.visibility = View.VISIBLE
+                binding.textHomeSlogan3.visibility = View.VISIBLE
+            } else {
+                binding.imageHomeCard.visibility = View.GONE
+                binding.textHomeSlogan1.visibility = View.GONE
+                binding.textHomeSlogan2.visibility = View.GONE
+                binding.textHomeSlogan3.visibility = View.GONE
+            }
+        })
 
         binding.imageHomeSaveInfo.setOnClickListener {
 
@@ -70,6 +81,7 @@ class HomeFragment: Fragment() {
             challengeDialog.show()
 
         }
+
 
 //        viewModel.isCallDeleteAction.observe(viewLifecycleOwner, Observer {
 //            if (it == true){

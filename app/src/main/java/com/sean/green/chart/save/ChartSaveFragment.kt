@@ -70,6 +70,12 @@ class ChartSaveFragment : Fragment() {
                 binding.imageChartPageSavePlasticIcon1.visibility = View.VISIBLE
                 binding.imageChartPageSavePowerIcon1.visibility = View.VISIBLE
                 binding.imageChartPageSaveCarbonIcon1.visibility = View.VISIBLE
+                binding.recyclerViewChartPageSave.visibility = View.VISIBLE
+                binding.textCalendarTitle2.visibility = View.VISIBLE
+                binding.textPlasticTitle2.visibility = View.VISIBLE
+                binding.textPowerTitle2.visibility = View.VISIBLE
+                binding.textCarbonTitle2.visibility = View.VISIBLE
+
             }
             Log.d("0604", "count ++ = ${count}")
             Log.d("0604", "plasticList = ${viewModel.plasticList}")
@@ -94,6 +100,11 @@ class ChartSaveFragment : Fragment() {
         binding.imageChartPageSavePlasticIcon1.visibility = View.INVISIBLE
         binding.imageChartPageSavePowerIcon1.visibility = View.INVISIBLE
         binding.imageChartPageSaveCarbonIcon1.visibility = View.INVISIBLE
+        binding.recyclerViewChartPageSave.visibility = View.INVISIBLE
+        binding.textCalendarTitle2.visibility = View.INVISIBLE
+        binding.textPlasticTitle2.visibility = View.INVISIBLE
+        binding.textPowerTitle2.visibility = View.INVISIBLE
+        binding.textCarbonTitle2.visibility = View.INVISIBLE
 
         return binding.root
     }

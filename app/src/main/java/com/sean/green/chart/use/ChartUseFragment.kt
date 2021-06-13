@@ -67,6 +67,11 @@ class ChartUseFragment : Fragment() {
                 binding.imageChartPageUsePlasticIcon1.visibility = View.VISIBLE
                 binding.imageChartPageUsePowerIcon1.visibility = View.VISIBLE
                 binding.imageChartPageUseCarbonIcon1.visibility = View.VISIBLE
+                binding.recyclerViewChartPageUse.visibility = View.VISIBLE
+                binding.textCalendarTitle.visibility = View.VISIBLE
+                binding.textPlasticTitle.visibility = View.VISIBLE
+                binding.textPowerTitle.visibility = View.VISIBLE
+                binding.textCarbonTitle.visibility = View.VISIBLE
             }
         })
 
@@ -83,6 +88,11 @@ class ChartUseFragment : Fragment() {
         binding.imageChartPageUsePlasticIcon1.visibility = View.INVISIBLE
         binding.imageChartPageUsePowerIcon1.visibility = View.INVISIBLE
         binding.imageChartPageUseCarbonIcon1.visibility = View.INVISIBLE
+        binding.recyclerViewChartPageUse.visibility = View.INVISIBLE
+        binding.textCalendarTitle.visibility = View.INVISIBLE
+        binding.textPlasticTitle.visibility = View.INVISIBLE
+        binding.textPowerTitle.visibility = View.INVISIBLE
+        binding.textCarbonTitle.visibility = View.INVISIBLE
 
         return binding.root
     }
