@@ -1,24 +1,22 @@
 package com.sean.green.calendar
 
-import android.R
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sean.green.GreenApplication
 import com.sean.green.data.CalendarEvent
-import com.sean.green.data.Challenge
-import com.sean.green.data.FirebaseKey
-import com.sean.green.data.FirebaseKey.Companion.COLLECTION_CHALLENGE
 import com.sean.green.data.FirebaseKey.Companion.PATH_GREENS
-import com.sean.green.data.FirebaseKey.Companion.USER_ID
 import com.sean.green.data.Result
 import com.sean.green.data.source.GreenRepository
 import com.sean.green.ext.TimeUtil
 import com.sean.green.ext.sortByTimeStamp
 import com.sean.green.login.UserManager
 import com.sean.green.network.LoadApiStatus
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
 import java.util.*
 
@@ -113,7 +111,7 @@ class CalendarViewModel(private val repository: GreenRepository): ViewModel() {
                     null
                 }
                 else -> {
-                    _error.value = GreenApplication.instance.getString(com.sean.green.R.string.you_know_nothing)
+                    _error.value = GreenApplication.instance.getString(com.sean.green.R.string.Please_try_again_later)
                     _status.value = LoadApiStatus.ERROR
                     null
                 }

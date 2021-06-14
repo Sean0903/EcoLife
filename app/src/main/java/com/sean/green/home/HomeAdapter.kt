@@ -1,13 +1,11 @@
 package com.sean.green.home
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sean.green.data.Article
-import com.sean.green.data.Save
 import com.sean.green.databinding.ItemHomePictureBinding
 
 class HomeAdapter():
@@ -29,7 +27,7 @@ class HomeAdapter():
         class ViewHolder(var binding: ItemHomePictureBinding ) : RecyclerView.ViewHolder(binding.root) {
 
             fun bind(item: Article) {
-            Log.d("seanViewHolder","fun bind(item: Save) = $item")
+//            Log.d("seanViewHolder","fun bind(item: Save) = $item")
                 binding.article = item
             }
 

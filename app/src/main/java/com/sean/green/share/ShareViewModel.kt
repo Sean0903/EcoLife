@@ -4,18 +4,13 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
 import com.sean.green.GreenApplication
 import com.sean.green.R
-import com.sean.green.data.*
+import com.sean.green.data.FirebaseKey.Companion.COLLECTION_SAVE
 import com.sean.green.data.FirebaseKey.Companion.COLLECTION_SHARE
-import com.sean.green.data.FirebaseKey.Companion.COLLECTION_USE
-import com.sean.green.data.FirebaseKey.Companion.COLLECTION_USERS
+import com.sean.green.data.Result
+import com.sean.green.data.Save
+import com.sean.green.data.Share
 import com.sean.green.data.source.GreenRepository
 import com.sean.green.ext.toDisplayFormat
 import com.sean.green.login.UserManager
@@ -79,7 +74,7 @@ class ShareViewModel(private val repository: GreenRepository) : ViewModel() {
 
     init {
         getShareData()
-        getSaveDataForChart(UserManager.user.email)
+        getSaveDataForChart(UserManager.user.email,Share())
 //        getUser(UserManager.user.email)
 //        setSaveDataForChart()
     }
@@ -102,7 +97,7 @@ class ShareViewModel(private val repository: GreenRepository) : ViewModel() {
                     }
                     else -> {
                         _error.value =
-                            GreenApplication.instance.getString(R.string.you_know_nothing)
+                            GreenApplication.instance.getString(R.string.Please_try_again_later)
                         _status.value = LoadApiStatus.ERROR
 
                     }
@@ -117,7 +112,7 @@ class ShareViewModel(private val repository: GreenRepository) : ViewModel() {
 
 
 
-    fun getSaveDataForChart(userEmail: String) {
+    fun getSaveDataForChart(userEmail: String,share: Share) {
         coroutineScope.launch {
 
             var today = Calendar.getInstance().timeInMillis
@@ -128,9 +123,11 @@ class ShareViewModel(private val repository: GreenRepository) : ViewModel() {
 
                 _status.value = LoadApiStatus.LOADING
                 val daysAgo = today.toDisplayFormat()
-                val saveList2 = repository.getSaveDataForChart(userEmail, FirebaseKey.COLLECTION_SAVE, daysAgo)
+                val saveList2 = repository.getSaveDataForShareChart(userEmail,share,share.email,COLLECTION_SAVE, daysAgo)
                 Log.d("days", "time = $daysAgo")
                 today -= 85000000
+
+                Log.d("viewModel","share.email = ${share.email}")
 
                 _saveDataSevenDays.value = when (saveList2) {
                     is Result.Success -> {
@@ -141,7 +138,7 @@ class ShareViewModel(private val repository: GreenRepository) : ViewModel() {
                     }
                     else -> {
                         _error.value =
-                            GreenApplication.instance.getString(R.string.you_know_nothing)
+                            GreenApplication.instance.getString(R.string.Please_try_again_later)
                         _status.value = LoadApiStatus.ERROR
                         null
                     }
@@ -234,7 +231,4 @@ class ShareViewModel(private val repository: GreenRepository) : ViewModel() {
 //            Log.d("getUser", "_userImage.value = ${_userImage.value}")
 //        }
 //    }
-
-
-
 }

@@ -30,11 +30,7 @@ object GreenRemoteDataSource : GreenDataSource {
     private const val KEY_EVENT_MEMBER_IMAGE = "memberImage"
 
 
-    override suspend fun getSaveDataForChart(
-        userEmail: String,
-        collection: String,
-        documentId: String
-    ): Result<List<Save>> =
+    override suspend fun getSaveDataForChart(userEmail: String, collection: String, documentId: String): Result<List<Save>> =
         suspendCoroutine { continuation ->
 
             val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
@@ -70,17 +66,13 @@ object GreenRemoteDataSource : GreenDataSource {
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
-                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.Please_try_again_later)))
                     }
                 }
         }
 
 
-    override suspend fun getUseDataForChart(
-        userEmail: String,
-        collection: String,
-        documentId: String
-    ): Result<List<Use>> =
+    override suspend fun getUseDataForChart(userEmail: String, collection: String, documentId: String): Result<List<Use>> =
         suspendCoroutine { continuation ->
 
             val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
@@ -116,7 +108,7 @@ object GreenRemoteDataSource : GreenDataSource {
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
-                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.Please_try_again_later)))
                     }
                 }
         }
@@ -136,7 +128,7 @@ object GreenRemoteDataSource : GreenDataSource {
                     if (task.isSuccessful) {
                         val list = mutableListOf<Save>()
                         for (document in task.result!!) {
-                            Log.d("seanGetSaveNum", document.id + " => " + document.data)
+//                            Log.d("seanGetSaveNum", document.id + " => " + document.data)
 
                             val saveNum = document.toObject(Save::class.java)
                             list.add(saveNum)
@@ -154,7 +146,7 @@ object GreenRemoteDataSource : GreenDataSource {
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
-                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.Please_try_again_later)))
                     }
                 }
         }
@@ -174,7 +166,7 @@ object GreenRemoteDataSource : GreenDataSource {
                     if (task.isSuccessful) {
                         val list = mutableListOf<Use>()
                         for (document in task.result!!) {
-                            Log.d("seanGetUseNum", document.id + " => " + document.data)
+//                            Log.d("seanGetUseNum", document.id + " => " + document.data)
 
                             val useNum = document.toObject(Use::class.java)
                             list.add(useNum)
@@ -192,7 +184,7 @@ object GreenRemoteDataSource : GreenDataSource {
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
-                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.Please_try_again_later)))
                     }
                 }
         }
@@ -215,7 +207,7 @@ object GreenRemoteDataSource : GreenDataSource {
                     if (task.isSuccessful) {
                         val list = mutableListOf<Challenge>()
                         for (document in task.result!!) {
-                            Log.d("seanGetChallengeNum", document.id + " => " + document.data)
+//                            Log.d("seanGetChallengeNum", document.id + " => " + document.data)
 
                             val challengeNum = document.toObject(Challenge::class.java)
                             list.add(challengeNum)
@@ -233,7 +225,7 @@ object GreenRemoteDataSource : GreenDataSource {
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
-                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.Please_try_again_later)))
                     }
                 }
         }
@@ -269,7 +261,7 @@ object GreenRemoteDataSource : GreenDataSource {
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
-                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.Please_try_again_later)))
                     }
                 }
         }
@@ -302,7 +294,7 @@ object GreenRemoteDataSource : GreenDataSource {
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
-                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.Please_try_again_later)))
                     }
                 }
         }
@@ -340,7 +332,7 @@ object GreenRemoteDataSource : GreenDataSource {
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
-                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.Please_try_again_later)))
                     }
                 }
 
@@ -400,7 +392,7 @@ object GreenRemoteDataSource : GreenDataSource {
                         continuation.resume(Result.Error(it))
                         return@addOnCompleteListener
                     }
-                    continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                    continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.Please_try_again_later)))
                 }
             }
     }
@@ -432,7 +424,7 @@ object GreenRemoteDataSource : GreenDataSource {
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
-                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.Please_try_again_later)))
                     }
                 }
         }
@@ -473,7 +465,7 @@ object GreenRemoteDataSource : GreenDataSource {
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
-                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.Please_try_again_later)))
                     }
                 }
         }
@@ -534,7 +526,7 @@ object GreenRemoteDataSource : GreenDataSource {
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
-                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.Please_try_again_later)))
                     }
                 }
         }
@@ -561,7 +553,7 @@ object GreenRemoteDataSource : GreenDataSource {
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
-                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.Please_try_again_later)))
                     }
                 }
         }
@@ -590,7 +582,7 @@ object GreenRemoteDataSource : GreenDataSource {
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
-                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.Please_try_again_later)))
                     }
                 }
         }
@@ -631,7 +623,7 @@ object GreenRemoteDataSource : GreenDataSource {
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
-                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.Please_try_again_later)))
                     }
                 }
         }
@@ -657,7 +649,7 @@ object GreenRemoteDataSource : GreenDataSource {
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
-                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.Please_try_again_later)))
                     }
                 }
         }
@@ -691,7 +683,7 @@ object GreenRemoteDataSource : GreenDataSource {
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
-                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.Please_try_again_later)))
                     }
                 }
         }
@@ -713,7 +705,7 @@ object GreenRemoteDataSource : GreenDataSource {
                 if (task.isSuccessful) {
                     val list = mutableListOf<Article>()
                     for (document in task.result!!) {
-                        Log.d("getArticle", document.id + " => " + document.data)
+//                        Log.d("getArticle", document.id + " => " + document.data)
 
                         val article = document.toObject(Article::class.java)
                         list.add(article)
@@ -731,7 +723,7 @@ object GreenRemoteDataSource : GreenDataSource {
                         continuation.resume(Result.Error(it))
                         return@addOnCompleteListener
                     }
-                    continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                    continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.Please_try_again_later)))
                 }
             }
     }
@@ -771,7 +763,50 @@ object GreenRemoteDataSource : GreenDataSource {
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
-                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.you_know_nothing)))
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.Please_try_again_later)))
+                    }
+                }
+        }
+
+    override suspend fun getSaveDataForShareChart(userEmail: String,share: Share,userDocumentId: String,collection: String, documentId: String): Result<List<Save>> =
+        suspendCoroutine { continuation ->
+
+            val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
+
+            val firestore = FirebaseFirestore.getInstance().collection(PATH_USERS)
+            val userDocument = firestore.document(userEmail)
+            val greensCollenction = userDocument.collection(PATH_GREENS)
+            val dayDocument = greensCollenction.document(documentId)
+            val dayCollection = dayDocument.collection("save")
+
+            Log.d("remote","share.email = ${share.email}")
+
+            dayCollection
+                .orderBy(KEY_CREATED_TIME, Query.Direction.DESCENDING)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val list = mutableListOf<Save>()
+                        for (document in task.result!!) {
+                            Log.d("getSaveDataForChart", document.id + " => " + document.data)
+
+                            val saveNum = document.toObject(Save::class.java)
+                            list.add(saveNum)
+                        }
+
+                        continuation.resume(Result.Success(list))
+
+                    } else {
+                        task.exception?.let {
+
+                            Log.w(
+                                "sean",
+                                "[${this::class.simpleName}] Error getting documents. ${it.message}"
+                            )
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.Please_try_again_later)))
                     }
                 }
         }

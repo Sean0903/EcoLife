@@ -5,8 +5,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseUser
 import com.sean.green.data.*
 import com.sean.green.data.source.GreenDataSource
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 /**
  * Created by Wayne Chen in Jul. 2019.
@@ -92,6 +90,10 @@ class GreenLocalDataSource(val context: Context) : GreenDataSource {
     }
 
     override suspend fun addEventInfo2UserFirebase(event: Event,eventId: String, eventDay: String,userEmail: String): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getSaveDataForShareChart(userEmail: String,share: Share,userDocumentId: String,collection: String, documentId: String): Result<List<Save>> {
         TODO("Not yet implemented")
     }
 

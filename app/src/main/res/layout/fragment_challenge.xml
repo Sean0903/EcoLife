@@ -21,7 +21,7 @@
             app:layout_constraintStart_toStartOf="@+id/text_use_page_photo_title2" />
 
         <ImageView
-            android:id="@+id/image_use_page_back_to_home2"
+            android:id="@+id/image_use_page_back_to_home"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="8dp"
@@ -36,10 +36,10 @@
             style="@style/home_page_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:text="@string/text_save_page_photo_title"
             app:layout_constraintStart_toStartOf="@+id/add_challenge_photo"
-            app:layout_constraintTop_toBottomOf="@+id/image_use_page_back_to_home2" />
+            app:layout_constraintTop_toBottomOf="@+id/image_use_page_back_to_home" />
 
         <ImageView
             android:id="@+id/add_challenge_photo"
@@ -58,7 +58,7 @@
             android:id="@+id/constraintLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="@+id/add_challenge_photo"
             app:layout_constraintStart_toStartOf="@+id/add_challenge_photo"
             app:layout_constraintTop_toBottomOf="@+id/add_challenge_photo">
@@ -163,7 +163,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <EditText
-            android:id="@+id/editText_save_page_content3"
+            android:id="@+id/editText_save_page_content"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
@@ -175,6 +175,7 @@
             android:textColor="@color/colorWhite"
             android:textColorHint="@color/colorWhite"
             android:textSize="15dp"
+            android:text="@={viewModel.content}"
             app:layout_constraintBottom_toTopOf="@+id/button_challenge_save"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout"
@@ -185,7 +186,7 @@
             style="@style/home_page_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:text="@string/text_save_page_content_title"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />

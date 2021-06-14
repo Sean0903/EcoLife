@@ -9,9 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.sean.green.data.Event
+import com.sean.green.data.Share
 import com.sean.green.event.EventAdapter
 import com.sean.green.event.eventImage.EventImageAdapter
 import com.sean.green.ext.toDisplayFormat
+import com.sean.green.share.ShareAdapter
 
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
@@ -73,5 +75,19 @@ fun bindRecycleViewWithEventImage(recyclerView: RecyclerView, data : List<String
             Log.d("checkImage2", "child data2 = $it")
         }
         Log.d("checkImage3", "child data3 = $it")
+    }
+}
+
+@BindingAdapter("share")
+fun bindRecyclerViewWithShare(recyclerView: RecyclerView, share: List<Share>?) {
+    share?.let {
+        recyclerView.adapter?.apply {
+            when (this) {
+                is ShareAdapter -> {
+                    notifyDataSetChanged()
+                    submitList(it)
+                }
+            }
+        }
     }
 }

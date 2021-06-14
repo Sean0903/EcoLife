@@ -49,4 +49,6 @@ interface GreenDataSource {
     suspend fun getArticle(userEmail: String, collection: String): Result<List<Article>>
 
     suspend fun addEventInfo2UserFirebase(event: Event,eventId: String, eventDay: String,userEmail: String): Result<Boolean>
+
+    suspend fun getSaveDataForShareChart(userEmail: String,share: Share,userDocumentId: String,collection: String, documentId: String): Result<List<Save>>
 }

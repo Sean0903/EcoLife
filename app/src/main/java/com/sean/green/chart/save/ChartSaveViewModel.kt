@@ -4,20 +4,19 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.prolificinteractive.materialcalendarview.CalendarDay.today
 import com.sean.green.GreenApplication
 import com.sean.green.R
 import com.sean.green.data.FirebaseKey.Companion.COLLECTION_SAVE
-import com.sean.green.data.FirebaseKey.Companion.USER_ID
 import com.sean.green.data.Result
 import com.sean.green.data.Save
-import com.sean.green.data.Chart
-import com.sean.green.data.Use
 import com.sean.green.data.source.GreenRepository
 import com.sean.green.ext.toDisplayFormat
 import com.sean.green.login.UserManager
 import com.sean.green.network.LoadApiStatus
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import java.util.*
 
 class ChartSaveViewModel(private val repository: GreenRepository) : ViewModel() {
@@ -77,7 +76,7 @@ class ChartSaveViewModel(private val repository: GreenRepository) : ViewModel() 
                     }
                     else -> {
                         _error.value =
-                            GreenApplication.instance.getString(R.string.you_know_nothing)
+                            GreenApplication.instance.getString(R.string.Please_try_again_later)
                         _status.value = LoadApiStatus.ERROR
 
                     }
@@ -94,7 +93,7 @@ class ChartSaveViewModel(private val repository: GreenRepository) : ViewModel() 
                     }
                     else -> {
                         _error.value =
-                            GreenApplication.instance.getString(R.string.you_know_nothing)
+                            GreenApplication.instance.getString(R.string.Please_try_again_later)
                         _status.value = LoadApiStatus.ERROR
                         null
                     }

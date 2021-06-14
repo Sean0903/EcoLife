@@ -1,15 +1,11 @@
 package com.sean.green.share.toShare
 
-import android.content.Intent
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.sean.green.GreenApplication
-import com.sean.green.MainActivity
 import com.sean.green.R
 import com.sean.green.data.FirebaseKey.Companion.COLLECTION_SHARE
 import com.sean.green.data.FirebaseKey.Companion.COLLECTION_USERS
@@ -21,8 +17,6 @@ import com.sean.green.ext.toDisplayFormat
 import com.sean.green.ext.toDisplayFormatDay
 import com.sean.green.ext.toDisplayFormatMonth
 import com.sean.green.ext.toDisplayFormatYear
-import com.sean.green.login.UserManager
-import com.sean.green.login.UserManager.user
 import com.sean.green.network.LoadApiStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -129,7 +123,7 @@ class ToShareViewModel(private val repository: GreenRepository): ViewModel() {
                     _status.value = LoadApiStatus.ERROR
                 }
                 else -> {
-                    _error.value = GreenApplication.instance.getString(R.string.you_know_nothing)
+                    _error.value = GreenApplication.instance.getString(R.string.Please_try_again_later)
                     _status.value = LoadApiStatus.ERROR
                 }
             }

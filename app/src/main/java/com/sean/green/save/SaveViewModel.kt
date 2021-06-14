@@ -1,7 +1,7 @@
 package com.sean.green.save
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
-import com.sean.green.data.Result
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FirebaseFirestore
@@ -9,9 +9,13 @@ import com.google.firebase.firestore.SetOptions
 import com.sean.green.GreenApplication
 import com.sean.green.R
 import com.sean.green.data.Article
+import com.sean.green.data.Result
 import com.sean.green.data.Save
 import com.sean.green.data.source.GreenRepository
-import com.sean.green.ext.*
+import com.sean.green.ext.toDisplayFormat
+import com.sean.green.ext.toDisplayFormatDay
+import com.sean.green.ext.toDisplayFormatMonth
+import com.sean.green.ext.toDisplayFormatYear
 import com.sean.green.network.LoadApiStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -54,6 +58,28 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
 
     val navigateToHome: MutableLiveData<Boolean>
         get() = _navigateToHome
+
+    //相片功能data
+    private val _date = MutableLiveData<Date>()
+    val date: LiveData<Date>
+        get() = _date
+
+    private val _isUploadPhoto = MutableLiveData<Boolean>()
+    private val isUploadPhoto: LiveData<Boolean>
+        get() = _isUploadPhoto
+
+    val _photoUri = MutableLiveData<Uri>()
+    val photoUri: LiveData<Uri>
+        get() = _photoUri
+
+    //相片功能function
+    fun uploadPhoto(){
+        _isUploadPhoto.value = true
+    }
+
+    fun setPhoto(photo: Uri){
+        _photoUri.value = photo
+    }
 
     override fun onCleared() {
         super.onCleared()
@@ -115,7 +141,7 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
                     _status.value = LoadApiStatus.ERROR
                 }
                 else -> {
-                    _error.value = GreenApplication.instance.getString(R.string.you_know_nothing)
+                    _error.value = GreenApplication.instance.getString(R.string.Please_try_again_later)
                     _status.value = LoadApiStatus.ERROR
                 }
             }
@@ -168,7 +194,7 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
                     _status.value = LoadApiStatus.ERROR
                 }
                 else -> {
-                    _error.value = GreenApplication.instance.getString(R.string.you_know_nothing)
+                    _error.value = GreenApplication.instance.getString(R.string.Please_try_again_later)
                     _status.value = LoadApiStatus.ERROR
                 }
             }

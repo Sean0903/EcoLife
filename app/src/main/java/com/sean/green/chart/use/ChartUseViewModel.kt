@@ -6,7 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sean.green.GreenApplication
 import com.sean.green.R
-import com.sean.green.data.*
+import com.sean.green.data.FirebaseKey
+import com.sean.green.data.Result
+import com.sean.green.data.Use
 import com.sean.green.data.source.GreenRepository
 import com.sean.green.ext.toDisplayFormat
 import com.sean.green.login.UserManager
@@ -76,7 +78,7 @@ class ChartUseViewModel(private val repository: GreenRepository) : ViewModel() {
                     }
                     else -> {
                         _error.value =
-                            GreenApplication.instance.getString(R.string.you_know_nothing)
+                            GreenApplication.instance.getString(R.string.Please_try_again_later)
                         _status.value = LoadApiStatus.ERROR
 
                     }
@@ -93,7 +95,7 @@ class ChartUseViewModel(private val repository: GreenRepository) : ViewModel() {
                     }
                     else -> {
                         _error.value =
-                            GreenApplication.instance.getString(R.string.you_know_nothing)
+                            GreenApplication.instance.getString(R.string.Please_try_again_later)
                         _status.value = LoadApiStatus.ERROR
                         null
                     }

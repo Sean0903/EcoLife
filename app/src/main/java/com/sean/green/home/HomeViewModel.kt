@@ -4,30 +4,23 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.sean.green.App
 import com.sean.green.GreenApplication
 import com.sean.green.R
 import com.sean.green.data.*
 import com.sean.green.data.FirebaseKey.Companion.COLLECTION_ARTICLE
 import com.sean.green.data.FirebaseKey.Companion.COLLECTION_CHALLENGE
 import com.sean.green.data.FirebaseKey.Companion.COLLECTION_SAVE
-import com.sean.green.data.FirebaseKey.Companion.COLLECTION_SHARE
 import com.sean.green.data.FirebaseKey.Companion.COLLECTION_USE
-import com.sean.green.data.FirebaseKey.Companion.USER_ID
 import com.sean.green.data.source.GreenRepository
+import com.sean.green.login.UserManager
 import com.sean.green.network.LoadApiStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import com.sean.green.login.UserManager
-import java.sql.Timestamp
 import java.util.*
-import kotlin.math.absoluteValue
 
-//, private val arguments: String
 class HomeViewModel(private val repository: GreenRepository): ViewModel() {
-
 
     val plastic = MutableLiveData<String>()
     val power = MutableLiveData<String>()
@@ -90,14 +83,8 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
 
     init {
         getTotalSaveNum(UserManager.user.email)
-        getTotalUseNum(UserManager.user.email)
-        getNowChallengeNum(UserManager.user.email)
         getArticleData(UserManager.user.email)
     }
-
-    var nowChallengePlastic = 0
-    var nowChallengePower = 0
-    var nowChallengeCarbon = 0
 
     var totalUsePlastic = 0
     var totalUsePower = 0
@@ -107,10 +94,6 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
     var totalSavePower = 0
     var totalSaveCarbon = 0
 
-    var showNowChallengePlastic = MutableLiveData<Int>()
-    var showNowChallengePower = MutableLiveData<Int>()
-    var showNowChallengeCarbon = MutableLiveData<Int>()
-
     var showTotalUsePlastic = MutableLiveData<Int>()
     var showTotalUsePower = MutableLiveData<Int>()
     var showTotalUseCarbon = MutableLiveData<Int>()
@@ -119,16 +102,24 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
     var showTotalSavePower = MutableLiveData<Int>()
     var showTotalSaveCarbon = MutableLiveData<Int>()
 
+    var nowChallengePlastic = 10
+    var nowChallengePower = 10
+    var nowChallengeCarbon = 10
+
+    var showNowChallengePlastic = MutableLiveData<Int>()
+    var showNowChallengePower = MutableLiveData<Int>()
+    var showNowChallengeCarbon = MutableLiveData<Int>()
+
     fun getTotalSaveNum(userEmail: String) {
         coroutineScope.launch {
             _status.value = LoadApiStatus.LOADING
 
             val saveList = repository.getSaveNum(userEmail,COLLECTION_SAVE)
 
-            Log.d("homeViewModel", "getTotalSaveNum = " +
-                    "${repository.getSaveNum(userEmail,COLLECTION_SAVE)}")
+//            Log.d("homeViewModel", "getTotalSaveNum = " +
+//                    "${repository.getSaveNum(userEmail,COLLECTION_SAVE)}")
 
-            Log.d("homePage", "challengeNum = $saveList")
+//            Log.d("homePage", "challengeNum = $saveList")
 
             _saveNum.value = when (saveList) {
 
@@ -141,8 +132,8 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
                         totalSavePlastic = totalSavePlastic.plus(saving.plastic ?: 0)
                         totalSavePower = totalSavePower.plus(saving.power ?: 0)
                         totalSaveCarbon = totalSaveCarbon.plus(saving.carbon ?: 0)
-                        Log.d("homePage", "totalSavePlastic = ${totalSavePlastic}")
-                        Log.d("homePage", "saveList = $saveList")
+//                        Log.d("homePage", "totalSavePlastic = ${totalSavePlastic}")
+//                        Log.d("homePage", "saveList = $saveList")
                     }
 //                    totalSavePower = totalSavePower
                     showTotalSavePlastic.value = totalSavePlastic
@@ -155,13 +146,14 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
                     saveList.data
                 }
                 else -> {
-                    _error.value = GreenApplication.instance.getString(R.string.you_know_nothing)
+                    _error.value = GreenApplication.instance.getString(R.string.Please_try_again_later)
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
             }
-            Log.d("homeViewModel", "saveList = $saveList")
+//            Log.d("homeViewModel", "saveList = $saveList")
             _refreshStatus.value = false
+            getTotalUseNum(UserManager.user.email)
         }
     }
 
@@ -171,8 +163,8 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
 
             val useList = repository.getUseNum(userEmail,COLLECTION_USE)
 
-            Log.d("homeViewModel", "getTotalUseNum = ${repository.getUseNum(userEmail,COLLECTION_USE)}")
-            Log.d("homeViewModel", "useList = $useList")
+//            Log.d("homeViewModel", "getTotalUseNum = ${repository.getUseNum(userEmail,COLLECTION_USE)}")
+//            Log.d("homeViewModel", "useList = $useList")
 
             _useNum.value = when (useList) {
 
@@ -184,7 +176,7 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
                         totalUsePlastic = totalUsePlastic.plus(using.plastic ?: 0)
                         totalUsePower = totalUsePower.plus(using.power ?: 0)
                         totalUseCarbon = totalUseCarbon.plus(using.carbon ?: 0)
-                        Log.d("homePage", "totalUsePlastic = ${totalUsePlastic}")
+//                        Log.d("homePage", "totalUsePlastic = ${totalUsePlastic}")
                     }
 //                    totalSavePower = totalSavePower
                     showTotalUsePlastic.value = totalUsePlastic
@@ -197,12 +189,13 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
                     useList.data
                 }
                 else -> {
-                    _error.value = GreenApplication.instance.getString(R.string.you_know_nothing)
+                    _error.value = GreenApplication.instance.getString(R.string.Please_try_again_later)
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
             }
             _refreshStatus.value = false
+            getNowChallengeNum(UserManager.user.email)
         }
     }
 
@@ -213,7 +206,7 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
 
             val nowChallenge = repository.getChallengeNum(userEmail,COLLECTION_CHALLENGE)
 
-            Log.d("homeViewModel", "getNowChallengeNum = ${repository.getChallengeNum(userEmail,COLLECTION_CHALLENGE)}")
+//            Log.d("homeViewModel", "getNowChallengeNum = ${repository.getChallengeNum(userEmail,COLLECTION_CHALLENGE)}")
 
             _challengeNum.value = when (nowChallenge) {
 
@@ -226,7 +219,7 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
                         nowChallengePlastic =  nowChallengePlastic.plus(challenge.plastic ?: 0)
                         nowChallengePower = nowChallengePower.plus(challenge.power ?: 0)
                         nowChallengeCarbon = nowChallengeCarbon.plus(challenge.carbon ?: 0)
-                        Log.d("homePage", "nowChallengePlastic = ${nowChallengePlastic}")
+//                        Log.d("homePage", "nowChallengePlastic = ${nowChallengePlastic}")
 
                     }
 
@@ -241,7 +234,7 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
                     nowChallenge.data
                 }
                 else -> {
-                    _error.value = GreenApplication.instance.getString(R.string.you_know_nothing)
+                    _error.value = GreenApplication.instance.getString(R.string.Please_try_again_later)
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
@@ -258,7 +251,7 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
             _status.value = LoadApiStatus.LOADING
 
             val articleList = repository.getArticle(userEmail, COLLECTION_ARTICLE)
-            Log.d("articleData","articleList = ${repository.getArticle(userEmail, COLLECTION_ARTICLE)}")
+//            Log.d("articleData","articleList = ${repository.getArticle(userEmail, COLLECTION_ARTICLE)}")
 
             when (articleList) {
                 is Result.Success -> {
@@ -268,7 +261,7 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
                 }
                 else -> {
                     _error.value =
-                        GreenApplication.instance.getString(R.string.you_know_nothing)
+                        GreenApplication.instance.getString(R.string.Please_try_again_later)
                     _status.value = LoadApiStatus.ERROR
 
                 }
@@ -277,7 +270,7 @@ class HomeViewModel(private val repository: GreenRepository): ViewModel() {
             _refreshStatus.value = false
 
             _articleDataForRecycleView.value = articleListForRecycleView
-            Log.d("homeViewModel","_articleDataForRecycleView.value = ${_articleDataForRecycleView.value}")
+//            Log.d("homeViewModel","_articleDataForRecycleView.value = ${_articleDataForRecycleView.value}")
 
         }
     }

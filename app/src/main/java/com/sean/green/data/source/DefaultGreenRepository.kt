@@ -97,4 +97,8 @@ class DefaultGreenRepository(
         return greenRemoteDataSource.addEventInfo2UserFirebase(event,eventId,eventDay,userEmail)
     }
 
+    override suspend fun getSaveDataForShareChart(userEmail: String,share: Share,userDocumentId: String,collection: String, documentId: String): Result<List<Save>> {
+        return greenRemoteDataSource.getSaveDataForShareChart(userEmail,share,userDocumentId,collection,documentId)
+    }
+
 }

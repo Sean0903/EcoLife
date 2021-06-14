@@ -1,60 +1,28 @@
 package com.sean.green.login
 
-import android.content.Context
+import android.content.SharedPreferences
+import android.util.Log
 import com.sean.green.GreenApplication
 import com.sean.green.data.User
+
+
+const val tagUserUid = "uid"
+const val tagUserToken = "token"
 
 object UserManager {
 
     var user = User()
 
-//    private const val USER_DATA = "user_data"
-//    private const val USER_NAME = "user_name"
-//    private const val LAST_TIME_LOGIN_GOOGLE = "last_time_google"
-//
-//    var userName: String? = null
-//        get() = GreenApplication.instance
-//            .getSharedPreferences(USER_DATA, Context.MODE_PRIVATE)
-//            .getString(USER_NAME, "")
-//        set(value) {
-//            field = when (value) {
-//                null -> {
-//                    GreenApplication.instance
-//                        .getSharedPreferences(USER_DATA, Context.MODE_PRIVATE).edit()
-//                        .remove(USER_NAME)
-//                        .apply()
-//                    null
-//                }
-//                else -> {
-//                    GreenApplication.instance
-//                        .getSharedPreferences(USER_DATA, Context.MODE_PRIVATE).edit()
-//                        .putString(USER_NAME, value)
-//                        .apply()
-//                    value
-//                }
-//            }
-//        }
-//
-//    var lastTimeGoogle: String? = null
-//        get() = GreenApplication.instance
-//            .getSharedPreferences(USER_DATA, Context.MODE_PRIVATE)
-//            .getString(LAST_TIME_LOGIN_GOOGLE, "")
-//        set(value) {
-//            field = when (value) {
-//                null -> {
-//                    GreenApplication.instance
-//                        .getSharedPreferences(USER_DATA, Context.MODE_PRIVATE).edit()
-//                        .remove(LAST_TIME_LOGIN_GOOGLE)
-//                        .apply()
-//                    null
-//                }
-//                else -> {
-//                    GreenApplication.instance
-//                        .getSharedPreferences(USER_DATA, Context.MODE_PRIVATE).edit()
-//                        .putString(LAST_TIME_LOGIN_GOOGLE, value)
-//                        .apply()
-//                    value
-//                }
-//            }
-//        }
+    var prefs : SharedPreferences? = GreenApplication.instance?.getSharedPreferences(tagUserToken, 0)
+
+    var uid : String? = null
+        get(){
+            return prefs?.getString(
+                tagUserUid, "")
+        }
+        set(value){
+            field = prefs?.edit()?.putString(
+                tagUserUid,value)?.apply().toString()
+            Log.i("UserManager.Uid", value!!)
+        }
 }

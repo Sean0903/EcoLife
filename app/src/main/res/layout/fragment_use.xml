@@ -38,7 +38,7 @@
             style="@style/home_page_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:text="@string/text_save_page_photo_title"
             app:layout_constraintStart_toStartOf="@+id/add_use_photo"
             app:layout_constraintTop_toBottomOf="@+id/image_use_page_back_to_home" />
@@ -60,7 +60,7 @@
             android:id="@+id/constraintLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="@+id/add_use_photo"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/add_use_photo"
@@ -106,12 +106,12 @@
 
             <EditText
                 android:id="@+id/editText_use_page_plastic"
+                style="@style/element_text"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/tag_right_corners_plastic"
                 android:inputType="number"
                 android:maxLines="1"
                 android:text="@={viewModel.plastic}"
-                style="@style/element_text"
                 app:layout_constraintBottom_toBottomOf="@+id/image_use_page_plastic"
                 app:layout_constraintEnd_toStartOf="@+id/image_use_page_power"
                 app:layout_constraintStart_toEndOf="@+id/image_use_page_plastic"
@@ -119,8 +119,8 @@
 
             <ImageView
                 android:id="@+id/image_use_page_power"
-                android:background="@drawable/tag_left_power_corners"
                 style="@style/element_image"
+                android:background="@drawable/tag_left_power_corners"
                 app:layout_constraintBottom_toBottomOf="@+id/image_use_page_plastic"
                 app:layout_constraintEnd_toStartOf="@+id/editText_use_page_power"
                 app:layout_constraintStart_toEndOf="@+id/editText_use_page_plastic"
@@ -129,13 +129,13 @@
 
             <EditText
                 android:id="@+id/editText_use_page_power"
+                style="@style/element_text"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/tag_right_corners_power"
                 android:inputType="number"
                 android:maxLines="1"
                 android:padding="@dimen/elevation_all"
                 android:text="@={viewModel.power}"
-                style="@style/element_text"
                 app:layout_constraintBottom_toBottomOf="@+id/editText_use_page_plastic"
                 app:layout_constraintEnd_toStartOf="@+id/image_use_page_carbon"
                 app:layout_constraintStart_toEndOf="@+id/image_use_page_power"
@@ -143,8 +143,8 @@
 
             <ImageView
                 android:id="@+id/image_use_page_carbon"
-                android:background="@drawable/tag_left_carbon_corners"
                 style="@style/element_image"
+                android:background="@drawable/tag_left_carbon_corners"
                 app:layout_constraintBottom_toBottomOf="@+id/image_use_page_power"
                 app:layout_constraintEnd_toStartOf="@+id/editText_use_page_carbon"
                 app:layout_constraintStart_toEndOf="@+id/editText_use_page_power"
@@ -153,11 +153,11 @@
 
             <EditText
                 android:id="@+id/editText_use_page_carbon"
+                style="@style/element_text"
                 android:background="@drawable/tag_right_corners_carbon"
                 android:inputType="number"
                 android:maxLines="1"
                 android:text="@={viewModel.carbon}"
-                style="@style/element_text"
                 app:layout_constraintBottom_toBottomOf="@+id/image_use_page_carbon"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/image_use_page_carbon"
@@ -171,7 +171,7 @@
             style="@style/home_page_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:text="@string/text_save_page_content_title"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
@@ -186,7 +186,7 @@
             app:layout_constraintStart_toStartOf="@+id/text_save_page_content_title2" />
 
         <EditText
-            android:id="@+id/editText_save_page_content2"
+            android:id="@+id/editText_use_page_content"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
@@ -198,6 +198,7 @@
             android:textColor="@color/colorWhite"
             android:textColorHint="@color/colorWhite"
             android:textSize="15dp"
+            android:text="@={viewModel.content}"
             app:layout_constraintBottom_toTopOf="@+id/button_use_save"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout"

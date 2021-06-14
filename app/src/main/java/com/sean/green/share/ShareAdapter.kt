@@ -3,24 +3,23 @@ package com.sean.green.share
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.sean.green.data.Share
-import com.sean.green.databinding.ItemShareBinding
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.sean.green.R
-import com.sean.green.data.User
+import com.sean.green.data.Share
+import com.sean.green.databinding.ItemShareBinding
+import com.sean.green.login.UserManager
 import com.sean.green.util.Util
 import com.sean.green.util.Util.getColor
 import kotlinx.android.synthetic.main.item_share.view.*
 
 
-class ShareAdapter(private val viewModel: ShareViewModel) :
+class ShareAdapter(private val viewModel: ShareViewModel,val onClickListener: OnClickListener) :
     ListAdapter<Share, ShareAdapter.ViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,10 +29,18 @@ class ShareAdapter(private val viewModel: ShareViewModel) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
+        val share = getItem(position)
         holder.bind(viewModel, getItem(position))
 
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(share)
+        }
 
+
+        holder.itemView.imageView3.setOnClickListener {
+            viewModel.getSaveDataForChart(UserManager.user.email,Share())
+
+        }
     }
 
     class ViewHolder(var binding: ItemShareBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -41,7 +48,6 @@ class ShareAdapter(private val viewModel: ShareViewModel) :
         fun bind(viewModel: ShareViewModel, item: Share) {
             Log.d("seanViewHolder", "fun bind(item: Save) = $item")
             binding.shareData = item
-//            binding.image = item
             binding.lineChart1
 
             fun setLine() {
@@ -127,6 +133,10 @@ class ShareAdapter(private val viewModel: ShareViewModel) :
         override fun areContentsTheSame(oldItem: Share, newItem: Share): Boolean {
             return oldItem == newItem
         }
+    }
+
+    class OnClickListener(val clickListener: (share: Share) -> Unit) {
+        fun onClick(share: Share) = clickListener(share)
     }
 }
 

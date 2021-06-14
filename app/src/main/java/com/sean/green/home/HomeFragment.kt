@@ -2,20 +2,16 @@ package com.sean.green.home
 
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.sean.green.MainActivity
 import com.sean.green.R
-import com.sean.green.data.Save
 import com.sean.green.databinding.FragmentHomeBinding
 import com.sean.green.ext.getVmFactory
-import com.sean.green.login.UserManager
 
 class HomeFragment : Fragment() {
 
@@ -82,6 +78,19 @@ class HomeFragment : Fragment() {
 
         }
 
+//        viewModel.getTotalSaveNum(UserManager.user.email)
+//        viewModel.getTotalUseNum(UserManager.user.email)
+////        viewModel.getNowChallengeNum(UserManager.user.email)
+//        viewModel.getArticleData(UserManager.user.email)
+
+//        viewModel.saveNum.observe(viewLifecycleOwner, Observer {
+//            viewModel.getNowChallengeNum(user.email)
+//        })
+//
+//        viewModel.useNum.observe(viewLifecycleOwner, Observer {
+//            viewModel.getNowChallengeNum(user.email)
+//        })
+
 
 //        viewModel.isCallDeleteAction.observe(viewLifecycleOwner, Observer {
 //            if (it == true){
@@ -98,6 +107,8 @@ class HomeFragment : Fragment() {
 //                viewModel.getTotalSaveNum(UserManager.user.email)
 //            }
 //        })
+
+
 
         (activity as MainActivity).dismissFabButton(true)
 

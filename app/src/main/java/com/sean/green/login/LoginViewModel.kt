@@ -1,28 +1,20 @@
 package com.sean.green.login
 
-import android.icu.util.Calendar
-import android.text.format.DateFormat
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.GoogleAuthProvider
 import com.sean.green.GreenApplication
 import com.sean.green.R
+import com.sean.green.data.Result
 import com.sean.green.data.User
 import com.sean.green.data.source.GreenRepository
+import com.sean.green.network.LoadApiStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import com.sean.green.data.Result
-import com.sean.green.network.LoadApiStatus
-import com.sean.green.util.Util.getString
-import java.util.*
 
 class LoginViewModel(private val repository: GreenRepository) : ViewModel() {
 
@@ -83,7 +75,7 @@ class LoginViewModel(private val repository: GreenRepository) : ViewModel() {
                     _status.value = LoadApiStatus.ERROR
                 }
                 else -> {
-                    _error.value = GreenApplication.instance.getString(R.string.you_know_nothing)
+                    _error.value = GreenApplication.instance.getString(R.string.Please_try_again_later)
                     _status.value = LoadApiStatus.ERROR
                 }
             }
@@ -116,7 +108,7 @@ class LoginViewModel(private val repository: GreenRepository) : ViewModel() {
                     null
                 }
                 else -> {
-                    _error.value = GreenApplication.instance.getString(R.string.you_know_nothing)
+                    _error.value = GreenApplication.instance.getString(R.string.Please_try_again_later)
                     _status.value = LoadApiStatus.ERROR
                     null
                 }

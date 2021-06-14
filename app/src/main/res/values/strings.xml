@@ -48,7 +48,7 @@
     <string name="text_dialog_use_carbon_3">3分：碳排1公斤(約汽車行駛7公里)</string>
     <string name="text_dialog_use_carbon_4">4分：碳排1公斤(約汽車行駛7公里)</string>
     <string name="text_dialog_use_carbon_5">5分：碳排1公斤(約汽車行駛7公里)</string>
-    <string name="you_know_nothing">Please try again later</string>
+    <string name="Please_try_again_later">Please try again later</string>
     <string name="editText_save_page_content_hint">為自己的努力留下紀錄吧~</string>
     <string name="text_save_page_content_title">心情隨筆</string>
     <string name="text_save_page_photo_title">拍照存證</string>
@@ -85,7 +85,7 @@
     <string name="editText_dialog_share_time">請輸入時間</string>
     <string name="text_dialog_share_content">內容</string>
     <string name="editText_dialog_share_content">請分享你的心情</string>
-    <string name="text_dialog_share_chart">分享本週圖表</string>
+    <string name="text_dialog_share_chart">分享時將附上七天內的成果圖表</string>
 
     <!--Login-->
     <string name="login_success">登入成功</string>
@@ -93,7 +93,19 @@
     <string name="token_id">409647628078-i23ohi769v3p5snc7mt2j28o19oueqgh.apps.googleusercontent.com</string>
     <string name="button_dialog_share_send">發送</string>
     <string name="sign_up_with_google">Sign Up With Google</string>
-
     <string name="diary_record_date">dd/MM/yyyy</string>
+
+    <!--相機、照片功能-->
+    <string name="edit_add_photo">拍照</string>
+    <string name="edit_choose_from_gallery">選擇相片</string>
+    <string name="edit_cancel">取消</string>
+    <string name="edit_add_photo_title">新增照片</string>
+    <string name="edit_start_camera_camera">Camera</string>
+    <string name="edit_start_camera_jpg">.jpg</string>
+    <string name="edit_start_camera_provider">.provider</string>
+    <string name="edit_show_gallery_intent_type">image/*</string>
+    <string name="edit_show_gallery_select_picture">Select Picture</string>
+    <string name="edit_upload_permission_hint">記得到系統設定相機和相簿權限才能上傳喔</string>
+    <string name="firebase_storage_reference">images/users/%s/%s.jpg</string>
 
 </resources>

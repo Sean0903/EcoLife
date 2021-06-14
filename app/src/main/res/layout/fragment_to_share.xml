@@ -64,7 +64,7 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/dialog_edit_text_frame"
             android:ems="10"
@@ -110,7 +110,7 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/dialog_edit_text_frame"
             android:ems="10"
@@ -158,8 +158,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/dialog_edit_text_frame"
             android:gravity="top"
             android:hint="@string/editText_dialog_share_content"
@@ -169,7 +170,7 @@
             android:paddingEnd="12dp"
             android:paddingBottom="12dp"
             android:text="@={viewModel.content}"
-            app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+            app:layout_constraintBottom_toTopOf="@+id/text_dialog_share_chart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image_dialog_share_content"
@@ -179,50 +180,20 @@
             android:id="@+id/text_dialog_share_chart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="36dp"
             android:fontFamily="@font/noto_sans"
             android:text="@string/text_dialog_share_chart"
             android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/button_dialog_share_send"
-            app:layout_constraintEnd_toStartOf="@+id/radioGroup"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:visibility="visible" />
-
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="@+id/text_dialog_share_chart"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/text_dialog_share_chart"
-            app:layout_constraintTop_toTopOf="@+id/text_dialog_share_chart">
-
-            <RadioButton
-                android:id="@+id/morning_time2"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_marginRight="50dp"
-                android:fontFamily="@font/noto_sans"
-                android:paddingStart="10dp"
-                android:text="是" />
-
-            <RadioButton
-                android:id="@+id/morning_time"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:fontFamily="@font/noto_sans"
-                android:paddingStart="10dp"
-                android:text="否" />
-
-        </RadioGroup>
 
         <Button
             android:id="@+id/button_dialog_share_send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:layout_marginBottom="70dp"
             android:background="@drawable/dialog_frame"
             android:fontFamily="@font/noto_sans_bold"
@@ -232,7 +203,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroup"
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

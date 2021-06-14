@@ -5,24 +5,17 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
 import com.sean.green.GreenApplication
 import com.sean.green.R
-import com.sean.green.data.*
-import com.sean.green.data.FirebaseKey.Companion.COLLECTION_EVENT
-import com.sean.green.data.FirebaseKey.Companion.COLLECTION_SHARE
-import com.sean.green.data.FirebaseKey.Companion.COLLECTION_USERS
+import com.sean.green.data.Event
+import com.sean.green.data.FirebaseKey
+import com.sean.green.data.Result
 import com.sean.green.data.source.GreenRepository
-import com.sean.green.ext.*
-import com.sean.green.login.UserManager
 import com.sean.green.network.LoadApiStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.util.*
 
 
 class EventViewModel(private val repository: GreenRepository) : ViewModel() {
@@ -91,7 +84,7 @@ class EventViewModel(private val repository: GreenRepository) : ViewModel() {
                 }
                 else -> {
                     _error.value =
-                        GreenApplication.instance.getString(R.string.you_know_nothing)
+                        GreenApplication.instance.getString(R.string.Please_try_again_later)
                     _status.value = LoadApiStatus.ERROR
 
                 }
@@ -138,7 +131,7 @@ class EventViewModel(private val repository: GreenRepository) : ViewModel() {
                     _status.value = LoadApiStatus.ERROR
                 }
                 else -> {
-                    _error.value = GreenApplication.instance.getString(R.string.you_know_nothing)
+                    _error.value = GreenApplication.instance.getString(R.string.Please_try_again_later)
                     _status.value = LoadApiStatus.ERROR
                 }
             }

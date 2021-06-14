@@ -28,11 +28,12 @@
 
         <TextView
             android:id="@+id/text_article_tiime"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
             android:layout_marginBottom="25dp"
             android:text='@{TimeUtil.stampToHM(article.createdTime)}'
+            android:background="@drawable/chart_daily_frame"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -42,11 +43,12 @@
             android:id="@+id/textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/dialog_edit_text_frame"
             android:text="@{article.content}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/text_article_tiime"
             tools:text="今天都騎腳踏車" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
