@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="com.sean.green.home.HomeViewModel" />
+        <variable
+            name="item"
+            type="com.sean.green.data.Save" />
+        <variable
+            name="item2"
+            type="com.sean.green.data.Use" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/text_underLine"
+                android:layout_width="0dp"
+                android:layout_height="8dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/underline"
+                app:layout_constraintEnd_toEndOf="@+id/text_my_challenge_title"
+                app:layout_constraintStart_toStartOf="@+id/text_my_challenge_title"
+                app:layout_constraintTop_toTopOf="@+id/text_my_challenge_title" />
+
+            <ImageView
+                android:id="@+id/image_home_challenge_info"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:scaleType="fitStart"
+                app:layout_constraintBottom_toBottomOf="@+id/text_my_challenge_title"
+                app:layout_constraintStart_toEndOf="@+id/text_my_challenge_title"
+                app:layout_constraintTop_toTopOf="@+id/text_my_challenge_title"
+                app:srcCompat="@drawable/ic_baseline_info_24" />
+
+            <TextView
+                android:id="@+id/text_my_challenge_title"
+                style="@style/home_page_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_challenge_myChallenge"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/text_challenge_plastic"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/text_round"
+                android:fontFamily="@font/noto_sans_bold"
+                android:gravity="center"
+                android:text="@{String.valueOf(viewModel.showNowChallengePlastic)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_my_challenge_title"
+                tools:text="100"
+                tools:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/text_challenge_power"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/text_round_2"
+                android:fontFamily="@font/noto_sans_bold"
+                android:gravity="center"
+                android:text="@{String.valueOf(viewModel.showNowChallengePower)}"
+                android:textSize="12dp"
+                app:layout_constraintEnd_toStartOf="@+id/text_challenge_corban"
+                app:layout_constraintStart_toEndOf="@+id/text_challenge_plastic"
+                app:layout_constraintTop_toTopOf="@+id/text_challenge_plastic"
+                tools:text="100" />
+
+            <TextView
+                android:id="@+id/text_challenge_corban"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="25dp"
+                android:background="@drawable/text_round_3"
+                android:fontFamily="@font/noto_sans_bold"
+                android:gravity="center"
+                android:text="@{String.valueOf(viewModel.showNowChallengeCarbon)}"
+                android:textSize="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/text_challenge_power"
+                tools:text="100" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+            <TextView
+                android:id="@+id/text_my_save_title"
+                style="@style/home_page_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_my_save_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/image_home_save_info"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:scaleType="fitStart"
+                app:layout_constraintBottom_toBottomOf="@+id/text_my_save_title"
+                app:layout_constraintStart_toEndOf="@+id/text_my_save_title"
+                app:layout_constraintTop_toTopOf="@+id/text_my_save_title"
+                app:srcCompat="@drawable/ic_baseline_info_24" />
+
+            <ImageView
+                android:id="@+id/image_home_save_plastic"
+                style="@style/element_image"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/tag_left_plastic_corners"
+                app:layout_constraintEnd_toStartOf="@+id/text_home_save_plastic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_my_save_title"
+                app:srcCompat="@drawable/bag" />
+
+            <TextView
+                android:id="@+id/text_home_save_plastic"
+                style="@style/element_text"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/tag_right_corners_plastic"
+                android:text="@{String.valueOf(viewModel.showTotalSavePlastic)}"
+                app:layout_constraintBottom_toBottomOf="@+id/image_home_save_plastic"
+                app:layout_constraintEnd_toStartOf="@+id/image_home_save_power"
+                app:layout_constraintStart_toEndOf="@+id/image_home_save_plastic"
+                app:layout_constraintTop_toTopOf="@+id/image_home_save_plastic" />
+
+            <ImageView
+                android:id="@+id/image_home_save_power"
+                style="@style/element_image"
+                android:background="@drawable/tag_left_power_corners"
+                app:layout_constraintBottom_toBottomOf="@+id/text_home_save_plastic"
+                app:layout_constraintEnd_toStartOf="@+id/text_home_save_power"
+                app:layout_constraintStart_toEndOf="@+id/text_home_save_plastic"
+                app:layout_constraintTop_toTopOf="@+id/text_home_save_plastic"
+                app:srcCompat="@drawable/lighting" />
+
+            <TextView
+                android:id="@+id/text_home_save_power"
+                style="@style/element_text"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/tag_right_corners_power"
+                android:text="@{String.valueOf(viewModel.showTotalSavePower)}"
+                app:layout_constraintBottom_toBottomOf="@+id/text_home_save_plastic"
+                app:layout_constraintEnd_toStartOf="@+id/image_home_save_carbon"
+                app:layout_constraintStart_toEndOf="@+id/image_home_save_power"
+                app:layout_constraintTop_toTopOf="@+id/text_home_save_plastic" />
+
+            <ImageView
+                android:id="@+id/image_home_save_carbon"
+                style="@style/element_image"
+                android:background="@drawable/tag_left_carbon_corners"
+                app:layout_constraintBottom_toBottomOf="@+id/text_home_save_power"
+                app:layout_constraintEnd_toStartOf="@+id/text_home_save_carbon"
+                app:layout_constraintStart_toEndOf="@+id/text_home_save_power"
+                app:layout_constraintTop_toTopOf="@+id/text_home_save_power"
+                app:srcCompat="@drawable/co2" />
+
+            <TextView
+                android:id="@+id/text_home_save_carbon"
+                style="@style/element_text"
+                android:background="@drawable/tag_right_corners_carbon"
+                android:text="@{String.valueOf(viewModel.showTotalSaveCarbon)}"
+                app:layout_constraintBottom_toBottomOf="@+id/text_home_save_power"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_home_save_carbon"
+                app:layout_constraintTop_toTopOf="@+id/text_home_save_power" />
+
+            <TextView
+                android:id="@+id/text_underLine2"
+                android:layout_width="0dp"
+                android:layout_height="8dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/underline"
+                app:layout_constraintEnd_toEndOf="@+id/text_my_save_title"
+                app:layout_constraintStart_toStartOf="@+id/text_my_save_title"
+                app:layout_constraintTop_toTopOf="@+id/text_my_save_title" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+            <TextView
+                android:id="@+id/text_underLine3"
+                android:layout_width="0dp"
+                android:layout_height="8dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/underline"
+                app:layout_constraintEnd_toEndOf="@+id/text_my_use_title"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/text_my_use_title"
+                app:layout_constraintTop_toTopOf="@+id/text_my_use_title" />
+
+            <TextView
+                android:id="@+id/text_my_use_title"
+                style="@style/home_page_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_my_use_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/image_home_use_info"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:scaleType="fitStart"
+                app:layout_constraintBottom_toBottomOf="@+id/text_my_use_title"
+                app:layout_constraintStart_toEndOf="@+id/text_my_use_title"
+                app:layout_constraintTop_toTopOf="@+id/text_my_use_title"
+                app:srcCompat="@drawable/ic_baseline_info_24" />
+
+            <ImageView
+                android:id="@+id/image_home_use_plastic"
+                style="@style/element_image"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/tag_left_plastic_corners"
+                app:layout_constraintEnd_toStartOf="@+id/text_home_use_plastic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_underLine3"
+                app:srcCompat="@drawable/bag" />
+
+            <TextView
+                android:id="@+id/text_home_use_plastic"
+                style="@style/element_text"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/tag_right_corners_plastic"
+                android:text="@{String.valueOf(viewModel.showTotalUsePlastic)}"
+                app:layout_constraintBottom_toBottomOf="@+id/image_home_use_plastic"
+                app:layout_constraintEnd_toStartOf="@+id/image_home_use_power"
+                app:layout_constraintStart_toEndOf="@+id/image_home_use_plastic"
+                app:layout_constraintTop_toTopOf="@+id/image_home_use_plastic" />
+
+            <ImageView
+                android:id="@+id/image_home_use_power"
+                style="@style/element_image"
+                android:background="@drawable/tag_left_power_corners"
+                app:layout_constraintBottom_toBottomOf="@+id/text_home_use_plastic"
+                app:layout_constraintEnd_toStartOf="@+id/text_home_use_power"
+                app:layout_constraintStart_toEndOf="@+id/text_home_use_plastic"
+                app:layout_constraintTop_toTopOf="@+id/text_home_use_plastic"
+                app:srcCompat="@drawable/lighting" />
+
+            <TextView
+                android:id="@+id/text_home_use_power"
+                style="@style/element_text"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/tag_right_corners_power"
+                android:text="@{String.valueOf(viewModel.showTotalUsePower)}"
+                app:layout_constraintBottom_toBottomOf="@+id/text_home_use_plastic"
+                app:layout_constraintEnd_toStartOf="@+id/image_home_use_carbon"
+                app:layout_constraintStart_toEndOf="@+id/image_home_use_power"
+                app:layout_constraintTop_toTopOf="@+id/text_home_use_plastic" />
+
+            <ImageView
+                android:id="@+id/image_home_use_carbon"
+                style="@style/element_image"
+                android:background="@drawable/tag_left_carbon_corners"
+                app:layout_constraintBottom_toBottomOf="@+id/text_home_use_power"
+                app:layout_constraintEnd_toStartOf="@+id/text_home_use_carbon"
+                app:layout_constraintStart_toEndOf="@+id/text_home_use_power"
+                app:layout_constraintTop_toTopOf="@+id/text_home_use_power"
+                app:srcCompat="@drawable/co2" />
+
+            <TextView
+                android:id="@+id/text_home_use_carbon"
+                style="@style/element_text"
+                android:background="@drawable/tag_right_corners_carbon"
+                android:text="@{String.valueOf(viewModel.showTotalUseCarbon)}"
+                app:layout_constraintBottom_toBottomOf="@+id/image_home_use_carbon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_home_use_carbon"
+                app:layout_constraintTop_toTopOf="@+id/image_home_use_carbon" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout3"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_home"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_home_picture" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/image_home_card"
+            android:layout_width="286dp"
+            android:layout_height="233dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
+            app:srcCompat="@drawable/note"
+            tools:visibility="gone" />
+
+        <TextView
+            android:id="@+id/text_home_slogan1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="65dp"
+            android:layout_marginTop="95dp"
+            android:fontFamily="@font/aguafina_script"
+            android:text="不要問世界能為你做什麼，"
+            app:layout_constraintBottom_toTopOf="@+id/text_home_slogan2"
+            app:layout_constraintStart_toStartOf="@+id/image_home_card"
+            app:layout_constraintTop_toTopOf="@+id/image_home_card"
+            tools:visibility="gone" />
+
+        <TextView
+            android:id="@+id/text_home_slogan2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/aguafina_script"
+            android:text="要問你能為世界做什麼，"
+            app:layout_constraintStart_toStartOf="@+id/text_home_slogan1"
+            app:layout_constraintTop_toBottomOf="@+id/text_home_slogan1"
+            tools:visibility="gone" />
+
+        <TextView
+            android:id="@+id/text_home_slogan3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/aguafina_script"
+            android:text="來記錄你的環保挑戰吧。"
+            app:layout_constraintEnd_toEndOf="@+id/text_home_slogan2"
+            app:layout_constraintStart_toStartOf="@+id/text_home_slogan2"
+            app:layout_constraintTop_toBottomOf="@+id/text_home_slogan2"
+            tools:visibility="gone" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

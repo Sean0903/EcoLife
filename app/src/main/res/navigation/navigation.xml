@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.sean.green.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+<!--        <argument-->
+<!--            android:name="userIDKey"-->
+<!--            app:argType="string" />-->
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/shareFragment"
+        android:name="com.sean.green.share.ShareFragment"
+        android:label="CommunityFragment"
+        tools:layout="@layout/fragment_share">
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/chartFragment"
+        android:name="com.sean.green.chart.save.ChartSaveFragment"
+        android:label="ChartFragment"
+        tools:layout="@layout/fragment_save_chart"/>
+
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.sean.green.calendar.CalendarFragment"
+        android:label="CalendarFragment"
+        tools:layout="@layout/fragment_calendar"/>
+
+    <fragment
+        android:id="@+id/challengeFragment"
+        android:name="com.sean.green.challenge.ChallengeFragment"
+        android:label="ChallengeFragment"
+        tools:layout="@layout/fragment_challenge"/>
+
+    <fragment
+        android:id="@+id/saveFragment"
+        android:name="com.sean.green.save.SaveFragment"
+        android:label="SaveFragment"
+        tools:layout="@layout/fragment_save">
+<!--        <argument android:name="saveKey"-->
+<!--            app:argType="com.sean.green.data.Save"/>-->
+    </fragment>
+
+    <fragment
+        android:id="@+id/useFragment"
+        android:name="com.sean.green.use.UseFragment"
+        android:label="UseFragment"
+        tools:layout="@layout/fragment_use"/>
+
+    <fragment
+        android:id="@+id/dialogSaveFragment"
+        android:name="com.sean.green.dialog.DialogSaveFragment"
+        android:label="DialogSaveFragment"
+        tools:layout="@layout/dialog_save">
+    </fragment>
+
+    <fragment
+        android:id="@+id/dialogUseFragment"
+        android:name="com.sean.green.dialog.DialogUseFragment"
+        android:label="DialogUseFragment"
+        tools:layout="@layout/dialog_use"/>
+
+    <fragment
+        android:id="@+id/eventFragment"
+        android:name="com.sean.green.event.EventFragment"
+        android:label="EventFragment"
+        tools:layout="@layout/fragment_event">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/shareDialogFragment"
+        android:name="com.sean.green.share.message.ShareDialogFragment"
+        android:label="ShareDialogFragment" />
+
+    <fragment
+        android:id="@+id/dialogChallengeFragment"
+        android:name="com.sean.green.dialog.DialogChallengeFragment"
+        android:label="DialogChallengeFragment"
+        tools:layout="@layout/dialog_challenge">
+    </fragment>
+
+    <fragment
+        android:id="@+id/pagerFragment"
+        android:name="com.sean.green.chart.PagerFragment"
+        android:label="PagerFragment" />
+
+    <fragment
+        android:id="@+id/chartUseFragment"
+        android:name="com.sean.green.chart.use.ChartUseFragment"
+        android:label="ChartUseFragment"
+        tools:layout="@layout/fragment_use_chart"/>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.sean.green.login.LoginActivity"
+        android:label="LoginFragment"
+        tools:layout="@layout/activity_login">
+    </fragment>
+
+    <fragment
+        android:id="@+id/toShareFragment"
+        android:name="com.sean.green.share.toShare.ToShareFragment"
+        android:label="ToShareFragment"
+        tools:layout="@layout/fragment_to_share"/>
+
+    <fragment
+        android:id="@+id/toEventFragment"
+        android:name="com.sean.green.event.toEvent.ToEventFragment"
+        android:label="ToEventFragment"
+        tools:layout="@layout/fragment_to_event"/>
+
+
+    <action android:id="@+id/navigate_to_home_fragment" app:destination="@id/homeFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+    <action android:id="@+id/navigate_to_pager_fragment" app:destination="@id/pagerFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+    <action android:id="@+id/navigate_to_chart_fragment" app:destination="@id/chartFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+    <action android:id="@+id/navigate_to_calendar_fragment" app:destination="@id/calendarFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+    <action android:id="@+id/navigate_to_share_fragment" app:destination="@id/shareFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+    <action android:id="@+id/navigate_to_event_fragment" app:destination="@id/eventFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+    <action android:id="@+id/navigate_to_save_fragment" app:destination="@id/saveFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+    <action android:id="@+id/navigate_to_use_fragment" app:destination="@id/useFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+    <action android:id="@+id/navigate_to_challenge_fragment" app:destination="@id/challengeFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+    <action android:id="@+id/navigate_to_toShare_fragment" app:destination="@id/toShareFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+    <action android:id="@+id/navigate_to_toEvent_fragment" app:destination="@id/toEventFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_loginFragment" app:destination="@id/loginFragment" />
+    <action
+        android:id="@+id/action_homeFragment_to_dialogSaveFragment"
+        app:destination="@id/dialogSaveFragment" />
+    <action
+        android:id="@+id/action_homeFragment_to_dialogUseFragment"
+        app:destination="@id/dialogUseFragment" />
+    <action
+        android:id="@+id/action_saveFragment_to_homeFragment"
+        app:destination="@id/homeFragment" />
+    <action
+        android:id="@+id/action_dialogShareFragment_to_shareFragment"
+        app:destination="@id/shareFragment" />
+    <action
+        android:id="@+id/action_dialogEvent_to_eventFragment"
+        app:destination="@id/eventFragment" />
+    <action
+        android:id="@+id/action_homeFragment_to_dialogChallengeFragment"
+        app:destination="@id/dialogChallengeFragment" />
+    <action
+        android:id="@+id/action_dialogChallengeFragment_to_homeFragment"
+        app:destination="@id/homeFragment"/>
+    <action
+        android:id="@+id/action_shareFragment_to_toShareFragment"
+        app:destination="@id/toShareFragment" />
+    <action
+        android:id="@+id/action_eventFragment_to_toEventFragment"
+        app:destination="@id/toEventFragment" />
+
+
+</navigation>

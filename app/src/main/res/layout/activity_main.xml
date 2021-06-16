@@ -1,18 +1,312 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <variable
+            name="viewModel"
+            type="com.sean.green.MainViewModel" />
+        <variable
+            name="activity"
+            type="com.sean.green.MainActivity" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <fragment
+            android:id="@+id/myNavHostFragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNavView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navGraph="@navigation/navigation"
+            />
+
+        <ImageView
+            android:id="@+id/fabShadow"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:onClick="@{()->activity.closeFABMenu()}"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNavView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/myNavHostFragment"
+            app:srcCompat="@color/colorShadow" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fabLayout_save"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="3dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/fab"
+            app:layout_constraintEnd_toEndOf="@+id/fab"
+            app:layout_constraintTop_toTopOf="@+id/fab">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_save"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                app:backgroundTint="@color/colorBlue2"
+                app:elevation="0dp"
+                app:fabCustomSize="45dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/award__1_"
+                app:tint="@color/colorWhite" />
+
+            <TextView
+                android:id="@+id/text_save_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/noto_sans"
+                android:paddingLeft="@dimen/dialog_padding"
+                android:paddingTop="@dimen/dialog_padding"
+                android:paddingRight="@dimen/dialog_padding"
+                android:paddingBottom="@dimen/dialog_padding"
+                android:text="@string/text_save_title"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/fab_save"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fabLayout_use"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="3dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/fab"
+            app:layout_constraintEnd_toEndOf="@+id/fab"
+            app:layout_constraintTop_toTopOf="@+id/fab"
+            tools:visibility="visible">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_use"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                app:backgroundTint="@color/colorBlue2"
+                app:elevation="0dp"
+                app:fabCustomSize="45dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/hourglass__1_"
+                app:tint="@color/colorWhite" />
+
+            <TextView
+                android:id="@+id/text_use_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/noto_sans"
+                android:paddingLeft="@dimen/dialog_padding"
+                android:paddingTop="@dimen/dialog_padding"
+                android:paddingRight="@dimen/dialog_padding"
+                android:paddingBottom="@dimen/dialog_padding"
+                android:text="@string/text_use_title"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/fab_use"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fabLayout_challenge"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="3dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/fab"
+            app:layout_constraintEnd_toEndOf="@+id/fab"
+            app:layout_constraintTop_toTopOf="@+id/fab"
+            tools:visibility="visible">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_challenge"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                app:backgroundTint="@color/colorBlue2"
+                app:elevation="0dp"
+                app:fabCustomSize="45dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/goal"
+                app:tint="@color/colorWhite" />
+
+            <TextView
+                android:id="@+id/text_challenge_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/noto_sans"
+                android:paddingLeft="@dimen/dialog_padding"
+                android:paddingTop="@dimen/dialog_padding"
+                android:paddingRight="@dimen/dialog_padding"
+                android:paddingBottom="@dimen/dialog_padding"
+                android:text="@string/text_challenge_title"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/fab_challenge"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fabLayout_share"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="3dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/fab"
+            app:layout_constraintEnd_toEndOf="@+id/fab"
+            app:layout_constraintTop_toTopOf="@+id/fab"
+            tools:visibility="visible">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_share"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                app:backgroundTint="@color/colorBlue2"
+                app:elevation="0dp"
+                app:fabCustomSize="45dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/paper_plane"
+                app:tint="@color/colorWhite" />
+
+            <TextView
+                android:id="@+id/text_share_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/noto_sans"
+                android:paddingLeft="@dimen/dialog_padding"
+                android:paddingTop="@dimen/dialog_padding"
+                android:paddingRight="@dimen/dialog_padding"
+                android:paddingBottom="@dimen/dialog_padding"
+                android:text="@string/text_share_title"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/fab_share"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fabLayout_event"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="3dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/fab"
+            app:layout_constraintEnd_toEndOf="@+id/fab"
+            app:layout_constraintTop_toTopOf="@+id/fab"
+            tools:visibility="visible">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_event"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                app:backgroundTint="@color/colorBlue2"
+                app:elevation="0dp"
+                app:fabCustomSize="45dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/flag__1_"
+                app:tint="@color/colorWhite" />
+
+            <TextView
+                android:id="@+id/text_event_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/noto_sans"
+                android:paddingLeft="@dimen/dialog_padding"
+                android:paddingTop="@dimen/dialog_padding"
+                android:paddingRight="@dimen/dialog_padding"
+                android:paddingBottom="@dimen/dialog_padding"
+                android:text="@string/text_event_title"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/fab_event"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            style="@style/MyFloatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="false"
+            android:layout_alignParentBottom="false"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="60dp"
+            app:elevation="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:rippleColor="@color/colorBlue4" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavView"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:background="@color/colorWhite"
+            android:elevation="4dp"
+            app:itemIconSize="25dp"
+            app:labelVisibilityMode="labeled"
+            app:itemTextColor="@drawable/bottom_nav_item_selector"
+            app:itemIconTint="@drawable/bottom_nav_item_selector"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:menu="@menu/bottom_nav_menu"/>
+
+        <ImageView
+            android:id="@+id/fab_custom_pic"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp"
+            android:elevation="11dp"
+            app:layout_constraintBottom_toBottomOf="@+id/fab"
+            app:layout_constraintEnd_toEndOf="@+id/fab"
+            app:layout_constraintStart_toStartOf="@+id/fab"
+            app:layout_constraintTop_toTopOf="@+id/fab"
+            app:srcCompat="@drawable/plus"
+            app:tint="@color/white" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/home"
+        android:title="@string/navigation_home_name" />
+
+    <item
+        android:id="@+id/pagerFragment"
+        android:icon="@drawable/business_and_finance"
+        android:title="@string/navigation_chart_name" />
+
+    <item
+        android:id="@+id/calendarFragment"
+        android:icon="@drawable/calendar"
+        android:title="@string/navigation_calendar_name" />
+
+    <item
+        android:id="@+id/eventFragment"
+        android:icon="@drawable/flag"
+        android:title="@string/navigation_event_name" />
+
+    <item
+        android:id="@+id/shareFragment"
+        android:icon="@drawable/paper_plane"
+        android:title="@string/navigation_community_name" />
+
+
+
+</menu>

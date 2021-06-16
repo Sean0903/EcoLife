@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="MyFloatingActionButton" parent="@style/Widget.MaterialComponents.FloatingActionButton">
+        <item name="colorPrimary">@color/colorBlue2</item>
+        <item name="materialThemeOverlay">@style/MyFabOverlay</item>
+    </style>
+
+    <style name="MyFloatingActionButtonEvent" parent="@style/Widget.MaterialComponents.FloatingActionButton">
+        <item name="colorPrimary">@color/colorSelectedBottomNav</item>
+        <item name="materialThemeOverlay">@style/MyFabOverlay2</item>
+    </style>
+
+    <style name="MyFabOverlay">
+        <item name="colorSecondary">@color/colorBlue2</item>
+    </style>
+
+    <style name="MyFabOverlay2">
+        <item name="colorSecondary">@color/colorSelectedBottomNav</item>
+    </style>
+
+    <style name="home_page_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/noto_sans_bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="calendarDateText">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="AppTheme.NumberPicker">
+        <item name="colorControlNormal">@color/black_3f3a3a</item>
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/black_3f3a3a</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorAccent">@color/black_3f3a3a</item>
+        <item name="android:fontFamily">@font/noto_sans</item>
+    </style>
+
+    <style name="element_image">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:scaleType">fitCenter</item>
+
+    </style>
+
+    <style name="element_text">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:hint">0</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textColorHint">@color/colorWhite</item>
+    </style>
+
+    <style name="icon_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">18dp</item>
+        <item name="android:textColor">@color/colorFlyingLemon1</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+</resources>
