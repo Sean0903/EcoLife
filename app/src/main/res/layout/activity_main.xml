@@ -6,7 +6,6 @@
     <data>
         <variable name="viewModel" type="com.sean.green.MainViewModel" />
         <variable name="activity" type="com.sean.green.MainActivity" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,7 +30,7 @@
             android:id="@+id/fab_shadow"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:onClick="@{()->activity.closeFABMenu()}"
+            android:onClick="@{()->activity.closeFabMenu()}"
             android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/bottomNavView"
             app:layout_constraintEnd_toEndOf="parent"
@@ -302,7 +301,6 @@
             app:layout_constraintTop_toTopOf="@+id/fab"
             app:srcCompat="@drawable/plus"
             app:tint="@color/white" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

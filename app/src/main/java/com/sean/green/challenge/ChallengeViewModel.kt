@@ -11,11 +11,8 @@ import com.sean.green.data.Article
 import com.sean.green.data.Challenge
 import com.sean.green.data.Result
 import com.sean.green.data.source.GreenRepository
-import com.sean.green.ext.toDisplayFormat
-import com.sean.green.ext.toDisplayFormatDay
-import com.sean.green.ext.toDisplayFormatMonth
-import com.sean.green.ext.toDisplayFormatYear
 import com.sean.green.network.LoadApiStatus
+import com.sean.green.util.Util
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -23,11 +20,6 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 class ChallengeViewModel(private val repository: GreenRepository) : ViewModel() {
-
-    val plastic = MutableLiveData<String>()
-    val power = MutableLiveData<String>()
-    val carbon = MutableLiveData<String>()
-    val content = MutableLiveData<String>()
 
     private var viewModelJob = Job()
 
@@ -48,27 +40,26 @@ class ChallengeViewModel(private val repository: GreenRepository) : ViewModel() 
         viewModelJob.cancel()
     }
 
+    val plastic = MutableLiveData<String>()
+    val power = MutableLiveData<String>()
+    val carbon = MutableLiveData<String>()
+    val content = MutableLiveData<String>()
+
     fun addChallengeData2Firebase(userEmail: String) {
 
         coroutineScope.launch {
 
-            val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
-            val year = Calendar.getInstance().timeInMillis.toDisplayFormatYear()
-            val month = Calendar.getInstance().timeInMillis.toDisplayFormatMonth()
-            val day = Calendar.getInstance().timeInMillis.toDisplayFormatDay()
-            val createdTime = Calendar.getInstance().timeInMillis
-
             val data = hashMapOf(
-                "day" to day,
-                "month" to month,
-                "year" to year,
-                "createdTime" to createdTime,
+                "day" to Util.day,
+                "month" to Util.month,
+                "year" to Util.year,
+                "createdTime" to Util.createdTime,
                 "challenge" to "challenge"
             )
 
             val saveTime = FirebaseFirestore.getInstance()
                 .collection("users").document(userEmail).collection("greens")
-                .document(today).set(data, SetOptions.merge())
+                .document(Util.today).set(data, SetOptions.merge())
 
             val newChallengeData = Challenge(
                 plastic = plastic.value?.toInt(),

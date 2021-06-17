@@ -27,7 +27,7 @@ class EventFragment: Fragment() {
         binding.viewModel = viewModel
 
         binding.recyclerViewEvent.adapter = EventAdapter(viewModel,EventAdapter.OnClickListener {
-            Log.d("test","eventMember= $it")
+            Log.d("eventFragment","eventMember= $it")
         })
 
         return binding.root

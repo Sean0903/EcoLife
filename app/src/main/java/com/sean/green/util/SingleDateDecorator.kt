@@ -15,8 +15,4 @@ class SingleDateDecorator (private val color: Int, date: CalendarDay) :
     override fun decorate(view: DayViewFacade) {
         view.addSpan(DotSpan(10F, color))
     }
-
-    init {
-
-    }
 }

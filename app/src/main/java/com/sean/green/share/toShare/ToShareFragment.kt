@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.sean.green.NavigationDirections
 import com.sean.green.databinding.FragmentToShareBinding
@@ -33,7 +32,7 @@ class ToShareFragment: Fragment() {
             this.findNavController().popBackStack()
         }
 
-        binding.editTextDialogShareExplain.doOnTextChanged { text, start, before, count ->
+        binding.editTextDialogShareAchievement.doOnTextChanged { text, start, before, count ->
             viewModel.achievement.value = text.toString()
             Log.d("toShareFragment", "achievement = ${viewModel.achievement.value}")
         }
@@ -63,7 +62,6 @@ class ToShareFragment: Fragment() {
         binding.imageDialogShareCancel.setOnClickListener {
             findNavController().navigate(
                 NavigationDirections.navigateToHomeFragment(
-//                FirebaseAuth.getInstance().currentUser!!.uid
             ))
         }
 

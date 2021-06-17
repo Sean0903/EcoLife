@@ -49,9 +49,7 @@ import java.io.*
 
 class SaveFragment : Fragment() {
 
-    var db = FirebaseFirestore.getInstance()
-
-//    private lateinit var binding : FragmentSaveBinding
+    private lateinit var binding : FragmentSaveBinding
 
     private val viewModel by viewModels<SaveViewModel> { getVmFactory() }
 
@@ -61,7 +59,11 @@ class SaveFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val binding = FragmentSaveBinding.inflate(inflater, container, false)
+        binding = FragmentSaveBinding.inflate(inflater, container, false)
+
+        binding.viewModel = viewModel
+
+        binding.lifecycleOwner = this
 
         viewModel.plastic.observe(viewLifecycleOwner, Observer {
             Log.i("saveFragment", "plastic = ${viewModel.plastic.value}")
@@ -78,9 +80,9 @@ class SaveFragment : Fragment() {
         }
         )
 
-        binding.lifecycleOwner = this
-
-        binding.viewModel = viewModel
+        viewModel.content.observe(viewLifecycleOwner, Observer {
+            Log.i("saveFragment", "content = ${viewModel.content.value}")
+        })
 
         binding.imageSavePageInfo.setOnClickListener {
 
@@ -88,7 +90,6 @@ class SaveFragment : Fragment() {
             val view = layoutInflater.inflate(R.layout.dialog_save, null)
             saveDialog.setContentView(view)
             saveDialog.show()
-
         }
 
         binding.buttonSavePage.setOnClickListener {
@@ -100,7 +101,6 @@ class SaveFragment : Fragment() {
             } else {
                 viewModel.addSaveData2Firebase(user.email)
                 Toast.makeText(context, "已成功送出", Toast.LENGTH_LONG).show()
-                viewModel.navigateToHome()
             }
 
             if (viewModel.content.value != null) {
@@ -115,11 +115,6 @@ class SaveFragment : Fragment() {
                 NavigationDirections.navigateToHomeFragment(
                 )
             )
-        }
-
-        binding.editTextSavePageContent.doOnTextChanged { text, start, before, count ->
-            viewModel.content.value = text.toString()
-            Log.d("saveFragment", "content = ${viewModel.content.value}")
         }
 
         binding.addSavePhoto.setOnClickListener{

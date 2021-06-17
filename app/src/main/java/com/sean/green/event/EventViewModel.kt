@@ -17,16 +17,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-
 class EventViewModel(private val repository: GreenRepository) : ViewModel() {
-
-    private var viewModelJob = Job()
-
-    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     private val _eventDataForRecycleView = MutableLiveData<List<Event>>()
     val eventDataForRecycleView: LiveData<List<Event>>
         get() = _eventDataForRecycleView
+
+    private var viewModelJob = Job()
+
+    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     private val _status = MutableLiveData<LoadApiStatus>()
 
@@ -38,25 +37,12 @@ class EventViewModel(private val repository: GreenRepository) : ViewModel() {
     val error: LiveData<String?>
         get() = _error
 
-    private val _navigateToHome = MutableLiveData<Boolean>()
-
-    val navigateToHome: MutableLiveData<Boolean>
-        get() = _navigateToHome
-
     // status for the loading icon of swl
     private val _refreshStatus = MutableLiveData<Boolean>()
 
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
-    }
-
-    fun navigateToHome() {
-        _navigateToHome.value = true
-    }
-
-    fun navigateToHomeAfterSend(needRefresh: Boolean = false) {
-        _navigateToHome.value = needRefresh
     }
 
     init {
@@ -100,26 +86,22 @@ class EventViewModel(private val repository: GreenRepository) : ViewModel() {
         }
     }
 
-
     fun addMemberToEvent(event: Event, userEmail: String, userImage: String) {
 
         coroutineScope.launch {
-
             val result = repository.addEventMember(event.id, userEmail, userImage)
-            _eventDataForRecycleView.value = _eventDataForRecycleView.value
         }
     }
 
-    fun addEventInfo2UserFirebase(event: Event,userEmail: String) {
+    fun addEventInfo2UserFirebase(event: Event, userEmail: String) {
 
         coroutineScope.launch {
 
             when (val result =
-                repository.addEventInfo2UserFirebase(event,event.id, event.eventYMD, userEmail)) {
+                repository.addEventInfo2UserFirebase(event, event.id, event.eventYMD, userEmail)) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
-                    navigateToHomeAfterSend(true)
                 }
                 is Result.Fail -> {
                     _error.value = result.error
@@ -130,7 +112,8 @@ class EventViewModel(private val repository: GreenRepository) : ViewModel() {
                     _status.value = LoadApiStatus.ERROR
                 }
                 else -> {
-                    _error.value = GreenApplication.instance.getString(R.string.Please_try_again_later)
+                    _error.value =
+                        GreenApplication.instance.getString(R.string.Please_try_again_later)
                     _status.value = LoadApiStatus.ERROR
                 }
             }

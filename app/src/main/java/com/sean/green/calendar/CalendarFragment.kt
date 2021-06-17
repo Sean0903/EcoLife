@@ -47,7 +47,6 @@ class CalendarFragment : Fragment() {
 
         widget = binding.calendarView
 
-
         var adapter = CalendarEventAdapter()
         binding.recyclerViewCalendar.adapter = adapter
 

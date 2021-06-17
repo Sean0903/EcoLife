@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     val viewModel by viewModels<MainViewModel> { getVmFactory() }
 
-    private var isFABOpen: Boolean = false
+    private var isFabOpen: Boolean = false
 
     private lateinit var binding: ActivityMainBinding
 
@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
 
                     findNavController(R.id.fragment_main_activity).navigate(
                         NavigationDirections.navigateToHomeFragment(
-//                    FirebaseAuth.getInstance().currentUser!!.uid
                         )
                     )
                     return@OnNavigationItemSelectedListener true
@@ -69,10 +68,10 @@ class MainActivity : AppCompatActivity() {
         val fab = findViewById<View>(R.id.fab) as FloatingActionButton
 
         fab.setOnClickListener {
-            if (!isFABOpen) {
-                showFABMenu()
+            if (!isFabOpen) {
+                showFabMenu()
             } else {
-                closeFABMenu()
+                closeFabMenu()
             }
         }
 
@@ -82,7 +81,7 @@ class MainActivity : AppCompatActivity() {
                 )
             )
             binding.fabShadow.visibility = View.GONE
-            closeFABMenu()
+            closeFabMenu()
         }
 
         binding.fabUse.setOnClickListener {
@@ -91,7 +90,7 @@ class MainActivity : AppCompatActivity() {
                 )
             )
             binding.fabShadow.visibility = View.GONE
-            closeFABMenu()
+            closeFabMenu()
         }
 
         binding.fabChallenge.setOnClickListener {
@@ -100,7 +99,7 @@ class MainActivity : AppCompatActivity() {
                 )
             )
             binding.fabShadow.visibility = View.GONE
-            closeFABMenu()
+            closeFabMenu()
         }
 
         binding.fabShare.setOnClickListener {
@@ -109,7 +108,7 @@ class MainActivity : AppCompatActivity() {
                 )
             )
             binding.fabShadow.visibility = View.GONE
-            closeFABMenu()
+            closeFabMenu()
         }
 
         binding.fabEvent.setOnClickListener {
@@ -118,19 +117,17 @@ class MainActivity : AppCompatActivity() {
                 )
             )
             binding.fabShadow.visibility = View.GONE
-            closeFABMenu()
+            closeFabMenu()
         }
-
 
         setupBottomNav()
     }
-
 
     private fun setupBottomNav() {
         binding.bottomNavView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
 
-    private fun showFABMenu() {
+    private fun showFabMenu() {
         text_save_title.visibility = View.VISIBLE
         text_use_title.visibility = View.VISIBLE
         text_challenge_title.visibility = View.VISIBLE
@@ -159,7 +156,7 @@ class MainActivity : AppCompatActivity() {
                 View.INVISIBLE
             else -> fabLayout_event.visibility = View.VISIBLE
         }
-        isFABOpen = true
+        isFabOpen = true
         fabLayout_share.animate().translationY(-resources.getDimension(R.dimen.standard_55))
         fabLayout_event.animate().translationY(-resources.getDimension(R.dimen.standard_105))
         fabLayout_use.animate().translationY(-resources.getDimension(R.dimen.standard_155))
@@ -169,10 +166,9 @@ class MainActivity : AppCompatActivity() {
         fab_custom_pic.animate().rotation(45.0f)
         binding.fab.visibility = View.VISIBLE
         binding.fabShadow.visibility = View.VISIBLE
-
     }
 
-    fun closeFABMenu() {
+    fun closeFabMenu() {
 
         fab_save.visibility = View.VISIBLE
         fab_use.visibility = View.VISIBLE
@@ -209,7 +205,7 @@ class MainActivity : AppCompatActivity() {
             else -> fabLayout_event.visibility = View.VISIBLE
         }
 
-        isFABOpen = false
+        isFabOpen = false
         binding.fabShadow.visibility = View.GONE
         fab.animate().rotation(90.0f)
         fab_custom_pic.animate().rotation(90.0f)

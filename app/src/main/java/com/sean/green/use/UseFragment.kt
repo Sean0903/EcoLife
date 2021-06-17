@@ -19,9 +19,9 @@ import com.sean.green.ext.getVmFactory
 import com.sean.green.login.UserManager.user
 
 
-class UseFragment: Fragment() {
+class UseFragment : Fragment() {
 
-    private lateinit var binding : FragmentUseBinding
+    private lateinit var binding: FragmentUseBinding
 
     private val viewModel by viewModels<UseViewModel> { getVmFactory() }
 
@@ -36,15 +36,15 @@ class UseFragment: Fragment() {
         binding.viewModel = viewModel
 
         viewModel.plastic.observe(viewLifecycleOwner, Observer {
-            Log.i("useFragment","plastic = ${viewModel.plastic.value}")
+            Log.i("useFragment", "plastic = ${viewModel.plastic.value}")
         })
 
         viewModel.power.observe(viewLifecycleOwner, Observer {
-            Log.i("useFragment","power = ${viewModel.power.value}")
+            Log.i("useFragment", "power = ${viewModel.power.value}")
         })
 
         viewModel.carbon.observe(viewLifecycleOwner, Observer {
-            Log.i("useFragment","carbon = ${viewModel.carbon.value}")
+            Log.i("useFragment", "carbon = ${viewModel.carbon.value}")
         })
 
 
@@ -70,7 +70,8 @@ class UseFragment: Fragment() {
 
             if (viewModel.plastic.value.isNullOrBlank() &&
                 viewModel.power.value.isNullOrBlank() &&
-                viewModel.carbon.value.isNullOrBlank()) {
+                viewModel.carbon.value.isNullOrBlank()
+            ) {
                 Toast.makeText(context, "請輸入消耗", Toast.LENGTH_LONG).show()
             } else {
                 viewModel.addUseData2Firebase(user.email)
@@ -80,10 +81,9 @@ class UseFragment: Fragment() {
             if (viewModel.content.value != null) {
                 viewModel.addArticle2Firebase(user.email)
                 Toast.makeText(context, "已成功送出", Toast.LENGTH_LONG).show()
-
             }
         }
-
         return binding.root
     }
+
 }

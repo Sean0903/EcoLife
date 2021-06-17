@@ -50,13 +50,12 @@ class ChartSaveViewModel(private val repository: GreenRepository) : ViewModel() 
         getSaveDataForChart(UserManager.user.email)
     }
 
-
     fun getSaveDataForChart(userEmail: String) {
         coroutineScope.launch {
 
             var today = Calendar.getInstance().timeInMillis
 
-            val save7List = mutableListOf<Save>()
+            val save7DaysList = mutableListOf<Save>()
             val dataListForChart = mutableListOf<List<Save>>()
 
             for (i in 0..6) {
@@ -65,12 +64,12 @@ class ChartSaveViewModel(private val repository: GreenRepository) : ViewModel() 
                 val daysAgo = today.toDisplayFormat()
                 val saveList = repository.getSaveDataForChart(userEmail, COLLECTION_SAVE, daysAgo)
                 val saveList2 = repository.getSaveDataForChart(userEmail, COLLECTION_SAVE, daysAgo)
-                Log.d("days", "chartSavetime = $daysAgo")
+                Log.d("chartSaveViewModel", "chartSaveTime = $daysAgo")
                 today -= 87000000
 
                 when (saveList) {
                     is Result.Success -> {
-                        save7List.addAll(saveList.data)
+                        save7DaysList.addAll(saveList.data)
                         _error.value = null
                         _status.value = LoadApiStatus.DONE
                     }
@@ -78,11 +77,10 @@ class ChartSaveViewModel(private val repository: GreenRepository) : ViewModel() 
                         _error.value =
                             GreenApplication.instance.getString(R.string.Please_try_again_later)
                         _status.value = LoadApiStatus.ERROR
-
                     }
                 }
 
-                Log.d("chartSaveViewModel", "save7List = ${save7List.size}")
+                Log.d("chartSaveViewModel", "save7DaysList = ${save7DaysList.size}")
 
                 _saveDataSevenDays.value = when (saveList2) {
                     is Result.Success -> {
@@ -104,18 +102,17 @@ class ChartSaveViewModel(private val repository: GreenRepository) : ViewModel() 
                 _refreshStatus.value = false
             }
 
-            _saveDataForRecycleView.value = save7List
+            _saveDataForRecycleView.value = save7DaysList
 
-            Log.d("chartSaveViewModel", "save7List = ${save7List}")
-            Log.i("chartSaveViewModel", "save7List = ${save7List.size}")
+            Log.d("chartSaveViewModel", "save7List = ${save7DaysList}")
+            Log.i("chartSaveViewModel", "save7List = ${save7DaysList.size}")
 
             Log.d("chartSaveViewModel", "dataListForChart = ${dataListForChart}")
             Log.i("chartSaveViewModel", "dataListForChart = ${dataListForChart.size}")
 
-            setChartTotalData(save7List)
+            setChartTotalData(save7DaysList)
         }
     }
-
 
     val plasticList = mutableListOf<Int>()
     val powerList = mutableListOf<Int>()
@@ -124,22 +121,22 @@ class ChartSaveViewModel(private val repository: GreenRepository) : ViewModel() 
     fun setSaveDataForChart() {
         val sevenDaysData = _saveDataSevenDays.value
 
-        Log.d("sean0903", "haha = ${_saveDataSevenDays.value} ")
+        Log.d("chartSaveViewModel", "setSaveDataForChart = ${_saveDataSevenDays.value} ")
 
-        var dailyPlastic: Int = 0
-        var dailyPower: Int = 0
-        var dailyCarbon: Int = 0
+        var dailyPlastic = 0
+        var dailyPower = 0
+        var dailyCarbon = 0
 
         for (i in 0..0) {
             for (sumOneDay in sevenDaysData as List<Save>) {
                 dailyPlastic = dailyPlastic.plus(sumOneDay.plastic ?: 0)
-                Log.d("sean0603", "saveDailyPlastic = ${dailyPlastic}")
+                Log.d("chartSaveViewModel", "saveDailyPlastic = ${dailyPlastic}")
 
                 dailyPower = dailyPower.plus(sumOneDay.power ?: 0)
-                Log.d("sean0603", "saveDailyPower = ${dailyPower}")
+                Log.d("chartSaveViewModel", "saveDailyPower = ${dailyPower}")
 
                 dailyCarbon = dailyCarbon.plus(sumOneDay.carbon ?: 0)
-                Log.d("sean0603", "saveDailyCarbon = ${dailyCarbon}")
+                Log.d("chartSaveViewModel", "saveDailyCarbon = ${dailyCarbon}")
             }
         }
 
@@ -147,10 +144,9 @@ class ChartSaveViewModel(private val repository: GreenRepository) : ViewModel() 
         powerList.add(dailyPower)
         carbonList.add(dailyCarbon)
 
-        Log.d("sean0903", " savePlasticList = $plasticList")
-        Log.d("sean0903", " savePowerList = $powerList")
-        Log.d("sean0903", " saveCarbonList = $carbonList")
-
+        Log.d("chartSaveViewModel", " savePlasticList = $plasticList")
+        Log.d("chartSaveViewModel", " savePowerList = $powerList")
+        Log.d("chartSaveViewModel", " saveCarbonList = $carbonList")
     }
 
     var showTotalSavePlastic = MutableLiveData<Int>()
@@ -170,12 +166,11 @@ class ChartSaveViewModel(private val repository: GreenRepository) : ViewModel() 
         var powerTotalForDay = 0
         var carbonTotalForDay = 0
 
-        var date: String = ""
+        var date = ""
 
         for (save in saves) {
-            Log.d("testSave", "save = $save")
+            Log.d("chartSaveViewModel", "saveDataPerDay = $save")
             if (save.today != date) {
-                Log.i("testSave", "save.today != date")
 
                 if (date.isNotEmpty()) {
                     //add into a list

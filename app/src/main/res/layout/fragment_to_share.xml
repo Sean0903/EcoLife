@@ -58,7 +58,7 @@
             app:layout_constraintStart_toEndOf="@+id/image_dialog_share_explain" />
 
         <EditText
-            android:id="@+id/editText_dialog_share_explain"
+            android:id="@+id/editText_dialog_share_achievement"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
@@ -87,8 +87,8 @@
             android:layout_height="24dp"
             android:layout_marginTop="16dp"
             android:src="@drawable/icon_calendar"
-            app:layout_constraintStart_toStartOf="@+id/editText_dialog_share_explain"
-            app:layout_constraintTop_toBottomOf="@+id/editText_dialog_share_explain" />
+            app:layout_constraintStart_toStartOf="@+id/editText_dialog_share_achievement"
+            app:layout_constraintTop_toBottomOf="@+id/editText_dialog_share_achievement" />
 
         <TextView
             android:id="@+id/text_dialog_share_time"

@@ -11,7 +11,6 @@ import com.sean.green.databinding.ItemHomePictureBinding
 class HomeAdapter():
     ListAdapter<Article, HomeAdapter.ViewHolder>(HomeAdapter.DiffCallback()) {
 
-        //實體化ViewHolder然後把View與ViewHolder綁定
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
             return ViewHolder.from(parent)
@@ -27,7 +26,6 @@ class HomeAdapter():
         class ViewHolder(var binding: ItemHomePictureBinding ) : RecyclerView.ViewHolder(binding.root) {
 
             fun bind(item: Article) {
-//            Log.d("seanViewHolder","fun bind(item: Save) = $item")
                 binding.article = item
             }
 

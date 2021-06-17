@@ -108,9 +108,7 @@ class ShareAdapter(private val viewModel: ShareViewModel,val onClickListener: On
             binding.textItemShareContent.setOnClickListener {
                 setLine()
             }
-
             binding.executePendingBindings()
-
         }
 
         companion object {
@@ -126,7 +124,6 @@ class ShareAdapter(private val viewModel: ShareViewModel,val onClickListener: On
         override fun areItemsTheSame(oldItem: Share, newItem: Share): Boolean {
             return oldItem == newItem
         }
-
 
         override fun areContentsTheSame(oldItem: Share, newItem: Share): Boolean {
             return oldItem == newItem

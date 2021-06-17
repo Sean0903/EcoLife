@@ -40,9 +40,8 @@ class EventAdapter(val viewModel: EventViewModel, val onClickListener: OnClickLi
     class ViewHolder(var binding: ItemEventBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Event, viewModel: EventViewModel) {
-            Log.d("eventAdapter", "fun bind(item: Save) = $item")
+            Log.d("eventAdapter", "viewHolder = $item")
             binding.eventData = item
-//            binding.viewModel = viewModel
 
             // Nested RecyclerView - Child Adapter
             val eventImageAdapter = EventImageAdapter()

@@ -1,11 +1,8 @@
 package com.sean.green.ext
 
-import android.annotation.SuppressLint
 import android.icu.text.SimpleDateFormat
-import android.icu.util.Calendar
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.google.firebase.firestore.FirebaseFirestore
 import com.sean.green.GreenApplication
 import com.sean.green.R
 import java.util.*
@@ -108,3 +105,4 @@ const val FORMAT_HH_MM: Int = 0x04
 const val FORMAT_HH_MM_SS_FFFFFFFFF: Int = 0x05
 const val FORMAT_YYYY_MM_DDHHMMSS: Int = 0x06
 const val FORMAT_YYYY_MM_DD_HH_MM_SS_FFFFFFFFF: Int = 0x07
+

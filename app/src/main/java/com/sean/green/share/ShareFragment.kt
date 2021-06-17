@@ -37,12 +37,10 @@ class ShareFragment: Fragment() {
             count++
             if (count == 7) {
                 binding.lottieShare.visibility = View.GONE
-
             }
         })
 
         binding.lottieShare.repeatCount = -1
-        // start lottie
         binding.lottieShare.playAnimation()
 
         return binding.root

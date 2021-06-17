@@ -15,7 +15,9 @@ class DialogUseFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding = DialogUseBinding.inflate(inflater)
+
         return binding.root
     }
 }

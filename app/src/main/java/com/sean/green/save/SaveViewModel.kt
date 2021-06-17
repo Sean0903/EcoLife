@@ -17,6 +17,7 @@ import com.sean.green.ext.toDisplayFormatDay
 import com.sean.green.ext.toDisplayFormatMonth
 import com.sean.green.ext.toDisplayFormatYear
 import com.sean.green.network.LoadApiStatus
+import com.sean.green.util.Util
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -26,15 +27,9 @@ import java.util.*
 
 class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
 
-    val content = MutableLiveData<String>()
-
     private var viewModelJob = Job()
 
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
-
-    val plastic = MutableLiveData<String>()
-    val power = MutableLiveData<String>()
-    val carbon = MutableLiveData<String>()
 
     private val _save = MutableLiveData<Save>().apply {
         value = Save(
@@ -86,51 +81,41 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
         viewModelJob.cancel()
     }
 
-    fun navigateToHome() {
-        _navigateToHome.value = true
-    }
-
-    fun navigateToHomeAfterSend(needRefresh: Boolean = false) {
-        _navigateToHome.value = needRefresh
-    }
+    val plastic = MutableLiveData<String>()
+    val power = MutableLiveData<String>()
+    val carbon = MutableLiveData<String>()
+    val content = MutableLiveData<String>()
 
 
     fun addSaveData2Firebase(userEmail: String) {
 
         coroutineScope.launch {
 
-            val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
-            val year = Calendar.getInstance().timeInMillis.toDisplayFormatYear()
-            val month = Calendar.getInstance().timeInMillis.toDisplayFormatMonth()
-            val day = Calendar.getInstance().timeInMillis.toDisplayFormatDay()
-            val createdTime = Calendar.getInstance().timeInMillis
-
             val data = hashMapOf(
-                "day" to day,
-                "month" to month,
-                "year" to year,
-                "createdTime" to createdTime,
+                "day" to Util.day,
+                "month" to Util.month,
+                "year" to Util.year,
+                "createdTime" to Util.createdTime,
                 "save" to "save"
             )
 
             val saveTime = FirebaseFirestore.getInstance()
                 .collection("users").document(userEmail).collection("greens")
-                .document(today).set(data, SetOptions.merge())
+                .document(Util.today).set(data, SetOptions.merge())
 
             val newSaveData = Save(
                 plastic = plastic.value?.toInt(),
                 power = power.value?.toInt(),
                 carbon = carbon.value?.toInt(),
+                content = content.value?.toString(),
                 createdTime = Calendar.getInstance().timeInMillis,
-                today = today
-//                id = document.id
+                today = Util.today
             )
 
             when (val result = repository.addSaveNum2Firebase(userEmail,newSaveData)) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
-                    navigateToHomeAfterSend(true)
                 }
                 is Result.Fail -> {
                     _error.value = result.error
@@ -158,9 +143,6 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
             val day = Calendar.getInstance().timeInMillis.toDisplayFormatDay()
             val createdTime = Calendar.getInstance().timeInMillis
 
-//            val articleTimeStamp = Calendar.getInstance().timeInMillis
-//            val articleHourAndMin =  TimeUtil.stampToHM(articleTimeStamp)
-
             val data = hashMapOf(
                 "day" to day,
                 "month" to month,
@@ -183,7 +165,6 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
-                    navigateToHomeAfterSend(true)
                 }
                 is Result.Fail -> {
                     _error.value = result.error

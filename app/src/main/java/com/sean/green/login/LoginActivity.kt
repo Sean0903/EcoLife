@@ -51,14 +51,11 @@ class LoginActivity : AppCompatActivity() {
             .build()
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-
         viewModel.firebaseUser.observe(this, Observer {
             it?.let {
                 moveMainPage(it)
             }
         })
-
-
 
         binding.lottieLoginWaves.repeatCount = -1
         // 开始播放动画
@@ -75,7 +72,6 @@ class LoginActivity : AppCompatActivity() {
         val signInIntent = googleSignInClient?.signInIntent
         startActivityForResult(signInIntent, GOOGLE_LOGIN_CODE)
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -109,5 +105,4 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
     }
-
 }

@@ -80,7 +80,6 @@ class LoginViewModel(private val repository: GreenRepository) : ViewModel() {
                 }
             }
         }
-
     }
 
     fun loginAuth(account: GoogleSignInAccount?) {
@@ -114,8 +113,5 @@ class LoginViewModel(private val repository: GreenRepository) : ViewModel() {
                 }
             }
         }
-
     }
-
-
 }

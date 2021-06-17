@@ -36,11 +36,6 @@ class ShareViewModel(private val repository: GreenRepository) : ViewModel() {
     val saveDataSevenDays: LiveData<List<Save>>
         get() = _saveDataSevenDays
 
-//    private val _userImage = MutableLiveData<List<User>>()
-//
-//    val userImage: LiveData<List<User>>
-//        get() = _userImage
-
     private val _status = MutableLiveData<LoadApiStatus>()
 
     val status: LiveData<LoadApiStatus>
@@ -51,11 +46,6 @@ class ShareViewModel(private val repository: GreenRepository) : ViewModel() {
     val error: LiveData<String?>
         get() = _error
 
-    private val _navigateToHome = MutableLiveData<Boolean>()
-
-    val navigateToHome: MutableLiveData<Boolean>
-        get() = _navigateToHome
-
     // status for the loading icon of swl
     private val _refreshStatus = MutableLiveData<Boolean>()
 
@@ -64,55 +54,42 @@ class ShareViewModel(private val repository: GreenRepository) : ViewModel() {
         viewModelJob.cancel()
     }
 
-    fun navigateToHome() {
-        _navigateToHome.value = true
-    }
-
-    fun navigateToHomeAfterSend(needRefresh: Boolean = false) {
-        _navigateToHome.value = needRefresh
-    }
-
     init {
         getShareData()
-        getSaveDataForChart(UserManager.user.email,Share())
-//        getUser(UserManager.user.email)
-//        setSaveDataForChart()
+        getSaveDataForChart(UserManager.user.email, Share())
     }
 
-    fun getShareData() {
+    private fun getShareData() {
         coroutineScope.launch {
 
             val shareListForRecycleView = mutableListOf<Share>()
 
-                _status.value = LoadApiStatus.LOADING
+            _status.value = LoadApiStatus.LOADING
 
-                val shareList = repository.getSharingData(COLLECTION_SHARE)
-            Log.d("shareData","shareList = ${repository.getSharingData(COLLECTION_SHARE)}")
+            val shareList = repository.getSharingData(COLLECTION_SHARE)
+            Log.d("shareViewModel", "shareList = ${repository.getSharingData(COLLECTION_SHARE)}")
 
-                when (shareList) {
-                    is Result.Success -> {
-                        shareListForRecycleView.addAll(shareList.data)
-                        _error.value = null
-                        _status.value = LoadApiStatus.DONE
-                    }
-                    else -> {
-                        _error.value =
-                            GreenApplication.instance.getString(R.string.Please_try_again_later)
-                        _status.value = LoadApiStatus.ERROR
-
-                    }
+            when (shareList) {
+                is Result.Success -> {
+                    shareListForRecycleView.addAll(shareList.data)
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
                 }
+                else -> {
+                    _error.value =
+                        GreenApplication.instance.getString(R.string.Please_try_again_later)
+                    _status.value = LoadApiStatus.ERROR
 
-                _refreshStatus.value = false
+                }
+            }
+            _refreshStatus.value = false
 
             _shareDataForRecycleView.value = shareListForRecycleView
-
         }
     }
 
 
-
-    fun getSaveDataForChart(userEmail: String,share: Share) {
+    fun getSaveDataForChart(userEmail: String, share: Share) {
         coroutineScope.launch {
 
             var today = Calendar.getInstance().timeInMillis
@@ -123,11 +100,17 @@ class ShareViewModel(private val repository: GreenRepository) : ViewModel() {
 
                 _status.value = LoadApiStatus.LOADING
                 val daysAgo = today.toDisplayFormat()
-                val saveList2 = repository.getSaveDataForShareChart(userEmail,share,share.email,COLLECTION_SAVE, daysAgo)
-                Log.d("days", "time = $daysAgo")
+                val saveList2 = repository.getSaveDataForShareChart(
+                    userEmail,
+                    share,
+                    share.email,
+                    COLLECTION_SAVE,
+                    daysAgo
+                )
+                Log.d("shareViewModel", "time = $daysAgo")
                 today -= 85000000
 
-                Log.d("viewModel","share.email = ${share.email}")
+                Log.d("shareViewModel", "share.email = ${share.email}")
 
                 _saveDataSevenDays.value = when (saveList2) {
                     is Result.Success -> {
@@ -143,7 +126,6 @@ class ShareViewModel(private val repository: GreenRepository) : ViewModel() {
                         null
                     }
                 }
-
                 Log.w("shareViewModel", "saveDataSevenDays = ${_saveDataSevenDays.value}")
 
                 _refreshStatus.value = false
@@ -162,25 +144,25 @@ class ShareViewModel(private val repository: GreenRepository) : ViewModel() {
     fun setSaveDataForChart() {
         val sevenDaysData = _saveDataSevenDays.value
 
-        Log.d("sean0903", "haha = ${ _saveDataSevenDays.value} ")
+        Log.d("shareViewModel", "setSaveDataForChart = ${_saveDataSevenDays.value} ")
 
-        var dailyPlastic: Int = 0
-        var dailyPower: Int = 0
-        var dailyCarbon: Int = 0
+        var dailyPlastic = 0
+        var dailyPower = 0
+        var dailyCarbon = 0
 
         for (i in 0..0) {
             for (sumOneDay in sevenDaysData as List<Save>) {
                 dailyPlastic = dailyPlastic.plus(sumOneDay.plastic ?: 0)
-                Log.d("sean0603", "saveDailyPlastic = ${dailyPlastic}")
+                Log.d("shareViewModel", "saveDailyPlastic = ${dailyPlastic}")
 
                 dailyPower = dailyPower.plus(sumOneDay.power ?: 0)
-                Log.d("sean0603", "saveDailyPower = ${dailyPower}")
+                Log.d("shareViewModel", "saveDailyPower = ${dailyPower}")
 
                 dailyCarbon = dailyCarbon.plus(sumOneDay.carbon ?: 0)
-                Log.d("sean0603", "saveDailyCarbon = ${dailyCarbon}")
+                Log.d("shareViewModel", "saveDailyCarbon = ${dailyCarbon}")
 
                 count++
-                Log.d("seanCount","count = $count")
+                Log.d("seanCount", "count = $count")
             }
         }
 
@@ -188,47 +170,8 @@ class ShareViewModel(private val repository: GreenRepository) : ViewModel() {
         powerList.add(dailyPower)
         carbonList.add(dailyCarbon)
 
-        Log.d("sean0903", " savePlasticList = $plasticList")
-        Log.d("sean0903", " savePowerList = $powerList")
-        Log.d("sean0903", " saveCarbonList = $carbonList")
-
+        Log.d("shareViewModel", " savePlasticList = $plasticList")
+        Log.d("shareViewModel", " savePowerList = $powerList")
+        Log.d("shareViewModel", " saveCarbonList = $carbonList")
     }
-
-//    private fun getUser(userEmail: String) {
-//
-//        coroutineScope.launch {
-//
-//            _status.value = LoadApiStatus.LOADING
-//
-//            val result = repository.getUser(userEmail, COLLECTION_USERS)
-//            Log.d("getUser", "repository.getUser =" +
-//                    "${repository.getUser(userEmail, COLLECTION_USERS)}")
-//
-//            _userImage.value = when (result) {
-//                is Result.Success -> {
-//                    Log.d("calendarViewModel", "result.data = ${result.data}")
-//                    _error.value = null
-//                    _status.value = LoadApiStatus.DONE
-//                    result.data
-//                }
-//                is Result.Fail -> {
-//                    _error.value = result.error
-//                    _status.value = LoadApiStatus.ERROR
-//                    null
-//                }
-//                is Result.Error -> {
-//                    _error.value = result.exception.toString()
-//                    _status.value = LoadApiStatus.ERROR
-//                    null
-//                }
-//                else -> {
-//                    _error.value = GreenApplication.instance.getString(com.sean.green.R.string.you_know_nothing)
-//                    _status.value = LoadApiStatus.ERROR
-//                    null
-//                }
-//            }
-//            _refreshStatus.value = false
-//            Log.d("getUser", "_userImage.value = ${_userImage.value}")
-//        }
-//    }
 }

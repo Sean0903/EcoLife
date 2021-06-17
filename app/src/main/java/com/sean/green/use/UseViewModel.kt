@@ -11,36 +11,19 @@ import com.sean.green.data.Article
 import com.sean.green.data.Result
 import com.sean.green.data.Use
 import com.sean.green.data.source.GreenRepository
-import com.sean.green.ext.toDisplayFormat
-import com.sean.green.ext.toDisplayFormatDay
-import com.sean.green.ext.toDisplayFormatMonth
-import com.sean.green.ext.toDisplayFormatYear
 import com.sean.green.network.LoadApiStatus
+import com.sean.green.util.Util
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.util.*
 
-class UseViewModel(private val repository: GreenRepository): ViewModel() {
-
-    val content = MutableLiveData<String>()
+class UseViewModel(private val repository: GreenRepository) : ViewModel() {
 
     private var viewModelJob = Job()
 
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
-
-    val plastic = MutableLiveData<String>()
-    val power = MutableLiveData<String>()
-    val carbon = MutableLiveData<String>()
-
-    private val _use = MutableLiveData<Use>().apply {
-        value = Use(
-        )
-    }
-
-    val use: LiveData<Use>
-        get() = _use
 
     private val _status = MutableLiveData<LoadApiStatus>()
 
@@ -52,62 +35,44 @@ class UseViewModel(private val repository: GreenRepository): ViewModel() {
     val error: LiveData<String?>
         get() = _error
 
-    private val _navigateToHome = MutableLiveData<Boolean>()
-
-    val navigateToHome: MutableLiveData<Boolean>
-        get() = _navigateToHome
-
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
     }
 
-    fun navigateToHome () {
-        _navigateToHome.value = true
-    }
-
-    fun navigateToHomeAfterSend (needRefresh: Boolean = false) {
-        _navigateToHome.value = needRefresh
-    }
+    val content = MutableLiveData<String>()
+    val plastic = MutableLiveData<String>()
+    val power = MutableLiveData<String>()
+    val carbon = MutableLiveData<String>()
 
     fun addUseData2Firebase(userEmail: String) {
 
         coroutineScope.launch {
 
-//            val userId = "ip29dDcJ24BtyGUzNlPE"
-
-            val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
-            val year = Calendar.getInstance().timeInMillis.toDisplayFormatYear()
-            val month = Calendar.getInstance().timeInMillis.toDisplayFormatMonth()
-            val day = Calendar.getInstance().timeInMillis.toDisplayFormatDay()
-            val createdTime = Calendar.getInstance().timeInMillis
-
             val data = hashMapOf(
-                "day" to day,
-                "month" to month,
-                "year" to year,
-                "createdTime" to createdTime,
+                "day" to Util.day,
+                "month" to Util.month,
+                "year" to Util.year,
+                "createdTime" to Util.createdTime,
                 "use" to "use"
             )
 
             val saveTime = FirebaseFirestore.getInstance()
                 .collection("users").document(userEmail).collection("greens")
-                .document(today).set(data, SetOptions.merge())
+                .document(Util.today).set(data, SetOptions.merge())
 
             val newUseData = Use(
                 plastic = plastic.value?.toInt(),
                 power = power.value?.toInt(),
                 carbon = carbon.value?.toInt(),
                 createdTime = Calendar.getInstance().timeInMillis,
-                today = today
-//                id = document.id
+                today = Util.today
             )
 
-            when (val result = repository.addUseNum2Firebase(userEmail,newUseData)) {
+            when (val result = repository.addUseNum2Firebase(userEmail, newUseData)) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
-                    navigateToHomeAfterSend(true)
                 }
                 is Result.Fail -> {
                     _error.value = result.error
@@ -118,7 +83,8 @@ class UseViewModel(private val repository: GreenRepository): ViewModel() {
                     _status.value = LoadApiStatus.ERROR
                 }
                 else -> {
-                    _error.value = GreenApplication.instance.getString(R.string.Please_try_again_later)
+                    _error.value =
+                        GreenApplication.instance.getString(R.string.Please_try_again_later)
                     _status.value = LoadApiStatus.ERROR
                 }
             }
@@ -128,39 +94,27 @@ class UseViewModel(private val repository: GreenRepository): ViewModel() {
     fun addArticle2Firebase(userEmail: String) {
 
         coroutineScope.launch {
-
-            val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
-            val year = Calendar.getInstance().timeInMillis.toDisplayFormatYear()
-            val month = Calendar.getInstance().timeInMillis.toDisplayFormatMonth()
-            val day = Calendar.getInstance().timeInMillis.toDisplayFormatDay()
-            val createdTime = Calendar.getInstance().timeInMillis
-
-//            val articleTimeStamp = Calendar.getInstance().timeInMillis
-//            val articleHourAndMin =  TimeUtil.stampToHM(articleTimeStamp)
-
             val data = hashMapOf(
-                "day" to day,
-                "month" to month,
-                "year" to year,
-                "createdTime" to createdTime,
+                "day" to Util.day,
+                "month" to Util.month,
+                "year" to Util.year,
+                "createdTime" to Util.createdTime,
                 "save" to "save"
             )
 
             val saveTime = FirebaseFirestore.getInstance()
                 .collection("users").document(userEmail).collection("greens")
-                .document(today).set(data, SetOptions.merge())
+                .document(Util.today).set(data, SetOptions.merge())
 
             val newArticleData = Article(
                 content = content.value.toString(),
                 createdTime = Calendar.getInstance().timeInMillis,
-//                id = document.id
             )
 
-            when (val result = repository.addArticle2Firebase(userEmail,newArticleData)) {
+            when (val result = repository.addArticle2Firebase(userEmail, newArticleData)) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
-                    navigateToHomeAfterSend(true)
                 }
                 is Result.Fail -> {
                     _error.value = result.error
@@ -171,7 +125,8 @@ class UseViewModel(private val repository: GreenRepository): ViewModel() {
                     _status.value = LoadApiStatus.ERROR
                 }
                 else -> {
-                    _error.value = GreenApplication.instance.getString(R.string.Please_try_again_later)
+                    _error.value =
+                        GreenApplication.instance.getString(R.string.Please_try_again_later)
                     _status.value = LoadApiStatus.ERROR
                 }
             }
