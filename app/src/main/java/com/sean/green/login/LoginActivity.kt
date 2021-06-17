@@ -18,7 +18,6 @@ import com.sean.green.R
 import com.sean.green.data.User
 import com.sean.green.databinding.ActivityLoginBinding
 import com.sean.green.ext.getVmFactory
-import kotlinx.android.synthetic.main.activity_login.*
 
 /**
  * Demonstrate Firebase Authentication using a Google ID Token.
@@ -41,7 +40,7 @@ class LoginActivity : AppCompatActivity() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        binding.googleSignInButton.setOnClickListener {
+        binding.buttonGoogleSignIn.setOnClickListener {
             //First step
             googleLogin()
         }
@@ -61,13 +60,9 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-        binding.lottieAnimationView.repeatCount = -1
+        binding.lottieLoginWaves.repeatCount = -1
         // 开始播放动画
-        binding.lottieAnimationView.playAnimation()
-
-        binding.lottieAnimationView2.repeatCount = -1
-        // 开始播放动画
-        binding.lottieAnimationView2.playAnimation()
+        binding.lottieLoginWaves.playAnimation()
 
     }
 

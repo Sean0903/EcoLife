@@ -22,25 +22,16 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.util.*
 
-class ChallengeViewModel(private val repository: GreenRepository): ViewModel() {
+class ChallengeViewModel(private val repository: GreenRepository) : ViewModel() {
 
+    val plastic = MutableLiveData<String>()
+    val power = MutableLiveData<String>()
+    val carbon = MutableLiveData<String>()
     val content = MutableLiveData<String>()
 
     private var viewModelJob = Job()
 
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
-
-    val plastic = MutableLiveData<String>()
-    val power = MutableLiveData<String>()
-    val carbon = MutableLiveData<String>()
-
-    private val _challenge = MutableLiveData<Challenge>().apply {
-        value = Challenge(
-        )
-    }
-
-    val challenge: LiveData<Challenge>
-        get() = _challenge
 
     private val _status = MutableLiveData<LoadApiStatus>()
 
@@ -52,22 +43,9 @@ class ChallengeViewModel(private val repository: GreenRepository): ViewModel() {
     val error: LiveData<String?>
         get() = _error
 
-    private val _navigateToHome = MutableLiveData<Boolean>()
-
-    val navigateToHome: MutableLiveData<Boolean>
-        get() = _navigateToHome
-
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
-    }
-
-    fun navigateToHome() {
-        _navigateToHome.value = true
-    }
-
-    fun navigateToHomeAfterSend(needRefresh: Boolean = false) {
-        _navigateToHome.value = needRefresh
     }
 
     fun addChallengeData2Firebase(userEmail: String) {
@@ -99,11 +77,10 @@ class ChallengeViewModel(private val repository: GreenRepository): ViewModel() {
                 createdTime = Calendar.getInstance().timeInMillis,
             )
 
-            when (val result = repository.addChallenge2Firebase(userEmail,newChallengeData)) {
+            when (val result = repository.addChallenge2Firebase(userEmail, newChallengeData)) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
-                    navigateToHomeAfterSend(true)
                 }
                 is Result.Fail -> {
                     _error.value = result.error
@@ -114,7 +91,8 @@ class ChallengeViewModel(private val repository: GreenRepository): ViewModel() {
                     _status.value = LoadApiStatus.ERROR
                 }
                 else -> {
-                    _error.value = GreenApplication.instance.getString(R.string.Please_try_again_later)
+                    _error.value =
+                        GreenApplication.instance.getString(R.string.Please_try_again_later)
                     _status.value = LoadApiStatus.ERROR
                 }
             }
@@ -125,38 +103,15 @@ class ChallengeViewModel(private val repository: GreenRepository): ViewModel() {
 
         coroutineScope.launch {
 
-            val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
-            val year = Calendar.getInstance().timeInMillis.toDisplayFormatYear()
-            val month = Calendar.getInstance().timeInMillis.toDisplayFormatMonth()
-            val day = Calendar.getInstance().timeInMillis.toDisplayFormatDay()
-            val createdTime = Calendar.getInstance().timeInMillis
-
-//            val articleTimeStamp = Calendar.getInstance().timeInMillis
-//            val articleHourAndMin =  TimeUtil.stampToHM(articleTimeStamp)
-
-            val data = hashMapOf(
-                "day" to day,
-                "month" to month,
-                "year" to year,
-                "createdTime" to createdTime,
-                "save" to "save"
-            )
-
-            val saveTime = FirebaseFirestore.getInstance()
-                .collection("users").document(userEmail).collection("greens")
-                .document(today).set(data, SetOptions.merge())
-
             val newArticleData = Article(
-                content = content.value.toString(),
+                content = content.value?.toString(),
                 createdTime = Calendar.getInstance().timeInMillis,
-//                id = document.id
             )
 
-            when (val result = repository.addArticle2Firebase(userEmail,newArticleData)) {
+            when (val result = repository.addArticle2Firebase(userEmail, newArticleData)) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
-                    navigateToHomeAfterSend(true)
                 }
                 is Result.Fail -> {
                     _error.value = result.error
@@ -167,7 +122,8 @@ class ChallengeViewModel(private val repository: GreenRepository): ViewModel() {
                     _status.value = LoadApiStatus.ERROR
                 }
                 else -> {
-                    _error.value = GreenApplication.instance.getString(R.string.Please_try_again_later)
+                    _error.value =
+                        GreenApplication.instance.getString(R.string.Please_try_again_later)
                     _status.value = LoadApiStatus.ERROR
                 }
             }

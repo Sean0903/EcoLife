@@ -9,8 +9,6 @@ class FirebaseKey {
         const val COLLECTION_SHARE: String = "share"
         const val COLLECTION_EVENT: String = "event"
         const val COLLECTION_ARTICLE: String = "article"
-        const val USER_ID: String = "ip29dDcJ24BtyGUzNlPE"
         const val PATH_GREENS: String = "greens"
-
     }
 }

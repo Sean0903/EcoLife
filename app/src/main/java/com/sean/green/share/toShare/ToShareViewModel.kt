@@ -104,7 +104,7 @@ class ToShareViewModel(private val repository: GreenRepository): ViewModel() {
                 createdTime = Calendar.getInstance().timeInMillis,
                 today = today,
                 image = userImage,
-                userName = userName,
+                name = userName,
                 email = userEmail
             )
 

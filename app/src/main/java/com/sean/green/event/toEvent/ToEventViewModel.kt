@@ -111,22 +111,20 @@ class ToEventViewModel(private val repository: GreenRepository) : ViewModel() {
                 .document(eventYMD).set(data, SetOptions.merge())
 
             val newEventData = Event(
-                eventTime = eventYMD,
+                eventYMD = eventYMD,
                 content = content.value?.toString(),
                 createdTime = Calendar.getInstance().timeInMillis,
                 introduction = introduction.value?.toString(),
                 location = location.value.toString(),
-                today = today,
-                image = userImage,
-                userName = userName,
-                email = userEmail,
-                memberImage = listOf(userImage),
-                member = listOf(userEmail),
+                hostImage = userImage,
+                hostName = userName,
+                hostEmail = userEmail,
+                memberImages = listOf(userImage),
+                members = listOf(userEmail),
                 eventYear = eventYear,
                 eventMonth = eventMonth,
                 eventDay = eventDate,
                 eventTimestamp = eventTimeStamp
-
             )
 
 //            val addMemberImage = FirebaseFirestore.getInstance()

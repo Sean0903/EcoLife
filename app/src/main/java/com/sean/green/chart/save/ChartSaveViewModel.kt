@@ -63,8 +63,8 @@ class ChartSaveViewModel(private val repository: GreenRepository) : ViewModel() 
 
                 _status.value = LoadApiStatus.LOADING
                 val daysAgo = today.toDisplayFormat()
-                val saveList = repository.getSaveDataForChart(userEmail,COLLECTION_SAVE, daysAgo)
-                val saveList2 = repository.getSaveDataForChart(userEmail,COLLECTION_SAVE, daysAgo)
+                val saveList = repository.getSaveDataForChart(userEmail, COLLECTION_SAVE, daysAgo)
+                val saveList2 = repository.getSaveDataForChart(userEmail, COLLECTION_SAVE, daysAgo)
                 Log.d("days", "chartSavetime = $daysAgo")
                 today -= 87000000
 
@@ -124,7 +124,7 @@ class ChartSaveViewModel(private val repository: GreenRepository) : ViewModel() 
     fun setSaveDataForChart() {
         val sevenDaysData = _saveDataSevenDays.value
 
-        Log.d("sean0903", "haha = ${ _saveDataSevenDays.value} ")
+        Log.d("sean0903", "haha = ${_saveDataSevenDays.value} ")
 
         var dailyPlastic: Int = 0
         var dailyPower: Int = 0

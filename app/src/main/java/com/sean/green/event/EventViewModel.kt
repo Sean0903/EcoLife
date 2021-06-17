@@ -98,7 +98,6 @@ class EventViewModel(private val repository: GreenRepository) : ViewModel() {
                 "_eventDataForRecycleView.value = ${_eventDataForRecycleView.value}"
             )
         }
-
     }
 
 
@@ -116,7 +115,7 @@ class EventViewModel(private val repository: GreenRepository) : ViewModel() {
         coroutineScope.launch {
 
             when (val result =
-                repository.addEventInfo2UserFirebase(event,event.id, event.eventTime, userEmail)) {
+                repository.addEventInfo2UserFirebase(event,event.id, event.eventYMD, userEmail)) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE

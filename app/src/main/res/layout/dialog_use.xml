@@ -3,11 +3,9 @@
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable
-            name="dialogUse"
-            type="com.sean.green.dialog.DialogUseFragment" />
-
         <import type="android.view.View"/>
+
+        <variable name="dialogUse" type="com.sean.green.dialog.DialogUseFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,7 +39,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/dialog_image"
+                android:background="@drawable/dialog_image_plastic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image_dialog_use_title"
@@ -106,7 +104,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/dialog_image_2"
+                android:background="@drawable/dialog_image_power"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
@@ -174,7 +172,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/dialog_image_3"
+                android:background="@drawable/dialog_image_carbon"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"

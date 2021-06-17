@@ -5,12 +5,22 @@
 
     <data>
         <variable name="viewModel" type="com.sean.green.save.SaveViewModel" />
-        <variable name="item" type="com.sean.green.data.Save" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/image_save_page_back_to_home"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/back_button"
+            app:tint="@color/colorBlue5" />
 
         <TextView
             android:id="@+id/text_save_page_photo_title"
@@ -23,24 +33,13 @@
             app:layout_constraintTop_toBottomOf="@+id/image_save_page_back_to_home" />
 
         <TextView
-            android:id="@+id/text_underLine4"
+            android:id="@+id/text_underLine1"
             android:layout_width="0dp"
             android:layout_height="8dp"
             android:background="@drawable/underline"
             app:layout_constraintBottom_toBottomOf="@+id/text_save_page_photo_title"
             app:layout_constraintEnd_toEndOf="@+id/text_save_page_photo_title"
             app:layout_constraintStart_toStartOf="@+id/text_save_page_photo_title" />
-
-        <ImageView
-            android:id="@+id/image_save_page_back_to_home"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/back_button"
-            app:tint="@color/colorBlue5" />
 
         <ImageView
             android:id="@+id/add_save_photo"
@@ -67,7 +66,7 @@
             app:layout_constraintTop_toBottomOf="@+id/add_save_photo">
 
             <TextView
-                android:id="@+id/text_underLine6"
+                android:id="@+id/text_underLine2"
                 android:layout_width="0dp"
                 android:layout_height="8dp"
                 android:background="@drawable/underline"
@@ -180,7 +179,7 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
         <TextView
-            android:id="@+id/text_underLine7"
+            android:id="@+id/text_underLine3"
             android:layout_width="81dp"
             android:layout_height="8dp"
             android:background="@drawable/underline"

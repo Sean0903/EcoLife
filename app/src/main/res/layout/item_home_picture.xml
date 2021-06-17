@@ -4,8 +4,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <variable name="article" type="com.sean.green.data.Article" />
         <import type="com.sean.green.ext.TimeUtil"/>
+
+        <variable name="article" type="com.sean.green.data.Article" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,7 +14,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/image_item_home_article"
             android:layout_width="0dp"
             android:layout_height="150dp"
             android:layout_marginStart="8dp"
@@ -27,7 +28,7 @@
             app:srcCompat="@drawable/_506964794_4efdd2f969559e8b1c92e99f32ded48e" />
 
         <TextView
-            android:id="@+id/text_article_tiime"
+            android:id="@+id/text_item_home_article_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
@@ -40,15 +41,15 @@
             tools:text="14:22"/>
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/text_item_home_article_content"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@drawable/dialog_edit_text_frame"
             android:text="@{article.content}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/text_article_tiime"
+            app:layout_constraintStart_toStartOf="@+id/image_item_home_article"
+            app:layout_constraintTop_toBottomOf="@+id/text_item_home_article_time"
             tools:text="今天都騎腳踏車" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

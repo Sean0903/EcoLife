@@ -4,9 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <variable
-            name="viewModel"
-            type="com.sean.green.use.UseViewModel" />
+        <variable name="viewModel" type="com.sean.green.use.UseViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,7 +12,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/text_underLine5"
+            android:id="@+id/text_underLine1"
             android:layout_width="0dp"
             android:layout_height="8dp"
             android:background="@drawable/underline"
@@ -57,7 +55,7 @@
             app:srcCompat="@drawable/picture" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
+            android:id="@+id/constraintLayout2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -67,7 +65,7 @@
             app:layout_constraintTop_toBottomOf="@+id/add_use_photo">
 
             <TextView
-                android:id="@+id/text_underLine8"
+                android:id="@+id/text_underLine2"
                 android:layout_width="0dp"
                 android:layout_height="8dp"
                 android:background="@drawable/underline"
@@ -167,23 +165,23 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/text_save_page_content_title2"
+            android:id="@+id/text_save_page_content_title"
             style="@style/home_page_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/text_save_page_content_title"
-            app:layout_constraintStart_toStartOf="@+id/constraintLayout"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
         <TextView
-            android:id="@+id/text_underLine9"
+            android:id="@+id/text_underLine3"
             android:layout_width="0dp"
             android:layout_height="8dp"
             android:background="@drawable/underline"
-            app:layout_constraintBottom_toBottomOf="@+id/text_save_page_content_title2"
-            app:layout_constraintEnd_toEndOf="@+id/text_save_page_content_title2"
-            app:layout_constraintStart_toStartOf="@+id/text_save_page_content_title2" />
+            app:layout_constraintBottom_toBottomOf="@+id/text_save_page_content_title"
+            app:layout_constraintEnd_toEndOf="@+id/text_save_page_content_title"
+            app:layout_constraintStart_toStartOf="@+id/text_save_page_content_title" />
 
         <EditText
             android:id="@+id/editText_use_page_content"
@@ -200,9 +198,9 @@
             android:textSize="15dp"
             android:text="@={viewModel.content}"
             app:layout_constraintBottom_toTopOf="@+id/button_use_save"
-            app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
-            app:layout_constraintStart_toStartOf="@+id/constraintLayout"
-            app:layout_constraintTop_toBottomOf="@+id/text_save_page_content_title2" />
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
+            app:layout_constraintTop_toBottomOf="@+id/text_save_page_content_title" />
 
         <Button
             android:id="@+id/button_use_save"

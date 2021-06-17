@@ -10,7 +10,8 @@ import com.sean.green.data.CalendarEvent
 import com.sean.green.databinding.ItemCalendarEventBinding
 
 
-class CalendarEventAdapter(): ListAdapter<CalendarEvent, CalendarEventAdapter.ViewHolder>(DiffCallback()) {
+class CalendarEventAdapter() :
+    ListAdapter<CalendarEvent, CalendarEventAdapter.ViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -24,10 +25,11 @@ class CalendarEventAdapter(): ListAdapter<CalendarEvent, CalendarEventAdapter.Vi
 
     }
 
-    class ViewHolder(var binding: ItemCalendarEventBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(var binding: ItemCalendarEventBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: CalendarEvent) {
-            Log.d("seanViewHolder","fun bind(item: CalendarEvent) = $item")
+            Log.d("calendarEventAdapter", "ViewHolder = $item")
             binding.calendarEvent = item
             binding.executePendingBindings()
         }

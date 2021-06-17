@@ -4,9 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <variable
-            name="viewModel"
-            type="com.sean.green.chart.save.ChartSaveViewModel" />
+        <variable name="viewModel" type="com.sean.green.chart.save.ChartSaveViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -19,18 +17,6 @@
             android:layout_height="wrap_content"
             tools:visibility="visible">
 
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                tools:visibility="visible">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout2"
@@ -152,7 +138,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
                 <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/lottieAnimationView"
+                    android:id="@+id/lottie_chart"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:visibility="visible"
@@ -162,13 +148,13 @@
                     tools:visibility="gone" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayout9"
+                    android:id="@+id/constraintLayout3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="24dp"
-                    app:layout_constraintBottom_toTopOf="@+id/constraintLayout10"
+                    app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -187,7 +173,7 @@
                         app:srcCompat="@drawable/icon_calendar" />
 
                     <ImageView
-                        android:id="@+id/image_chart_page_save_plastic_icon1"
+                        android:id="@+id/image_chart_page_save_plastic2"
                         android:layout_width="40dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="40dp"
@@ -199,31 +185,31 @@
                         app:srcCompat="@drawable/bag" />
 
                     <ImageView
-                        android:id="@+id/image_chart_page_save_power_icon1"
+                        android:id="@+id/image_chart_page_save_power2"
                         android:layout_width="40dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="18dp"
                         android:padding="@dimen/elevation_all"
                         android:paddingTop="@dimen/elevation_all"
                         android:scaleType="fitCenter"
-                        app:layout_constraintBottom_toBottomOf="@+id/image_chart_page_save_plastic_icon1"
-                        app:layout_constraintStart_toEndOf="@+id/image_chart_page_save_plastic_icon1"
+                        app:layout_constraintBottom_toBottomOf="@+id/image_chart_page_save_plastic2"
+                        app:layout_constraintStart_toEndOf="@+id/image_chart_page_save_plastic2"
                         app:srcCompat="@drawable/lighting" />
 
                     <ImageView
-                        android:id="@+id/image_chart_page_save_carbon_icon1"
+                        android:id="@+id/image_chart_page_save_carbon2"
                         android:layout_width="40dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="18dp"
                         android:padding="@dimen/elevation_all"
                         android:paddingTop="@dimen/elevation_all"
                         android:scaleType="fitCenter"
-                        app:layout_constraintBottom_toBottomOf="@+id/image_chart_page_save_power_icon1"
-                        app:layout_constraintStart_toEndOf="@+id/image_chart_page_save_power_icon1"
+                        app:layout_constraintBottom_toBottomOf="@+id/image_chart_page_save_power2"
+                        app:layout_constraintStart_toEndOf="@+id/image_chart_page_save_power2"
                         app:srcCompat="@drawable/co2" />
 
                     <TextView
-                        android:id="@+id/text_calendar_title2"
+                        android:id="@+id/text_calendar_title"
                         style="@style/icon_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -234,49 +220,49 @@
                         app:layout_constraintTop_toBottomOf="@+id/image_chart_page_calender" />
 
                     <TextView
-                        android:id="@+id/text_plastic_title2"
+                        android:id="@+id/text_plastic_title"
                         style="@style/icon_title"
                         android:layout_width="wrap_content"
                         android:layout_height="18dp"
                         android:text="減 塑"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/image_chart_page_save_plastic_icon1"
-                        app:layout_constraintStart_toStartOf="@+id/image_chart_page_save_plastic_icon1"
+                        app:layout_constraintEnd_toEndOf="@+id/image_chart_page_save_plastic2"
+                        app:layout_constraintStart_toStartOf="@+id/image_chart_page_save_plastic2"
                         app:layout_constraintTop_toBottomOf="@+id/image_chart_page_calender" />
 
                     <TextView
-                        android:id="@+id/text_power_title2"
+                        android:id="@+id/text_power_title"
                         style="@style/icon_title"
                         android:layout_width="wrap_content"
                         android:layout_height="18dp"
                         android:text="節 能"
-                        app:layout_constraintBottom_toBottomOf="@+id/text_calendar_title2"
-                        app:layout_constraintEnd_toEndOf="@+id/image_chart_page_save_power_icon1"
-                        app:layout_constraintStart_toStartOf="@+id/image_chart_page_save_power_icon1"
+                        app:layout_constraintBottom_toBottomOf="@+id/text_calendar_title"
+                        app:layout_constraintEnd_toEndOf="@+id/image_chart_page_save_power2"
+                        app:layout_constraintStart_toStartOf="@+id/image_chart_page_save_power2"
                         app:layout_constraintTop_toBottomOf="@+id/image_chart_page_calender" />
 
                     <TextView
-                        android:id="@+id/text_carbon_title2"
+                        android:id="@+id/text_carbon_title"
                         style="@style/icon_title"
                         android:layout_width="wrap_content"
                         android:layout_height="18dp"
                         android:text="減 排"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/image_chart_page_save_carbon_icon1"
-                        app:layout_constraintStart_toStartOf="@+id/image_chart_page_save_carbon_icon1"
+                        app:layout_constraintEnd_toEndOf="@+id/image_chart_page_save_carbon2"
+                        app:layout_constraintStart_toStartOf="@+id/image_chart_page_save_carbon2"
                         app:layout_constraintTop_toBottomOf="@+id/image_chart_page_calender" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayout10"
+                    android:id="@+id/constraintLayout4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="60dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/constraintLayout9"
-                    app:layout_constraintStart_toStartOf="@+id/constraintLayout9"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout9">
+                    app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
+                    app:layout_constraintStart_toStartOf="@+id/constraintLayout3"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerView_chart_page_save"
@@ -293,11 +279,6 @@
 
                     </androidx.recyclerview.widget.RecyclerView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.core.widget.NestedScrollView>
 </layout>

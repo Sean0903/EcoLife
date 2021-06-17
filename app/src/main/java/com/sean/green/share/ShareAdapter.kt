@@ -13,10 +13,8 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.sean.green.R
 import com.sean.green.data.Share
 import com.sean.green.databinding.ItemShareBinding
-import com.sean.green.login.UserManager
 import com.sean.green.util.Util
 import com.sean.green.util.Util.getColor
-import kotlinx.android.synthetic.main.item_share.view.*
 
 
 class ShareAdapter(private val viewModel: ShareViewModel,val onClickListener: OnClickListener) :
@@ -37,10 +35,10 @@ class ShareAdapter(private val viewModel: ShareViewModel,val onClickListener: On
         }
 
 
-        holder.itemView.imageView3.setOnClickListener {
-            viewModel.getSaveDataForChart(UserManager.user.email,Share())
-
-        }
+//        holder.itemView.imageView2.setOnClickListener {
+//            viewModel.getSaveDataForChart(UserManager.user.email,Share())
+//
+//        }
     }
 
     class ViewHolder(var binding: ItemShareBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -48,7 +46,7 @@ class ShareAdapter(private val viewModel: ShareViewModel,val onClickListener: On
         fun bind(viewModel: ShareViewModel, item: Share) {
             Log.d("seanViewHolder", "fun bind(item: Save) = $item")
             binding.shareData = item
-            binding.lineChart1
+            binding.lineChart3
 
             fun setLine() {
                 val xvalue = ArrayList<String>()
@@ -102,12 +100,12 @@ class ShareAdapter(private val viewModel: ShareViewModel,val onClickListener: On
 
                 val data = LineData(xvalue, finaldataset as List<ILineDataSet>?)
 
-                binding.lineChart1.data = data
-                binding.lineChart1.setBackgroundColor(Util.getColor(R.color.white))
-                binding.lineChart1.animateXY(3000, 3000)
+                binding.lineChart3.data = data
+                binding.lineChart3.setBackgroundColor(Util.getColor(R.color.white))
+                binding.lineChart3.animateXY(3000, 3000)
             }
 
-            binding.textView9.setOnClickListener {
+            binding.textItemShareContent.setOnClickListener {
                 setLine()
             }
 

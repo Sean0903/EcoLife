@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sean.green.data.Use
 import com.sean.green.databinding.ItemChartDateUseBinding
 
-class ChartUseAdapter(): ListAdapter<Use, ChartUseAdapter.ViewHolder>(
+class ChartUseAdapter() : ListAdapter<Use, ChartUseAdapter.ViewHolder>(
     DiffCallback()
 ) {
 
@@ -30,7 +30,7 @@ class ChartUseAdapter(): ListAdapter<Use, ChartUseAdapter.ViewHolder>(
     class ViewHolder(var binding: ItemChartDateUseBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Use) {
-            Log.d("seanViewHolder","fun bind(item: use) = $item")
+            Log.d("chartUseAdapter", "viewHolder = $item")
             binding.useChartData = item
         }
 

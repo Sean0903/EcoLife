@@ -19,58 +19,55 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:background="@drawable/dialog_frame"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/image_dialog_challenge_title"
+                android:id="@+id/text_dialog_challenge_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-
                 android:fontFamily="@font/noto_sans"
-                android:text="– 我的每日挑戰 –"
-                android:textSize="@dimen/text_content"
+                android:text="@string/image_dialog_challenge_title"
+                android:textSize="14dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/image_dialog_challenge_plastic"
+                android:id="@+id/image_dialog_challenge"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/dialog_image"
-
+                android:background="@drawable/dialog_image_plastic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image_dialog_challenge_title"
+                app:layout_constraintTop_toBottomOf="@+id/text_dialog_challenge_title"
                 app:srcCompat="@drawable/goal2" />
 
             <TextView
-                android:id="@+id/text_dialog_challenge_plastic_1"
+                android:id="@+id/text_dialog_challenge_content1"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_marginTop="8dp"
-                android:text="請點選右下方按鈕，輸入您今日的挑戰目標。"
+                android:text="@string/text_dialog_challenge_content1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image_dialog_challenge_plastic" />
+                app:layout_constraintTop_toBottomOf="@+id/image_dialog_challenge" />
 
             <TextView
-                android:id="@+id/textView15"
+                android:id="@+id/text_dialog_challenge_content2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp"
-                android:text="您輸入的挑戰數值，將會隨著您紀錄的成果和消耗即時增減，願您每天的挑戰都能達成！"
+                android:text="@string/text_dialog_challenge_content2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_dialog_challenge_plastic_1" />
+                app:layout_constraintTop_toBottomOf="@+id/text_dialog_challenge_content1" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

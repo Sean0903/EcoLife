@@ -5,43 +5,39 @@
 
     <data>
         <variable name="shareData" type="com.sean.green.data.Share" />
-        <variable name="viewModel" type="com.sean.green.data.Share" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout6"
+            android:id="@+id/constraintLayout2"
             android:layout_width="0dp"
-            android:layout_height="400dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/recyclerview_dialog_frame_top"
             app:layout_constraintBottom_toTopOf="@+id/constraintLayout7"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/card_view_image"
+                android:id="@+id/card_item_share_view_image"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
                 app:cardCornerRadius="30dp"
-                app:layout_constraintBottom_toTopOf="@+id/image_item_event_host2"
-                app:layout_constraintEnd_toEndOf="@+id/image_item_event_host2"
-                app:layout_constraintStart_toStartOf="@+id/image_item_event_host2"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/profile_image"
+                    android:id="@+id/item_share_profile_image"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginEnd="92dp"
@@ -54,60 +50,59 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/text_item_share_host_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="@{shareData.userName}"
-                app:layout_constraintBottom_toTopOf="@+id/textView6"
-                app:layout_constraintStart_toEndOf="@+id/card_view_image"
+                android:text="@{shareData.name}"
+                app:layout_constraintBottom_toTopOf="@+id/text_item_share_time"
+                app:layout_constraintStart_toEndOf="@+id/card_item_share_view_image"
                 tools:text="Kai Hsiang Liang" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/text_item_share_time"
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:layout_marginStart="8dp"
                 android:text="@{shareData.time}"
-                app:layout_constraintBottom_toBottomOf="@+id/image_item_event_host2"
-                app:layout_constraintStart_toEndOf="@+id/image_item_event_host2"
-                app:layout_constraintTop_toTopOf="@+id/image_item_event_host2"
+                app:layout_constraintBottom_toTopOf="@+id/image_item_share_presentation"
+                app:layout_constraintStart_toEndOf="@+id/image_item_share_calendar"
+                app:layout_constraintTop_toTopOf="@+id/image_item_share_calendar"
                 tools:text="2021.5.18  9:00" />
 
             <ImageView
-                android:id="@+id/image_item_event_host2"
+                android:id="@+id/image_item_share_calendar"
                 android:layout_width="30dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/card_view_image"
+                app:layout_constraintStart_toStartOf="@+id/card_item_share_view_image"
+                app:layout_constraintTop_toBottomOf="@+id/card_item_share_view_image"
                 app:srcCompat="@drawable/icon_calendar" />
 
             <ImageView
-                android:id="@+id/image_item_event_host4"
+                android:id="@+id/image_item_share_presentation"
                 android:layout_width="35dp"
                 android:layout_height="25dp"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image_item_event_host2"
+                app:layout_constraintEnd_toEndOf="@+id/image_item_share_calendar"
+                app:layout_constraintStart_toStartOf="@+id/image_item_share_calendar"
+                app:layout_constraintTop_toBottomOf="@+id/image_item_share_calendar"
                 app:srcCompat="@drawable/presentation" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/text_item_share_achievement"
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:layout_marginStart="8dp"
                 android:text="@{shareData.achievement}"
-                app:layout_constraintBottom_toBottomOf="@+id/image_item_event_host4"
-                app:layout_constraintStart_toEndOf="@+id/image_item_event_host4"
-                app:layout_constraintTop_toTopOf="@+id/image_item_event_host4"
+                app:layout_constraintBottom_toBottomOf="@+id/image_item_share_presentation"
+                app:layout_constraintStart_toEndOf="@+id/image_item_share_presentation"
+                app:layout_constraintTop_toTopOf="@+id/image_item_share_presentation"
                 tools:text="一週都騎腳踏車" />
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/text_item_share_content"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -117,30 +112,32 @@
                 android:text="@{shareData.content}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image_item_event_host4"
+                app:layout_constraintTop_toBottomOf="@+id/image_item_share_presentation"
                 tools:text="大眾交通擔心染疫，開車又有碳排，我一週都騎腳踏車上班。" />
 
             <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/lineChart1"
+                android:id="@+id/lineChart3"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:clickable="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView9">
+                app:layout_constraintTop_toBottomOf="@+id/text_item_share_content">
             </com.github.mikephil.charting.charts.LineChart>
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/imageView"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="6dp"
                 android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ecolife" />
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -148,9 +145,9 @@
             android:layout_width="0dp"
             android:layout_height="200dp"
             android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/constraintLayout6"
-            app:layout_constraintStart_toStartOf="@+id/constraintLayout6"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout6">
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycleView_share_dialog"

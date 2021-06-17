@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -33,6 +32,10 @@ class ChallengeFragment : Fragment() {
 
         binding = FragmentChallengeBinding.inflate(inflater, container, false)
 
+        binding.lifecycleOwner = this
+
+        binding.viewModel = viewModel
+
         viewModel.plastic.observe(viewLifecycleOwner, Observer {
             Log.i("challengeFragment", "plastic = ${viewModel.plastic.value}")
         }
@@ -48,12 +51,12 @@ class ChallengeFragment : Fragment() {
         }
         )
 
+        viewModel.content.observe(viewLifecycleOwner, Observer {
+            Log.i("challengeFragment", "content = ${viewModel.content.value}")
+        }
+        )
 
-        binding.lifecycleOwner = this
-
-        binding.viewModel = viewModel
-
-        binding.imageUsePageBackToHome.setOnClickListener {
+        binding.imageChallengePageBackToHome.setOnClickListener {
             findNavController().navigate(NavigationDirections.navigateToHomeFragment())
         }
 
@@ -66,16 +69,12 @@ class ChallengeFragment : Fragment() {
 
         }
 
-        binding.editTextSavePageContent.doOnTextChanged { text, start, before, count ->
-            viewModel.content.value = text.toString()
-            Log.d("saveFragment", "content = ${viewModel.content.value}")
-        }
-
-        binding.buttonChallengeSave.setOnClickListener {
+        binding.buttonChallengePageSave.setOnClickListener {
 
             if (viewModel.plastic.value.isNullOrBlank() &&
                 viewModel.power.value.isNullOrBlank() &&
-                viewModel.carbon.value.isNullOrBlank()) {
+                viewModel.carbon.value.isNullOrBlank()
+            ) {
                 Toast.makeText(context, "請輸入挑戰", Toast.LENGTH_LONG).show()
             } else {
                 viewModel.addChallengeData2Firebase(UserManager.user.email)
@@ -87,7 +86,6 @@ class ChallengeFragment : Fragment() {
                 Toast.makeText(context, "已成功送出", Toast.LENGTH_LONG).show()
             }
         }
-
 
         return binding.root
     }

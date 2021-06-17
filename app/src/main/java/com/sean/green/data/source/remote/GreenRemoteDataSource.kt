@@ -736,7 +736,7 @@ object GreenRemoteDataSource : GreenDataSource {
             val firestore = FirebaseFirestore.getInstance().collection(PATH_USERS)
             val userDocument = firestore.document(userEmail)
             val greensCollenction = userDocument.collection(PATH_GREENS)
-            val document = greensCollenction.document(event.eventTime)
+            val document = greensCollenction.document(event.eventYMD)
 
             val data = hashMapOf(
                 "event" to "event",
