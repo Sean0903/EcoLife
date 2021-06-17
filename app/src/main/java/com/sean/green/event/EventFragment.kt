@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.sean.green.MainActivity
 import com.sean.green.databinding.FragmentEventBinding
 import com.sean.green.ext.getVmFactory
 
@@ -30,8 +29,6 @@ class EventFragment: Fragment() {
         binding.recyclerViewEvent.adapter = EventAdapter(viewModel,EventAdapter.OnClickListener {
             Log.d("test","eventMember= $it")
         })
-
-        (activity as MainActivity).dismissFabButton(true)
 
         return binding.root
     }

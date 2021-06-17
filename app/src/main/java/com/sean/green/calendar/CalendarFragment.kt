@@ -12,7 +12,6 @@ import androidx.lifecycle.Observer
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import com.sean.green.GreenApplication
-import com.sean.green.MainActivity
 import com.sean.green.R
 import com.sean.green.databinding.FragmentCalendarBinding
 import com.sean.green.ext.TimeUtil
@@ -48,7 +47,6 @@ class CalendarFragment : Fragment() {
 
         widget = binding.calendarView
 
-        (activity as MainActivity).dismissFabButton(true)
 
         var adapter = CalendarEventAdapter()
         binding.recyclerViewCalendar.adapter = adapter

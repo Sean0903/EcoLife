@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.sean.green.MainActivity
 import com.sean.green.databinding.FragmentShareBinding
 import com.sean.green.ext.getVmFactory
 
@@ -45,8 +44,6 @@ class ShareFragment: Fragment() {
         binding.lottieShare.repeatCount = -1
         // start lottie
         binding.lottieShare.playAnimation()
-
-        (activity as MainActivity).dismissFabButton(true)
 
         return binding.root
     }
