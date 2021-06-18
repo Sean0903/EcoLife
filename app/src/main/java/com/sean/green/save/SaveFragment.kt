@@ -240,8 +240,6 @@ class SaveFragment : Fragment() {
 
                                     val byteArray = byte.toByteArray()
 
-
-
                                     uploadFile(byteArray)
                                     Log.d("Peter", "Run9")
 
@@ -475,9 +473,6 @@ class SaveFragment : Fragment() {
                 )
             ).child(fileFromCamera.toString())
 
-
-
-
             Log.d("Peter", "Hey6")
 
             Log.d("Peter", "Hey7")
@@ -630,8 +625,7 @@ class SaveFragment : Fragment() {
                     else -> {
                         Log.d("sean","6 = getPermissions")
                         ActivityCompat.requestPermissions(
-                            activity as MainActivity,
-                            permissions,
+                            activity as MainActivity, permissions,
                             SELECT_PHOTO_PERMISSION_REQUEST_CODE
                         )
                     }
@@ -647,7 +641,6 @@ class SaveFragment : Fragment() {
                 )
             }
         }
-
     }
 
     override fun onRequestPermissionsResult(

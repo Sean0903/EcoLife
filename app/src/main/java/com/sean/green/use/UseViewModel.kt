@@ -8,8 +8,9 @@ import com.google.firebase.firestore.SetOptions
 import com.sean.green.GreenApplication
 import com.sean.green.R
 import com.sean.green.data.Article
+import com.sean.green.data.FirebaseKey.Companion.COLLECTION_USE
 import com.sean.green.data.Result
-import com.sean.green.data.Use
+import com.sean.green.data.Sum
 import com.sean.green.data.source.GreenRepository
 import com.sean.green.network.LoadApiStatus
 import com.sean.green.util.Util
@@ -61,7 +62,7 @@ class UseViewModel(private val repository: GreenRepository) : ViewModel() {
                 .collection("users").document(userEmail).collection("greens")
                 .document(Util.today).set(data, SetOptions.merge())
 
-            val newUseData = Use(
+            val newUseData = Sum(
                 plastic = plastic.value?.toInt(),
                 power = power.value?.toInt(),
                 carbon = carbon.value?.toInt(),
@@ -69,7 +70,7 @@ class UseViewModel(private val repository: GreenRepository) : ViewModel() {
                 today = Util.today
             )
 
-            when (val result = repository.addUseNum2Firebase(userEmail, newUseData)) {
+            when (val result = repository.addData2Firebase(userEmail,COLLECTION_USE,newUseData)) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE

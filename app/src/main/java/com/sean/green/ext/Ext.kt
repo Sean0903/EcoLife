@@ -64,7 +64,6 @@ object TimeUtil {
     }
 }
 
-
 fun Date?.toDateFormat(dateFormat: Int): String {
 
     return java.text.SimpleDateFormat(
@@ -93,8 +92,7 @@ fun Date?.toDateFormat(dateFormat: Int): String {
                 )
             else -> null
         }
-        , Locale.US
-    ).format(this)
+        , Locale.US).format(this)
 
 }
 

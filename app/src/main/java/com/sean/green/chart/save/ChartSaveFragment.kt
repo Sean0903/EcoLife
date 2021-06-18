@@ -51,56 +51,17 @@ class ChartSaveFragment : Fragment() {
 
         viewModel.saveDataSevenDays.observe(viewLifecycleOwner, Observer {
             viewModel.setSaveDataForChart()
-//            viewModel.setDataForRecycleView(List<List<Save>>)
+
             count++
             if (count == 7) {
+
                 setLineChartData()
-                binding.lottieChart.visibility = View.GONE
-                binding.imageChartPageSavePlastic.visibility = View.VISIBLE
-                binding.imageChartPageSavePower.visibility = View.VISIBLE
-                binding.imageChartPageSaveCarbon.visibility = View.VISIBLE
-                binding.textChartPageSavePlastic.visibility = View.VISIBLE
-                binding.textChartPageSavePower.visibility = View.VISIBLE
-                binding.textChartPageSaveCarbon.visibility = View.VISIBLE
-                binding.imageChartPageCalender.visibility = View.VISIBLE
-                binding.imageChartPageSavePlastic2.visibility = View.VISIBLE
-                binding.imageChartPageSavePower2.visibility = View.VISIBLE
-                binding.imageChartPageSaveCarbon2.visibility = View.VISIBLE
-                binding.recyclerViewChartPageSave.visibility = View.VISIBLE
-                binding.textCalendarTitle.visibility = View.VISIBLE
-                binding.textPlasticTitle.visibility = View.VISIBLE
-                binding.textPowerTitle.visibility = View.VISIBLE
-                binding.textCarbonTitle.visibility = View.VISIBLE
+                letViewInvisible()
 
             }
-            Log.d("0604", "count ++ = ${count}")
-            Log.d("0604", "plasticList = ${viewModel.plasticList}")
-            Log.d("0604", "powerlist = ${viewModel.powerList}")
-            Log.d("0604", "carbon = ${viewModel.carbonList}")
-            Log.d("seanChartSaveFragment", "observe = ${viewModel.saveDataSevenDays.value}")
-
-
         })
 
-
-        binding.lottieChart.repeatCount = -1
-        // start lottie
-        binding.lottieChart.playAnimation()
-        binding.imageChartPageSavePlastic.visibility = View.INVISIBLE
-        binding.imageChartPageSavePower.visibility = View.INVISIBLE
-        binding.imageChartPageSaveCarbon.visibility = View.INVISIBLE
-        binding.textChartPageSavePlastic.visibility = View.INVISIBLE
-        binding.textChartPageSavePower.visibility = View.INVISIBLE
-        binding.textChartPageSaveCarbon.visibility = View.INVISIBLE
-        binding.imageChartPageCalender.visibility = View.INVISIBLE
-        binding.imageChartPageSavePlastic2.visibility = View.INVISIBLE
-        binding.imageChartPageSavePower2.visibility = View.INVISIBLE
-        binding.imageChartPageSaveCarbon2.visibility = View.INVISIBLE
-        binding.recyclerViewChartPageSave.visibility = View.INVISIBLE
-        binding.textCalendarTitle.visibility = View.INVISIBLE
-        binding.textPlasticTitle.visibility = View.INVISIBLE
-        binding.textPowerTitle.visibility = View.INVISIBLE
-        binding.textCarbonTitle.visibility = View.INVISIBLE
+        letViewVisible()
 
         return binding.root
     }
@@ -153,11 +114,6 @@ class ChartSaveFragment : Fragment() {
         val linedatasetSaveCarbon = LineDataSet(lineentrySaveCarbon, "Carbon")
         linedatasetSaveCarbon.color = resources.getColor(R.color.colorNight)
 
-//            linedataset.circleRadius = 0f
-//            linedataset.setDrawFilled(true)
-//            linedataset.fillColor = resources.getColor(R.color.black)
-//            linedataset.fillAlpha = 30
-
         val finaldataset = ArrayList<LineDataSet>()
         finaldataset.add(linedatasetSavePlastic)
         finaldataset.add(linedatasetSavePower)
@@ -171,5 +127,43 @@ class ChartSaveFragment : Fragment() {
 
     }
 
+    private fun letViewInvisible() {
+        binding.lottieChart.visibility = View.GONE
+        binding.imageChartPageSavePlastic.visibility = View.VISIBLE
+        binding.imageChartPageSavePower.visibility = View.VISIBLE
+        binding.imageChartPageSaveCarbon.visibility = View.VISIBLE
+        binding.textChartPageSavePlastic.visibility = View.VISIBLE
+        binding.textChartPageSavePower.visibility = View.VISIBLE
+        binding.textChartPageSaveCarbon.visibility = View.VISIBLE
+        binding.imageChartPageCalender.visibility = View.VISIBLE
+        binding.imageChartPageSavePlastic2.visibility = View.VISIBLE
+        binding.imageChartPageSavePower2.visibility = View.VISIBLE
+        binding.imageChartPageSaveCarbon2.visibility = View.VISIBLE
+        binding.recyclerViewChartPageSave.visibility = View.VISIBLE
+        binding.textCalendarTitle.visibility = View.VISIBLE
+        binding.textPlasticTitle.visibility = View.VISIBLE
+        binding.textPowerTitle.visibility = View.VISIBLE
+        binding.textCarbonTitle.visibility = View.VISIBLE
+    }
 
+    private fun letViewVisible() {
+        binding.lottieChart.repeatCount = -1
+        // start lottie
+        binding.lottieChart.playAnimation()
+        binding.imageChartPageSavePlastic.visibility = View.INVISIBLE
+        binding.imageChartPageSavePower.visibility = View.INVISIBLE
+        binding.imageChartPageSaveCarbon.visibility = View.INVISIBLE
+        binding.textChartPageSavePlastic.visibility = View.INVISIBLE
+        binding.textChartPageSavePower.visibility = View.INVISIBLE
+        binding.textChartPageSaveCarbon.visibility = View.INVISIBLE
+        binding.imageChartPageCalender.visibility = View.INVISIBLE
+        binding.imageChartPageSavePlastic2.visibility = View.INVISIBLE
+        binding.imageChartPageSavePower2.visibility = View.INVISIBLE
+        binding.imageChartPageSaveCarbon2.visibility = View.INVISIBLE
+        binding.recyclerViewChartPageSave.visibility = View.INVISIBLE
+        binding.textCalendarTitle.visibility = View.INVISIBLE
+        binding.textPlasticTitle.visibility = View.INVISIBLE
+        binding.textPowerTitle.visibility = View.INVISIBLE
+        binding.textCarbonTitle.visibility = View.INVISIBLE
+    }
 }

@@ -8,8 +8,9 @@ import com.google.firebase.firestore.SetOptions
 import com.sean.green.GreenApplication
 import com.sean.green.R
 import com.sean.green.data.Article
-import com.sean.green.data.Challenge
+import com.sean.green.data.FirebaseKey.Companion.COLLECTION_CHALLENGE
 import com.sean.green.data.Result
+import com.sean.green.data.Sum
 import com.sean.green.data.source.GreenRepository
 import com.sean.green.network.LoadApiStatus
 import com.sean.green.util.Util
@@ -61,14 +62,14 @@ class ChallengeViewModel(private val repository: GreenRepository) : ViewModel() 
                 .collection("users").document(userEmail).collection("greens")
                 .document(Util.today).set(data, SetOptions.merge())
 
-            val newChallengeData = Challenge(
+            val newChallengeData = Sum(
                 plastic = plastic.value?.toInt(),
                 power = power.value?.toInt(),
                 carbon = carbon.value?.toInt(),
                 createdTime = Calendar.getInstance().timeInMillis,
             )
 
-            when (val result = repository.addChallenge2Firebase(userEmail, newChallengeData)) {
+            when (val result = repository.addData2Firebase(userEmail,COLLECTION_CHALLENGE, newChallengeData)) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE

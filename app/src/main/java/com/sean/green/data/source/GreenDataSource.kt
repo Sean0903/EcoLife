@@ -4,17 +4,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseUser
 import com.sean.green.data.*
 
-/**
- *
- * Main entry point for accessing Stylish sources.
- */
 interface GreenDataSource {
 
-    suspend fun addSaveNum2Firebase(userEmail: String,save: Save): Result<Boolean>
+    suspend fun addData2Firebase(userEmail: String, collection: String, any: Any): Result<Boolean>
 
-    suspend fun addUseNum2Firebase(userEmail: String, use: Use): Result<Boolean>
-
-    suspend fun addChallenge2Firebase(userEmail: String,challenge: Challenge): Result<Boolean>
+    suspend fun getDataFromFirebase(userEmail: String, collection: String, any: Any): Result<List<Any>>
 
     suspend fun getSaveNum(userEmail: String,collection:String): Result<List<Save>>
 

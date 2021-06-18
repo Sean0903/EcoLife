@@ -8,10 +8,6 @@ import com.sean.green.data.source.GreenDataSource
 import com.sean.green.data.source.GreenRepository
 import com.sean.green.data.source.local.GreenLocalDataSource
 
-
-/**
- * A Service Locator for the [StylishRepository].
- */
 object ServiceLocator {
 
     @Volatile

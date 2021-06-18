@@ -13,11 +13,10 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.sean.green.R
 import com.sean.green.data.Share
 import com.sean.green.databinding.ItemShareBinding
-import com.sean.green.util.Util
 import com.sean.green.util.Util.getColor
 
 
-class ShareAdapter(private val viewModel: ShareViewModel,val onClickListener: OnClickListener) :
+class ShareAdapter(private val viewModel: ShareViewModel, val onClickListener: OnClickListener) :
     ListAdapter<Share, ShareAdapter.ViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -47,6 +46,14 @@ class ShareAdapter(private val viewModel: ShareViewModel,val onClickListener: On
             Log.d("seanViewHolder", "fun bind(item: Save) = $item")
             binding.shareData = item
             binding.lineChart3
+//
+//            var plasticList = mutableListOf<List<Int>>()
+//            var powerList = mutableListOf<Int>()
+//            var carbonList = mutableListOf<Int>()
+//
+//            plasticList.add(viewModel.plasticLiveDataList.value!!)
+//
+//            Log.d("sean0618","viewHolderPlasticList = $plasticList")
 
             fun setLine() {
                 val xvalue = ArrayList<String>()
@@ -101,13 +108,28 @@ class ShareAdapter(private val viewModel: ShareViewModel,val onClickListener: On
                 val data = LineData(xvalue, finaldataset as List<ILineDataSet>?)
 
                 binding.lineChart3.data = data
-                binding.lineChart3.setBackgroundColor(Util.getColor(R.color.white))
+                binding.lineChart3.setBackgroundColor(getColor(R.color.white))
                 binding.lineChart3.animateXY(3000, 3000)
             }
+
+//            var count = 0
+//
+//            viewModel.saveDataSevenDays.observe(viewLifecycleOwner, Observer {
+//                viewModel.setSaveDataForChart()
+//
+//                count++
+//                if (count == 7) {
+//
+//                }
+//            })
+
+//            Log.d("sean0618 Adapter","plasticListSize = ${viewModel.plasticListSize}")
+//            Log.d("sean0618 Adapter","plasticList.sum = ${viewModel.plasticList.sum()}")
 
             binding.textItemShareContent.setOnClickListener {
                 setLine()
             }
+
             binding.executePendingBindings()
         }
 

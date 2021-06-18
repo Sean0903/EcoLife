@@ -9,8 +9,10 @@ import com.google.firebase.firestore.SetOptions
 import com.sean.green.GreenApplication
 import com.sean.green.R
 import com.sean.green.data.Article
+import com.sean.green.data.FirebaseKey.Companion.COLLECTION_SAVE
 import com.sean.green.data.Result
 import com.sean.green.data.Save
+import com.sean.green.data.Sum
 import com.sean.green.data.source.GreenRepository
 import com.sean.green.ext.toDisplayFormat
 import com.sean.green.ext.toDisplayFormatDay
@@ -22,6 +24,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.sql.Time
 import java.util.*
 
 
@@ -49,10 +52,9 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
     val error: LiveData<String?>
         get() = _error
 
-    private val _navigateToHome = MutableLiveData<Boolean>()
-
-    val navigateToHome: MutableLiveData<Boolean>
-        get() = _navigateToHome
+    private val _time = MutableLiveData<Time>()
+    val time : LiveData<Time>
+        get() = _time
 
     //相片功能data
     private val _date = MutableLiveData<Date>()
@@ -68,13 +70,23 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
         get() = _photoUri
 
     //相片功能function
+    fun setPhoto(photo: Uri){
+        _photoUri.value = photo
+    }
+
     fun uploadPhoto(){
         _isUploadPhoto.value = true
     }
 
-    fun setPhoto(photo: Uri){
-        _photoUri.value = photo
+    fun setCurrentDate(date: Date){
+        _date.value = date
+        _time.value = Time(date.time)
     }
+
+    init {
+        setCurrentDate(Date())
+    }
+
 
     override fun onCleared() {
         super.onCleared()
@@ -103,7 +115,7 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
                 .collection("users").document(userEmail).collection("greens")
                 .document(Util.today).set(data, SetOptions.merge())
 
-            val newSaveData = Save(
+            val newSaveData = Sum(
                 plastic = plastic.value?.toInt(),
                 power = power.value?.toInt(),
                 carbon = carbon.value?.toInt(),
@@ -112,7 +124,7 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
                 today = Util.today
             )
 
-            when (val result = repository.addSaveNum2Firebase(userEmail,newSaveData)) {
+            when (val result = repository.addData2Firebase(userEmail,COLLECTION_SAVE,newSaveData)) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE

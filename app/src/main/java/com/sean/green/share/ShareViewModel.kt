@@ -136,10 +136,14 @@ class ShareViewModel(private val repository: GreenRepository) : ViewModel() {
         }
     }
 
-    val plasticList = mutableListOf<Int>()
-    val powerList = mutableListOf<Int>()
-    val carbonList = mutableListOf<Int>()
-    var count = 0
+    var plasticLiveDataList = MutableLiveData<List<Int>>()
+
+    var plasticList = mutableListOf<Int>()
+    var powerList = mutableListOf<Int>()
+    var carbonList = mutableListOf<Int>()
+
+//    var plasticListSize = 0
+//    var plasticListSum = 0
 
     fun setSaveDataForChart() {
         val sevenDaysData = _saveDataSevenDays.value
@@ -160,9 +164,6 @@ class ShareViewModel(private val repository: GreenRepository) : ViewModel() {
 
                 dailyCarbon = dailyCarbon.plus(sumOneDay.carbon ?: 0)
                 Log.d("shareViewModel", "saveDailyCarbon = ${dailyCarbon}")
-
-                count++
-                Log.d("seanCount", "count = $count")
             }
         }
 
@@ -170,8 +171,9 @@ class ShareViewModel(private val repository: GreenRepository) : ViewModel() {
         powerList.add(dailyPower)
         carbonList.add(dailyCarbon)
 
-        Log.d("shareViewModel", " savePlasticList = $plasticList")
+        Log.d("shareViewModel", " plasticLiveDataList.value = ${plasticLiveDataList.value}")
         Log.d("shareViewModel", " savePowerList = $powerList")
         Log.d("shareViewModel", " saveCarbonList = $carbonList")
+
     }
 }
