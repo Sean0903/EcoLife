@@ -126,7 +126,7 @@ class ShareAdapter(private val viewModel: ShareViewModel, val onClickListener: O
 //            Log.d("sean0618 Adapter","plasticListSize = ${viewModel.plasticListSize}")
 //            Log.d("sean0618 Adapter","plasticList.sum = ${viewModel.plasticList.sum()}")
 
-            binding.textItemShareContent.setOnClickListener {
+            binding.imageItemShareShowChart.setOnClickListener {
                 setLine()
             }
 
