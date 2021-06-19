@@ -8,11 +8,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.sean.green.GreenApplication
 import com.sean.green.R
-import com.sean.green.data.Article
+import com.sean.green.data.*
 import com.sean.green.data.FirebaseKey.Companion.COLLECTION_SAVE
-import com.sean.green.data.Result
-import com.sean.green.data.Save
-import com.sean.green.data.Sum
 import com.sean.green.data.source.GreenRepository
 import com.sean.green.ext.toDisplayFormat
 import com.sean.green.ext.toDisplayFormatDay
@@ -29,6 +26,7 @@ import java.util.*
 
 
 class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
+
 
     private var viewModelJob = Job()
 
@@ -52,15 +50,7 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
     val error: LiveData<String?>
         get() = _error
 
-    private val _time = MutableLiveData<Time>()
-    val time : LiveData<Time>
-        get() = _time
-
     //相片功能data
-    private val _date = MutableLiveData<Date>()
-    val date: LiveData<Date>
-        get() = _date
-
     private val _isUploadPhoto = MutableLiveData<Boolean>()
     private val isUploadPhoto: LiveData<Boolean>
         get() = _isUploadPhoto
@@ -69,16 +59,15 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
     val photoUri: LiveData<Uri>
         get() = _photoUri
 
-    //相片功能function
-    fun setPhoto(photo: Uri){
-        _photoUri.value = photo
-    }
+    private val _date = MutableLiveData<Date>()
+    val date: LiveData<Date>
+        get() = _date
 
-    fun uploadPhoto(){
-        _isUploadPhoto.value = true
-    }
+    private val _time = MutableLiveData<Time>()
+    val time : LiveData<Time>
+        get() = _time
 
-    fun setCurrentDate(date: Date){
+    private fun setCurrentDate(date: Date){
         _date.value = date
         _time.value = Time(date.time)
     }
@@ -87,6 +76,7 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
         setCurrentDate(Date())
     }
 
+    val camera = MutableLiveData<Boolean>()
 
     override fun onCleared() {
         super.onCleared()
@@ -169,8 +159,9 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
 
             val newArticleData = Article(
                 content = content.value.toString(),
+                image = photoUri.value.toString(),
+                save = FirebaseKey.PHOTO_TAG_SAVE,
                 createdTime = Calendar.getInstance().timeInMillis,
-//                id = document.id
             )
 
             when (val result = repository.addArticle2Firebase(userEmail,newArticleData)) {
@@ -192,6 +183,19 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
                 }
             }
         }
+    }
+
+    //相片功能function
+    fun setPhoto(photo: Uri){
+        _photoUri.value = photo
+    }
+
+    fun uploadPhoto(){
+        _isUploadPhoto.value = true
+    }
+
+    fun closeCamera () {
+        camera.value = false
     }
 }
 

@@ -22,10 +22,6 @@ import java.util.*
 
 class  HomeViewModel(private val repository: GreenRepository): ViewModel() {
 
-    val plastic = MutableLiveData<String>()
-    val power = MutableLiveData<String>()
-    val carbon = MutableLiveData<String>()
-
     private val   _saveNum = MutableLiveData<List<Save>>()
     val saveNum: LiveData<List<Save>>
         get() =   _saveNum

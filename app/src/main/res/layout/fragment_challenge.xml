@@ -4,6 +4,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+        <variable name="images" type="String" />
+        <variable name="articlePhoto" type="com.sean.green.data.Article" />
         <variable name="viewModel" type="com.sean.green.challenge.ChallengeViewModel" />
     </data>
 
@@ -29,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/text_save_page_photo_title"
-            app:layout_constraintStart_toStartOf="@+id/add_challenge_photo"
+            app:layout_constraintStart_toStartOf="@+id/constrainLayout_photo"
             app:layout_constraintTop_toBottomOf="@+id/image_challenge_page_back_to_home" />
 
         <TextView
@@ -41,27 +43,43 @@
             app:layout_constraintEnd_toEndOf="@+id/text_use_page_photo_title"
             app:layout_constraintStart_toStartOf="@+id/text_use_page_photo_title" />
 
-        <ImageView
-            android:id="@+id/add_challenge_photo"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constrainLayout_photo"
             android:layout_width="330dp"
-            android:layout_height="150dp"
+            android:layout_height="200dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/normal_frame"
-            android:cropToPadding="false"
-            android:scaleType="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_use_page_photo_title"
-            app:srcCompat="@drawable/picture" />
+            app:layout_constraintTop_toBottomOf="@+id/text_use_page_photo_title">
+
+            <ImageView
+                android:id="@+id/add_challenge_photo"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:clickable="true"
+                android:cropToPadding="false"
+                android:scaleType="center"
+                app:imageUrl='@{viewModel.photoUri.toString()}'
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/picture" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="@+id/add_challenge_photo"
-            app:layout_constraintStart_toStartOf="@+id/add_challenge_photo"
-            app:layout_constraintTop_toBottomOf="@+id/add_challenge_photo">
+            app:layout_constraintEnd_toEndOf="@+id/constrainLayout_photo"
+            app:layout_constraintStart_toStartOf="@+id/constrainLayout_photo"
+            app:layout_constraintTop_toBottomOf="@+id/constrainLayout_photo">
 
             <TextView
                 android:id="@+id/text_challenge_page_my_title"
@@ -203,7 +221,7 @@
             android:id="@+id/button_challenge_page_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="90dp"
+            android:layout_marginBottom="60dp"
             android:text="@string/button_save"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
