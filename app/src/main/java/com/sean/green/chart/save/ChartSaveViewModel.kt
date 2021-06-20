@@ -50,13 +50,13 @@ class ChartSaveViewModel(private val repository: GreenRepository) : ViewModel() 
         getSaveDataForChart(UserManager.user.email)
     }
 
+    val save7DaysList = mutableListOf<Save>()
+    private val dataListForChart = mutableListOf<List<Save>>()
+
     fun getSaveDataForChart(userEmail: String) {
         coroutineScope.launch {
 
             var today = Calendar.getInstance().timeInMillis
-
-            val save7DaysList = mutableListOf<Save>()
-            val dataListForChart = mutableListOf<List<Save>>()
 
             for (i in 0..6) {
 
@@ -111,6 +111,7 @@ class ChartSaveViewModel(private val repository: GreenRepository) : ViewModel() 
             Log.i("chartSaveViewModel", "dataListForChart = ${dataListForChart.size}")
 
             setChartTotalData(save7DaysList)
+            setSaveDataForChart(save7DaysList)
         }
     }
 
@@ -118,7 +119,8 @@ class ChartSaveViewModel(private val repository: GreenRepository) : ViewModel() 
     val powerList = mutableListOf<Int>()
     val carbonList = mutableListOf<Int>()
 
-    fun setSaveDataForChart() {
+
+    fun setSaveDataForChart(saveList : MutableList<Save>): MutableList<Save> {
         val sevenDaysData = _saveDataSevenDays.value
 
         Log.d("chartSaveViewModel", "setSaveDataForChart = ${_saveDataSevenDays.value} ")
@@ -147,6 +149,8 @@ class ChartSaveViewModel(private val repository: GreenRepository) : ViewModel() 
         Log.d("chartSaveViewModel", " savePlasticList = $plasticList")
         Log.d("chartSaveViewModel", " savePowerList = $powerList")
         Log.d("chartSaveViewModel", " saveCarbonList = $carbonList")
+
+        return saveList
     }
 
     var showTotalSavePlastic = MutableLiveData<Int>()

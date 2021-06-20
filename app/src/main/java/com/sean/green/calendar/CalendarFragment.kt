@@ -122,7 +122,7 @@ class CalendarFragment : Fragment() {
         return binding.root
     }
 
-    private fun addDotDecoration(year: Int, month: Int, day: Int) {
+    internal fun addDotDecoration(year: Int, month: Int, day: Int) {
         widget.addDecorators(
             SingleDateDecorator(
                 GreenApplication.appContext.applicationContext.getColor(R.color.colorBlue4),

@@ -50,7 +50,7 @@ class ChartSaveFragment : Fragment() {
         var count = 0
 
         viewModel.saveDataSevenDays.observe(viewLifecycleOwner, Observer {
-            viewModel.setSaveDataForChart()
+            viewModel.setSaveDataForChart(viewModel.save7DaysList)
 
             count++
             if (count == 7) {

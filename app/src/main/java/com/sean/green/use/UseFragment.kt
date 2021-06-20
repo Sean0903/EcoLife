@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.sean.green.NavigationDirections
 import com.sean.green.R
@@ -34,19 +33,6 @@ class UseFragment : Fragment() {
         binding = FragmentUseBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-
-        viewModel.plastic.observe(viewLifecycleOwner, Observer {
-            Log.i("useFragment", "plastic = ${viewModel.plastic.value}")
-        })
-
-        viewModel.power.observe(viewLifecycleOwner, Observer {
-            Log.i("useFragment", "power = ${viewModel.power.value}")
-        })
-
-        viewModel.carbon.observe(viewLifecycleOwner, Observer {
-            Log.i("useFragment", "carbon = ${viewModel.carbon.value}")
-        })
-
 
         binding.imageUsePageInfo.setOnClickListener {
 
