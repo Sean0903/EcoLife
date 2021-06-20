@@ -13,43 +13,95 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/image_item_home_article"
-            android:layout_width="0dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="8dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
-            android:scaleType="fitXY"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/_506964794_4efdd2f969559e8b1c92e99f32ded48e" />
-
-        <TextView
-            android:id="@+id/text_item_home_article_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
-            android:layout_marginBottom="25dp"
-            android:text='@{TimeUtil.stampToHM(article.createdTime)}'
-            android:background="@drawable/chart_daily_frame"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/photo_frame"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="14:22"/>
-
-        <TextView
-            android:id="@+id/text_item_home_article_content"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/dialog_edit_text_frame"
-            android:text="@{article.content}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/image_item_home_article"
-            app:layout_constraintTop_toBottomOf="@+id/text_item_home_article_time"
-            tools:text="今天都騎腳踏車" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/text_item_home_article_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/chart_daily_frame"
+                android:textColor="@color/colorBlue5"
+                android:text='@{TimeUtil.stampToHM(article.createdTime)}'
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="14:22" />
+
+            <TextView
+                android:id="@+id/text_item_home_article_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/dialog_edit_text_frame"
+                android:text="@{article.content}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_item_home_article_time"
+                tools:text="今天都騎腳踏車" />
+
+            <ImageView
+                android:id="@+id/image_item_home_article"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:scaleType="fitXY"
+                app:imageUrl="@{article.image}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_item_home_article_content" />
+
+            <TextView
+                android:id="@+id/text_item_home_tag_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/noto_sans_bold"
+                android:text="@{article.save}"
+                android:textColor="@color/colorBlue5"
+                app:layout_constraintBottom_toBottomOf="@+id/text_item_home_article_time"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/text_item_home_article_time" />
+
+            <TextView
+                android:id="@+id/text_item_home_tag_challenge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/noto_sans_bold"
+                android:text="@{article.challenge}"
+                android:textColor="@color/colorBlue5"
+                app:layout_constraintBottom_toBottomOf="@+id/text_item_home_article_time"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/text_item_home_article_time" />
+
+            <TextView
+                android:id="@+id/text_item_home_tag_use"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/noto_sans_bold"
+                android:text="@{article.use}"
+                android:textColor="@color/colorBlue5"
+                app:layout_constraintBottom_toBottomOf="@+id/text_item_home_article_time"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/text_item_home_article_time" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

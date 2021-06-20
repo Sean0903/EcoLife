@@ -1,5 +1,6 @@
 package com.sean.green.challenge
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,6 +10,7 @@ import com.sean.green.GreenApplication
 import com.sean.green.R
 import com.sean.green.data.Article
 import com.sean.green.data.FirebaseKey.Companion.COLLECTION_CHALLENGE
+import com.sean.green.data.FirebaseKey.Companion.PHOTO_TAG_CHALLENGE
 import com.sean.green.data.Result
 import com.sean.green.data.Sum
 import com.sean.green.data.source.GreenRepository
@@ -18,6 +20,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.sql.Time
 import java.util.*
 
 class ChallengeViewModel(private val repository: GreenRepository) : ViewModel() {
@@ -35,6 +38,34 @@ class ChallengeViewModel(private val repository: GreenRepository) : ViewModel() 
 
     val error: LiveData<String?>
         get() = _error
+
+    //photo
+    private val _isUploadPhoto = MutableLiveData<Boolean>()
+    private val isUploadPhoto: LiveData<Boolean>
+        get() = _isUploadPhoto
+
+    val _photoUri = MutableLiveData<Uri>()
+    val photoUri: LiveData<Uri>
+        get() = _photoUri
+
+    private val _date = MutableLiveData<Date>()
+    val date: LiveData<Date>
+        get() = _date
+
+    private val _time = MutableLiveData<Time>()
+    val time : LiveData<Time>
+        get() = _time
+
+    private fun setCurrentDate(date: Date){
+        _date.value = date
+        _time.value = Time(date.time)
+    }
+
+    init {
+        setCurrentDate(Date())
+    }
+
+    val camera = MutableLiveData<Boolean>()
 
     override fun onCleared() {
         super.onCleared()
@@ -97,6 +128,8 @@ class ChallengeViewModel(private val repository: GreenRepository) : ViewModel() 
 
             val newArticleData = Article(
                 content = content.value?.toString(),
+                image = photoUri.value.toString(),
+                challenge = PHOTO_TAG_CHALLENGE,
                 createdTime = Calendar.getInstance().timeInMillis,
             )
 
@@ -120,5 +153,18 @@ class ChallengeViewModel(private val repository: GreenRepository) : ViewModel() 
                 }
             }
         }
+    }
+
+    //相片功能function
+    fun setPhoto(photo: Uri){
+        _photoUri.value = photo
+    }
+
+    fun uploadPhoto(){
+        _isUploadPhoto.value = true
+    }
+
+    fun closeCamera () {
+        camera.value = false
     }
 }
