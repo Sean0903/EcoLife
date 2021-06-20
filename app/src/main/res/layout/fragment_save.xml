@@ -64,7 +64,7 @@
                 android:clickable="true"
                 android:cropToPadding="false"
                 android:scaleType="center"
-                app:imageUrl='@{viewModel.photoUri.toString()}'
+                app:imageUrl="@{viewModel.photoUri.toString()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -39,7 +39,7 @@ class ChallengeViewModel(private val repository: GreenRepository) : ViewModel() 
     val error: LiveData<String?>
         get() = _error
 
-    //相片功能data
+    //photo
     private val _isUploadPhoto = MutableLiveData<Boolean>()
     private val isUploadPhoto: LiveData<Boolean>
         get() = _isUploadPhoto

@@ -543,7 +543,6 @@ class SaveFragment : Fragment() {
         private var windowManager: WindowManager? = null
         private var fileFromCamera: File? = null
         var isUploadPermissionsGranted = false
-//            private var foodie: Foodie? = null
     }
 }
 
