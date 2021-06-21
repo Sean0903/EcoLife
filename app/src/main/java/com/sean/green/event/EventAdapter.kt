@@ -1,6 +1,5 @@
 package com.sean.green.event
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -40,7 +39,6 @@ class EventAdapter(val viewModel: EventViewModel, val onClickListener: OnClickLi
     class ViewHolder(var binding: ItemEventBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Event, viewModel: EventViewModel) {
-            Log.d("eventAdapter", "viewHolder = $item")
             binding.eventData = item
 
             // Nested RecyclerView - Child Adapter

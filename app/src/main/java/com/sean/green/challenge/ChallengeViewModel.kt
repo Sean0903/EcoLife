@@ -9,8 +9,15 @@ import com.google.firebase.firestore.SetOptions
 import com.sean.green.GreenApplication
 import com.sean.green.R
 import com.sean.green.data.Article
+import com.sean.green.data.FirebaseKey.Companion.CHALLENGE
 import com.sean.green.data.FirebaseKey.Companion.COLLECTION_CHALLENGE
+import com.sean.green.data.FirebaseKey.Companion.COLLECTION_USERS
+import com.sean.green.data.FirebaseKey.Companion.CREATEDTIME
+import com.sean.green.data.FirebaseKey.Companion.DAY
+import com.sean.green.data.FirebaseKey.Companion.MONTH
+import com.sean.green.data.FirebaseKey.Companion.PATH_GREENS
 import com.sean.green.data.FirebaseKey.Companion.PHOTO_TAG_CHALLENGE
+import com.sean.green.data.FirebaseKey.Companion.YEAR
 import com.sean.green.data.Result
 import com.sean.green.data.Sum
 import com.sean.green.data.source.GreenRepository
@@ -77,20 +84,21 @@ class ChallengeViewModel(private val repository: GreenRepository) : ViewModel() 
     val carbon = MutableLiveData<String>()
     val content = MutableLiveData<String>()
 
+    //need refactor
     fun addChallengeData2Firebase(userEmail: String) {
 
         coroutineScope.launch {
 
             val data = hashMapOf(
-                "day" to Util.day,
-                "month" to Util.month,
-                "year" to Util.year,
-                "createdTime" to Util.createdTime,
-                "challenge" to "challenge"
+                DAY to Util.day,
+                MONTH to Util.month,
+                YEAR to Util.year,
+                CREATEDTIME to Util.createdTime,
+                CHALLENGE to CHALLENGE
             )
 
-            val saveTime = FirebaseFirestore.getInstance()
-                .collection("users").document(userEmail).collection("greens")
+            FirebaseFirestore.getInstance()
+                .collection(COLLECTION_USERS).document(userEmail).collection(PATH_GREENS)
                 .document(Util.today).set(data, SetOptions.merge())
 
             val newChallengeData = Sum(
@@ -122,6 +130,7 @@ class ChallengeViewModel(private val repository: GreenRepository) : ViewModel() 
         }
     }
 
+    //need refactor
     fun addArticle2Firebase(userEmail: String) {
 
         coroutineScope.launch {
@@ -155,7 +164,7 @@ class ChallengeViewModel(private val repository: GreenRepository) : ViewModel() 
         }
     }
 
-    //相片功能function
+    //camera function
     fun setPhoto(photo: Uri){
         _photoUri.value = photo
     }
@@ -164,7 +173,5 @@ class ChallengeViewModel(private val repository: GreenRepository) : ViewModel() 
         _isUploadPhoto.value = true
     }
 
-    fun closeCamera () {
-        camera.value = false
-    }
+
 }

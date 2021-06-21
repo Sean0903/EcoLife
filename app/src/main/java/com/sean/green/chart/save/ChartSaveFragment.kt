@@ -47,21 +47,21 @@ class ChartSaveFragment : Fragment() {
             setLineChartData()
         }
 
+        //need refactor
         var count = 0
-
         viewModel.saveDataSevenDays.observe(viewLifecycleOwner, Observer {
-            viewModel.setSaveDataForChart(viewModel.save7DaysList)
+            viewModel.setSaveDataForChart()
 
             count++
             if (count == 7) {
 
                 setLineChartData()
-                letViewInvisible()
+                makeViewInvisible()
 
             }
         })
 
-        letViewVisible()
+        makeViewVisible()
 
         return binding.root
     }
@@ -71,6 +71,7 @@ class ChartSaveFragment : Fragment() {
     val lineentrySavePower = ArrayList<Entry>();
     val lineentrySaveCarbon = ArrayList<Entry>();
 
+    //need refactor
     fun setLineChartData() {
 
         xvalue.add("")
@@ -127,7 +128,7 @@ class ChartSaveFragment : Fragment() {
 
     }
 
-    private fun letViewInvisible() {
+    private fun makeViewInvisible() {
         binding.lottieChart.visibility = View.GONE
         binding.imageChartPageSavePlastic.visibility = View.VISIBLE
         binding.imageChartPageSavePower.visibility = View.VISIBLE
@@ -146,9 +147,8 @@ class ChartSaveFragment : Fragment() {
         binding.textCarbonTitle.visibility = View.VISIBLE
     }
 
-    private fun letViewVisible() {
+    private fun makeViewVisible() {
         binding.lottieChart.repeatCount = -1
-        // start lottie
         binding.lottieChart.playAnimation()
         binding.imageChartPageSavePlastic.visibility = View.INVISIBLE
         binding.imageChartPageSavePower.visibility = View.INVISIBLE

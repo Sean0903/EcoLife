@@ -64,8 +64,8 @@ class ChartSaveViewModel(private val repository: GreenRepository) : ViewModel() 
                 val daysAgo = today.toDisplayFormat()
                 val saveList = repository.getSaveDataForChart(userEmail, COLLECTION_SAVE, daysAgo)
                 val saveList2 = repository.getSaveDataForChart(userEmail, COLLECTION_SAVE, daysAgo)
-                Log.d("chartSaveViewModel", "chartSaveTime = $daysAgo")
-                today -= 87000000
+                today -= 86400000
+                Log.w("checkTime","time = $daysAgo")
 
                 when (saveList) {
                     is Result.Success -> {
@@ -111,7 +111,6 @@ class ChartSaveViewModel(private val repository: GreenRepository) : ViewModel() 
             Log.i("chartSaveViewModel", "dataListForChart = ${dataListForChart.size}")
 
             setChartTotalData(save7DaysList)
-            setSaveDataForChart(save7DaysList)
         }
     }
 
@@ -120,17 +119,16 @@ class ChartSaveViewModel(private val repository: GreenRepository) : ViewModel() 
     val carbonList = mutableListOf<Int>()
 
 
-    fun setSaveDataForChart(saveList : MutableList<Save>): MutableList<Save> {
-        val sevenDaysData = _saveDataSevenDays.value
+    fun setSaveDataForChart() {
 
-        Log.d("chartSaveViewModel", "setSaveDataForChart = ${_saveDataSevenDays.value} ")
+        val saveSevenDaysData = _saveDataSevenDays.value
 
         var dailyPlastic = 0
         var dailyPower = 0
         var dailyCarbon = 0
 
         for (i in 0..0) {
-            for (sumOneDay in sevenDaysData as List<Save>) {
+            for (sumOneDay in saveSevenDaysData as List<Save>) {
                 dailyPlastic = dailyPlastic.plus(sumOneDay.plastic ?: 0)
                 Log.d("chartSaveViewModel", "saveDailyPlastic = ${dailyPlastic}")
 
@@ -150,7 +148,6 @@ class ChartSaveViewModel(private val repository: GreenRepository) : ViewModel() 
         Log.d("chartSaveViewModel", " savePowerList = $powerList")
         Log.d("chartSaveViewModel", " saveCarbonList = $carbonList")
 
-        return saveList
     }
 
     var showTotalSavePlastic = MutableLiveData<Int>()

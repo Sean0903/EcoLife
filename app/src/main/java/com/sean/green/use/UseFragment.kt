@@ -43,8 +43,6 @@ import com.sean.green.login.UserManager
 import com.sean.green.login.UserManager.user
 import java.io.*
 
-
-
 class UseFragment : Fragment() {
 
     private lateinit var binding: FragmentUseBinding
@@ -544,6 +542,5 @@ class UseFragment : Fragment() {
         private var windowManager: WindowManager? = null
         private var fileFromCamera: File? = null
         var isUploadPermissionsGranted = false
-//            private var foodie: Foodie? = null
     }
 }

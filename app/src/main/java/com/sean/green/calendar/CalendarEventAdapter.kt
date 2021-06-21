@@ -1,6 +1,5 @@
 package com.sean.green.calendar
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -29,7 +28,6 @@ class CalendarEventAdapter() :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: CalendarEvent) {
-            Log.d("calendarEventAdapter", "ViewHolder = $item")
             binding.calendarEvent = item
             binding.executePendingBindings()
         }
@@ -47,7 +45,6 @@ class CalendarEventAdapter() :
         override fun areItemsTheSame(oldItem: CalendarEvent, newItem: CalendarEvent): Boolean {
             return oldItem == newItem
         }
-
 
         override fun areContentsTheSame(oldItem: CalendarEvent, newItem: CalendarEvent): Boolean {
             return oldItem == newItem

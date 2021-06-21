@@ -108,7 +108,7 @@ class ShareViewModel(private val repository: GreenRepository) : ViewModel() {
                     daysAgo
                 )
                 Log.d("shareViewModel", "time = $daysAgo")
-                today -= 85000000
+                today -= 86400000
 
                 Log.d("shareViewModel", "share.email = ${share.email}")
 
@@ -141,9 +141,6 @@ class ShareViewModel(private val repository: GreenRepository) : ViewModel() {
     var plasticList = mutableListOf<Int>()
     var powerList = mutableListOf<Int>()
     var carbonList = mutableListOf<Int>()
-
-//    var plasticListSize = 0
-//    var plasticListSum = 0
 
     fun setSaveDataForChart() {
         val sevenDaysData = _saveDataSevenDays.value

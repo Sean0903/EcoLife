@@ -73,6 +73,7 @@ class ChallengeFragment : Fragment() {
 
         }
 
+        //need refactor
         binding.buttonChallengePageSave.setOnClickListener {
 
             if (viewModel.plastic.value.isNullOrBlank() &&
@@ -97,6 +98,7 @@ class ChallengeFragment : Fragment() {
 
         return binding.root
     }
+
     private fun activateCamera() {
         getPermissions()
         if (isUploadPermissionsGranted) {
@@ -537,6 +539,5 @@ class ChallengeFragment : Fragment() {
         private var windowManager: WindowManager? = null
         private var fileFromCamera: File? = null
         var isUploadPermissionsGranted = false
-//            private var foodie: Foodie? = null
     }
 }

@@ -46,14 +46,6 @@ class ShareAdapter(private val viewModel: ShareViewModel, val onClickListener: O
             Log.d("seanViewHolder", "fun bind(item: Save) = $item")
             binding.shareData = item
             binding.lineChart3
-//
-//            var plasticList = mutableListOf<List<Int>>()
-//            var powerList = mutableListOf<Int>()
-//            var carbonList = mutableListOf<Int>()
-//
-//            plasticList.add(viewModel.plasticLiveDataList.value!!)
-//
-//            Log.d("sean0618","viewHolderPlasticList = $plasticList")
 
             fun setLine() {
                 val xvalue = ArrayList<String>()
@@ -111,20 +103,6 @@ class ShareAdapter(private val viewModel: ShareViewModel, val onClickListener: O
                 binding.lineChart3.setBackgroundColor(getColor(R.color.white))
                 binding.lineChart3.animateXY(3000, 3000)
             }
-
-//            var count = 0
-//
-//            viewModel.saveDataSevenDays.observe(viewLifecycleOwner, Observer {
-//                viewModel.setSaveDataForChart()
-//
-//                count++
-//                if (count == 7) {
-//
-//                }
-//            })
-
-//            Log.d("sean0618 Adapter","plasticListSize = ${viewModel.plasticListSize}")
-//            Log.d("sean0618 Adapter","plasticList.sum = ${viewModel.plasticList.sum()}")
 
             binding.imageItemShareShowChart.setOnClickListener {
                 setLine()

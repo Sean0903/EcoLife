@@ -4,7 +4,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseUser
 import com.sean.green.data.*
 
-class FakeRepository(var data: MutableList<Save>? = mutableListOf()) : GreenRepository {
+class FakeRepository : GreenRepository {
+
+    override suspend fun getSaveDataForChart(userEmail: String, collection: String, documentId: String): Result<List<Save>> {
+        TODO("Not yet implemented")
+    }
 
     override suspend fun postUser(user: User): Result<Boolean> {
         TODO("Not yet implemented")
@@ -18,11 +22,7 @@ class FakeRepository(var data: MutableList<Save>? = mutableListOf()) : GreenRepo
         TODO("Not yet implemented")
     }
 
-    override suspend fun addData2Firebase(
-        userEmail: String,
-        collection: String,
-        any: Any
-    ): Result<Boolean> {
+    override suspend fun addData2Firebase(userEmail: String, collection: String, any: Any): Result<Boolean> {
         TODO("Not yet implemented")
     }
 
@@ -30,18 +30,11 @@ class FakeRepository(var data: MutableList<Save>? = mutableListOf()) : GreenRepo
         TODO("Not yet implemented")
     }
 
-    override suspend fun getDataFromFirebase(
-        userEmail: String,
-        collection: String,
-        any: Any
-    ): Result<List<Any>> {
+    override suspend fun getDataFromFirebase(userEmail: String, collection: String, any: Any): Result<List<Any>> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getChallengeNum(
-        userEmail: String,
-        collection: String
-    ): Result<List<Challenge>> {
+    override suspend fun getChallengeNum(userEmail: String, collection: String): Result<List<Challenge>> {
         TODO("Not yet implemented")
     }
 
@@ -53,10 +46,7 @@ class FakeRepository(var data: MutableList<Save>? = mutableListOf()) : GreenRepo
         TODO("Not yet implemented")
     }
 
-    override suspend fun getCalendarEvent(
-        userEmail: String,
-        collection: String
-    ): Result<List<CalendarEvent>> {
+    override suspend fun getCalendarEvent(userEmail: String, collection: String): Result<List<CalendarEvent>> {
         TODO("Not yet implemented")
     }
 
@@ -64,19 +54,8 @@ class FakeRepository(var data: MutableList<Save>? = mutableListOf()) : GreenRepo
         TODO("Not yet implemented")
     }
 
-    override suspend fun getSaveDataForChart(
-        userEmail: String,
-        collection: String,
-        documentId: String
-    ): Result<List<Save>> {
-        TODO("Not yet implemented")
-    }
 
-    override suspend fun getUseDataForChart(
-        userEmail: String,
-        collection: String,
-        documentId: String
-    ): Result<List<Use>> {
+    override suspend fun getUseDataForChart(userEmail: String, collection: String, documentId: String): Result<List<Use>> {
         TODO("Not yet implemented")
     }
 
@@ -88,20 +67,11 @@ class FakeRepository(var data: MutableList<Save>? = mutableListOf()) : GreenRepo
         TODO("Not yet implemented")
     }
 
-    override suspend fun addEventMember(
-        eventId: String,
-        userEmail: String,
-        userImage: String
-    ): Result<Boolean> {
+    override suspend fun addEventMember(eventId: String, userEmail: String, userImage: String): Result<Boolean> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun addEventInfo2UserFirebase(
-        event: Event,
-        eventId: String,
-        eventDay: String,
-        userEmail: String
-    ): Result<Boolean> {
+    override suspend fun addEventInfo2UserFirebase(event: Event, eventId: String, eventDay: String, userEmail: String): Result<Boolean> {
         TODO("Not yet implemented")
     }
 
@@ -113,13 +83,7 @@ class FakeRepository(var data: MutableList<Save>? = mutableListOf()) : GreenRepo
         TODO("Not yet implemented")
     }
 
-    override suspend fun getSaveDataForShareChart(
-        userEmail: String,
-        share: Share,
-        userDocumentId: String,
-        collection: String,
-        documentId: String
-    ): Result<List<Save>> {
+    override suspend fun getSaveDataForShareChart(userEmail: String, share: Share, userDocumentId: String, collection: String, documentId: String): Result<List<Save>> {
         TODO("Not yet implemented")
     }
 }

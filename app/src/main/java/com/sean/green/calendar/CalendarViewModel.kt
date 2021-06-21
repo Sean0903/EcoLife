@@ -74,7 +74,6 @@ class CalendarViewModel(private val repository: GreenRepository): ViewModel() {
 
             _allEvents.value = when (result) {
                 is Result.Success -> {
-                    Log.d("calendarViewModel", "result.data = ${result.data}")
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
                     result.data
@@ -96,15 +95,12 @@ class CalendarViewModel(private val repository: GreenRepository): ViewModel() {
                 }
             }
             _refreshStatus.value = false
-            Log.d("calendarViewModel", "calendarData = ${_allEvents.value}")
         }
     }
 
     fun createdDailyEvent (toTimeStamp: Long) {
         selectedLiveEvent.value = allEvent.value.sortByTimeStamp(toTimeStamp)
         _navigationToPostDialog.value = toTimeStamp
-        Log.d("calendarViewModel"," selectedLiveEvent.value = ${selectedLiveEvent.value}")
-        Log.d("createdDailyEvent","allLiveEvents.value = ${allEvent.value}")
     }
 
     private fun todayDate() {

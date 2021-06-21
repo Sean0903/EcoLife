@@ -70,7 +70,7 @@ class ChartUseViewModel(private val repository: GreenRepository) : ViewModel() {
                     userEmail, FirebaseKey.COLLECTION_USE, daysAgo
                 )
                 Log.d("chartUseViewModel", "charUseTime = $daysAgo")
-                today -= 87000000
+                today -= 86400000
 
                 when (useList) {
                     is Result.Success -> {

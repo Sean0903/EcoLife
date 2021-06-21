@@ -95,13 +95,10 @@ class CalendarFragment : Fragment() {
 
                 it.forEach { event ->
                     val year = event.year.toInt()
-                    Log.d("calendarFragment", "year = $year")
 
                     val month = event.month.toInt()
-                    Log.d("calendarFragment", "month = $month")
 
                     val day = event.day.toInt()
-                    Log.d("calendarFragment", "day = $day")
 
                     addDotDecoration(year, month, day)
 
@@ -122,7 +119,7 @@ class CalendarFragment : Fragment() {
         return binding.root
     }
 
-    internal fun addDotDecoration(year: Int, month: Int, day: Int) {
+    private fun addDotDecoration(year: Int, month: Int, day: Int) {
         widget.addDecorators(
             SingleDateDecorator(
                 GreenApplication.appContext.applicationContext.getColor(R.color.colorBlue4),

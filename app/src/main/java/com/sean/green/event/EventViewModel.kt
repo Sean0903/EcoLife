@@ -89,7 +89,27 @@ class EventViewModel(private val repository: GreenRepository) : ViewModel() {
     fun addMemberToEvent(event: Event, userEmail: String, userImage: String) {
 
         coroutineScope.launch {
-            val result = repository.addEventMember(event.id, userEmail, userImage)
+
+            when (val result =
+                repository.addEventMember(event.id, userEmail, userImage)) {
+                is Result.Success -> {
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                }
+                is Result.Fail -> {
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                }
+                is Result.Error -> {
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                }
+                else -> {
+                    _error.value =
+                        GreenApplication.instance.getString(R.string.Please_try_again_later)
+                    _status.value = LoadApiStatus.ERROR
+                }
+            }
         }
     }
 
