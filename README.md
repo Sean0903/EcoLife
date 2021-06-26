@@ -45,7 +45,6 @@ EcoLife 環保日記
 * Jetpack<br>
   *   Data Binding<br>
   *   Navigation<br>
-  *   Room<br>
   *   LiveData<br>
   *   ViewModel<br>
   *   Lifecycles<br>
