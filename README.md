@@ -5,7 +5,7 @@ EcoLife 環保日記
 
 [![](https://i.imgur.com/yyHKZwS.jpg)](https://play.google.com/store/apps/details?id=com.sean.green)
 
-測試用 Google 帳號：ecolife@gmail.com 密碼：greenworld
+測試用 Google 帳號：ecolife20210609@gmail.com 密碼：greenworld
 
 
 功能介紹
