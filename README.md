@@ -3,7 +3,7 @@ EcoLife 環保日記
 
 幫助使用者紀錄環保及消耗行為，養成環保習慣的工具
 
-[![](https://i.imgur.com/0yFMaJH.png)](https://play.google.com/store/apps/details?id=com.sean.green)
+[![](https://i.imgur.com/JOc1p3d.png)](https://play.google.com/store/apps/details?id=com.sean.green)
 
 測試用 Google 帳號：ecolife20210609@gmail.com 密碼：greenworld
 
