@@ -26,7 +26,7 @@ class EventImageAdapter() : ListAdapter<String, EventImageAdapter.ViewHolder>(Di
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: String) {
-            Log.d("eventImageAdapter", "fun bind(item: Event) = $item")
+            Log.d("eventImageAdapter", "eventMemberImage = $item")
             binding.memberImage = item
             binding.executePendingBindings()
         }

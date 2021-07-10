@@ -61,6 +61,7 @@
                 android:background="@drawable/text_round"
                 android:fontFamily="@font/noto_sans_bold"
                 android:gravity="center"
+                android:maxLines="1"
                 android:text="@{String.valueOf(viewModel.showNowChallengePlastic)}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_home_challenge_title"
@@ -76,6 +77,7 @@
                 android:gravity="center"
                 android:text="@{String.valueOf(viewModel.showNowChallengePower)}"
                 android:textSize="12dp"
+                android:maxLines="1"
                 app:layout_constraintEnd_toStartOf="@+id/text_home_challenge_carbon"
                 app:layout_constraintStart_toEndOf="@+id/text_home_challenge_plastic"
                 app:layout_constraintTop_toTopOf="@+id/text_home_challenge_plastic"
@@ -91,6 +93,7 @@
                 android:gravity="center"
                 android:text="@{String.valueOf(viewModel.showNowChallengeCarbon)}"
                 android:textSize="12dp"
+                android:maxLines="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/text_home_challenge_power"
                 tools:text="100" />
@@ -151,6 +154,7 @@
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/tag_right_corners_plastic"
                 android:text="@{String.valueOf(viewModel.showTotalSavePlastic)}"
+                android:maxLines="1"
                 app:layout_constraintBottom_toBottomOf="@+id/image_home_save_plastic"
                 app:layout_constraintEnd_toStartOf="@+id/image_home_save_power"
                 app:layout_constraintStart_toEndOf="@+id/image_home_save_plastic"
@@ -172,6 +176,7 @@
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/tag_right_corners_power"
                 android:text="@{String.valueOf(viewModel.showTotalSavePower)}"
+                android:maxLines="1"
                 app:layout_constraintBottom_toBottomOf="@+id/text_home_save_plastic"
                 app:layout_constraintEnd_toStartOf="@+id/image_home_save_carbon"
                 app:layout_constraintStart_toEndOf="@+id/image_home_save_power"
@@ -192,6 +197,7 @@
                 style="@style/element_text"
                 android:background="@drawable/tag_right_corners_carbon"
                 android:text="@{String.valueOf(viewModel.showTotalSaveCarbon)}"
+                android:maxLines="1"
                 app:layout_constraintBottom_toBottomOf="@+id/text_home_save_power"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/image_home_save_carbon"
@@ -256,6 +262,7 @@
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/tag_right_corners_plastic"
                 android:text="@{String.valueOf(viewModel.showTotalUsePlastic)}"
+                android:maxLines="1"
                 app:layout_constraintBottom_toBottomOf="@+id/image_home_use_plastic"
                 app:layout_constraintEnd_toStartOf="@+id/image_home_use_power"
                 app:layout_constraintStart_toEndOf="@+id/image_home_use_plastic"
@@ -277,6 +284,7 @@
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/tag_right_corners_power"
                 android:text="@{String.valueOf(viewModel.showTotalUsePower)}"
+                android:maxLines="1"
                 app:layout_constraintBottom_toBottomOf="@+id/text_home_use_plastic"
                 app:layout_constraintEnd_toStartOf="@+id/image_home_use_carbon"
                 app:layout_constraintStart_toEndOf="@+id/image_home_use_power"
@@ -297,6 +305,7 @@
                 style="@style/element_text"
                 android:background="@drawable/tag_right_corners_carbon"
                 android:text="@{String.valueOf(viewModel.showTotalUseCarbon)}"
+                android:maxLines="1"
                 app:layout_constraintBottom_toBottomOf="@+id/image_home_use_carbon"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/image_home_use_carbon"
@@ -319,9 +328,11 @@
                 android:id="@+id/recyclerView_home"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_home_picture" />
 
+                android:visibility="visible"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_home_picture"
+                tools:visibility="visible" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView

@@ -95,13 +95,10 @@ class CalendarFragment : Fragment() {
 
                 it.forEach { event ->
                     val year = event.year.toInt()
-                    Log.d("calendarFragment", "year = $year")
 
                     val month = event.month.toInt()
-                    Log.d("calendarFragment", "month = $month")
 
                     val day = event.day.toInt()
-                    Log.d("calendarFragment", "day = $day")
 
                     addDotDecoration(year, month, day)
 

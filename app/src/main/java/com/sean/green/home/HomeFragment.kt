@@ -39,11 +39,13 @@ class HomeFragment : Fragment() {
                 binding.textHomeSlogan1.visibility = View.VISIBLE
                 binding.textHomeSlogan2.visibility = View.VISIBLE
                 binding.textHomeSlogan3.visibility = View.VISIBLE
+                binding.recyclerViewHome.visibility = View.GONE
             } else {
                 binding.imageHomeCard.visibility = View.GONE
                 binding.textHomeSlogan1.visibility = View.GONE
                 binding.textHomeSlogan2.visibility = View.GONE
                 binding.textHomeSlogan3.visibility = View.GONE
+                binding.recyclerViewHome.visibility = View.VISIBLE
             }
         })
 

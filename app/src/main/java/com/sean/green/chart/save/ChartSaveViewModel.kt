@@ -50,13 +50,13 @@ class ChartSaveViewModel(private val repository: GreenRepository) : ViewModel() 
         getSaveDataForChart(UserManager.user.email)
     }
 
+    val save7DaysList = mutableListOf<Save>()
+    private val dataListForChart = mutableListOf<List<Save>>()
+
     fun getSaveDataForChart(userEmail: String) {
         coroutineScope.launch {
 
             var today = Calendar.getInstance().timeInMillis
-
-            val save7DaysList = mutableListOf<Save>()
-            val dataListForChart = mutableListOf<List<Save>>()
 
             for (i in 0..6) {
 
@@ -64,8 +64,8 @@ class ChartSaveViewModel(private val repository: GreenRepository) : ViewModel() 
                 val daysAgo = today.toDisplayFormat()
                 val saveList = repository.getSaveDataForChart(userEmail, COLLECTION_SAVE, daysAgo)
                 val saveList2 = repository.getSaveDataForChart(userEmail, COLLECTION_SAVE, daysAgo)
-                Log.d("chartSaveViewModel", "chartSaveTime = $daysAgo")
-                today -= 87000000
+                today -= 86400000
+                Log.w("checkTime","time = $daysAgo")
 
                 when (saveList) {
                     is Result.Success -> {
@@ -118,17 +118,17 @@ class ChartSaveViewModel(private val repository: GreenRepository) : ViewModel() 
     val powerList = mutableListOf<Int>()
     val carbonList = mutableListOf<Int>()
 
-    fun setSaveDataForChart() {
-        val sevenDaysData = _saveDataSevenDays.value
 
-        Log.d("chartSaveViewModel", "setSaveDataForChart = ${_saveDataSevenDays.value} ")
+    fun setSaveDataForChart() {
+
+        val saveSevenDaysData = _saveDataSevenDays.value
 
         var dailyPlastic = 0
         var dailyPower = 0
         var dailyCarbon = 0
 
         for (i in 0..0) {
-            for (sumOneDay in sevenDaysData as List<Save>) {
+            for (sumOneDay in saveSevenDaysData as List<Save>) {
                 dailyPlastic = dailyPlastic.plus(sumOneDay.plastic ?: 0)
                 Log.d("chartSaveViewModel", "saveDailyPlastic = ${dailyPlastic}")
 
@@ -147,6 +147,7 @@ class ChartSaveViewModel(private val repository: GreenRepository) : ViewModel() 
         Log.d("chartSaveViewModel", " savePlasticList = $plasticList")
         Log.d("chartSaveViewModel", " savePowerList = $powerList")
         Log.d("chartSaveViewModel", " saveCarbonList = $carbonList")
+
     }
 
     var showTotalSavePlastic = MutableLiveData<Int>()

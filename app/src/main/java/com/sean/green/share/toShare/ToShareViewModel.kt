@@ -9,6 +9,11 @@ import com.sean.green.GreenApplication
 import com.sean.green.R
 import com.sean.green.data.FirebaseKey.Companion.COLLECTION_SHARE
 import com.sean.green.data.FirebaseKey.Companion.COLLECTION_USERS
+import com.sean.green.data.FirebaseKey.Companion.CREATEDTIME
+import com.sean.green.data.FirebaseKey.Companion.DAY
+import com.sean.green.data.FirebaseKey.Companion.MONTH
+import com.sean.green.data.FirebaseKey.Companion.SHARE
+import com.sean.green.data.FirebaseKey.Companion.YEAR
 import com.sean.green.data.Result
 import com.sean.green.data.Share
 import com.sean.green.data.User
@@ -59,11 +64,11 @@ class ToShareViewModel(private val repository: GreenRepository): ViewModel() {
         coroutineScope.launch {
 
             val data = hashMapOf(
-                "day" to Util.day,
-                "month" to Util.month,
-                "year" to Util.year,
-                "createdTime" to Util.createdTime,
-                "share" to "share"
+                DAY to Util.day,
+                MONTH to Util.month,
+                YEAR to Util.year,
+                CREATEDTIME to Util.createdTime,
+                SHARE to SHARE
             )
 
             val saveTime = FirebaseFirestore.getInstance()

@@ -10,11 +10,14 @@ import com.sean.green.GreenApplication
 import com.sean.green.R
 import com.sean.green.data.*
 import com.sean.green.data.FirebaseKey.Companion.COLLECTION_SAVE
+import com.sean.green.data.FirebaseKey.Companion.COLLECTION_USERS
+import com.sean.green.data.FirebaseKey.Companion.CREATEDTIME
+import com.sean.green.data.FirebaseKey.Companion.DAY
+import com.sean.green.data.FirebaseKey.Companion.MONTH
+import com.sean.green.data.FirebaseKey.Companion.PATH_GREENS
+import com.sean.green.data.FirebaseKey.Companion.SAVE
+import com.sean.green.data.FirebaseKey.Companion.YEAR
 import com.sean.green.data.source.GreenRepository
-import com.sean.green.ext.toDisplayFormat
-import com.sean.green.ext.toDisplayFormatDay
-import com.sean.green.ext.toDisplayFormatMonth
-import com.sean.green.ext.toDisplayFormatYear
 import com.sean.green.network.LoadApiStatus
 import com.sean.green.util.Util
 import kotlinx.coroutines.CoroutineScope
@@ -76,8 +79,6 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
         setCurrentDate(Date())
     }
 
-    val camera = MutableLiveData<Boolean>()
-
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
@@ -94,15 +95,15 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
         coroutineScope.launch {
 
             val data = hashMapOf(
-                "day" to Util.day,
-                "month" to Util.month,
-                "year" to Util.year,
-                "createdTime" to Util.createdTime,
-                "save" to "save"
+                DAY to Util.day,
+                MONTH to Util.month,
+                YEAR to Util.year,
+                CREATEDTIME to Util.createdTime,
+                SAVE to SAVE
             )
 
-            val saveTime = FirebaseFirestore.getInstance()
-                .collection("users").document(userEmail).collection("greens")
+            FirebaseFirestore.getInstance()
+                .collection(COLLECTION_USERS).document(userEmail).collection(PATH_GREENS)
                 .document(Util.today).set(data, SetOptions.merge())
 
             val newSaveData = Sum(
@@ -139,24 +140,6 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
 
         coroutineScope.launch {
 
-            val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
-            val year = Calendar.getInstance().timeInMillis.toDisplayFormatYear()
-            val month = Calendar.getInstance().timeInMillis.toDisplayFormatMonth()
-            val day = Calendar.getInstance().timeInMillis.toDisplayFormatDay()
-            val createdTime = Calendar.getInstance().timeInMillis
-
-            val data = hashMapOf(
-                "day" to day,
-                "month" to month,
-                "year" to year,
-                "createdTime" to createdTime,
-                "save" to "save"
-            )
-
-            val saveTime = FirebaseFirestore.getInstance()
-                .collection("users").document(userEmail).collection("greens")
-                .document(today).set(data, SetOptions.merge())
-
             val newArticleData = Article(
                 content = content.value.toString(),
                 image = photoUri.value.toString(),
@@ -185,7 +168,7 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
         }
     }
 
-    //相片功能function
+    //camera function
     fun setPhoto(photo: Uri){
         _photoUri.value = photo
     }
@@ -194,9 +177,6 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
         _isUploadPhoto.value = true
     }
 
-    fun closeCamera () {
-        camera.value = false
-    }
 }
 
 

@@ -1,6 +1,5 @@
 package com.sean.green.chart.save
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -30,7 +29,6 @@ class ChartSaveAdapter() : ListAdapter<Save, ChartSaveAdapter.ViewHolder>(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Save) {
-            Log.d("chartSaveAdapter", "viewHolder = $item")
             binding.saveChartData = item
         }
 

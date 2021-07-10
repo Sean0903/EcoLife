@@ -2,7 +2,6 @@ package com.sean.green.event.toEvent
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,22 +41,18 @@ class ToEventFragment : Fragment() {
 
         binding.editTextDialogEventExplain.doOnTextChanged { text, start, before, count ->
             viewModel.introduction.value = text.toString()
-            Log.d("toEventFragment", "introduction = ${viewModel.introduction.value}")
         }
 
         binding.editTextDialogEventTime.doOnTextChanged { text, start, before, count ->
             viewModel.time.value = text.toString()
-            Log.d("toEventFragment", "time = ${viewModel.time.value}")
         }
 
         binding.editTextDialogEventLocation.doOnTextChanged { text, start, before, count ->
             viewModel.location.value = text.toString()
-            Log.d("toEventFragment", "location = ${viewModel.location.value}")
         }
 
         binding.editTextDialogEventContent.doOnTextChanged { text, start, before, count ->
             viewModel.content.value = text.toString()
-            Log.d("toEventFragment", "content = ${viewModel.content.value}")
         }
 
         binding.buttonDialogEventSend.setOnClickListener {
@@ -66,6 +61,8 @@ class ToEventFragment : Fragment() {
                 UserManager.user.email,
                 UserManager.user.image,
                 UserManager.user.userName)
+            findNavController().navigate(NavigationDirections.navigateToHomeFragment())
+
         }
 
         binding.datePickerDialogEvent.apply {
@@ -73,15 +70,9 @@ class ToEventFragment : Fragment() {
             setOnDateChangedListener { _, year, month, date ->
                 val format = SimpleDateFormat(getString(R.string.diary_record_date))
                 viewModel.dueDate.value = format.parse("$date/${month + 1}/$year").time
-                Log.d("endDate","minDate = $minDate")
-                Log.d("endDate","format = $format")
-                Log.d("endDate","viewModel.dueDate.value =${viewModel.dueDate.value}")
             }
         }
 
-//        viewModel.dueDate.observe(viewLifecycleOwner, Observer {
-//            viewModel.stampToDate(viewModel.dueDate.value!!)
-//        })
             return binding.root
     }
 }
