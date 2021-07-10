@@ -1,6 +1,5 @@
 package com.sean.green.calendar
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -69,8 +68,6 @@ class CalendarViewModel(private val repository: GreenRepository): ViewModel() {
             _status.value = LoadApiStatus.LOADING
 
             val result = repository.getCalendarEvent(userEmail,PATH_GREENS)
-            Log.d("calendarViewModel", "repository.getChallengeNum =" +
-                    "${repository.getCalendarEvent(userEmail,PATH_GREENS)}")
 
             _allEvents.value = when (result) {
                 is Result.Success -> {

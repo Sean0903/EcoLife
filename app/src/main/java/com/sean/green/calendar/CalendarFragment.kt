@@ -1,6 +1,5 @@
 package com.sean.green.calendar
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -32,7 +31,6 @@ class CalendarFragment : Fragment() {
 
     private val oneDayDecorator: OneDayDecorator = OneDayDecorator()
 
-    @SuppressLint("SimpleDateFormat")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

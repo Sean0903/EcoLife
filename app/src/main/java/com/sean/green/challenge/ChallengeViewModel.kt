@@ -84,7 +84,6 @@ class ChallengeViewModel(private val repository: GreenRepository) : ViewModel() 
     val carbon = MutableLiveData<String>()
     val content = MutableLiveData<String>()
 
-    //need refactor
     fun addChallengeData2Firebase(userEmail: String) {
 
         coroutineScope.launch {
@@ -129,8 +128,7 @@ class ChallengeViewModel(private val repository: GreenRepository) : ViewModel() 
             }
         }
     }
-
-    //need refactor
+    
     fun addArticle2Firebase(userEmail: String) {
 
         coroutineScope.launch {
