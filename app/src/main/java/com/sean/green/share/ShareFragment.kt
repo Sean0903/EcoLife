@@ -40,6 +40,7 @@ class ShareFragment: Fragment() {
             }
         })
 
+
         binding.lottieShare.repeatCount = -1
         binding.lottieShare.playAnimation()
 

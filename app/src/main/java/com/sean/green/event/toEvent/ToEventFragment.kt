@@ -61,6 +61,8 @@ class ToEventFragment : Fragment() {
                 UserManager.user.email,
                 UserManager.user.image,
                 UserManager.user.userName)
+            findNavController().navigate(NavigationDirections.navigateToHomeFragment())
+
         }
 
         binding.datePickerDialogEvent.apply {

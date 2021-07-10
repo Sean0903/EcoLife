@@ -1,5 +1,6 @@
 package com.sean.green.use
 
+
 import android.Manifest
 import android.app.Activity
 import android.app.Dialog
@@ -81,21 +82,77 @@ class UseFragment : Fragment() {
 
             if (viewModel.plastic.value.isNullOrBlank() &&
                 viewModel.power.value.isNullOrBlank() &&
-                viewModel.carbon.value.isNullOrBlank()
+                viewModel.carbon.value.isNullOrBlank() &&
+                viewModel.content.value.isNullOrBlank() &&
+                viewModel.photoUri.value == null
             ) {
-                Toast.makeText(context, "請輸入消耗", Toast.LENGTH_LONG).show()
-            } else {
-                viewModel.addUseData2Firebase(user.email)
-                Toast.makeText(context, "已成功送出", Toast.LENGTH_LONG).show()
-            }
+                Toast.makeText(context, "請輸入相關訊息", Toast.LENGTH_LONG).show()
 
-            if (viewModel.content.value != null) {
+            } else if (viewModel.photoUri.value != null &&
+                viewModel.plastic.value.isNullOrBlank() &&
+                viewModel.power.value.isNullOrBlank() &&
+                viewModel.carbon.value.isNullOrBlank() &&
+                viewModel.content.value.isNullOrBlank()
+            ) {
+                Toast.makeText(context, "圖片請附心情隨筆", Toast.LENGTH_LONG).show()
+
+            } else if (viewModel.photoUri.value != null &&
+                viewModel.content.value != null
+            ) {
+                if (viewModel.plastic.value != null ||
+                    viewModel.carbon.value != null ||
+                    viewModel.power.value != null
+                ) {
+                    viewModel.addUseData2Firebase(user.email)
+                }
                 viewModel.addArticle2Firebase(user.email)
                 Toast.makeText(context, "已成功送出", Toast.LENGTH_LONG).show()
+                findNavController().navigate(NavigationDirections.navigateToHomeFragment())
+
+            } else if (viewModel.content.value != null &&
+                viewModel.photoUri.value == null
+            ) {
+                if (viewModel.plastic.value != null ||
+                    viewModel.carbon.value != null ||
+                    viewModel.power.value != null
+                ) {
+                    viewModel.addUseData2Firebase(user.email)
+                }
+                viewModel.addArticle2Firebase(user.email)
+                Toast.makeText(context, "已成功送出", Toast.LENGTH_LONG).show()
+                findNavController().navigate(NavigationDirections.navigateToHomeFragment())
+
+            } else if (viewModel.plastic.value != null ||
+                viewModel.carbon.value != null ||
+                viewModel.power.value != null
+            ) {
+                if (viewModel.photoUri.value != null &&
+                    viewModel.content.value.isNullOrBlank()
+                ) {
+                    Toast.makeText(context, "圖片請附心情隨筆", Toast.LENGTH_LONG).show()
+                }
+                if (viewModel.content.value != null) {
+                    viewModel.addArticle2Firebase(user.email)
+                    viewModel.addUseData2Firebase(user.email)
+                    Toast.makeText(context, "已成功送出", Toast.LENGTH_LONG).show()
+                    findNavController().navigate(NavigationDirections.navigateToHomeFragment())
+                }
+                if (viewModel.plastic.value != null ||
+                    viewModel.carbon.value != null ||
+                    viewModel.power.value != null
+                ) {
+                    if (viewModel.content.value.isNullOrBlank() &&
+                        viewModel.photoUri.value == null
+                    ) {
+                        viewModel.addUseData2Firebase(user.email)
+                        Toast.makeText(context, "已成功送出", Toast.LENGTH_LONG).show()
+                        findNavController().navigate(NavigationDirections.navigateToHomeFragment())
+                    }
+                }
             }
         }
 
-        binding.addUsePhoto.setOnClickListener{
+        binding.addUsePhoto.setOnClickListener {
             activateCamera()
         }
 
@@ -208,7 +265,7 @@ class UseFragment : Fragment() {
                     IMAGE_FROM_CAMERA -> {
 
                         fileFromCamera?.let {
-                            Log.d("Sean","the value of file path =  $fileFromCamera")
+                            Log.d("Sean", "the value of file path =  $fileFromCamera")
                             bitmap = data?.extras?.get("data") as Bitmap
 
                             val matrix = Matrix()

@@ -8,29 +8,34 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:allowBackup="true"
         android:name=".GreenApplication"
+        android:allowBackup="true"
         android:icon="@drawable/ecolife"
         android:label="@string/app_name2"
         android:roundIcon="@drawable/ecolife"
         android:supportsRtl="true"
         android:theme="@style/Theme.Green"
-        tools:replace="android:allowBackup"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:replace="android:allowBackup">
 
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:label="@string/app_name"
-            android:windowSoftInputMode="adjustPan"
-            android:theme="@style/Theme.Green">
+            android:theme="@style/Theme.Green"
+            android:windowSoftInputMode="adjustPan">
         </activity>
 
-        <activity android:name=".login.LoginActivity"
+        <activity
+            android:name=".login.LoginActivity"
             android:theme="@style/Theme.Green">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,6 +44,7 @@
             </intent-filter>
 
         </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

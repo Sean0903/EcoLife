@@ -216,7 +216,7 @@
             android:background="@drawable/fragment_content"
             android:gravity="top"
             android:hint="@string/editText_save_page_content_hint"
-            android:inputType="none"
+            android:inputType="text"
             android:text="@={viewModel.content}"
             android:textColor="@color/colorWhite"
             android:textColorHint="@color/colorWhite"

@@ -52,6 +52,7 @@ class ToShareFragment: Fragment() {
             } else {
                 viewModel.addSharingData2Firebase(UserManager.user.email,UserManager.user.image,UserManager.user.userName)
                 Toast.makeText(context, "發送成功", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(NavigationDirections.navigateToHomeFragment())
             }
         }
 
