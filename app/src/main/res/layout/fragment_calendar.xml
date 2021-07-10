@@ -5,9 +5,8 @@
 
     <data>
         <import type="android.view.View" />
-        <variable
-            name="viewModel"
-            type="com.sean.green.calendar.CalendarViewModel" />
+
+        <variable name="viewModel" type="com.sean.green.calendar.CalendarViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,72 +36,8 @@
             app:mcv_showOtherDates="all"
             tools:ignore="MissingConstraints" />
 
-        <Button
-            android:id="@+id/button_SetTarget"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="設置標記"
-            android:visibility="gone"
-            app:layout_constraintEnd_toStartOf="@+id/button_Today"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/calendarView" />
-
-        <Button
-            android:id="@+id/button_Today"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="150dp"
-            android:text="回到今日"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/button_CancelTarget"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="解除標記"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/button_Today"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/button_Today" />
-
-        <Button
-            android:id="@+id/button_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="1"
-            android:visibility="gone"
-            app:layout_constraintEnd_toStartOf="@+id/button_2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_SetTarget"
-            tools:visibility="gone" />
-
-        <Button
-            android:id="@+id/button_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2"
-            android:visibility="gone"
-            app:layout_constraintEnd_toStartOf="@+id/button_3"
-            app:layout_constraintStart_toEndOf="@+id/button_1"
-            app:layout_constraintTop_toTopOf="@+id/button_1" />
-
-        <Button
-            android:id="@+id/button_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="3"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/button_2"
-            app:layout_constraintTop_toTopOf="@+id/button_2" />
-
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/recyclerView_calendar"
             android:layout_width="match_parent"
             android:layout_height="110dp"
             android:layout_marginBottom="170dp"
@@ -115,7 +50,7 @@
             tools:visibility="visible" />
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lottieAnimationView"
+            android:id="@+id/lottie_calendar"
             android:layout_width="176dp"
             android:layout_height="133dp"
             android:layout_marginBottom="110dp"
@@ -125,33 +60,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:lottie_rawRes="@raw/summer_camp_animations_raccoon_snorkel" />
 
-<!--        <ImageView-->
-<!--            android:id="@+id/imageView5"-->
-<!--            android:layout_width="176dp"-->
-<!--            android:layout_height="133dp"-->
-<!--            android:layout_marginBottom="110dp"-->
-<!--            android:background="@drawable/image_round"-->
-<!--            android:visibility="@{viewModel.selectedLiveEvent.size() &lt;= 0 ? View.VISIBLE : View.GONE}"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:srcCompat="@drawable/island" />-->
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
-
-
-
-<!--<androidx.recyclerview.widget.RecyclerView-->
-<!--android:id="@+id/recyclerView"-->
-<!--ShowEvent="@{viewModel.selectedLiveEvent}"-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="110dp"-->
-<!--android:layout_marginBottom="60dp"-->
-<!--app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-<!--app:layout_constraintBottom_toBottomOf="parent"-->
-<!--app:layout_constraintEnd_toEndOf="parent"-->
-<!--app:layout_constraintStart_toStartOf="parent"-->
-<!--app:layout_constraintTop_toBottomOf="@+id/calendarView"-->
-<!--tools:listitem="@layout/item_calendar_event" />-->

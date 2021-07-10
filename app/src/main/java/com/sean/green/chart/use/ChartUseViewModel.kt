@@ -56,7 +56,7 @@ class ChartUseViewModel(private val repository: GreenRepository) : ViewModel() {
 
             var today = Calendar.getInstance().timeInMillis
 
-            val use7List = mutableListOf<Use>()
+            val use7DayList = mutableListOf<Use>()
             val dataListForChart = mutableListOf<List<Use>>()
 
             for (i in 0..6) {
@@ -64,15 +64,17 @@ class ChartUseViewModel(private val repository: GreenRepository) : ViewModel() {
                 _status.value = LoadApiStatus.LOADING
                 val daysAgo = today.toDisplayFormat()
                 val useList = repository.getUseDataForChart(
-                    userEmail, FirebaseKey.COLLECTION_USE, daysAgo)
+                    userEmail, FirebaseKey.COLLECTION_USE, daysAgo
+                )
                 val useList2 = repository.getUseDataForChart(
-                    userEmail, FirebaseKey.COLLECTION_USE, daysAgo)
-                Log.d("days", "charUsetime = $daysAgo")
-                today -= 87000000
+                    userEmail, FirebaseKey.COLLECTION_USE, daysAgo
+                )
+                Log.d("chartUseViewModel", "charUseTime = $daysAgo")
+                today -= 86400000
 
                 when (useList) {
                     is Result.Success -> {
-                        use7List.addAll(useList.data)
+                        use7DayList.addAll(useList.data)
                         _error.value = null
                         _status.value = LoadApiStatus.DONE
                     }
@@ -80,11 +82,10 @@ class ChartUseViewModel(private val repository: GreenRepository) : ViewModel() {
                         _error.value =
                             GreenApplication.instance.getString(R.string.Please_try_again_later)
                         _status.value = LoadApiStatus.ERROR
-
                     }
                 }
 
-                Log.d("chartUseViewModel", "use7List = ${use7List.size}")
+                Log.d("chartUseViewModel", "use7DayList.size1 = ${use7DayList.size}")
 
                 _useDataSevenDays.value = when (useList2) {
                     is Result.Success -> {
@@ -106,15 +107,15 @@ class ChartUseViewModel(private val repository: GreenRepository) : ViewModel() {
                 _refreshStatus.value = false
             }
 
-            _useDataForRecycleView.value = use7List
+            _useDataForRecycleView.value = use7DayList
 
-            Log.d("chartUseViewModel", "use7List = ${use7List}")
-            Log.i("chartUseViewModel", "use7List = ${use7List.size}")
+            Log.d("chartUseViewModel", "use7DayList = ${use7DayList}")
+            Log.i("chartUseViewModel", "use7DayList.size2 = ${use7DayList.size}")
 
-            Log.d("chartUseViewModel", "dataListForChart = ${dataListForChart}")
-            Log.i("chartUseViewModel", "dataListForChart = ${dataListForChart.size}")
+            Log.d("chartUseViewModel", "useDataListForChart = ${dataListForChart}")
+            Log.i("chartUseViewModel", "useDataListForChart.size = ${dataListForChart.size}")
 
-            setChartTotalData(use7List)
+            setChartTotalData(use7DayList)
         }
     }
 
@@ -123,34 +124,36 @@ class ChartUseViewModel(private val repository: GreenRepository) : ViewModel() {
     val carbonList = mutableListOf<Int>()
 
     fun setUseDataForChart() {
-        val sevenDaysData = _useDataSevenDays.value
+        val useSevenDaysData = _useDataSevenDays.value
 
-        Log.d("sean0903", "setUseDataForChart = ${ _useDataSevenDays.value} ")
+        Log.d("chartUseViewModel", "useSevenDaysData = ${_useDataSevenDays.value} ")
 
-        var dailyPlastic: Int = 0
-        var dailyPower: Int = 0
-        var dailyCarbon: Int = 0
+        var dailyPlastic = 0
+        var dailyPower = 0
+        var dailyCarbon = 0
 
+        //if there are more than one num per day , it will be summed into a total
         for (i in 0..0) {
-            for (sumOneDay in sevenDaysData as List<Use>) {
+            for (sumOneDay in useSevenDaysData as List<Use>) {
                 dailyPlastic = dailyPlastic.plus(sumOneDay.plastic ?: 0)
-                Log.d("sean0603", "useDailyPlastic = ${dailyPlastic}")
+                Log.d("chartUseViewModel", "useDailyPlastic = ${dailyPlastic}")
 
                 dailyPower = dailyPower.plus(sumOneDay.power ?: 0)
-                Log.d("sean0603", "useDailyPower = ${dailyPower}")
+                Log.d("chartUseViewModel", "useDailyPower = ${dailyPower}")
 
                 dailyCarbon = dailyCarbon.plus(sumOneDay.carbon ?: 0)
-                Log.d("sean0603", "useDailyCarbon = ${dailyCarbon}")
+                Log.d("chartUseViewModel", "useDailyCarbon = ${dailyCarbon}")
             }
         }
 
+        //make data become a list(7days)
         plasticList.add(dailyPlastic)
         powerList.add(dailyPower)
         carbonList.add(dailyCarbon)
 
-        Log.d("sean0903", " usePlasticList = $plasticList")
-        Log.d("sean0903", " usePowerList = $powerList")
-        Log.d("sean0903", " useCarbonList = $carbonList")
+        Log.d("chartUseViewModel", " usePlasticList = $plasticList")
+        Log.d("chartUseViewModel", " usePowerList = $powerList")
+        Log.d("chartUseViewModel", " useCarbonList = $carbonList")
 
     }
 
@@ -171,12 +174,11 @@ class ChartUseViewModel(private val repository: GreenRepository) : ViewModel() {
         var powerTotalForDay = 0
         var carbonTotalForDay = 0
 
-        var date: String = ""
+        var date = ""
 
         for (use in uses) {
-            Log.d("testUse", "use = $use")
+            Log.d("chartUseViewModel", "useDataPerDay = $use")
             if (use.today != date) {
-                Log.i("testUse", "use.today != date")
 
                 if (date.isNotEmpty()) {
                     //add into a list
@@ -190,7 +192,7 @@ class ChartUseViewModel(private val repository: GreenRepository) : ViewModel() {
                 carbonTotalForDay = 0
 
             }
-            //if doc more than one , the plastic num will be added into one result
+            //if doc more than one , the plastic num will be added into a total
             plasticTotalForDay += use.plastic ?: 0
             powerTotalForDay += use.power ?: 0
             carbonTotalForDay += use.carbon ?: 0

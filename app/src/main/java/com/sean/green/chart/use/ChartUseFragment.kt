@@ -12,7 +12,6 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
-import com.sean.green.MainActivity
 import com.sean.green.R
 import com.sean.green.databinding.FragmentUseChartBinding
 import com.sean.green.ext.getVmFactory
@@ -43,8 +42,6 @@ class ChartUseFragment : Fragment() {
             }
         })
 
-        (activity as MainActivity).dismissFabButton(true)
-
         binding.imageChartPageCalender.setOnClickListener {
             setLineChartData()
         }
@@ -56,43 +53,11 @@ class ChartUseFragment : Fragment() {
             count++
             if (count == 7) {
                 setLineChartData()
-                binding.lottieAnimationView.visibility = View.GONE
-                binding.imageChartPageUsePlastic.visibility = View.VISIBLE
-                binding.imageChartPageUsePower.visibility = View.VISIBLE
-                binding.imageChartPageUseCarbon.visibility = View.VISIBLE
-                binding.textChartPageUsePlastic.visibility = View.VISIBLE
-                binding.textChartPageUsePower.visibility = View.VISIBLE
-                binding.textChartPageUseCarbon.visibility = View.VISIBLE
-                binding.imageChartPageCalender.visibility = View.VISIBLE
-                binding.imageChartPageUsePlasticIcon1.visibility = View.VISIBLE
-                binding.imageChartPageUsePowerIcon1.visibility = View.VISIBLE
-                binding.imageChartPageUseCarbonIcon1.visibility = View.VISIBLE
-                binding.recyclerViewChartPageUse.visibility = View.VISIBLE
-                binding.textCalendarTitle.visibility = View.VISIBLE
-                binding.textPlasticTitle.visibility = View.VISIBLE
-                binding.textPowerTitle.visibility = View.VISIBLE
-                binding.textCarbonTitle.visibility = View.VISIBLE
+                letViewInvisible()
             }
         })
 
-        binding.lottieAnimationView.repeatCount = -1
-        // 开始播放动画
-        binding.lottieAnimationView.playAnimation()
-        binding.imageChartPageUsePlastic.visibility = View.INVISIBLE
-        binding.imageChartPageUsePower.visibility = View.INVISIBLE
-        binding.imageChartPageUseCarbon.visibility = View.INVISIBLE
-        binding.textChartPageUsePlastic.visibility = View.INVISIBLE
-        binding.textChartPageUsePower.visibility = View.INVISIBLE
-        binding.textChartPageUseCarbon.visibility = View.INVISIBLE
-        binding.imageChartPageCalender.visibility = View.INVISIBLE
-        binding.imageChartPageUsePlasticIcon1.visibility = View.INVISIBLE
-        binding.imageChartPageUsePowerIcon1.visibility = View.INVISIBLE
-        binding.imageChartPageUseCarbonIcon1.visibility = View.INVISIBLE
-        binding.recyclerViewChartPageUse.visibility = View.INVISIBLE
-        binding.textCalendarTitle.visibility = View.INVISIBLE
-        binding.textPlasticTitle.visibility = View.INVISIBLE
-        binding.textPowerTitle.visibility = View.INVISIBLE
-        binding.textCarbonTitle.visibility = View.INVISIBLE
+        letViewVisible()
 
         return binding.root
     }
@@ -144,12 +109,6 @@ class ChartUseFragment : Fragment() {
         val linedatasetSaveCarbon = LineDataSet(lineentrySaveCarbon, "Carbon")
         linedatasetSaveCarbon.color = resources.getColor(R.color.colorNight)
 
-
-//            linedataset.circleRadius = 0f
-//            linedataset.setDrawFilled(true)
-//            linedataset.fillColor = resources.getColor(R.color.black)
-//            linedataset.fillAlpha = 30
-
         val finaldataset = ArrayList<LineDataSet>()
         finaldataset.add(linedatasetSavePlastic)
         finaldataset.add(linedatasetSavePower)
@@ -161,5 +120,45 @@ class ChartUseFragment : Fragment() {
         lineChart2.setBackgroundColor(resources.getColor(R.color.white))
         lineChart2.animateXY(3000, 3000)
 
+    }
+
+    private fun letViewInvisible() {
+        binding.lottieChart.visibility = View.GONE
+        binding.imageChartPageUsePlastic.visibility = View.VISIBLE
+        binding.imageChartPageUsePower.visibility = View.VISIBLE
+        binding.imageChartPageUseCarbon.visibility = View.VISIBLE
+        binding.textChartPageUsePlastic.visibility = View.VISIBLE
+        binding.textChartPageUsePower.visibility = View.VISIBLE
+        binding.textChartPageUseCarbon.visibility = View.VISIBLE
+        binding.imageChartPageCalender.visibility = View.VISIBLE
+        binding.imageChartPageUsePlastic2.visibility = View.VISIBLE
+        binding.imageChartPageUsePower2.visibility = View.VISIBLE
+        binding.imageChartPageUseCarbon2.visibility = View.VISIBLE
+        binding.recyclerViewChartPageUse.visibility = View.VISIBLE
+        binding.textCalendarTitle.visibility = View.VISIBLE
+        binding.textPlasticTitle.visibility = View.VISIBLE
+        binding.textPowerTitle.visibility = View.VISIBLE
+        binding.textCarbonTitle.visibility = View.VISIBLE
+    }
+
+    private fun letViewVisible() {
+        binding.lottieChart.repeatCount = -1
+        // 开始播放动画
+        binding.lottieChart.playAnimation()
+        binding.imageChartPageUsePlastic.visibility = View.INVISIBLE
+        binding.imageChartPageUsePower.visibility = View.INVISIBLE
+        binding.imageChartPageUseCarbon.visibility = View.INVISIBLE
+        binding.textChartPageUsePlastic.visibility = View.INVISIBLE
+        binding.textChartPageUsePower.visibility = View.INVISIBLE
+        binding.textChartPageUseCarbon.visibility = View.INVISIBLE
+        binding.imageChartPageCalender.visibility = View.INVISIBLE
+        binding.imageChartPageUsePlastic2.visibility = View.INVISIBLE
+        binding.imageChartPageUsePower2.visibility = View.INVISIBLE
+        binding.imageChartPageUseCarbon2.visibility = View.INVISIBLE
+        binding.recyclerViewChartPageUse.visibility = View.INVISIBLE
+        binding.textCalendarTitle.visibility = View.INVISIBLE
+        binding.textPlasticTitle.visibility = View.INVISIBLE
+        binding.textPowerTitle.visibility = View.INVISIBLE
+        binding.textCarbonTitle.visibility = View.INVISIBLE
     }
 }

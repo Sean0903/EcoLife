@@ -5,7 +5,6 @@
 
     <data>
         <variable name="useChartData" type="com.sean.green.data.Use" />
-        <variable name="viewModel" type="com.sean.green.chart.use.ChartUseViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,7 +23,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/item_chart_date_time"
+                android:id="@+id/text_item_chart_date_time"
                 android:layout_width="84dp"
                 android:layout_height="22dp"
                 android:layout_marginStart="32dp"
@@ -39,7 +38,7 @@
                 tools:text="2020.10.11" />
 
             <TextView
-                android:id="@+id/item_chart_date_use_plastic"
+                android:id="@+id/text_item_chart_date_use_plastic"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -48,13 +47,13 @@
                 android:textAlignment="center"
                 android:textColor="@color/colorFlyingLemon1"
                 android:textSize="@dimen/text_content"
-                app:layout_constraintBottom_toBottomOf="@+id/item_chart_date_time"
-                app:layout_constraintStart_toEndOf="@+id/item_chart_date_time"
-                app:layout_constraintTop_toTopOf="@+id/item_chart_date_time"
+                app:layout_constraintBottom_toBottomOf="@+id/text_item_chart_date_time"
+                app:layout_constraintStart_toEndOf="@+id/text_item_chart_date_time"
+                app:layout_constraintTop_toTopOf="@+id/text_item_chart_date_time"
                 tools:text="11" />
 
             <TextView
-                android:id="@+id/item_chart_date_use_power"
+                android:id="@+id/text_item_chart_date_use_power"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -63,13 +62,13 @@
                 android:textAlignment="center"
                 android:textColor="@color/colorFlyingLemon1"
                 android:textSize="@dimen/text_content"
-                app:layout_constraintBottom_toBottomOf="@+id/item_chart_date_use_plastic"
-                app:layout_constraintStart_toEndOf="@+id/item_chart_date_use_plastic"
-                app:layout_constraintTop_toTopOf="@+id/item_chart_date_use_plastic"
+                app:layout_constraintBottom_toBottomOf="@+id/text_item_chart_date_use_plastic"
+                app:layout_constraintStart_toEndOf="@+id/text_item_chart_date_use_plastic"
+                app:layout_constraintTop_toTopOf="@+id/text_item_chart_date_use_plastic"
                 tools:text="40" />
 
             <TextView
-                android:id="@+id/item_chart_date_use_carbon"
+                android:id="@+id/text_item_chart_date_use_carbon"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -78,9 +77,9 @@
                 android:textAlignment="center"
                 android:textColor="@color/colorFlyingLemon1"
                 android:textSize="@dimen/text_content"
-                app:layout_constraintBottom_toBottomOf="@+id/item_chart_date_use_power"
-                app:layout_constraintStart_toEndOf="@+id/item_chart_date_use_power"
-                app:layout_constraintTop_toTopOf="@+id/item_chart_date_use_power"
+                app:layout_constraintBottom_toBottomOf="@+id/text_item_chart_date_use_power"
+                app:layout_constraintStart_toEndOf="@+id/text_item_chart_date_use_power"
+                app:layout_constraintTop_toTopOf="@+id/text_item_chart_date_use_power"
                 tools:text="20" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

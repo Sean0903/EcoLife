@@ -5,23 +5,19 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Event(
-
     var id: String = "",
-    val name: String? = "",
+    var hostName: String = "",
+    var hostImage: String = "",
+    var hostEmail: String = "",
     val introduction: String? = "",
     val location: String? = "",
     val content: String? = "",
-    val member: List<String> = listOf(""),
-    val memberImage: List<String> = listOf(""),
-    var today: String? = "",
     var createdTime: Long = -1,
-    var image: String = "",
-    var userName: String = "",
-    var email: String = "",
-    val eventTime: String = "",
+    val eventYMD: String = "",
     var eventYear: String? = "",
     var eventMonth: String? = "",
     var eventDay: String? = "",
-    var eventTimestamp: Long =  -1,
-
-    ) : Parcelable
+    var eventTimestamp: Long = -1,
+    val members: List<String> = listOf(""),
+    val memberImages: List<String> = listOf(""),
+) : Parcelable

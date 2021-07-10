@@ -8,33 +8,32 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.sean.green.GreenApplication
 import com.sean.green.R
-import com.sean.green.data.Article
-import com.sean.green.data.Result
-import com.sean.green.data.Save
+import com.sean.green.data.*
+import com.sean.green.data.FirebaseKey.Companion.COLLECTION_SAVE
+import com.sean.green.data.FirebaseKey.Companion.COLLECTION_USERS
+import com.sean.green.data.FirebaseKey.Companion.CREATEDTIME
+import com.sean.green.data.FirebaseKey.Companion.DAY
+import com.sean.green.data.FirebaseKey.Companion.MONTH
+import com.sean.green.data.FirebaseKey.Companion.PATH_GREENS
+import com.sean.green.data.FirebaseKey.Companion.SAVE
+import com.sean.green.data.FirebaseKey.Companion.YEAR
 import com.sean.green.data.source.GreenRepository
-import com.sean.green.ext.toDisplayFormat
-import com.sean.green.ext.toDisplayFormatDay
-import com.sean.green.ext.toDisplayFormatMonth
-import com.sean.green.ext.toDisplayFormatYear
 import com.sean.green.network.LoadApiStatus
+import com.sean.green.util.Util
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.sql.Time
 import java.util.*
 
 
 class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
 
-    val content = MutableLiveData<String>()
 
     private var viewModelJob = Job()
 
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
-
-    val plastic = MutableLiveData<String>()
-    val power = MutableLiveData<String>()
-    val carbon = MutableLiveData<String>()
 
     private val _save = MutableLiveData<Save>().apply {
         value = Save(
@@ -54,16 +53,7 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
     val error: LiveData<String?>
         get() = _error
 
-    private val _navigateToHome = MutableLiveData<Boolean>()
-
-    val navigateToHome: MutableLiveData<Boolean>
-        get() = _navigateToHome
-
-    //相片功能data
-    private val _date = MutableLiveData<Date>()
-    val date: LiveData<Date>
-        get() = _date
-
+    //photo
     private val _isUploadPhoto = MutableLiveData<Boolean>()
     private val isUploadPhoto: LiveData<Boolean>
         get() = _isUploadPhoto
@@ -72,13 +62,21 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
     val photoUri: LiveData<Uri>
         get() = _photoUri
 
-    //相片功能function
-    fun uploadPhoto(){
-        _isUploadPhoto.value = true
+    private val _date = MutableLiveData<Date>()
+    val date: LiveData<Date>
+        get() = _date
+
+    private val _time = MutableLiveData<Time>()
+    val time : LiveData<Time>
+        get() = _time
+
+    private fun setCurrentDate(date: Date){
+        _date.value = date
+        _time.value = Time(date.time)
     }
 
-    fun setPhoto(photo: Uri){
-        _photoUri.value = photo
+    init {
+        setCurrentDate(Date())
     }
 
     override fun onCleared() {
@@ -86,51 +84,41 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
         viewModelJob.cancel()
     }
 
-    fun navigateToHome() {
-        _navigateToHome.value = true
-    }
-
-    fun navigateToHomeAfterSend(needRefresh: Boolean = false) {
-        _navigateToHome.value = needRefresh
-    }
+    val plastic = MutableLiveData<String>()
+    val power = MutableLiveData<String>()
+    val carbon = MutableLiveData<String>()
+    val content = MutableLiveData<String>()
 
 
     fun addSaveData2Firebase(userEmail: String) {
 
         coroutineScope.launch {
 
-            val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
-            val year = Calendar.getInstance().timeInMillis.toDisplayFormatYear()
-            val month = Calendar.getInstance().timeInMillis.toDisplayFormatMonth()
-            val day = Calendar.getInstance().timeInMillis.toDisplayFormatDay()
-            val createdTime = Calendar.getInstance().timeInMillis
-
             val data = hashMapOf(
-                "day" to day,
-                "month" to month,
-                "year" to year,
-                "createdTime" to createdTime,
-                "save" to "save"
+                DAY to Util.day,
+                MONTH to Util.month,
+                YEAR to Util.year,
+                CREATEDTIME to Util.createdTime,
+                SAVE to SAVE
             )
 
-            val saveTime = FirebaseFirestore.getInstance()
-                .collection("users").document(userEmail).collection("greens")
-                .document(today).set(data, SetOptions.merge())
+            FirebaseFirestore.getInstance()
+                .collection(COLLECTION_USERS).document(userEmail).collection(PATH_GREENS)
+                .document(Util.today).set(data, SetOptions.merge())
 
-            val newSaveData = Save(
+            val newSaveData = Sum(
                 plastic = plastic.value?.toInt(),
                 power = power.value?.toInt(),
                 carbon = carbon.value?.toInt(),
+                content = content.value?.toString(),
                 createdTime = Calendar.getInstance().timeInMillis,
-                today = today
-//                id = document.id
+                today = Util.today
             )
 
-            when (val result = repository.addSaveNum2Firebase(userEmail,newSaveData)) {
+            when (val result = repository.addData2Firebase(userEmail,COLLECTION_SAVE,newSaveData)) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
-                    navigateToHomeAfterSend(true)
                 }
                 is Result.Fail -> {
                     _error.value = result.error
@@ -152,38 +140,17 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
 
         coroutineScope.launch {
 
-            val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
-            val year = Calendar.getInstance().timeInMillis.toDisplayFormatYear()
-            val month = Calendar.getInstance().timeInMillis.toDisplayFormatMonth()
-            val day = Calendar.getInstance().timeInMillis.toDisplayFormatDay()
-            val createdTime = Calendar.getInstance().timeInMillis
-
-//            val articleTimeStamp = Calendar.getInstance().timeInMillis
-//            val articleHourAndMin =  TimeUtil.stampToHM(articleTimeStamp)
-
-            val data = hashMapOf(
-                "day" to day,
-                "month" to month,
-                "year" to year,
-                "createdTime" to createdTime,
-                "save" to "save"
-            )
-
-            val saveTime = FirebaseFirestore.getInstance()
-                .collection("users").document(userEmail).collection("greens")
-                .document(today).set(data, SetOptions.merge())
-
             val newArticleData = Article(
                 content = content.value.toString(),
+                image = photoUri.value.toString(),
+                save = FirebaseKey.PHOTO_TAG_SAVE,
                 createdTime = Calendar.getInstance().timeInMillis,
-//                id = document.id
             )
 
             when (val result = repository.addArticle2Firebase(userEmail,newArticleData)) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
-                    navigateToHomeAfterSend(true)
                 }
                 is Result.Fail -> {
                     _error.value = result.error
@@ -200,6 +167,16 @@ class SaveViewModel(private val repository: GreenRepository) : ViewModel() {
             }
         }
     }
+
+    //camera function
+    fun setPhoto(photo: Uri){
+        _photoUri.value = photo
+    }
+
+    fun uploadPhoto(){
+        _isUploadPhoto.value = true
+    }
+
 }
 
 

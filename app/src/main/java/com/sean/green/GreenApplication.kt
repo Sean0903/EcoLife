@@ -6,13 +6,6 @@ import app.appworks.school.stylish.util.ServiceLocator
 import com.sean.green.data.source.GreenRepository
 import kotlin.properties.Delegates
 
-
-/**
- *
- * An application that lazily provides a repository. Note that this Service Locator pattern is
- * used to simplify the sample. Consider a Dependency Injection framework.
- */
-
 class GreenApplication: Application() {
 
     val greenRepository: GreenRepository

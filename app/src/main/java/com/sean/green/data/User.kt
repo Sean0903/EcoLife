@@ -6,11 +6,9 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class User(
-
     var userId: String = "",
     var userName: String = "",
     var email: String = "",
-    var createdTime: Long = Calendar.getInstance().timeInMillis,
     var image: String = "",
-
+    var createdTime: Long = Calendar.getInstance().timeInMillis,
 ) : Parcelable

@@ -13,13 +13,17 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.sean.green.R
 import com.sean.green.data.Share
 import com.sean.green.databinding.ItemShareBinding
-import com.sean.green.login.UserManager
-import com.sean.green.util.Util
 import com.sean.green.util.Util.getColor
-import kotlinx.android.synthetic.main.item_share.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.concurrent.schedule
 
 
-class ShareAdapter(private val viewModel: ShareViewModel,val onClickListener: OnClickListener) :
+class ShareAdapter(private val viewModel: ShareViewModel, val onClickListener: OnClickListener) :
     ListAdapter<Share, ShareAdapter.ViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,82 +41,98 @@ class ShareAdapter(private val viewModel: ShareViewModel,val onClickListener: On
         }
 
 
-        holder.itemView.imageView3.setOnClickListener {
-            viewModel.getSaveDataForChart(UserManager.user.email,Share())
-
-        }
+//        holder.itemView.imageView2.setOnClickListener {
+//            viewModel.getSaveDataForChart(UserManager.user.email,Share())
+//
+//        }
     }
 
     class ViewHolder(var binding: ItemShareBinding) : RecyclerView.ViewHolder(binding.root) {
 
+        private var viewModelJob = Job()
+
+        private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+
         fun bind(viewModel: ShareViewModel, item: Share) {
             Log.d("seanViewHolder", "fun bind(item: Save) = $item")
             binding.shareData = item
-            binding.lineChart1
+            binding.lineChart3
+            
+                fun setLine() {
+                    val xvalue = ArrayList<String>()
+                    xvalue.add("")
+                    xvalue.add("")
+                    xvalue.add("")
+                    xvalue.add("")
+                    xvalue.add("")
+                    xvalue.add("")
+                    xvalue.add("")
 
-            fun setLine() {
-                val xvalue = ArrayList<String>()
-                xvalue.add("")
-                xvalue.add("")
-                xvalue.add("")
-                xvalue.add("")
-                xvalue.add("")
-                xvalue.add("")
-                xvalue.add("")
+                    val lineentrySavePlastic = ArrayList<Entry>();
+                    lineentrySavePlastic.add(Entry(viewModel.plasticList[5].toFloat(), 1))
+                    lineentrySavePlastic.add(Entry(viewModel.plasticList[4].toFloat(), 2))
+                    lineentrySavePlastic.add(Entry(viewModel.plasticList[3].toFloat(), 3))
+                    lineentrySavePlastic.add(Entry(viewModel.plasticList[2].toFloat(), 4))
+                    lineentrySavePlastic.add(Entry(viewModel.plasticList[1].toFloat(), 5))
+                    lineentrySavePlastic.add(Entry(viewModel.plasticList[0].toFloat(), 6))
 
-                val lineentrySavePlastic = ArrayList<Entry>();
-                lineentrySavePlastic.add(Entry(viewModel.plasticList[5].toFloat(), 1))
-                lineentrySavePlastic.add(Entry(viewModel.plasticList[4].toFloat(), 2))
-                lineentrySavePlastic.add(Entry(viewModel.plasticList[3].toFloat(), 3))
-                lineentrySavePlastic.add(Entry(viewModel.plasticList[2].toFloat(), 4))
-                lineentrySavePlastic.add(Entry(viewModel.plasticList[1].toFloat(), 5))
-                lineentrySavePlastic.add(Entry(viewModel.plasticList[0].toFloat(), 6))
+                    val lineentrySavePower = ArrayList<Entry>();
+                    lineentrySavePower.add(Entry(viewModel.powerList[6].toFloat(), 0))
+                    lineentrySavePower.add(Entry(viewModel.powerList[5].toFloat(), 1))
+                    lineentrySavePower.add(Entry(viewModel.powerList[4].toFloat(), 2))
+                    lineentrySavePower.add(Entry(viewModel.powerList[3].toFloat(), 3))
+                    lineentrySavePower.add(Entry(viewModel.powerList[2].toFloat(), 4))
+                    lineentrySavePower.add(Entry(viewModel.powerList[1].toFloat(), 5))
+                    lineentrySavePower.add(Entry(viewModel.powerList[0].toFloat(), 6))
 
-                val lineentrySavePower = ArrayList<Entry>();
-                lineentrySavePower.add(Entry(viewModel.powerList[6].toFloat(), 0))
-                lineentrySavePower.add(Entry(viewModel.powerList[5].toFloat(), 1))
-                lineentrySavePower.add(Entry(viewModel.powerList[4].toFloat(), 2))
-                lineentrySavePower.add(Entry(viewModel.powerList[3].toFloat(), 3))
-                lineentrySavePower.add(Entry(viewModel.powerList[2].toFloat(), 4))
-                lineentrySavePower.add(Entry(viewModel.powerList[1].toFloat(), 5))
-                lineentrySavePower.add(Entry(viewModel.powerList[0].toFloat(), 6))
+                    val lineentrySaveCarbon = ArrayList<Entry>();
+                    lineentrySaveCarbon.add(Entry(viewModel.carbonList[6].toFloat(), 0))
+                    lineentrySaveCarbon.add(Entry(viewModel.carbonList[5].toFloat(), 1))
+                    lineentrySaveCarbon.add(Entry(viewModel.carbonList[4].toFloat(), 2))
+                    lineentrySaveCarbon.add(Entry(viewModel.carbonList[3].toFloat(), 3))
+                    lineentrySaveCarbon.add(Entry(viewModel.carbonList[2].toFloat(), 4))
+                    lineentrySaveCarbon.add(Entry(viewModel.carbonList[1].toFloat(), 5))
+                    lineentrySaveCarbon.add(Entry(viewModel.carbonList[0].toFloat(), 6))
 
-                val lineentrySaveCarbon = ArrayList<Entry>();
-                lineentrySaveCarbon.add(Entry(viewModel.carbonList[6].toFloat(), 0))
-                lineentrySaveCarbon.add(Entry(viewModel.carbonList[5].toFloat(), 1))
-                lineentrySaveCarbon.add(Entry(viewModel.carbonList[4].toFloat(), 2))
-                lineentrySaveCarbon.add(Entry(viewModel.carbonList[3].toFloat(), 3))
-                lineentrySaveCarbon.add(Entry(viewModel.carbonList[2].toFloat(), 4))
-                lineentrySaveCarbon.add(Entry(viewModel.carbonList[1].toFloat(), 5))
-                lineentrySaveCarbon.add(Entry(viewModel.carbonList[0].toFloat(), 6))
+                    val linedatasetSavePlastic = LineDataSet(lineentrySavePlastic, "Plastic")
+                    linedatasetSavePlastic.color = getColor(R.color.colorBlue5)
 
-                val linedatasetSavePlastic = LineDataSet(lineentrySavePlastic, "Plastic")
-                linedatasetSavePlastic.color = getColor(R.color.colorBlue5)
+                    val linedatasetSavePower = LineDataSet(lineentrySavePower, "Power")
+                    linedatasetSavePower.color = getColor(R.color.colorSelectedBottomNav)
 
-                val linedatasetSavePower = LineDataSet(lineentrySavePower, "Power")
-                linedatasetSavePower.color = getColor(R.color.colorSelectedBottomNav)
+                    val linedatasetSaveCarbon = LineDataSet(lineentrySaveCarbon, "Carbon")
+                    linedatasetSaveCarbon.color = getColor(R.color.colorNight)
 
-                val linedatasetSaveCarbon = LineDataSet(lineentrySaveCarbon, "Carbon")
-                linedatasetSaveCarbon.color = getColor(R.color.colorNight)
+                    val finaldataset = ArrayList<LineDataSet>()
+                    finaldataset.add(linedatasetSavePlastic)
+                    finaldataset.add(linedatasetSavePower)
+                    finaldataset.add(linedatasetSaveCarbon)
 
-                val finaldataset = ArrayList<LineDataSet>()
-                finaldataset.add(linedatasetSavePlastic)
-                finaldataset.add(linedatasetSavePower)
-                finaldataset.add(linedatasetSaveCarbon)
+                    val data = LineData(xvalue, finaldataset as List<ILineDataSet>?)
 
-                val data = LineData(xvalue, finaldataset as List<ILineDataSet>?)
+                    binding.lineChart3.data = data
+//                binding.lineChart3.setBackgroundColor(getColor(R.color.white))
+//                binding.lineChart3.animateXY(3000, 3000)
+                }
 
-                binding.lineChart1.data = data
-                binding.lineChart1.setBackgroundColor(Util.getColor(R.color.white))
-                binding.lineChart1.animateXY(3000, 3000)
+//            binding.textItemShareContent.setOnClickListener {
+//                setLine()
+//            }
+
+            coroutineScope.launch(Dispatchers.Main) {
+                Timer("SettingUp", false).schedule(2500) {
+                    setLine()
+                }
             }
 
-            binding.textView9.setOnClickListener {
-                setLine()
-            }
+//            coroutineScope.launch(Dispatchers.Default) {
+//                Timer("SettingUp", false).schedule(2500) {
+//                setLine() }
+//
+//            }
+
 
             binding.executePendingBindings()
-
         }
 
         companion object {
@@ -128,7 +148,6 @@ class ShareAdapter(private val viewModel: ShareViewModel,val onClickListener: On
         override fun areItemsTheSame(oldItem: Share, newItem: Share): Boolean {
             return oldItem == newItem
         }
-
 
         override fun areContentsTheSame(oldItem: Share, newItem: Share): Boolean {
             return oldItem == newItem

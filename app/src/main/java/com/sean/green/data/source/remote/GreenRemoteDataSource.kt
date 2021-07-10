@@ -26,9 +26,77 @@ object GreenRemoteDataSource : GreenDataSource {
     private const val PATH_EVENT = "event"
     private const val PATH_GREENS = "greens"
     private const val KEY_CREATED_TIME = "createdTime"
-    private const val KEY_EVENT_MEMBER = "member"
-    private const val KEY_EVENT_MEMBER_IMAGE = "memberImage"
+    private const val KEY_EVENT_MEMBER = "members"
+    private const val KEY_EVENT_MEMBER_IMAGE = "memberImages"
 
+    override suspend fun addData2Firebase(userEmail: String, collection: String, any: Any): Result<Boolean> =
+    suspendCoroutine { continuation ->
+
+        val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
+
+        val firestore = FirebaseFirestore.getInstance().collection(PATH_USERS)
+        val userDocument = firestore.document(userEmail)
+        val greensCollenction = userDocument.collection(PATH_GREENS)
+        val todayDocument = greensCollenction.document(today)
+        val saveCollection = todayDocument.collection(collection).document()
+
+        (any as Sum).id = saveCollection.id
+        saveCollection.set(any)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Log.d("dataSource", "addData2Firebase: $any")
+                    continuation.resume(Result.Success(true))
+                } else {
+                    task.exception?.let {
+
+                        Log.d(
+                            "dataSource",
+                            "[${this::class.simpleName}] Error getting documents. ${it.message}"
+                        )
+                        continuation.resume(Result.Error(it))
+                        return@addOnCompleteListener
+                    }
+                    continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.Please_try_again_later)))
+                }
+            }
+    }
+
+    override suspend fun getDataFromFirebase(userEmail: String, collection: String, any: Any): Result<List<Any>> =
+        suspendCoroutine { continuation ->
+
+            val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
+
+            FirebaseFirestore.getInstance().collection(PATH_USERS).document(userEmail)
+                .collection(PATH_GREENS).document(today)
+                .collection(collection)
+                .orderBy(KEY_CREATED_TIME, Query.Direction.DESCENDING)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val list = mutableListOf<Any>()
+                        for (document in task.result!!) {
+                            Log.d("seanGetSaveNum", document.id + " => " + document.data)
+
+                            val allNum = document.toObject(Any::class.java)
+                            list.add(allNum)
+                        }
+
+                        continuation.resume(Result.Success(list))
+
+                    } else {
+                        task.exception?.let {
+
+                            Log.w(
+                                "sean",
+                                "[${this::class.simpleName}] Error getting documents. ${it.message}"
+                            )
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.Please_try_again_later)))
+                    }
+                }
+        }
 
     override suspend fun getSaveDataForChart(userEmail: String, collection: String, documentId: String): Result<List<Save>> =
         suspendCoroutine { continuation ->
@@ -265,137 +333,6 @@ object GreenRemoteDataSource : GreenDataSource {
                     }
                 }
         }
-
-
-    override suspend fun addSaveNum2Firebase(userEmail: String, save: Save): Result<Boolean> =
-        suspendCoroutine { continuation ->
-
-            val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
-
-            val firestore = FirebaseFirestore.getInstance().collection(PATH_USERS)
-            val userDocument = firestore.document(userEmail)
-            val greensCollenction = userDocument.collection(PATH_GREENS)
-            val todayDocument = greensCollenction.document(today)
-            val saveCollection = todayDocument.collection("save").document()
-
-            save.id = saveCollection.id
-            saveCollection.set(save)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Log.d("dataSource", "addSaveNum2Firebase: $save")
-                        continuation.resume(Result.Success(true))
-                    } else {
-                        task.exception?.let {
-
-                            Log.d(
-                                "dataSource",
-                                "[${this::class.simpleName}] Error getting documents. ${it.message}"
-                            )
-                            continuation.resume(Result.Error(it))
-                            return@addOnCompleteListener
-                        }
-                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.Please_try_again_later)))
-                    }
-                }
-        }
-
-    override suspend fun addUseNum2Firebase(userEmail: String, use: Use): Result<Boolean> =
-        suspendCoroutine { continuation ->
-
-            val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
-//            val year = Calendar.getInstance().timeInMillis.toDisplayFormatYear()
-//            val month = Calendar.getInstance().timeInMillis.toDisplayFormatMonth()
-//            val day = Calendar.getInstance().timeInMillis.toDisplayFormatDay()
-//            val createdTime = Calendar.getInstance().timeInMillis
-
-            val firestore = FirebaseFirestore.getInstance().collection(PATH_USERS)
-            val userDocument = firestore.document(userEmail)
-            val greensCollenction = userDocument.collection(PATH_GREENS)
-            val todayDocument = greensCollenction.document(today)
-            val useCollection = todayDocument.collection("use").document()
-
-            use.id = useCollection.id
-            useCollection
-                .set(use)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Log.d("dataSource", "addUseNum2Firebase: $use")
-
-                        continuation.resume(Result.Success(true))
-                    } else {
-                        task.exception?.let {
-
-                            Log.d(
-                                "dataSource",
-                                "[${this::class.simpleName}] Error getting documents. ${it.message}"
-                            )
-                            continuation.resume(Result.Error(it))
-                            return@addOnCompleteListener
-                        }
-                        continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.Please_try_again_later)))
-                    }
-                }
-
-//            greensCollenction
-//                .whereEqualTo("year", year)
-//                .whereEqualTo("month", month)
-//                .whereEqualTo("day", day)
-//                .get().addOnCompleteListener {
-//                    Log.d("sean0531", "greensCollenction.whereEqualTo")
-//
-//                    Log.d("seam0531", "it =${it.result!!} ")
-//
-//                    if (it.isSuccessful) {
-//
-//                        if (it.result!!.isEmpty) {
-//                            todayDocument.set(useTimeData)
-//                            use.id = useCollection.id
-//                            sendData2Firebase
-//
-//                        } else {
-//                            for (document in it.result!!) {
-//                                todayDocument.set(useTimeData, SetOptions.merge())
-//                                use.id = useCollection.id
-//                                sendData2Firebase
-//                                Log.d("sean0531", "useTimeData, SetOptions.merge()")
-//                            }
-//                        }
-//                    }
-//                }
-        }
-
-    override suspend fun addChallenge2Firebase(userEmail: String, challenge: Challenge)
-            : Result<Boolean> = suspendCoroutine { continuation ->
-
-        val today = Calendar.getInstance().timeInMillis.toDisplayFormat()
-
-        val firestore = FirebaseFirestore.getInstance().collection(PATH_USERS)
-        val userDocument = firestore.document(userEmail)
-        val greensCollenction = userDocument.collection(PATH_GREENS)
-        val todayDocument = greensCollenction.document(today)
-        val challengeCollection = todayDocument.collection("challenge").document()
-
-        challenge.id = challengeCollection.id
-        challengeCollection.set(challenge)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Log.d("dataSource", "addChallenge2Firebase: $challenge")
-
-                    continuation.resume(Result.Success(true))
-                } else {
-                    task.exception?.let {
-
-                        Log.d(
-                            "dataSource",
-                            "[${this::class.simpleName}] Error getting documents. ${it.message}"
-                        )
-                        continuation.resume(Result.Error(it))
-                        return@addOnCompleteListener
-                    }
-                    continuation.resume(Result.Fail(GreenApplication.instance.getString(R.string.Please_try_again_later)))
-                }
-            }
-    }
 
     override suspend fun addSharing2Firebase(collection: String, share: Share): Result<Boolean> =
         suspendCoroutine { continuation ->
@@ -736,7 +673,7 @@ object GreenRemoteDataSource : GreenDataSource {
             val firestore = FirebaseFirestore.getInstance().collection(PATH_USERS)
             val userDocument = firestore.document(userEmail)
             val greensCollenction = userDocument.collection(PATH_GREENS)
-            val document = greensCollenction.document(event.eventTime)
+            val document = greensCollenction.document(event.eventYMD)
 
             val data = hashMapOf(
                 "event" to "event",

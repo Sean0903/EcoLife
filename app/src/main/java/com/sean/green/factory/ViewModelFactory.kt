@@ -35,9 +35,6 @@ class ViewModelFactory constructor(
                 isAssignableFrom(HomeViewModel::class.java) ->
                     HomeViewModel(greenRepository)
 
-//                isAssignableFrom(HomeViewModel::class.java) ->
-//                    HomeViewModel(greenRepository,(FirebaseAuth.getInstance().currentUser!!.uid))
-
                 isAssignableFrom(SaveViewModel::class.java) ->
                     SaveViewModel(greenRepository)
 

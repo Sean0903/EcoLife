@@ -3,11 +3,9 @@
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable
-            name="dialogSave"
-            type="com.sean.green.dialog.DialogSaveFragment" />
-
         <import type="android.view.View"/>
+
+        <variable name="dialogSave" type="com.sean.green.dialog.DialogSaveFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +16,6 @@
             android:id="@+id/layout_dialog_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:background="@drawable/dialog_frame"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -29,11 +26,10 @@
                 android:id="@+id/image_dialog_save_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/noto_sans"
                 android:text="@string/dialog_save_title"
-                android:textSize="@dimen/text_content"
+                android:textSize="14dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -42,13 +38,12 @@
                 android:id="@+id/image_dialog_save_plastic"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-
                 android:layout_marginTop="16dp"
-                android:background="@drawable/dialog_image"
+                android:background="@drawable/dialog_image_plastic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image_dialog_save_title"
-                app:srcCompat="@drawable/bag" />
+                app:srcCompat="@drawable/bag"/>
 
             <TextView
                 android:id="@+id/text_dialog_save_plastic_1"
@@ -109,7 +104,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/dialog_image_2"
+                android:background="@drawable/dialog_image_power"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_dialog_save_plastic_5"
@@ -177,7 +172,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/dialog_image_3"
+                android:background="@drawable/dialog_image_carbon"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_dialog_save_power_5"

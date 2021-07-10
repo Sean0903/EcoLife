@@ -6,22 +6,13 @@ import com.google.firebase.auth.FirebaseUser
 import com.sean.green.data.*
 import com.sean.green.data.source.GreenDataSource
 
-/**
- * Created by Wayne Chen in Jul. 2019.
- *
- * Concrete implementation of a Stylish source as a db.
- */
 class GreenLocalDataSource(val context: Context) : GreenDataSource {
 
-    override suspend fun addSaveNum2Firebase(userEmail: String,save: Save): Result<Boolean> {
+    override suspend fun addData2Firebase(userEmail: String, collection: String, any: Any): Result<Boolean> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun addUseNum2Firebase(userEmail: String,use: Use): Result<Boolean> {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun addChallenge2Firebase(userEmail: String,challenge: Challenge): Result<Boolean> {
+    override suspend fun getDataFromFirebase(userEmail: String, collection: String, any: Any): Result<List<Any>> {
         TODO("Not yet implemented")
     }
 

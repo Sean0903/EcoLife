@@ -4,6 +4,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+        <variable name="images" type="String" />
+        <variable name="articlePhoto" type="com.sean.green.data.Article" />
         <variable name="viewModel" type="com.sean.green.challenge.ChallengeViewModel" />
     </data>
 
@@ -11,17 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/text_underLine10"
-            android:layout_width="0dp"
-            android:layout_height="8dp"
-            android:background="@drawable/underline"
-            app:layout_constraintBottom_toBottomOf="@+id/text_use_page_photo_title2"
-            app:layout_constraintEnd_toEndOf="@+id/text_use_page_photo_title2"
-            app:layout_constraintStart_toStartOf="@+id/text_use_page_photo_title2" />
-
         <ImageView
-            android:id="@+id/image_use_page_back_to_home"
+            android:id="@+id/image_challenge_page_back_to_home"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="8dp"
@@ -32,45 +25,61 @@
             app:tint="@color/colorBlue5" />
 
         <TextView
-            android:id="@+id/text_use_page_photo_title2"
+            android:id="@+id/text_use_page_photo_title"
             style="@style/home_page_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/text_save_page_photo_title"
-            app:layout_constraintStart_toStartOf="@+id/add_challenge_photo"
-            app:layout_constraintTop_toBottomOf="@+id/image_use_page_back_to_home" />
+            app:layout_constraintStart_toStartOf="@+id/constrainLayout_photo"
+            app:layout_constraintTop_toBottomOf="@+id/image_challenge_page_back_to_home" />
 
-        <ImageView
-            android:id="@+id/add_challenge_photo"
+        <TextView
+            android:id="@+id/text_underLine1"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:background="@drawable/underline"
+            app:layout_constraintBottom_toBottomOf="@+id/text_use_page_photo_title"
+            app:layout_constraintEnd_toEndOf="@+id/text_use_page_photo_title"
+            app:layout_constraintStart_toStartOf="@+id/text_use_page_photo_title" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constrainLayout_photo"
             android:layout_width="330dp"
-            android:layout_height="150dp"
+            android:layout_height="200dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/normal_frame"
-            android:cropToPadding="false"
-            android:scaleType="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_use_page_photo_title2"
-            app:srcCompat="@drawable/picture" />
+            app:layout_constraintTop_toBottomOf="@+id/text_use_page_photo_title">
+
+            <ImageView
+                android:id="@+id/add_challenge_photo"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:clickable="true"
+                android:cropToPadding="false"
+                android:scaleType="center"
+                app:imageUrl='@{viewModel.photoUri.toString()}'
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/picture" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="@+id/add_challenge_photo"
-            app:layout_constraintStart_toStartOf="@+id/add_challenge_photo"
-            app:layout_constraintTop_toBottomOf="@+id/add_challenge_photo">
-
-            <TextView
-                android:id="@+id/text_underLine11"
-                android:layout_width="0dp"
-                android:layout_height="8dp"
-                android:background="@drawable/underline"
-                app:layout_constraintBottom_toBottomOf="@+id/text_challenge_page_my_title"
-                app:layout_constraintEnd_toEndOf="@+id/text_challenge_page_my_title"
-                app:layout_constraintStart_toStartOf="@+id/text_challenge_page_my_title" />
+            app:layout_constraintEnd_toEndOf="@+id/constrainLayout_photo"
+            app:layout_constraintStart_toStartOf="@+id/constrainLayout_photo"
+            app:layout_constraintTop_toBottomOf="@+id/constrainLayout_photo">
 
             <TextView
                 android:id="@+id/text_challenge_page_my_title"
@@ -80,6 +89,15 @@
                 android:text="@string/text_challenge_title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/text_underLine2"
+                android:layout_width="0dp"
+                android:layout_height="8dp"
+                android:background="@drawable/underline"
+                app:layout_constraintBottom_toBottomOf="@+id/text_challenge_page_my_title"
+                app:layout_constraintEnd_toEndOf="@+id/text_challenge_page_my_title"
+                app:layout_constraintStart_toStartOf="@+id/text_challenge_page_my_title" />
 
             <ImageView
                 android:id="@+id/image_challenge_page_info"
@@ -102,7 +120,6 @@
 
             <EditText
                 android:id="@+id/editText_challenge_page_plastic"
-
                 style="@style/element_text"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/tag_right_corners_plastic"
@@ -162,27 +179,8 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <EditText
-            android:id="@+id/editText_save_page_content"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="24dp"
-            android:background="@drawable/fragment_content"
-            android:gravity="top"
-            android:hint="@string/editText_challenge_page_content_hint"
-            android:inputType="none"
-            android:textColor="@color/colorWhite"
-            android:textColorHint="@color/colorWhite"
-            android:textSize="15dp"
-            android:text="@={viewModel.content}"
-            app:layout_constraintBottom_toTopOf="@+id/button_challenge_save"
-            app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
-            app:layout_constraintStart_toStartOf="@+id/constraintLayout"
-            app:layout_constraintTop_toBottomOf="@+id/text_save_page_content_title3" />
-
         <TextView
-            android:id="@+id/text_save_page_content_title3"
+            android:id="@+id/text_challenge_page_content_title"
             style="@style/home_page_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -192,19 +190,38 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
         <TextView
-            android:id="@+id/text_underLine12"
+            android:id="@+id/text_underLine3"
             android:layout_width="0dp"
             android:layout_height="8dp"
             android:background="@drawable/underline"
-            app:layout_constraintBottom_toBottomOf="@+id/text_save_page_content_title3"
-            app:layout_constraintEnd_toEndOf="@+id/text_save_page_content_title3"
-            app:layout_constraintStart_toStartOf="@+id/text_save_page_content_title3" />
+            app:layout_constraintBottom_toBottomOf="@+id/text_challenge_page_content_title"
+            app:layout_constraintEnd_toEndOf="@+id/text_challenge_page_content_title"
+            app:layout_constraintStart_toStartOf="@+id/text_challenge_page_content_title" />
+
+        <EditText
+            android:id="@+id/editText_challenge_page_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/fragment_content"
+            android:gravity="top"
+            android:hint="@string/editText_challenge_page_content_hint"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorWhite"
+            android:textSize="15dp"
+            android:text="@={viewModel.content}"
+            android:inputType="text"
+            app:layout_constraintBottom_toTopOf="@+id/button_challenge_page_save"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+            app:layout_constraintTop_toBottomOf="@+id/text_challenge_page_content_title" />
 
         <Button
-            android:id="@+id/button_challenge_save"
+            android:id="@+id/button_challenge_page_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="90dp"
+            android:layout_marginBottom="60dp"
             android:text="@string/button_save"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

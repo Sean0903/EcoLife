@@ -1,17 +1,15 @@
 package com.sean.green
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.sean.green.data.Save
 import com.sean.green.databinding.ActivityMainBinding
 import com.sean.green.ext.getVmFactory
 import kotlinx.android.synthetic.main.activity_main.*
@@ -21,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     val viewModel by viewModels<MainViewModel> { getVmFactory() }
 
-    private var isFABOpen: Boolean = false
+    private var isFabOpen: Boolean = false
 
     private lateinit var binding: ActivityMainBinding
 
@@ -30,31 +28,30 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.homeFragment -> {
 
-                    findNavController(R.id.myNavHostFragment).navigate(
+                    findNavController(R.id.fragment_main_activity).navigate(
                         NavigationDirections.navigateToHomeFragment(
-//                    FirebaseAuth.getInstance().currentUser!!.uid
                         )
                     )
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.pagerFragment -> {
 
-                    findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToPagerFragment())
+                    findNavController(R.id.fragment_main_activity).navigate(NavigationDirections.navigateToPagerFragment())
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.calendarFragment -> {
 
-                    findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToCalendarFragment())
+                    findNavController(R.id.fragment_main_activity).navigate(NavigationDirections.navigateToCalendarFragment())
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.shareFragment -> {
 
-                    findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToShareFragment())
+                    findNavController(R.id.fragment_main_activity).navigate(NavigationDirections.navigateToShareFragment())
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.eventFragment -> {
 
-                    findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToEventFragment())
+                    findNavController(R.id.fragment_main_activity).navigate(NavigationDirections.navigateToEventFragment())
                     return@OnNavigationItemSelectedListener true
                 }
             }
@@ -71,68 +68,66 @@ class MainActivity : AppCompatActivity() {
         val fab = findViewById<View>(R.id.fab) as FloatingActionButton
 
         fab.setOnClickListener {
-            if (!isFABOpen) {
-                showFABMenu()
+            if (!isFabOpen) {
+                showFabMenu()
             } else {
-                closeFABMenu()
+                closeFabMenu()
             }
         }
 
         binding.fabSave.setOnClickListener {
-            findNavController(R.id.myNavHostFragment).navigate(
+            findNavController(R.id.fragment_main_activity).navigate(
                 NavigationDirections.navigateToSaveFragment(
                 )
             )
             binding.fabShadow.visibility = View.GONE
-            closeFABMenu()
+            closeFabMenu()
         }
 
         binding.fabUse.setOnClickListener {
-            findNavController(R.id.myNavHostFragment).navigate(
+            findNavController(R.id.fragment_main_activity).navigate(
                 NavigationDirections.navigateToUseFragment(
                 )
             )
             binding.fabShadow.visibility = View.GONE
-            closeFABMenu()
+            closeFabMenu()
         }
 
         binding.fabChallenge.setOnClickListener {
-            findNavController(R.id.myNavHostFragment).navigate(
+            findNavController(R.id.fragment_main_activity).navigate(
                 NavigationDirections.navigateToChallengeFragment(
                 )
             )
             binding.fabShadow.visibility = View.GONE
-            closeFABMenu()
+            closeFabMenu()
         }
 
         binding.fabShare.setOnClickListener {
-            findNavController(R.id.myNavHostFragment).navigate(
+            findNavController(R.id.fragment_main_activity).navigate(
                 NavigationDirections.navigateToToShareFragment(
                 )
             )
             binding.fabShadow.visibility = View.GONE
-            closeFABMenu()
+            closeFabMenu()
         }
 
         binding.fabEvent.setOnClickListener {
-            findNavController(R.id.myNavHostFragment).navigate(
+            findNavController(R.id.fragment_main_activity).navigate(
                 NavigationDirections.navigateToToEventFragment(
                 )
             )
             binding.fabShadow.visibility = View.GONE
-            closeFABMenu()
+            closeFabMenu()
         }
-
 
         setupBottomNav()
     }
-
 
     private fun setupBottomNav() {
         binding.bottomNavView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
 
-    private fun showFABMenu() {
+    private fun showFabMenu() {
         text_save_title.visibility = View.VISIBLE
         text_use_title.visibility = View.VISIBLE
         text_challenge_title.visibility = View.VISIBLE
@@ -161,7 +156,7 @@ class MainActivity : AppCompatActivity() {
                 View.INVISIBLE
             else -> fabLayout_event.visibility = View.VISIBLE
         }
-        isFABOpen = true
+        isFabOpen = true
         fabLayout_share.animate().translationY(-resources.getDimension(R.dimen.standard_55))
         fabLayout_event.animate().translationY(-resources.getDimension(R.dimen.standard_105))
         fabLayout_use.animate().translationY(-resources.getDimension(R.dimen.standard_155))
@@ -171,10 +166,9 @@ class MainActivity : AppCompatActivity() {
         fab_custom_pic.animate().rotation(45.0f)
         binding.fab.visibility = View.VISIBLE
         binding.fabShadow.visibility = View.VISIBLE
-
     }
 
-    fun closeFABMenu() {
+    fun closeFabMenu() {
 
         fab_save.visibility = View.VISIBLE
         fab_use.visibility = View.VISIBLE
@@ -211,7 +205,7 @@ class MainActivity : AppCompatActivity() {
             else -> fabLayout_event.visibility = View.VISIBLE
         }
 
-        isFABOpen = false
+        isFabOpen = false
         binding.fabShadow.visibility = View.GONE
         fab.animate().rotation(90.0f)
         fab_custom_pic.animate().rotation(90.0f)
@@ -220,18 +214,6 @@ class MainActivity : AppCompatActivity() {
         fabLayout_challenge.animate().translationY(resources.getDimension(R.dimen.standard_0))
         fabLayout_share.animate().translationY(resources.getDimension(R.dimen.standard_0))
         fabLayout_event.animate().translationY(resources.getDimension(R.dimen.standard_0))
-    }
-
-    fun dismissFabButton(set: Boolean) {
-        when (set) {
-            true -> {
-                binding.fab.visibility = View.VISIBLE
-            }
-            false -> {
-                binding.fab.visibility = View.GONE
-
-            }
-        }
     }
 
     private fun signOut() {

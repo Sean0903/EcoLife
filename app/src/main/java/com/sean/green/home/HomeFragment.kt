@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.sean.green.MainActivity
 import com.sean.green.R
 import com.sean.green.databinding.FragmentHomeBinding
 import com.sean.green.ext.getVmFactory
@@ -16,9 +15,6 @@ import com.sean.green.ext.getVmFactory
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
-//    private val viewModel : HomeViewModel by lazy {
-//        ViewModelProvider(this).get(HomeViewModel::class.java)
-//    }
 
     private val viewModel by viewModels<HomeViewModel> { getVmFactory() }
 
@@ -43,11 +39,13 @@ class HomeFragment : Fragment() {
                 binding.textHomeSlogan1.visibility = View.VISIBLE
                 binding.textHomeSlogan2.visibility = View.VISIBLE
                 binding.textHomeSlogan3.visibility = View.VISIBLE
+                binding.recyclerViewHome.visibility = View.GONE
             } else {
                 binding.imageHomeCard.visibility = View.GONE
                 binding.textHomeSlogan1.visibility = View.GONE
                 binding.textHomeSlogan2.visibility = View.GONE
                 binding.textHomeSlogan3.visibility = View.GONE
+                binding.recyclerViewHome.visibility = View.VISIBLE
             }
         })
 
@@ -77,40 +75,6 @@ class HomeFragment : Fragment() {
             challengeDialog.show()
 
         }
-
-//        viewModel.getTotalSaveNum(UserManager.user.email)
-//        viewModel.getTotalUseNum(UserManager.user.email)
-////        viewModel.getNowChallengeNum(UserManager.user.email)
-//        viewModel.getArticleData(UserManager.user.email)
-
-//        viewModel.saveNum.observe(viewLifecycleOwner, Observer {
-//            viewModel.getNowChallengeNum(user.email)
-//        })
-//
-//        viewModel.useNum.observe(viewLifecycleOwner, Observer {
-//            viewModel.getNowChallengeNum(user.email)
-//        })
-
-
-//        viewModel.isCallDeleteAction.observe(viewLifecycleOwner, Observer {
-//            if (it == true){
-//                viewModel.getTotalUseNum(UserManager.user.email)
-//                viewModel.getTotalSaveNum(UserManager.user.email)
-//
-//            }
-//        })
-//
-//        viewModel.date.observe(viewLifecycleOwner, Observer { it ->
-//
-//            if (it != null){
-//                viewModel.getTotalUseNum(UserManager.user.email)
-//                viewModel.getTotalSaveNum(UserManager.user.email)
-//            }
-//        })
-
-
-
-        (activity as MainActivity).dismissFabButton(true)
 
         return binding.root
     }

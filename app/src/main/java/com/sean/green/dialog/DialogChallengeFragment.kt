@@ -16,6 +16,7 @@ class DialogChallengeFragment: DialogFragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding = DialogChallengeBinding.inflate(inflater)
 
         return binding.root

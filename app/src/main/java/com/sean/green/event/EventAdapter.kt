@@ -1,10 +1,7 @@
 package com.sean.green.event
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -42,13 +39,11 @@ class EventAdapter(val viewModel: EventViewModel, val onClickListener: OnClickLi
     class ViewHolder(var binding: ItemEventBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Event, viewModel: EventViewModel) {
-            Log.d("eventAdapter", "fun bind(item: Save) = $item")
             binding.eventData = item
-//            binding.viewModel = viewModel
 
             // Nested RecyclerView - Child Adapter
             val eventImageAdapter = EventImageAdapter()
-            itemView.recyclerView_event_image.adapter = eventImageAdapter
+            itemView.recyclerView_event_member_image.adapter = eventImageAdapter
 
             binding.executePendingBindings()
         }

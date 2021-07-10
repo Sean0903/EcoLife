@@ -26,13 +26,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.sean.green.GreenApplication
 import com.sean.green.MainActivity
@@ -49,9 +46,7 @@ import java.io.*
 
 class SaveFragment : Fragment() {
 
-    var db = FirebaseFirestore.getInstance()
-
-//    private lateinit var binding : FragmentSaveBinding
+    private lateinit var binding : FragmentSaveBinding
 
     private val viewModel by viewModels<SaveViewModel> { getVmFactory() }
 
@@ -61,26 +56,11 @@ class SaveFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val binding = FragmentSaveBinding.inflate(inflater, container, false)
-
-        viewModel.plastic.observe(viewLifecycleOwner, Observer {
-            Log.i("saveFragment", "plastic = ${viewModel.plastic.value}")
-        }
-        )
-
-        viewModel.power.observe(viewLifecycleOwner, Observer {
-            Log.i("saveFragment", "power = ${viewModel.power.value}")
-        }
-        )
-
-        viewModel.carbon.observe(viewLifecycleOwner, Observer {
-            Log.i("saveFragment", "carbon = ${viewModel.carbon.value}")
-        }
-        )
-
-        binding.lifecycleOwner = this
+        binding = FragmentSaveBinding.inflate(inflater, container, false)
 
         binding.viewModel = viewModel
+
+        binding.lifecycleOwner = this
 
         binding.imageSavePageInfo.setOnClickListener {
 
@@ -88,25 +68,80 @@ class SaveFragment : Fragment() {
             val view = layoutInflater.inflate(R.layout.dialog_save, null)
             saveDialog.setContentView(view)
             saveDialog.show()
-
         }
 
         binding.buttonSavePage.setOnClickListener {
 
             if (viewModel.plastic.value.isNullOrBlank() &&
                 viewModel.power.value.isNullOrBlank() &&
-                viewModel.carbon.value.isNullOrBlank()) {
-                Toast.makeText(context, "請輸入成果", Toast.LENGTH_LONG).show()
-            } else {
-                viewModel.addSaveData2Firebase(user.email)
-                Toast.makeText(context, "已成功送出", Toast.LENGTH_LONG).show()
-                viewModel.navigateToHome()
-            }
+                viewModel.carbon.value.isNullOrBlank() &&
+                viewModel.content.value.isNullOrBlank() &&
+                viewModel.photoUri.value == null
+            ) {
+                Toast.makeText(context, "請輸入相關訊息", Toast.LENGTH_LONG).show()
 
-            if (viewModel.content.value != null) {
+            } else if (viewModel.photoUri.value != null &&
+                viewModel.plastic.value.isNullOrBlank() &&
+                viewModel.power.value.isNullOrBlank() &&
+                viewModel.carbon.value.isNullOrBlank() &&
+                viewModel.content.value.isNullOrBlank()
+            ) {
+                Toast.makeText(context, "圖片請附心情隨筆", Toast.LENGTH_LONG).show()
+
+            } else if (viewModel.photoUri.value != null &&
+                viewModel.content.value != null
+            ) {
+                if (viewModel.plastic.value != null ||
+                    viewModel.carbon.value != null ||
+                    viewModel.power.value != null
+                ) {
+                    viewModel.addSaveData2Firebase(user.email)
+                }
                 viewModel.addArticle2Firebase(user.email)
                 Toast.makeText(context, "已成功送出", Toast.LENGTH_LONG).show()
+                findNavController().navigate(NavigationDirections.navigateToHomeFragment())
 
+            } else if (viewModel.content.value != null &&
+                viewModel.photoUri.value == null
+            ) {
+                if (viewModel.plastic.value != null ||
+                    viewModel.carbon.value != null ||
+                    viewModel.power.value != null
+                ) {
+                    viewModel.addSaveData2Firebase(user.email)
+
+                }
+                viewModel.addArticle2Firebase(user.email)
+                Toast.makeText(context, "已成功送出", Toast.LENGTH_LONG).show()
+                findNavController().navigate(NavigationDirections.navigateToHomeFragment())
+
+            } else if (viewModel.plastic.value != null ||
+                viewModel.carbon.value != null ||
+                viewModel.power.value != null
+            ) {
+                if (viewModel.photoUri.value != null &&
+                    viewModel.content.value.isNullOrBlank()
+                ) {
+                    Toast.makeText(context, "圖片請附心情隨筆", Toast.LENGTH_LONG).show()
+                }
+                if (viewModel.content.value != null) {
+                    viewModel.addArticle2Firebase(user.email)
+                    viewModel.addSaveData2Firebase(user.email)
+                    Toast.makeText(context, "已成功送出", Toast.LENGTH_LONG).show()
+                    findNavController().navigate(NavigationDirections.navigateToHomeFragment())
+                }
+                if (viewModel.plastic.value != null ||
+                    viewModel.carbon.value != null ||
+                    viewModel.power.value != null
+                ) {
+                    if (viewModel.content.value.isNullOrBlank() &&
+                        viewModel.photoUri.value == null
+                    ) {
+                        viewModel.addSaveData2Firebase(user.email)
+                        Toast.makeText(context, "已成功送出", Toast.LENGTH_LONG).show()
+                        findNavController().navigate(NavigationDirections.navigateToHomeFragment())
+                    }
+                }
             }
         }
 
@@ -117,14 +152,8 @@ class SaveFragment : Fragment() {
             )
         }
 
-        binding.editTextSavePageContent.doOnTextChanged { text, start, before, count ->
-            viewModel.content.value = text.toString()
-            Log.d("saveFragment", "content = ${viewModel.content.value}")
-        }
-
         binding.addSavePhoto.setOnClickListener{
             activateCamera()
-            Log.d("sean","0 = addSavePhoto")
         }
 
         return binding.root
@@ -133,7 +162,6 @@ class SaveFragment : Fragment() {
 
     private fun activateCamera() {
         getPermissions()
-        Log.d("sean","1 = activateCamera")
         if (isUploadPermissionsGranted) {
             selectImage()
         } else if (!isUploadPermissionsGranted) {
@@ -165,10 +193,6 @@ class SaveFragment : Fragment() {
     // Create an image file name
     private fun createImageFile(): File {
 
-        Log.d("Max","run 66")
-
-
-
         //This is the directory in which the file will be created. This is the default location of Camera photos
         val storageDir = File(
             Environment.getExternalStoragePublicDirectory(
@@ -176,7 +200,6 @@ class SaveFragment : Fragment() {
             ),
             GreenApplication.applicationContext().getString(R.string.edit_start_camera_camera)
         )
-        Log.d("Max","run 77")
 
         return File.createTempFile(
             viewModel.date.value.toDateFormat(FORMAT_YYYY_MM_DDHHMMSS),  /* prefix */
@@ -184,7 +207,6 @@ class SaveFragment : Fragment() {
                 .getString(R.string.edit_start_camera_jpg), /* suffix */
             storageDir      /* directory */
         )
-        Log.d("Max","run 88")
     }
 
     //handling the image chooser activity result
@@ -199,41 +221,29 @@ class SaveFragment : Fragment() {
                 when (requestCode) {
                     IMAGE_FROM_GALLERY -> {
 
-                        Log.d("Peter", "Run1")
-
                         data?.let {
-
-                            Log.d("Peter", "Run2")
 
                             it.data?.let { data ->
 
-                                Log.d("Peter", "Run3")
-
                                 filePath = data
-
-                                Log.d("Peter", "Run4")
 
                                 try {
                                     bitmap = MediaStore.Images.Media.getBitmap(
                                         (activity as MainActivity).contentResolver, filePath
                                     )
-                                    Log.d("Peter", "Run5")
 
                                     val matrix = Matrix()
-                                    Log.d("Peter", "Run6")
                                     matrix.postRotate(
                                         getImageRotation(
                                             GreenApplication.applicationContext(),
                                             data
                                         ).toFloat()
                                     )
-                                    Log.d("Peter", "Run7")
 
                                     val outBitmap = Bitmap.createBitmap(
                                         bitmap!!, 0, 0,
                                         bitmap!!.width, bitmap!!.height, matrix, false
                                     )
-                                    Log.d("Peter", "Run8")
 
                                     val byte = ByteArrayOutputStream()
 
@@ -245,29 +255,9 @@ class SaveFragment : Fragment() {
 
                                     val byteArray = byte.toByteArray()
 
-
-
                                     uploadFile(byteArray)
-                                    Log.d("Peter", "Run9")
-
-                                    Log.d("Peter", "value of OutBitmap = $outBitmap")
-
-//                                    scalePic(outBitmap, 100)
-
-//                                    val bitmapToString = BitMaptoString(outBitmap)
-//
-//                                    Log.d("Peter","BitMapToString = $bitmapToString")
-//
-//                                    viewModel.newPhotoList.value!!.add(bitmapToString)
-//
-//                                    Log.d("Peter","value of photolist = ${viewModel.newPhotoList.value}")
-
-//                                    binding.foodiePhoto.setImageBitmap(outBitmap)
-
-                                    Log.d("Peter", "Run10")
 
                                 } catch (e: IOException) {
-                                    Log.d("Peter", "Run11")
                                     e.printStackTrace()
                                 }
                             }
@@ -276,52 +266,25 @@ class SaveFragment : Fragment() {
                     IMAGE_FROM_CAMERA -> {
 
                         fileFromCamera?.let {
-                            Log.d("Max","Run1")
-
-                            Log.d("Max","the value of file path =  $fileFromCamera")
-
-                            Log.d("Max","Run2")
-
-
-
-                            Log.d("Max","Run1")
-
+                            Log.d("Sean","the value of file path =  $fileFromCamera")
                             bitmap = data?.extras?.get("data") as Bitmap
-//                                    MediaStore.Images.Media.getBitmap(
-//                                        (activity as MainActivity).contentResolver,
-//                                        it
-//                                    )
-                            Log.d("Max","$bitmap")
-                            Log.d("Max","Run2")
 
                             val matrix = Matrix()
-
-                            Log.d("Max","Run3")
-
-                            Log.d("Max","Run4")
 
                             val outBitmap = Bitmap.createBitmap(
                                 bitmap!!, 0, 0,
                                 bitmap!!.width, bitmap!!.height, matrix, false
                             )
 
-                            Log.d("Max","Run5")
-
-                            Log.d("Max","Run6")
                             val byte = ByteArrayOutputStream()
 
-                            Log.d("Max","Run7")
                             outBitmap.compress(
                                 Bitmap.CompressFormat.JPEG,
                                 15,
                                 byte
                             )
 
-                            Log.d("Max","Run8")
-
                             val byteArray = byte.toByteArray()
-
-                            Log.d("Max","Run9")
 
                             uploadCamera(byteArray)
 //                            }
@@ -332,62 +295,23 @@ class SaveFragment : Fragment() {
         }
     }
 
-//    private fun scalePic(bitmap: Bitmap, phone: Int)
-//    {
-//        Log.d("Peter","Wow111x")
-//        //縮放比例預設為1
-//        var scaleRate = 1f
-//        Log.d("Peter","Wow1")
-//
-//        //如果圖片寬度大於手機寬度則進行縮放，否則直接將圖片放入ImageView內
-//        if(bitmap.width > phone) {
-//            Log.d("Peter","Wow2")
-//
-//
-//            scaleRate = phone.toFloat()/ bitmap.width.toFloat() //判斷縮放比例
-//
-//            Log.d("Peter","Wow3")
-//
-//            val matrix = Matrix()
-//            matrix.setScale(scaleRate, scaleRate)
-//
-//            Log.d("Peter","Wow4")
-//
-//            binding.foodiePhoto.setImageBitmap(
-//                Bitmap.createBitmap(
-//                    bitmap, 0, 0,
-//                    bitmap.width, bitmap.height, matrix, false
-//                )
-//            )
-//            Log.d("Peter","Wow5")
-//        }
-//        else binding.foodiePhoto.setImageBitmap(bitmap)
-//    }
-
     fun BitMaptoString(bitmap: Bitmap): String {
-        Log.d("Peter", "Yes1")
         val ByteStream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, ByteStream)
-        Log.d("Peter", "Yes2")
         val b = ByteStream.toByteArray()
-        Log.d("Peter", "Yes3")
         return Base64.encodeToString(b, Base64.DEFAULT)
     }
 
     private fun getImageRotation(context: Context, uri: Uri): Int {
         var stream: InputStream? = null
         return try {
-            Log.d("Peter", "Ya1")
             stream = context.contentResolver.openInputStream(uri)
-            Log.d("Peter", "Ya2")
             val exifInterface = ExifInterface(stream!!)
-            Log.d("Peter", "Ya3")
             val exifOrientation =
                 exifInterface.getAttributeInt(
                     ExifInterface.TAG_ORIENTATION,
                     ExifInterface.ORIENTATION_NORMAL
                 )
-            Log.d("Peter", "Ya4")
             when (exifOrientation) {
                 ExifInterface.ORIENTATION_ROTATE_90 -> 90
                 ExifInterface.ORIENTATION_ROTATE_180 -> 180
@@ -395,10 +319,8 @@ class SaveFragment : Fragment() {
                 else -> 0
             }
         } catch (e: Exception) {
-            Log.d("Peter", "Ya6")
             0
         } finally {
-            Log.d("Peter", "Ya7")
             stream?.close()
         }
     }
@@ -406,7 +328,6 @@ class SaveFragment : Fragment() {
     fun selectImage() {
 
         val items = arrayOf<CharSequence>(
-            GreenApplication.applicationContext().resources.getText(R.string.edit_add_photo),
             GreenApplication.applicationContext().resources.getText(R.string.edit_choose_from_gallery),
             GreenApplication.applicationContext().resources.getText(R.string.edit_cancel)
         )
@@ -435,10 +356,6 @@ class SaveFragment : Fragment() {
 
             when (it) {
 
-               GreenApplication.applicationContext().resources.getString(R.string.edit_add_photo) -> {
-
-                    startCamera()
-                }
                 GreenApplication.applicationContext().resources.getString(R.string.edit_choose_from_gallery) -> {
 
                     showGallery()
@@ -450,27 +367,15 @@ class SaveFragment : Fragment() {
 
     private fun uploadCamera(bitmap: ByteArray) {
 
-
-
-        Log.d("Peter", "Hey1")
-
-
-        Log.d("Peter", "Hey2")
-
         viewModel.uploadPhoto()
-
-        Log.d("Peter", "Hey3")
 
         uid?.let { uid ->
 
-            Log.d("Peter", "Hey4")
 
             // Firebase storage
             auth = FirebaseAuth.getInstance()
 
-            Log.d("Peter", "Hey5")
-
-            Log.d("Peter", "the value of date = ${viewModel.date.value}")
+            Log.d("Sean", "the value of date = ${viewModel.date.value}")
 
             val imageReference = FirebaseStorage.getInstance().reference.child(
                 GreenApplication.applicationContext().getString(
@@ -480,13 +385,6 @@ class SaveFragment : Fragment() {
                 )
             ).child(fileFromCamera.toString())
 
-
-
-
-            Log.d("Peter", "Hey6")
-
-            Log.d("Peter", "Hey7")
-
             imageReference.putBytes(bitmap)
                 .addOnCompleteListener {
 
@@ -495,7 +393,7 @@ class SaveFragment : Fragment() {
 
                         task.result?.let { taskResult ->
 
-                            Log.d("Peter", "the result of pic = $taskResult")
+                            Log.d("Sean", "the result of pic = $taskResult")
 
                             viewModel.setPhoto(taskResult)
                         }
@@ -506,29 +404,16 @@ class SaveFragment : Fragment() {
     }
 
     private fun uploadFile(bitmap: ByteArray) {
-
-
-
-        Log.d("Peter", "Hey1")
-
         filePath?.let { filePath ->
-
-            Log.d("Peter", "Hey2")
 
             viewModel.uploadPhoto()
 
-            Log.d("Peter", "Hey3")
-
             uid?.let { uid ->
-
-                Log.d("Peter", "Hey4")
 
                 // Firebase storage
                 auth = FirebaseAuth.getInstance()
 
-                Log.d("Peter", "Hey5")
-
-                Log.d("Peter", "the value of date = ${viewModel.date.value}")
+                Log.d("Sean", "the value of date = ${viewModel.date.value}")
 
                 val imageReference = FirebaseStorage.getInstance().reference.child(
                     GreenApplication.applicationContext().getString(
@@ -538,13 +423,6 @@ class SaveFragment : Fragment() {
                     )
                 ).child(filePath.toString())
 
-
-
-
-                Log.d("Peter", "Hey6")
-
-                Log.d("Peter", "Hey7")
-
                 imageReference.putBytes(bitmap)
                     .addOnCompleteListener {
 
@@ -553,7 +431,7 @@ class SaveFragment : Fragment() {
 
                             task.result?.let { taskResult ->
 
-                                Log.d("Peter", "the result of pic = $taskResult")
+                                Log.d("Sean", "the result of pic = $taskResult")
 
                                 viewModel.setPhoto(taskResult)
                             }
@@ -605,38 +483,32 @@ class SaveFragment : Fragment() {
             PERMISSION_READ_EXTERNAL_STORAGE,
             PERMISSION_WRITE_EXTERNAL_STORAGE
         )
-        Log.d("sean","2 = getPermissions")
         when (ContextCompat.checkSelfPermission(
             GreenApplication.applicationContext(),
             PERMISSION_CAMERA
         )) {
 
             PackageManager.PERMISSION_GRANTED -> {
-                Log.d("sean","3 = getPermissions")
                 when (ContextCompat.checkSelfPermission(
                     GreenApplication.applicationContext(),
                     PERMISSION_WRITE_EXTERNAL_STORAGE
                 )) {
 
                     PackageManager.PERMISSION_GRANTED -> {
-                        Log.d("sean","4 = getPermissions")
                         when (ContextCompat.checkSelfPermission(
                             GreenApplication.applicationContext(),
                             PERMISSION_READ_EXTERNAL_STORAGE
                         )) {
 
                             PackageManager.PERMISSION_GRANTED -> {
-                                Log.d("sean","5 = getPermissions")
                                 isUploadPermissionsGranted = true
                             }
                         }
                     }
 
                     else -> {
-                        Log.d("sean","6 = getPermissions")
                         ActivityCompat.requestPermissions(
-                            activity as MainActivity,
-                            permissions,
+                            activity as MainActivity, permissions,
                             SELECT_PHOTO_PERMISSION_REQUEST_CODE
                         )
                     }
@@ -644,7 +516,6 @@ class SaveFragment : Fragment() {
             }
 
             else -> {
-                Log.d("sean","7 = getPermissions")
                 ActivityCompat.requestPermissions(
                     activity as MainActivity,
                     permissions,
@@ -652,7 +523,6 @@ class SaveFragment : Fragment() {
                 )
             }
         }
-
     }
 
     override fun onRequestPermissionsResult(
@@ -688,30 +558,20 @@ class SaveFragment : Fragment() {
 
 
     private fun startCamera() {
-
-        Log.d("Max","run 123")
-
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        Log.d("Max","$intent")
-        Log.d("Max","run 1234")
+
         if (intent.resolveActivity(GreenApplication.applicationContext().packageManager) != null) {
 
-            Log.d("Max","run 12")
-
             try {
-                Log.d("Max","run 13")
                 fileFromCamera = createImageFile()
 
                 Log.d("EditFragment", "the value of return photo = $fileFromCamera")
 
             } catch (ex: IOException) {
-                Log.d("Max","run 14")
                 return
             }
             if (fileFromCamera != null) {
-                Log.d("Max","run 15")
                 startActivityForResult(intent, IMAGE_FROM_CAMERA)
-                Log.d("Max","run 18")
             }
         }
     }
@@ -740,7 +600,6 @@ class SaveFragment : Fragment() {
         private var windowManager: WindowManager? = null
         private var fileFromCamera: File? = null
         var isUploadPermissionsGranted = false
-//            private var foodie: Foodie? = null
     }
 }
 

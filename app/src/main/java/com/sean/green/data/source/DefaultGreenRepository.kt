@@ -6,27 +6,18 @@ import com.sean.green.data.*
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
-/**
- * Created by Wayne Chen in Jul. 2019.
- *
- * Concrete implementation to load Stylish sources.
- */
 class DefaultGreenRepository(
     private val greenRemoteDataSource: GreenDataSource,
     private val greenLocalDataSource: GreenDataSource,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : GreenRepository {
 
-    override suspend fun addSaveNum2Firebase(userEmail: String,save: Save): Result<Boolean> {
-        return greenRemoteDataSource.addSaveNum2Firebase(userEmail,save)
+    override suspend fun addData2Firebase(userEmail: String, collection: String, any: Any): Result<Boolean> {
+        return greenRemoteDataSource.addData2Firebase(userEmail,collection,any)
     }
 
-    override suspend fun addUseNum2Firebase(userEmail: String, use: Use): Result<Boolean> {
-        return greenRemoteDataSource.addUseNum2Firebase(userEmail,use)
-    }
-
-    override suspend fun addChallenge2Firebase(userEmail: String,challenge: Challenge): Result<Boolean> {
-        return greenRemoteDataSource.addChallenge2Firebase(userEmail,challenge)
+    override suspend fun getDataFromFirebase(userEmail: String, collection: String, any: Any): Result<List<Any>> {
+        return greenRemoteDataSource.getDataFromFirebase(userEmail,collection,any)
     }
 
     override suspend fun getSaveNum( userEmail: String, collection: String): Result<List<Save>> {

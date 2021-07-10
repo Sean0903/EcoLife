@@ -1,6 +1,10 @@
 <resources>
+
+    <!--App-->
     <string name="app_name">Green</string>
     <string name="app_name2">EcoLife</string>
+
+    <!--Main-->
     <string name="navigation_home_name">首頁</string>
     <string name="navigation_chart_name">累積</string>
     <string name="navigation_calendar_name">日曆</string>
@@ -16,7 +20,38 @@
     <string name="text_my_use_title">我的消耗</string>
     <string name="button_save">儲存</string>
     <string name="text_save_page_title">新增成果</string>
+    <string name="editText_save_page_content_hint">為自己的努力留下紀錄吧~</string>
+    <string name="text_save_page_content_title">心情隨筆</string>
+    <string name="text_save_page_photo_title">拍照存證</string>
+    <string name="editText_use_page_content_hint">想要更好，所以記錄下來！</string>
+    <string name="editText_challenge_page_content_hint">有目標，才更有挑戰的動力</string>
+    <string name="text_chart_page_save_title">成果累積</string>
+    <string name="text_chart_page_use_title">消耗累積</string>
+    <string name="text_dialog_event_title">環保行動</string>
+    <string name="text_event_host">發起人：</string>
+    <string name="text_share_host">分享者：</string>
+    <string name="text_event_activity">活動目前</string>
+    <string name="text_event_num">位會參與</string>
+    <string name="share_spinner_title">請選擇以下方式</string>
+    <string name="text_event_page_title">環保行動</string>
+    <string name="text_dialog_share_title">分享成果</string>
+    <string name="editText_dialog_share_host">請輸入姓名</string>
+    <string name="text_dialog_share_explain">你的成就</string>
+    <string name="editText_dialog_share_explain">例如：無塑一週</string>
+    <string name="text_dialog_share_time">時間</string>
+    <string name="editText_dialog_share_time">請輸入時間</string>
+    <string name="text_dialog_share_content">內容</string>
+    <string name="editText_dialog_share_content">請分享你的心情</string>
+    <string name="text_dialog_share_chart">分享時將附上七天內的成果圖表</string>
+    <string name="text_home_slogan1">不要問世界能為你做什麼，</string>
+    <string name="text_home_slogan2">要問你能為世界做什麼，</string>
+    <string name="text_home_slogan3">來記錄你的環保挑戰吧。</string>
+
+    <!--Dialog-->
     <string name="dialog_save_title">— 每日成果量表參考 —</string>
+    <string name="image_dialog_challenge_title">– 我的每日挑戰 –</string>
+    <string name="text_dialog_challenge_content1">請點選右下方按鈕，輸入您今日的挑戰目標。</string>
+    <string name="text_dialog_challenge_content2">您輸入的挑戰數值，將會隨著您紀錄的成果和消耗即時增減，願您每天的挑戰都能達成！</string>
     <string name="text_dialog_save_plastic_1">1分：減少使用1個塑膠製品</string>
     <string name="text_dialog_save_plastic_2">2分：減少使用2個塑膠製品</string>
     <string name="text_dialog_save_plastic_3">3分：減少使用3個塑膠製品</string>
@@ -48,22 +83,32 @@
     <string name="text_dialog_use_carbon_3">3分：碳排3公斤(約汽車行駛21公里)</string>
     <string name="text_dialog_use_carbon_4">4分：碳排4公斤(約汽車行駛28公里)</string>
     <string name="text_dialog_use_carbon_5">5分：碳排5公斤(約汽車行駛35公里)</string>
-    <string name="Please_try_again_later">Please try again later</string>
-    <string name="editText_save_page_content_hint">為自己的努力留下紀錄吧~</string>
-    <string name="text_save_page_content_title">心情隨筆</string>
-    <string name="text_save_page_photo_title">拍照存證</string>
-    <string name="editText_use_page_content_hint">想要更好，所以記錄下來！</string>
-    <string name="editText_challenge_page_content_hint">有目標，才更有挑戰的動力</string>
-    <string name="text_chart_page_save_title">成果累積</string>
-    <string name="text_chart_page_use_title">消耗累積</string>
-    <string name="text_dialog_event_title">環保行動</string>
-    <string name="text_event_host">發起人：</string>
-    <string name="text_share_host">分享者：</string>
-    <string name="text_event_activity">活動目前</string>
-    <string name="text_event_num">位會參與</string>
-    <string name="share_spinner_title">請選擇以下方式</string>
 
-    //from vegetable
+    <!--Remind-->
+    <string name="Please_try_again_later">Please try again later</string>
+
+    <!--Login-->
+    <string name="login_success">登入成功</string>
+    <string name="login_name_unknown">你是誰~</string>
+    <string name="token_id">409647628078-i23ohi769v3p5snc7mt2j28o19oueqgh.apps.googleusercontent.com</string>
+    <string name="button_dialog_share_send">發送</string>
+    <string name="sign_up_with_google">Sign Up With Google</string>
+    <string name="diary_record_date">dd/MM/yyyy</string>
+
+    <!--Camera-->
+    <string name="edit_add_photo">拍照</string>
+    <string name="edit_choose_from_gallery">選擇相片</string>
+    <string name="edit_cancel">取消</string>
+    <string name="edit_add_photo_title">新增照片</string>
+    <string name="edit_start_camera_camera">Camera</string>
+    <string name="edit_start_camera_jpg">.jpg</string>
+    <string name="edit_start_camera_provider">.provider</string>
+    <string name="edit_show_gallery_intent_type">image/*</string>
+    <string name="edit_show_gallery_select_picture">Select Picture</string>
+    <string name="edit_upload_permission_hint">記得到系統設定相機和相簿權限才能上傳喔</string>
+    <string name="firebase_storage_reference">images/users/%s/%s.jpg</string>
+
+    <!--Others-->
     <string name="timestamp_dayend">%s 23:59:59.999999999</string>
     <string name="timestamp_daybegin">%s 00:00:00.000000000</string>
     <string name="year_month_date">%s-%s-%s</string>
@@ -77,35 +122,5 @@
     <string name="simpledateformat_date_time_to_timestamp">%s %s:00.000000000</string>
     <string name="simpledateformat_yyyy_MM_dd_HH_mm_ss_fffffffff">yyyy-MM-dd HH:mm:ss.%s</string>
     <string name="diary_select_date">d/M/yyyy</string>
-    <string name="text_dialog_share_title">分享成果</string>
-    <string name="editText_dialog_share_host">請輸入姓名</string>
-    <string name="text_dialog_share_explain">你的成就</string>
-    <string name="editText_dialog_share_explain">例如：無塑一週</string>
-    <string name="text_dialog_share_time">時間</string>
-    <string name="editText_dialog_share_time">請輸入時間</string>
-    <string name="text_dialog_share_content">內容</string>
-    <string name="editText_dialog_share_content">請分享你的心情</string>
-    <string name="text_dialog_share_chart">分享時將附上七天內的成果圖表</string>
-
-    <!--Login-->
-    <string name="login_success">登入成功</string>
-    <string name="login_name_unknown">你是誰~</string>
-    <string name="token_id">409647628078-i23ohi769v3p5snc7mt2j28o19oueqgh.apps.googleusercontent.com</string>
-    <string name="button_dialog_share_send">發送</string>
-    <string name="sign_up_with_google">Sign Up With Google</string>
-    <string name="diary_record_date">dd/MM/yyyy</string>
-
-    <!--相機、照片功能-->
-    <string name="edit_add_photo">拍照</string>
-    <string name="edit_choose_from_gallery">選擇相片</string>
-    <string name="edit_cancel">取消</string>
-    <string name="edit_add_photo_title">新增照片</string>
-    <string name="edit_start_camera_camera">Camera</string>
-    <string name="edit_start_camera_jpg">.jpg</string>
-    <string name="edit_start_camera_provider">.provider</string>
-    <string name="edit_show_gallery_intent_type">image/*</string>
-    <string name="edit_show_gallery_select_picture">Select Picture</string>
-    <string name="edit_upload_permission_hint">記得到系統設定相機和相簿權限才能上傳喔</string>
-    <string name="firebase_storage_reference">images/users/%s/%s.jpg</string>
 
 </resources>

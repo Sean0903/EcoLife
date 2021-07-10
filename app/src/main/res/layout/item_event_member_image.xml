@@ -12,7 +12,7 @@
         android:layout_height="wrap_content">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/card_view_image"
+            android:id="@+id/card_event_member_image"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="2dp"
@@ -26,7 +26,7 @@
             app:layout_constraintTop_toTopOf="parent" >
 
             <ImageView
-                android:id="@+id/profile_image"
+                android:id="@+id/image_event_member_image"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 app:imageUrl="@{memberImage}"

@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable
-            name="viewModel"
-            type="com.sean.green.event.toEvent.ToEventViewModel" />
+        <variable name="viewModel" type="com.sean.green.event.toEvent.ToEventViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -80,7 +78,6 @@
                 android:fontFamily="@font/noto_sans"
                 android:gravity="top"
                 android:hint="請輸入活動介紹　例如：淨灘"
-                android:inputType="textPersonName"
                 android:lines="5"
                 android:paddingStart="12dp"
                 android:paddingTop="12dp"
@@ -89,6 +86,7 @@
                 android:text="@={viewModel.introduction}"
                 android:textColor="@color/black"
                 android:textSize="18sp"
+                android:inputType="text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_dialog_event_explain" />
@@ -116,7 +114,7 @@
                 app:layout_constraintTop_toTopOf="@+id/image_dialog_event_time" />
 
             <DatePicker
-                android:id="@+id/end_date"
+                android:id="@+id/date_picker_dialog_event"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_marginStart="16dp"
@@ -167,7 +165,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/end_date"
+                app:layout_constraintTop_toBottomOf="@+id/date_picker_dialog_event"
                 app:srcCompat="@drawable/location" />
 
             <TextView
@@ -195,7 +193,6 @@
                 android:fontFamily="@font/noto_sans"
                 android:gravity="top"
                 android:hint="請輸入地點"
-                android:inputType="textPersonName"
                 android:lines="5"
                 android:paddingStart="12dp"
                 android:paddingTop="12dp"
@@ -204,6 +201,7 @@
                 android:text="@={viewModel.location}"
                 android:textColor="@color/black"
                 android:textSize="18sp"
+                android:inputType="text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image_dialog_event_location" />
@@ -248,6 +246,7 @@
                 android:paddingEnd="12dp"
                 android:paddingBottom="12dp"
                 android:text="@={viewModel.content}"
+                android:inputType="text"
                 app:layout_constraintBottom_toTopOf="@+id/button_dialog_event_send"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

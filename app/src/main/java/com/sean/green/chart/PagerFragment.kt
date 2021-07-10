@@ -5,11 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.sean.green.databinding.ActivityMainBinding.inflate
-import com.sean.green.databinding.DialogChallengeBinding.inflate
 import com.sean.green.databinding.PagerChartBinding
 
-class PagerFragment(): Fragment() {
+class PagerFragment : Fragment() {
 
     lateinit var binding: PagerChartBinding
 
@@ -19,11 +17,11 @@ class PagerFragment(): Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        //將pager在此處實現
-        binding = PagerChartBinding.inflate(inflater,container,false)
-        //賦予pager實際功能，功能寫在PagerAdapter中
+        //pager show on page
+        binding = PagerChartBinding.inflate(inflater, container, false)
+        //binding pager with pagerAdapter
         binding.chartPager.adapter = PagerAdapter(childFragmentManager)
-        //讓Tab顯示出來，並且會隨pager的滑動跳頁
+        //tab show on page and slide page can go to next page
         binding.chartTab.setupWithViewPager(binding.chartPager)
 
         return binding.root

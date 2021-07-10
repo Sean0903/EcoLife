@@ -1,7 +1,6 @@
 package com.sean.green.share.toShare
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,6 @@ import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.sean.green.NavigationDirections
 import com.sean.green.databinding.FragmentToShareBinding
@@ -33,19 +31,16 @@ class ToShareFragment: Fragment() {
             this.findNavController().popBackStack()
         }
 
-        binding.editTextDialogShareExplain.doOnTextChanged { text, start, before, count ->
+        binding.editTextDialogShareAchievement.doOnTextChanged { text, start, before, count ->
             viewModel.achievement.value = text.toString()
-            Log.d("toShareFragment", "achievement = ${viewModel.achievement.value}")
         }
 
         binding.editTextDialogShareTime.doOnTextChanged { text, start, before, count ->
             viewModel.time.value = text.toString()
-            Log.d("toShareFragment", "time = ${viewModel.time.value}")
         }
 
         binding.editTextDialogShareContent.doOnTextChanged { text, start, before, count ->
             viewModel.content.value = text.toString()
-            Log.d("toShareFragment", "content = ${viewModel.content.value}")
         }
 
         binding.buttonDialogShareSend.setOnClickListener {
@@ -57,13 +52,13 @@ class ToShareFragment: Fragment() {
             } else {
                 viewModel.addSharingData2Firebase(UserManager.user.email,UserManager.user.image,UserManager.user.userName)
                 Toast.makeText(context, "發送成功", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(NavigationDirections.navigateToHomeFragment())
             }
         }
 
         binding.imageDialogShareCancel.setOnClickListener {
             findNavController().navigate(
                 NavigationDirections.navigateToHomeFragment(
-//                FirebaseAuth.getInstance().currentUser!!.uid
             ))
         }
 

@@ -1,6 +1,5 @@
 package com.sean.green.calendar
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,7 +9,8 @@ import com.sean.green.data.CalendarEvent
 import com.sean.green.databinding.ItemCalendarEventBinding
 
 
-class CalendarEventAdapter(): ListAdapter<CalendarEvent, CalendarEventAdapter.ViewHolder>(DiffCallback()) {
+class CalendarEventAdapter() :
+    ListAdapter<CalendarEvent, CalendarEventAdapter.ViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -24,10 +24,10 @@ class CalendarEventAdapter(): ListAdapter<CalendarEvent, CalendarEventAdapter.Vi
 
     }
 
-    class ViewHolder(var binding: ItemCalendarEventBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(var binding: ItemCalendarEventBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: CalendarEvent) {
-            Log.d("seanViewHolder","fun bind(item: CalendarEvent) = $item")
             binding.calendarEvent = item
             binding.executePendingBindings()
         }
@@ -45,7 +45,6 @@ class CalendarEventAdapter(): ListAdapter<CalendarEvent, CalendarEventAdapter.Vi
         override fun areItemsTheSame(oldItem: CalendarEvent, newItem: CalendarEvent): Boolean {
             return oldItem == newItem
         }
-
 
         override fun areContentsTheSame(oldItem: CalendarEvent, newItem: CalendarEvent): Boolean {
             return oldItem == newItem
